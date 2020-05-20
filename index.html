@@ -7,7 +7,7 @@
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+  <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
@@ -130,7 +130,7 @@
 
 
 
-<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -139,7 +139,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
+  <div class="container sidebar-position-left 
   page-home">
     <div class="headband"></div>
 
@@ -287,7 +287,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/05/21/%E8%87%AA%E6%88%91%E7%AE%A1%E7%90%86/%E7%9B%AE%E6%A0%87%E7%AE%A1%E7%90%86/" itemprop="url">Qt电子地图</a></h1>
+                <a class="post-title-link" href="/2020/05/21/%E8%87%AA%E6%88%91%E7%AE%A1%E7%90%86/%E7%9B%AE%E6%A0%87%E7%AE%A1%E7%90%86/" itemprop="url">目标管理</a></h1>
         
 
         <div class="post-meta">
@@ -359,8 +359,16 @@
       
         
           
-            <h2 id="目标树"><a href="#目标树" class="headerlink" title="目标树"></a>目标树</h2><p>构建一棵目标树，从根节点（预期实现的最终目标）开始，逐渐向下拓展与细化。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">graph BT;</span><br><span class="line">A[&quot;最终目标：对金融较为了解，并可从中获利&quot;]</span><br><span class="line">B[&quot;理论金融：能够理解并利用金融学原理来解释一些现象&quot;] --&gt; A</span><br><span class="line">C[&quot;量化金融：构思与实现各种量化交易策略&quot;] --&gt; A</span><br><span class="line">D[&quot;...&quot;] --&gt; B</span><br><span class="line">E[&quot;...&quot;] --&gt; B</span><br><span class="line">F[&quot;...&quot;] --&gt; B</span><br><span class="line">G[&quot;...&quot;] --&gt; C</span><br><span class="line">H[&quot;...&quot;] --&gt; C</span><br></pre></td></tr></table></figure>
+            <h2><span id="目标树">目标树</span></h2><p>构建一棵目标树，从根节点（预期实现的最终目标）开始，逐渐向下拓展与细化。</p>
+<pre class="mermaid">graph BT;
+A["最终目标：对金融较为了解，并可从中获利"]
+B["理论金融：能够理解并利用金融学原理来解释一些现象"] --> A
+C["量化金融：构思与实现各种量化交易策略"] --> A
+D["..."] --> B
+E["..."] --> B
+F["..."] --> B
+G["..."] --> C
+H["..."] --> C</pre>
 
 
 
@@ -505,7 +513,7 @@
       
         
           
-            <h2 id="职业"><a href="#职业" class="headerlink" title="职业"></a>职业</h2><ol>
+            <h2><span id="职业">职业</span></h2><ol>
 <li>算法工程师</li>
 <li>后端工程师</li>
 <li>前端工程师</li>
@@ -651,7 +659,7 @@
       
         
           
-            <h2 id="信号与槽机制"><a href="#信号与槽机制" class="headerlink" title="信号与槽机制"></a>信号与槽机制</h2><p><strong>信号与槽（Signal &amp; Slot）</strong>是 Qt 编程的基础，也是 Qt 的一大创新。因为有了信号与槽的编程机制，在 Qt 中处理界面各个组件的交互操作时变得更加直观和简单。</p>
+            <h2><span id="信号与槽机制">信号与槽机制</span></h2><p><strong>信号与槽（Signal &amp; Slot）</strong>是 Qt 编程的基础，也是 Qt 的一大创新。因为有了信号与槽的编程机制，在 Qt 中处理界面各个组件的交互操作时变得更加直观和简单。</p>
 <p><strong>信号（Signal）</strong>就是在特定情况下被发射的事件，例如PushButton 最常见的信号就是鼠标单击时发射的 clicked() 信号，一个 ComboBox 最常见的信号是选择的列表项变化时发射的 CurrentIndexChanged() 信号。</p>
 <p><strong>GUI 程序设计的主要内容就是对界面上各组件的信号的响应</strong>，只需要知道什么情况下发射哪些信号，合理地去响应和处理这些信号就可以了。</p>
 <p><strong>槽（Slot）</strong>就是对信号响应的函数。槽就是一个函数，与一般的C++函数是一样的，可以定义在类的任何部分（public、private 或 protected），可以具有任何参数，也可以被直接调用。槽函数与一般的函数不同的是：槽函数可以与一个信号关联，当信号被发射时，关联的槽函数被自动执行。</p>
@@ -796,7 +804,7 @@
       
         
           
-            <h2 id="Qt-Widgets和Qt-Quick-QML的区别"><a href="#Qt-Widgets和Qt-Quick-QML的区别" class="headerlink" title="Qt Widgets和Qt Quick/QML的区别"></a>Qt Widgets和Qt Quick/QML的区别</h2><ul>
+            <h2><span id="qt-widgets和qt-quickqml的区别">Qt Widgets和Qt Quick/QML的区别</span></h2><ul>
 <li>QML <ul>
 <li>QML is a user interface specification and programming <strong>language</strong>. It allows developers and designers alike to create highly performant, fluidly animated and visually appealing applications. QML offers a highly readable, declarative, JSON-like syntax with support for imperative JavaScript expressions combined with dynamic property bindings.</li>
 <li>QML 是一种用户界面规范和标记语言，允许开发人员和设计师创建高性能、流畅的动画和视觉吸引人的应用程序。</li>
@@ -824,7 +832,7 @@
 <li><a href="https://www.cnblogs.com/lsgxeva/p/7826761.html" target="_blank" rel="noopener">Qt Widgets、QML、Qt Quick的区别</a></li>
 <li><a href="https://wizardforcel.gitbooks.io/qt-beginning/61.html" target="_blank" rel="noopener">https://wizardforcel.gitbooks.io/qt-beginning/61.html</a></li>
 </ul>
-<h2 id="Qt-Quick-QML项目结构示例与Hello-World"><a href="#Qt-Quick-QML项目结构示例与Hello-World" class="headerlink" title="Qt Quick/QML项目结构示例与Hello World"></a>Qt Quick/QML项目结构示例与Hello World</h2><p>新建一个Qt Quick的hello world项目（testclass为新建的类），项目结构如下：</p>
+<h2><span id="qt-quickqml项目结构示例与hello-world">Qt Quick/QML项目结构示例与Hello World</span></h2><p>新建一个Qt Quick的hello world项目（testclass为新建的类），项目结构如下：</p>
 <p><img src="/2020/05/19/Qt/Qt%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E4%BA%86%E8%A7%A3/image-20200520220339166.png" alt="image-20200520220339166"></p>
 <p>在项目名称节点下面，分组管理着项目内的各种源文件，几个文件及分组分别为以下几项：</p>
 <ul>
@@ -852,7 +860,7 @@
 <ul>
 <li><a href="https://cloud.tencent.com/developer/article/1169582" target="_blank" rel="noopener">QtQuick 系列教程之 QML 与 C++ 交互</a></li>
 </ul>
-<h2 id="Qt-Widgets项目结构示例与Hello-World"><a href="#Qt-Widgets项目结构示例与Hello-World" class="headerlink" title="Qt Widgets项目结构示例与Hello World"></a>Qt Widgets项目结构示例与Hello World</h2><p>新建一个Qt Widgets的hello world项目，项目结构如下：</p>
+<h2><span id="qt-widgets项目结构示例与hello-world">Qt Widgets项目结构示例与Hello World</span></h2><p>新建一个Qt Widgets的hello world项目，项目结构如下：</p>
 <p><img src="/2020/05/19/Qt/Qt%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E4%BA%86%E8%A7%A3/image-20200516155841639.png" alt="image-20200516155841639"></p>
 <p>在项目名称节点下面，分组管理着项目内的各种源文件，几个文件及分组分别为以下几项：</p>
 <ul>
@@ -1124,8 +1132,8 @@
       
         
           
-            <h2 id="瓦片-tile-地图"><a href="#瓦片-tile-地图" class="headerlink" title="瓦片(tile)地图"></a>瓦片(tile)地图</h2><p>如今互联网地图的地图内容分为两种，一种是栅格地图瓦片，一种是矢量地图瓦片。</p>
-<h3 id="栅格地图瓦片"><a href="#栅格地图瓦片" class="headerlink" title="栅格地图瓦片"></a>栅格地图瓦片</h3><p>栅格地图瓦片是一种比较传统的模式，将矢量数据渲染成为256×256像素大小的图片。前端js地图框架，如<a href="https://link.jianshu.com?t=http://openlayers.org/" target="_blank" rel="noopener">openlayer</a>和<a href="https://link.jianshu.com?t=http://leafletjs.com/" target="_blank" rel="noopener">leaflet</a>，按一定规则编排显示，如百度地图，高德地图，天地图等。栅格瓦片地图的渲染技术已经成熟，可以实现栅格渲染，矢量渲染两种。</p>
+            <h2><span id="瓦片tile地图">瓦片(tile)地图</span></h2><p>如今互联网地图的地图内容分为两种，一种是栅格地图瓦片，一种是矢量地图瓦片。</p>
+<h3><span id="栅格地图瓦片">栅格地图瓦片</span></h3><p>栅格地图瓦片是一种比较传统的模式，将矢量数据渲染成为256×256像素大小的图片。前端js地图框架，如<a href="https://link.jianshu.com?t=http://openlayers.org/" target="_blank" rel="noopener">openlayer</a>和<a href="https://link.jianshu.com?t=http://leafletjs.com/" target="_blank" rel="noopener">leaflet</a>，按一定规则编排显示，如百度地图，高德地图，天地图等。栅格瓦片地图的渲染技术已经成熟，可以实现栅格渲染，矢量渲染两种。</p>
 <p>优点：</p>
 <ul>
 <li>显示效率高</li>
@@ -1138,7 +1146,7 @@
 <li>数据保密性差</li>
 <li>相对来说，死板</li>
 </ul>
-<h3 id="矢量地图瓦片"><a href="#矢量地图瓦片" class="headerlink" title="矢量地图瓦片"></a>矢量地图瓦片</h3><p>矢量地图瓦片是一种新颖的模式。地图数据会以json等格式分块地传输过去，在浏览器端利用前端框架将地图在显示出来。在这个基础上，你必须懂得<a href="https://link.jianshu.com?t=http://www.w3school.com.cn/html5/html_5_canvas.asp" target="_blank" rel="noopener">canvas</a>。整个展示的过程对点线面的渲染有很严格的规定。总体来说，矢量瓦片的数据传输量少，服务器压力小。方便渲染成为各种各样的地图，所以这也是为什么Mapbox首推Mapbox GL的原因，腾讯地图使用矢量渲染的原因。而且现在移动端不断利用矢量瓦片的技术，考虑到导航时候，需要将地图旋转成为伪3D界面。</p>
+<h3><span id="矢量地图瓦片">矢量地图瓦片</span></h3><p>矢量地图瓦片是一种新颖的模式。地图数据会以json等格式分块地传输过去，在浏览器端利用前端框架将地图在显示出来。在这个基础上，你必须懂得<a href="https://link.jianshu.com?t=http://www.w3school.com.cn/html5/html_5_canvas.asp" target="_blank" rel="noopener">canvas</a>。整个展示的过程对点线面的渲染有很严格的规定。总体来说，矢量瓦片的数据传输量少，服务器压力小。方便渲染成为各种各样的地图，所以这也是为什么Mapbox首推Mapbox GL的原因，腾讯地图使用矢量渲染的原因。而且现在移动端不断利用矢量瓦片的技术，考虑到导航时候，需要将地图旋转成为伪3D界面。</p>
 <p>矢量地图瓦片是未来的发展方向。Mapbox在这方面做了很多功夫，可以参看<a href="https://link.jianshu.com/?t=https://github.com/mapbox" target="_blank" rel="noopener">它的github</a>。</p>
 <p>优点：</p>
 <ul>
@@ -1152,7 +1160,7 @@
 <ul>
 <li>技术成熟度较差，以前的资源不通用</li>
 </ul>
-<h3 id="片切割和瓦片坐标"><a href="#片切割和瓦片坐标" class="headerlink" title="片切割和瓦片坐标"></a>片切割和瓦片坐标</h3><p>对于经过墨卡托投影为平面的世界地图，在不同的地图分辨率(整个世界地图的像素大小)下，通过切割的方式将世界地图划分为像素为$256\times256$的地图单元，划分成的每一块地图单元称为地图瓦片。<br>地图瓦片具有以下特点：</p>
+<h3><span id="片切割和瓦片坐标">片切割和瓦片坐标</span></h3><p>对于经过墨卡托投影为平面的世界地图，在不同的地图分辨率(整个世界地图的像素大小)下，通过切割的方式将世界地图划分为像素为$256\times256$的地图单元，划分成的每一块地图单元称为地图瓦片。<br>地图瓦片具有以下特点：</p>
 <ul>
 <li>具有唯一的瓦片等级（Level）和瓦片坐标编号（tileX, tileY）。</li>
 <li>瓦片分辨率为256*256。</li>
@@ -1162,8 +1170,8 @@
 </ul>
 <p><img src="/2020/05/16/Qt/Qt%E7%94%B5%E5%AD%90%E5%9C%B0%E5%9B%BE/2019-01-14-060757.jpg-basicBlog" alt="img"></p>
 <p>由于瓦片是静态的图片，可预先生成，通过缓存和CDN技术，瓦片服务器可提供高效的瓦片读取服务。此外，浏览器并行获取和显示多张小图片，比获取和显示一张大图片要高效的多。显示地图变成和显示图片一样简单，这也是互联网地图能够承载亿级规模用户的原因。</p>
-<h2 id="Qt加载OSM"><a href="#Qt加载OSM" class="headerlink" title="Qt加载OSM"></a>Qt加载OSM</h2><p><a href="https://www.cnblogs.com/yutingliuyl/p/7189815.html" target="_blank" rel="noopener">https://www.cnblogs.com/yutingliuyl/p/7189815.html</a></p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ol>
+<h2><span id="qt加载osm">Qt加载OSM</span></h2><p><a href="https://www.cnblogs.com/yutingliuyl/p/7189815.html" target="_blank" rel="noopener">https://www.cnblogs.com/yutingliuyl/p/7189815.html</a></p>
+<h2><span id="问题">问题</span></h2><ol>
 <li>矢量地图格式应该是什么样的？目前能够找到的是openstreetmap中下载的.osm地图文件，打开文件，文件内容是通过xml描述的地图数据</li>
 <li>从网上搜索不到通过Qt加载.osm文件的方法，也搜索不到相关的加载本地地图的信息。能够搜到的是在一个html文件中调用百度地图的api显示地图，然后再从Qt中展示这个网页，但是这与您所说的加载本地地图是不符的</li>
 </ol>
@@ -1308,8 +1316,8 @@
       
         
           
-            <h2 id="Qt简介"><a href="#Qt简介" class="headerlink" title="Qt简介"></a>Qt简介</h2><p>Qt是一个1991年由Qt Company开发的<strong>跨平台C++图形用户界面应用程序开发框架</strong>。它既可以开发GUI程序，也可用于开发非GUI程序，比如控制台工具和服务器。Qt是面向对象的框架，使用特殊的代码生成扩展（称为元对象编译器(Meta Object Compiler, moc)）以及一些宏，Qt很容易扩展，并且允许真正地组件编程。2008年，Qt Company科技被诺基亚公司收购，Qt也因此成为诺基亚旗下的编程语言工具。2012年，Qt被Digia收购。2014年4月，跨平台集成开发环境Qt Creator 3.1.0正式发布，实现了对于iOS的完全支持，新增WinRT、Beautifier等插件，废弃了无Python接口的GDB调试支持，集成了基于Clang的C/C++代码模块，并对Android支持做出了调整，至此实现了全面支持iOS、Android、WP,它提供给应用程序开发者建立艺术级的图形用户界面所需的所有功能。基本上，Qt 同X Window上的 Motif，Openwin，GTK 等图形界 面库和 Windows 平台上的MFC，OWL，VCL，ATL 是同类型的东西。</p>
-<h2 id="Qt的下载与安装"><a href="#Qt的下载与安装" class="headerlink" title="Qt的下载与安装"></a>Qt的下载与安装</h2><p>在<a href="http://download.qt.io/archive/qt/" target="_blank" rel="noopener">Qt Download</a>下载需要的开源版本，我选的是5.12.8。</p>
+            <h2><span id="qt简介">Qt简介</span></h2><p>Qt是一个1991年由Qt Company开发的<strong>跨平台C++图形用户界面应用程序开发框架</strong>。它既可以开发GUI程序，也可用于开发非GUI程序，比如控制台工具和服务器。Qt是面向对象的框架，使用特殊的代码生成扩展（称为元对象编译器(Meta Object Compiler, moc)）以及一些宏，Qt很容易扩展，并且允许真正地组件编程。2008年，Qt Company科技被诺基亚公司收购，Qt也因此成为诺基亚旗下的编程语言工具。2012年，Qt被Digia收购。2014年4月，跨平台集成开发环境Qt Creator 3.1.0正式发布，实现了对于iOS的完全支持，新增WinRT、Beautifier等插件，废弃了无Python接口的GDB调试支持，集成了基于Clang的C/C++代码模块，并对Android支持做出了调整，至此实现了全面支持iOS、Android、WP,它提供给应用程序开发者建立艺术级的图形用户界面所需的所有功能。基本上，Qt 同X Window上的 Motif，Openwin，GTK 等图形界 面库和 Windows 平台上的MFC，OWL，VCL，ATL 是同类型的东西。</p>
+<h2><span id="qt的下载与安装">Qt的下载与安装</span></h2><p>在<a href="http://download.qt.io/archive/qt/" target="_blank" rel="noopener">Qt Download</a>下载需要的开源版本，我选的是5.12.8。</p>
 <p>需要注册一个Qt的账户。</p>
 <p>安装在D盘中：</p>
 <p><img src="/2020/05/16/Qt/Qt%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/image-20200515214900981.png" alt="image-20200515214900981"></p>
@@ -1318,12 +1326,12 @@
 <p><img src="/2020/05/16/Qt/Qt%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/image-20200515215208948.png" alt="image-20200515215208948"></p>
 <p>安装结束后，需要添加环境变量：</p>
 <p><img src="/2020/05/16/Qt/Qt%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/image-20200515223628139.png" alt="image-20200515223628139"></p>
-<h2 id="更新组件"><a href="#更新组件" class="headerlink" title="更新组件"></a>更新组件</h2><p>在Qt的安装目录下找到MaintenanceTool.exe运行。</p>
-<h2 id="使用Qt的三种方法"><a href="#使用Qt的三种方法" class="headerlink" title="使用Qt的三种方法"></a>使用Qt的三种方法</h2><h3 id="通过Qt-creator使用Qt"><a href="#通过Qt-creator使用Qt" class="headerlink" title="通过Qt creator使用Qt"></a>通过Qt creator使用Qt</h3><p>QtCreator是Qt自带的IDE环境，是跨平台的，编译器使用GCC，默认编码格式为UTF-8。</p>
+<h2><span id="更新组件">更新组件</span></h2><p>在Qt的安装目录下找到MaintenanceTool.exe运行。</p>
+<h2><span id="使用qt的三种方法">使用Qt的三种方法</span></h2><h3><span id="通过qt-creator使用qt">通过Qt creator使用Qt</span></h3><p>QtCreator是Qt自带的IDE环境，是跨平台的，编译器使用GCC，默认编码格式为UTF-8。</p>
 <p><img src="/2020/05/16/Qt/Qt%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/image-20200515231240816.png" alt="image-20200515231240816"></p>
-<h3 id="通过VS使用Qt"><a href="#通过VS使用Qt" class="headerlink" title="通过VS使用Qt"></a>通过VS使用Qt</h3><p><a href="http://www.mamicode.com/info-detail-2995135.html" target="_blank" rel="noopener">http://www.mamicode.com/info-detail-2995135.html</a></p>
+<h3><span id="通过vs使用qt">通过VS使用Qt</span></h3><p><a href="http://www.mamicode.com/info-detail-2995135.html" target="_blank" rel="noopener">http://www.mamicode.com/info-detail-2995135.html</a></p>
 <p>VS中使用Qt需要安装相应的插件，默认编码为GBK。与Qt creator相比，VS编译与调试效率较高，但是VS比较臃肿，而且不具有跨平台的特性。</p>
-<h3 id="通过python中使用Qt"><a href="#通过python中使用Qt" class="headerlink" title="通过python中使用Qt"></a>通过python中使用Qt</h3><p>PyQt</p>
+<h3><span id="通过python中使用qt">通过python中使用Qt</span></h3><p>PyQt</p>
 
           
         
@@ -1495,6 +1503,15 @@
   <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
 
 
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
 
 
         
@@ -1676,24 +1693,7 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
