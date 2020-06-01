@@ -268,6 +268,221 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/31/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/31/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/" itemprop="url">EA建模初步使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-31T21:12:03+08:00">
+                2020-05-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UML/" itemprop="url" rel="index">
+                    <span itemprop="name">UML</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UML/EA/" itemprop="url" rel="index">
+                    <span itemprop="name">EA</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2><span id="新建一个项目">新建一个项目</span></h2><h3><span id="模型向导">模型向导</span></h3><img src="/2020/05/31/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200531222844900.png" alt="image-20200531222844900" style="zoom: 67%;">
+
+<ul>
+<li>Use Case（用例图）: System behavior described with Use Cases and Actors.</li>
+<li>Domain Model: Domain specific objects and their relationships.</li>
+<li>Class（类图）: Type hierarchies, relationships and abstractions.</li>
+<li>Component（组件）: Software artificates and components.</li>
+<li>Deployment（部署）: Physical hardware, clients and network topologies.</li>
+</ul>
+<h3><span id="toolbox">ToolBox</span></h3><img src="/2020/05/31/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200531233808738.png" alt="image-20200531233808738" style="zoom:80%;">
+
+<p>通过工具箱添加内容，从更多的工具中选取其他的工具，例如profile</p>
+<h2><span id="create-a-profile-package">Create a Profile Package</span></h2><blockquote>
+<p> Profiles将stereotypes、tagged values(标记值)和constraints(约束)应用于具体的模型元素比如类、属性、操作和活动。一个Profile对象就是一系列为特定领域(比如，航空航天、保健、金融)或平台(J2EE、.NET)自定义的UML集合。</p>
+<p><strong>profile 作用</strong>：帮助你分析并发现程序运行的瓶颈，找到耗时所在，同时也能帮助你发现不会被执行的代码。从而最终实现程序的优化。</p>
+</blockquote>
+<p><a href="https://www.uml-diagrams.org/profile.html" target="_blank" rel="noopener">UML Profile</a></p>
+<p><a href="https://sparxsystems.com/enterprise_architect_user_guide/14.0/modeling_tools/createprofile.html" target="_blank" rel="noopener">Create a Profile Package</a></p>
+<p>在包中新建Package diagram：</p>
+<p><img src="/2020/05/31/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601140344602.png" alt="image-20200601140344602"></p>
+<p><img src="/2020/05/31/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601140211450.png" alt="image-20200601140211450"></p>
+<p>建完后，FirstPackage目录下的Class Model内容如下：</p>
+<p><img src="/2020/05/31/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601140652981.png" alt="image-20200601140652981"></p>
+<p>然后可以在新建的profile中建模：</p>
+<p><img src="/2020/05/31/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601140329778.png" alt="image-20200601140329778"></p>
+<h2><span id="add-metaclasses-and-stereotypes-to-a-profile">Add Metaclasses and Stereotypes to a Profile</span></h2><p><a href="https://sparxsystems.com/enterprise_architect_user_guide/14.0/modeling_tools/addingelementsandmetaclass.html" target="_blank" rel="noopener">Add Stereotypes and Metaclasses</a></p>
+<p><a href="https://www.uml-diagrams.org/stereotype.html" target="_blank" rel="noopener">UML Stereotype</a></p>
+<p><a href="https://www.uml-diagrams.org/profile-metaclass.html" target="_blank" rel="noopener">UML Profile Metaclass</a></p>
+<p>When you are extending the UML to develop a domain-specific toolset, you start by creating a Profile Package for the stereotypes you intend to customize. This Package has at least one child Class diagram, and it is on this child diagram that you specify:</p>
+<ul>
+<li>The types of object that you are extending, represented by Metaclass elements, and</li>
+<li>The way in which each object is extended, represented by Stereotype elements</li>
+</ul>
+<p>You can qualify the effect of a Stereotype on a Metaclass using a range of other tools, including:</p>
+<ul>
+<li>Shape Scripts in the Stereotype</li>
+<li><strong>Tagged Values</strong>, defined by attributes in the Stereotype element</li>
+<li>Structured <strong>Tagged Value</strong> Classes, defined using attributes in the Stereotype element</li>
+<li>Enumerations, defined using attributes in the Stereotype element</li>
+<li>Tagged Value connectors, to identify possible values for a Tagged Value in an element generated with a Stereotype</li>
+<li>Constraints on the Stereotype element</li>
+<li>Special attributes, that define specific default behavior of stereotyped elements, such as the initial size and color of the element</li>
+<li>Modifying the default appearance of the Stereotype element</li>
+</ul>
+<p>一个MetaClass与Stereotype的例子：</p>
+<img src="/2020/05/31/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601150015744.png" alt="image-20200601150015744" style="zoom:67%;">
+
+<h2><span id="define-stereotype-tagged-values">Define Stereotype Tagged Values</span></h2><p><a href="https://sparxsystems.com/enterprise_architect_user_guide/14.0/modeling_tools/definestereotypetags.html" target="_blank" rel="noopener">Define Stereotype Tagged Values</a></p>
+<p>向构造型中添加属性，操作方式如下（或者先选中Stereotype然后按F9）：</p>
+<img src="/2020/05/31/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601150918319.png" alt="image-20200601150918319" style="zoom:80%;">
+
+
+
+
+
+<img src="/2020/05/31/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601151146745.png" alt="image-20200601151146745" style="zoom: 67%;">
+
+<p>添加完毕后：</p>
+<p><img src="/2020/05/31/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601151232801.png" alt="image-20200601151232801"></p>
+<h2><span id="add-shape-scripts">Add Shape Scripts</span></h2><p><a href="https://sparxsystems.com/enterprise_architect_user_guide/14.0/modeling_tools/add_shape_scripts_to_uml_profi.html" target="_blank" rel="noopener">Add Shape Scripts</a></p>
+<p><a href="https://sparxsystems.com/enterprise_architect_user_guide/14.0/modeling_tools/shape_editor_2.html" target="_blank" rel="noopener">Shape Scripts</a></p>
+<img src="/2020/05/31/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601152810544.png" alt="image-20200601152810544" style="zoom: 67%;">
+
+
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/27/Qt/ArcGIS/%E5%9F%BA%E4%BA%8EArcGIS%E7%9A%84%E5%9C%B0%E5%9B%BE%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -578,6 +793,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UML/" itemprop="url" rel="index">
+                    <span itemprop="name">UML</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
 
@@ -606,6 +843,8 @@
         
           
             <h2><span id="简介">简介</span></h2><p>Unified Modeling Language (UML)又称统一建模语言或标准建模语言，是始于1997年一个OMG标准，它是一个支持模型化和软件系统开发的图形化语言，为软件开发的所有阶段提供模型化和可视化支持，包括由需求分析到规格，到构造和配置。 面向对象的分析与设计(OOA&amp;D，OOAD)方法的发展在80年代末至90年代中出现了一个高潮，UML是这个高潮的产物。它不仅统一了Booch、Rumbaugh和Jacobson的表示方法，而且对其作了进一步的发展，并最终统一为大众所接受的标准建模语言。Grady Booch的描述对象集合和它们之间的关系的方法。James Rumbaugh的对象建模技术（OMT）。Ivar Jacobson的包括用例方法的方式。还有其他一些想法也对UML起到了作用，UML是Booch, Rumbaugh, Jacobson。UML已经被对象管理组织（OMG）接受为标准，这个组织还制定了通用对象请求代理体系结构（CORBA），是分布式对象编程行业的领头羊。计算机辅助软件工程（CASE）产品的供应商也支持UML，并且它基本上已经被所有的软件开发产品制造商所认可，这其中包括IBM和微软(用于它的VB环境)。UML规范用来描述建模的概念有，类（对象的）、对象、关联、职责、行为、接口、用例、包、顺序、协作，以及状态。</p>
+<h2><span id="14-uml-diagram-types">14 UML Diagram Types</span></h2><p><a href="https://creately.com/blog/diagrams/uml-diagram-types-examples/" target="_blank" rel="noopener">UML Diagram Types Guide: Learn About All Types of UML Diagrams with Examples</a></p>
+<p><a href="https://www.uml-diagrams.org/uml-25-diagrams.html" target="_blank" rel="noopener">UML 2.5 Diagrams Overview</a></p>
 
           
         
@@ -1752,163 +1991,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/21/%E8%87%AA%E6%88%91%E7%AE%A1%E7%90%86/%E7%9B%AE%E6%A0%87%E7%AE%A1%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/21/%E8%87%AA%E6%88%91%E7%AE%A1%E7%90%86/%E7%9B%AE%E6%A0%87%E7%AE%A1%E7%90%86/" itemprop="url">目标管理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-21T00:44:10+08:00">
-                2020-05-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%87%AA%E6%88%91%E7%AE%A1%E7%90%86/" itemprop="url" rel="index">
-                    <span itemprop="name">自我管理</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2><span id="目标管理的目的">目标管理的目的</span></h2><ol>
-<li>指导自己如何前进；</li>
-</ol>
-<h2><span id="目标树">目标树</span></h2><p>构建一棵目标树，从根节点（预期实现的最终目标）开始，逐渐向下拓展与细化。</p>
-<p>示例如下：</p>
-<pre class="mermaid">graph BT;
-A["最终目标：对金融较为了解，并可从中获利"]
-B["理论金融：能够理解并利用金融学原理来解释一些现象"] --> A
-C["量化金融：构思与实现各种量化交易策略"] --> A
-D["..."] --> B
-E["..."] --> B
-F["..."] --> B
-G["..."] --> C
-H["..."] --> C</pre>
-
-<p>使用树形结构的原因在于，在把握大方向的前提下，能够通过细化的分支来明确当前应该做的事情，同时保证做的所有事情能够建立体系，从而点滴的积累能够汇聚到一起。</p>
-<h2><span id="目标的优先级">目标的优先级</span></h2><p>每天在两个目标的指导下前进：主要目标和次要目标。</p>
-<p>IT技术相关的目标是第一优先级，应该是每天主要做的事情，其他的目标（例如金融、音乐等）应该进行轮转，例如设置金融周，在本周内完成主要目标剩下的时间就集中学习金融方面的知识。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1959,7 +2041,7 @@ H["..."] --> C</pre>
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1970,7 +2052,7 @@ H["..."] --> C</pre>
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
