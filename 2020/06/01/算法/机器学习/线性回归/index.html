@@ -7,7 +7,7 @@
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
@@ -134,7 +134,7 @@
 
 
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -143,7 +143,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -358,13 +358,13 @@
       
 
       
-        <h1><span id="线性回归模型">线性回归模型</span></h1><p>​    给定数据集如下：<br>$$<br>T={(\boldsymbol{x}<em>1,y_1),(\boldsymbol{x}_2,y_2),\cdots,(\boldsymbol{x}_N,y_N)}<br>$$<br>线性回归模型比较简单，即是一个线性组合的形式<br>$$<br>f(\boldsymbol{x})=\displaystyle\sum</em>{i=1}^{n}w_ix_i+b=\boldsymbol{w}\cdot\boldsymbol{x}+b<br>$$</p>
-<h1><span id="线性回归学习策略">线性回归学习策略</span></h1><p>​    其损失函数为<br>$$<br>E(\boldsymbol{w},b)=\displaystyle\sum_{i=1}^{N}(f(\boldsymbol{x}<em>i)-y_i)^2<br>$$<br>为了求导方便，在前面加上一个系数$\dfrac{1}{2}$，即令<br>$$<br>E(\boldsymbol{w},b)=\dfrac{1}{2}\displaystyle\sum</em>{i=1}^{N}(f(\boldsymbol{x}<em>i)-y_i)^2<br>$$<br>显然，参数$\boldsymbol{w},b$应该使得损失函数最小，即<br>$$<br>\begin{array}{rl}\boldsymbol{w}^<em>,b^</em>=&amp;\arg\min\limits</em>{\boldsymbol{w},b}\left{E(\boldsymbol{w},b)\right}\=&amp; \arg\min\limits_{\boldsymbol{w},b}\left{\dfrac{1}{2}\displaystyle\sum_{i=1}^{N}(f(\boldsymbol{x}_i)-y_i)^2\right}\end{array}<br>$$</p>
-<h1><span id="线性回归算法">线性回归算法</span></h1><p>​    对于线性回归来说，通过对误差函数求偏导是可以得到一个方程组的，但是求解起来基本是不可能的，因此使用梯度下降方法。</p>
-<h2><span id="梯度下降">梯度下降</span></h2><p>​    曲面上沿着梯度的方向是函数值变化（增大）最快的方向，而我们希望求函数值减小最快的方向，因此在更新参数时使用参数当前值减去步长和导数的乘积，公式如下：<br>$$<br>\begin{array}{l}<br>\boldsymbol{w}\leftarrow\boldsymbol{w}-\alpha\nabla\boldsymbol{w}\<br>b\leftarrow b-\alpha\nabla b<br>\end{array}<br>$$<br>​    梯度下降方法中，$\nabla\boldsymbol{w},\nabla b$的求解公式如下：<br>$$<br>\begin{array}{l}<br>\nabla \boldsymbol{w} = \dfrac{\partial E(\boldsymbol{w},b)}{\partial \boldsymbol{w}} = \dfrac{\partial}{\partial \boldsymbol{w}}\left(\dfrac{1}{2}\sum_{i=1}^{N}(f(\boldsymbol{x_i}-y_i)^2)\right)\<br>\nabla b = \dfrac{\partial E(\boldsymbol{w},b)}{\partial b} = \dfrac{\partial}{\partial b}\left(\dfrac{1}{2}\sum_{i=1}^{N}(f(\boldsymbol{x_i}-y_i)^2)\right)<br>\end{array}<br>$$<br>​    参数$\boldsymbol{w},b$的每一次更新使用所有的样本，计算得到的是一个标准梯度，更新一次的幅度较大。样本不大的情况，收敛速度可以接受；但是若样本太大，收敛会很慢。    </p>
-<h2><span id="批量梯度下降">批量梯度下降</span></h2><p>​    每次使用训练数据中的一个样本更新，因而随机梯度下降是会带来一定的问题，因为计算得到的并不是准确的一个梯度，容易陷入到局部最优解中。一直不会收敛，只是在最小值附近波动。</p>
-<h2><span id="随机梯度下降">随机梯度下降</span></h2><p>​    批量的梯度下降就是一种折中的方法，他用了一些小样本来近似全部的样本。即：每次更新参数$\boldsymbol{w},b$使用一批样本。</p>
-<h2><span id="迭代过程中的步长设置">迭代过程中的步长设置</span></h2><p>步长$\eta$的选取也是一个值得注意的问题。事实上，在梯度下降过程中，步长$\eta$可以根据损失函数$C(\boldsymbol{\tilde{w}})$的变化进行更改：如果$C(\boldsymbol{\tilde{w}}^{(k+1)})&lt;C(\boldsymbol{\tilde{w}}^{(k)})$，那么说明步长$\eta$可以适当增大，因为这时正在向$C(\boldsymbol{\tilde{w}})$的极小值点逼近，通过增大步长可以加快收敛速度；如果$C(\boldsymbol{\tilde{w}}^{(k+1)})&gt;C(\boldsymbol{\tilde{w}}^{(k)})$，那么说明正在远离极小值点，应当缩小步长使之重新靠近极小值点。</p>
+        <h1 id="线性回归模型"><a href="#线性回归模型" class="headerlink" title="线性回归模型"></a>线性回归模型</h1><p>​    给定数据集如下：<br>$$<br>T={(\boldsymbol{x}<em>1,y_1),(\boldsymbol{x}_2,y_2),\cdots,(\boldsymbol{x}_N,y_N)}<br>$$<br>线性回归模型比较简单，即是一个线性组合的形式<br>$$<br>f(\boldsymbol{x})=\displaystyle\sum</em>{i=1}^{n}w_ix_i+b=\boldsymbol{w}\cdot\boldsymbol{x}+b<br>$$</p>
+<h1 id="线性回归学习策略"><a href="#线性回归学习策略" class="headerlink" title="线性回归学习策略"></a>线性回归学习策略</h1><p>​    其损失函数为<br>$$<br>E(\boldsymbol{w},b)=\displaystyle\sum_{i=1}^{N}(f(\boldsymbol{x}<em>i)-y_i)^2<br>$$<br>为了求导方便，在前面加上一个系数$\dfrac{1}{2}$，即令<br>$$<br>E(\boldsymbol{w},b)=\dfrac{1}{2}\displaystyle\sum</em>{i=1}^{N}(f(\boldsymbol{x}<em>i)-y_i)^2<br>$$<br>显然，参数$\boldsymbol{w},b$应该使得损失函数最小，即<br>$$<br>\begin{array}{rl}\boldsymbol{w}^<em>,b^</em>=&amp;\arg\min\limits</em>{\boldsymbol{w},b}\left{E(\boldsymbol{w},b)\right}\=&amp; \arg\min\limits_{\boldsymbol{w},b}\left{\dfrac{1}{2}\displaystyle\sum_{i=1}^{N}(f(\boldsymbol{x}_i)-y_i)^2\right}\end{array}<br>$$</p>
+<h1 id="线性回归算法"><a href="#线性回归算法" class="headerlink" title="线性回归算法"></a>线性回归算法</h1><p>​    对于线性回归来说，通过对误差函数求偏导是可以得到一个方程组的，但是求解起来基本是不可能的，因此使用梯度下降方法。</p>
+<h2 id="梯度下降"><a href="#梯度下降" class="headerlink" title="梯度下降"></a>梯度下降</h2><p>​    曲面上沿着梯度的方向是函数值变化（增大）最快的方向，而我们希望求函数值减小最快的方向，因此在更新参数时使用参数当前值减去步长和导数的乘积，公式如下：<br>$$<br>\begin{array}{l}<br>\boldsymbol{w}\leftarrow\boldsymbol{w}-\alpha\nabla\boldsymbol{w}\<br>b\leftarrow b-\alpha\nabla b<br>\end{array}<br>$$<br>​    梯度下降方法中，$\nabla\boldsymbol{w},\nabla b$的求解公式如下：<br>$$<br>\begin{array}{l}<br>\nabla \boldsymbol{w} = \dfrac{\partial E(\boldsymbol{w},b)}{\partial \boldsymbol{w}} = \dfrac{\partial}{\partial \boldsymbol{w}}\left(\dfrac{1}{2}\sum_{i=1}^{N}(f(\boldsymbol{x_i}-y_i)^2)\right)\<br>\nabla b = \dfrac{\partial E(\boldsymbol{w},b)}{\partial b} = \dfrac{\partial}{\partial b}\left(\dfrac{1}{2}\sum_{i=1}^{N}(f(\boldsymbol{x_i}-y_i)^2)\right)<br>\end{array}<br>$$<br>​    参数$\boldsymbol{w},b$的每一次更新使用所有的样本，计算得到的是一个标准梯度，更新一次的幅度较大。样本不大的情况，收敛速度可以接受；但是若样本太大，收敛会很慢。    </p>
+<h2 id="批量梯度下降"><a href="#批量梯度下降" class="headerlink" title="批量梯度下降"></a>批量梯度下降</h2><p>​    每次使用训练数据中的一个样本更新，因而随机梯度下降是会带来一定的问题，因为计算得到的并不是准确的一个梯度，容易陷入到局部最优解中。一直不会收敛，只是在最小值附近波动。</p>
+<h2 id="随机梯度下降"><a href="#随机梯度下降" class="headerlink" title="随机梯度下降"></a>随机梯度下降</h2><p>​    批量的梯度下降就是一种折中的方法，他用了一些小样本来近似全部的样本。即：每次更新参数$\boldsymbol{w},b$使用一批样本。</p>
+<h2 id="迭代过程中的步长设置"><a href="#迭代过程中的步长设置" class="headerlink" title="迭代过程中的步长设置"></a>迭代过程中的步长设置</h2><p>步长$\eta$的选取也是一个值得注意的问题。事实上，在梯度下降过程中，步长$\eta$可以根据损失函数$C(\boldsymbol{\tilde{w}})$的变化进行更改：如果$C(\boldsymbol{\tilde{w}}^{(k+1)})&lt;C(\boldsymbol{\tilde{w}}^{(k)})$，那么说明步长$\eta$可以适当增大，因为这时正在向$C(\boldsymbol{\tilde{w}})$的极小值点逼近，通过增大步长可以加快收敛速度；如果$C(\boldsymbol{\tilde{w}}^{(k+1)})&gt;C(\boldsymbol{\tilde{w}}^{(k)})$，那么说明正在远离极小值点，应当缩小步长使之重新靠近极小值点。</p>
 <p>迭代终止条件可以有以下两种：①定义一个合理的阈值，当两次迭代之间的差值小于该阈值时，迭代结束。②设置一个大概的迭代步数，比如1000或500。</p>
 <p>梯度下降法最终的迭代肯定会收敛，只要达到相应迭代次数，多了也没关系。因为迭代次数多了后，在到达极值点时，函数对变量的导数已近乎为0，即使过了极值点，导数就变为正数了，之前的导数为负数。这个时候，变量x的值减去步长与导数的乘积反倒变小了。所以即使步数多了，结果也基本上就在极值点处左右徘徊，几乎等于极值点，因此没有问题。</p>
 
@@ -541,7 +541,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">线性回归模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">线性回归学习策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">线性回归算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.1.</span> <span class="nav-text">梯度下降</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.2.</span> <span class="nav-text">批量梯度下降</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.3.</span> <span class="nav-text">随机梯度下降</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.4.</span> <span class="nav-text">迭代过程中的步长设置</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线性回归模型"><span class="nav-number">1.</span> <span class="nav-text">线性回归模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线性回归学习策略"><span class="nav-number">2.</span> <span class="nav-text">线性回归学习策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线性回归算法"><span class="nav-number">3.</span> <span class="nav-text">线性回归算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#梯度下降"><span class="nav-number">3.1.</span> <span class="nav-text">梯度下降</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#批量梯度下降"><span class="nav-number">3.2.</span> <span class="nav-text">批量梯度下降</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机梯度下降"><span class="nav-number">3.3.</span> <span class="nav-text">随机梯度下降</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代过程中的步长设置"><span class="nav-number">3.4.</span> <span class="nav-text">迭代过程中的步长设置</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -776,7 +776,24 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 

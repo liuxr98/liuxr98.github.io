@@ -7,7 +7,7 @@
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
@@ -134,7 +134,7 @@
 
 
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -143,7 +143,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -380,11 +380,11 @@
       
 
       
-        <h2><span id="registering-c-types-with-the-qml-type-system">Registering C++ Types with the QML Type System</span></h2><p>A <a href="https://doc.qt.io/qt-5/qobject.html" target="_blank" rel="noopener">QObject</a>-derived class can be registered with the QML type system to enable the type to be used as a data type from within QML code.</p>
+        <h2 id="Registering-C-Types-with-the-QML-Type-System"><a href="#Registering-C-Types-with-the-QML-Type-System" class="headerlink" title="Registering C++ Types with the QML Type System"></a>Registering C++ Types with the QML Type System</h2><p>A <a href="https://doc.qt.io/qt-5/qobject.html" target="_blank" rel="noopener">QObject</a>-derived class can be registered with the QML type system to enable the type to be used as a data type from within QML code.</p>
 <p>The engine allows the registration of both <strong>instantiable</strong> and <strong>non-instantiable</strong> types. Registering an instantiable type enables a C++ class to be <strong>used as the definition of a QML object type</strong>, allowing it to be used in object declarations from QML code to create objects of this type. Registration also provides the engine with additional type metadata, enabling the type (and any enums declared by the class) to be <strong>used as a data type for property values, method parameters and return values, and signal parameters that are exchanged between QML and C++</strong>.</p>
 <p>Registering a non-instantiable type also registers the class as a data type in this manner, but the type cannot be used instantiated as a QML object type from QML. This is useful, for example, if a type has enums that should be exposed to QML but the type itself should not be instantiable.</p>
 <p>For a quick guide to choosing the correct approach to expose C++ types to QML, see <a href="https://doc.qt.io/qt-5/qtqml-cppintegration-overview.html#choosing-the-correct-integration-method-between-c-and-qml" target="_blank" rel="noopener">Choosing the Correct Integration Method Between C++ and QML</a>.</p>
-<h2><span id="references">References</span></h2><ul>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
 <li><a href="https://doc.qt.io/qt-5/qtqml-cppintegration-definetypes.html" target="_blank" rel="noopener">Defining QML Types from C++</a></li>
 </ul>
 
@@ -561,7 +561,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">Registering C++ Types with the QML Type System</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Registering-C-Types-with-the-QML-Type-System"><span class="nav-number">1.</span> <span class="nav-text">Registering C++ Types with the QML Type System</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>
@@ -796,7 +796,24 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 

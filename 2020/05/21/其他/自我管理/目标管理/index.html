@@ -7,7 +7,7 @@
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
@@ -136,7 +136,7 @@
 
 
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -145,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -360,10 +360,10 @@
       
 
       
-        <h2><span id="目标管理的目的">目标管理的目的</span></h2><ol>
+        <h2 id="目标管理的目的"><a href="#目标管理的目的" class="headerlink" title="目标管理的目的"></a>目标管理的目的</h2><ol>
 <li>指导自己如何前进；</li>
 </ol>
-<h2><span id="目标树">目标树</span></h2><p>构建一棵目标树，从根节点（预期实现的最终目标）开始，逐渐向下拓展与细化。</p>
+<h2 id="目标树"><a href="#目标树" class="headerlink" title="目标树"></a>目标树</h2><p>构建一棵目标树，从根节点（预期实现的最终目标）开始，逐渐向下拓展与细化。</p>
 <p>示例如下：</p>
 <pre class="mermaid">graph BT;
 A["最终目标：对金融较为了解，并可从中获利"]
@@ -376,7 +376,7 @@ G["..."] --> C
 H["..."] --> C</pre>
 
 <p>使用树形结构的原因在于，在把握大方向的前提下，能够通过细化的分支来明确当前应该做的事情，同时保证做的所有事情能够建立体系，从而点滴的积累能够汇聚到一起。</p>
-<h2><span id="目标的优先级">目标的优先级</span></h2><p>每天在两个目标的指导下前进：主要目标和次要目标。</p>
+<h2 id="目标的优先级"><a href="#目标的优先级" class="headerlink" title="目标的优先级"></a>目标的优先级</h2><p>每天在两个目标的指导下前进：主要目标和次要目标。</p>
 <p>IT技术相关的目标是第一优先级，应该是每天主要做的事情，其他的目标（例如金融、音乐等）应该进行轮转，例如设置金融周，在本周内完成主要目标剩下的时间就集中学习金融方面的知识。</p>
 
       
@@ -560,7 +560,7 @@ H["..."] --> C</pre>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">目标管理的目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">目标树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">目标的优先级</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目标管理的目的"><span class="nav-number">1.</span> <span class="nav-text">目标管理的目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目标树"><span class="nav-number">2.</span> <span class="nav-text">目标树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目标的优先级"><span class="nav-number">3.</span> <span class="nav-text">目标的优先级</span></a></li></ol></div>
             
 
           </div>
@@ -795,7 +795,24 @@ H["..."] --> C</pre>
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 

@@ -7,7 +7,7 @@
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
@@ -151,7 +151,7 @@
 
 
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -160,7 +160,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -386,41 +386,41 @@
       
 
       
-        <h2><span id="双人零和游戏">双人零和游戏</span></h2><h3><span id="特点">特点</span></h3><ol>
+        <h2 id="双人零和游戏"><a href="#双人零和游戏" class="headerlink" title="双人零和游戏"></a>双人零和游戏</h2><h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ol>
 <li>Discrete（离散的）: Game states or decisions can be mapped on discretevalues.</li>
 <li>Finite（有限的）: There are only a finite number of states and possibledecisions that can be made.</li>
 <li>Zero-sum (零和的): Fully competitive</li>
 <li>Deterministic（确定性的）:  no chance involved</li>
 <li>Perfect information（信息完全的）: all aspects of the state are fullyobservable</li>
 </ol>
-<h3><span id="定义">定义</span></h3><p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20190104213857963.png" alt></p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20190104213857963.png" alt></p>
 <p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20190104214835667.png" alt></p>
-<h3><span id="组成部分">组成部分</span></h3><p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024163543298.png" alt></p>
+<h3 id="组成部分"><a href="#组成部分" class="headerlink" title="组成部分"></a>组成部分</h3><p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024163543298.png" alt></p>
 <hr>
-<h2><span id="minmax博弈树搜索">MinMax博弈树搜索</span></h2><h3><span id="原理">原理</span></h3><p>假设在博弈过程中,对抗者1总是选择使得博弈值最小的移动,那么作为对手的对抗者2则总会选择是的博弈值最大的移动,对抗者1称为min,对抗者2称为max.由于博弈双方是交替移动的,所以博弈树的结点及其父结点分属于两个对抗者中的一个,他们的种类（type）分属max和min.博弈树上的每个结点对应于一个深度（depth）,叶结点的深度为0.因此,在任意的结点node,对博弈双方均最优的博弈值为</p>
+<h2 id="MinMax博弈树搜索"><a href="#MinMax博弈树搜索" class="headerlink" title="MinMax博弈树搜索"></a>MinMax博弈树搜索</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>假设在博弈过程中,对抗者1总是选择使得博弈值最小的移动,那么作为对手的对抗者2则总会选择是的博弈值最大的移动,对抗者1称为min,对抗者2称为max.由于博弈双方是交替移动的,所以博弈树的结点及其父结点分属于两个对抗者中的一个,他们的种类（type）分属max和min.博弈树上的每个结点对应于一个深度（depth）,叶结点的深度为0.因此,在任意的结点node,对博弈双方均最优的博弈值为</p>
 <p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024204100457.png" alt></p>
 <p>Min-Max方法对博弈树进行深度优先搜索.相对于广度优先搜索,深度优先搜索需要非常少的存储空间,而且存储空间的需求不随树的大小而指数增长。</p>
-<h3><span id="伪代码">伪代码</span></h3><p>伪代码如下（以max角色的决策为例），使用DFS实现（可以节约空间，BFS占用空间太多了）</p>
+<h3 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h3><p>伪代码如下（以max角色的决策为例），使用DFS实现（可以节约空间，BFS占用空间太多了）</p>
 <p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024204414335.png" alt></p>
-<h3><span id="一个例子a是maxb是min">一个例子（A是max，B是min）</span></h3><p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024203520426.png" alt></p>
+<h3 id="一个例子（A是max，B是min）"><a href="#一个例子（A是max，B是min）" class="headerlink" title="一个例子（A是max，B是min）"></a>一个例子（A是max，B是min）</h3><p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024203520426.png" alt></p>
 <p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024203529214.png" alt></p>
 <hr>
-<h2><span id="alpha-beta剪枝">$\alpha$-$\beta$剪枝</span></h2><p>很多时候，作出决策并不需要搜索整棵树</p>
+<h2 id="alpha-beta-剪枝"><a href="#alpha-beta-剪枝" class="headerlink" title="$\alpha$-$\beta$剪枝"></a>$\alpha$-$\beta$剪枝</h2><p>很多时候，作出决策并不需要搜索整棵树</p>
 <p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024211735213.png" alt></p>
-<h3><span id="alpha剪枝beta剪枝同理">$\alpha$剪枝（$\beta$剪枝同理）</span></h3><p>当确定某些分支下属节点的取值不会传递到顶层时，那么对应分支就不需要往下探索了——剪枝。</p>
+<h3 id="alpha-剪枝（-beta-剪枝同理）"><a href="#alpha-剪枝（-beta-剪枝同理）" class="headerlink" title="$\alpha$剪枝（$\beta$剪枝同理）"></a>$\alpha$剪枝（$\beta$剪枝同理）</h3><p>当确定某些分支下属节点的取值不会传递到顶层时，那么对应分支就不需要往下探索了——剪枝。</p>
 <p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024223121311.png" alt></p>
 <p>以上图为例，在进行深度优先搜索的时候，要计算节点$n$的效益值需要计算$s_1,s_2,s_3,\cdots$的效益值，但是已经知道max节点中有效益值为5的节点了，节点$P$的 $\beta$值是节点$n$这一层节点的 $\alpha$值的最小值，而 $\alpha_{s_3}=9&gt;5$，所以$s_3$之后的节点都不用计算了，这就节省了计算量。</p>
 <p>更一般地：</p>
 <p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024222850354.png" alt></p>
 <p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024223246279.png" alt></p>
-<h3><span id="伪代码">伪代码</span></h3><p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-2019011008362316.png" alt></p>
-<h3><span id="例子">例子</span></h3><p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-2019011008363580.png" alt></p>
+<h3 id="伪代码-1"><a href="#伪代码-1" class="headerlink" title="伪代码"></a>伪代码</h3><p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-2019011008362316.png" alt></p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-2019011008363580.png" alt></p>
 <p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/minimax%E6%90%9C%E7%B4%A2.png" alt></p>
-<h3><span id="效果">效果</span></h3><p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181026143221860.png" alt></p>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181026143221860.png" alt></p>
 <hr>
-<h2><span id="事先建树与实时搜索">事先建树与实时搜索</span></h2><p>每一次构建博弈树，而不是刚开始就构建好博弈树</p>
+<h2 id="事先建树与实时搜索"><a href="#事先建树与实时搜索" class="headerlink" title="事先建树与实时搜索"></a>事先建树与实时搜索</h2><p>每一次构建博弈树，而不是刚开始就构建好博弈树</p>
 <p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181026143706809.png" alt></p>
-<h2><span id="negascout搜索算法">Negascout搜索算法</span></h2><h2><span id="mtd记忆增强测试驱动方法">MTD（记忆增强测试驱动）方法</span></h2>
+<h2 id="Negascout搜索算法"><a href="#Negascout搜索算法" class="headerlink" title="Negascout搜索算法"></a>Negascout搜索算法</h2><h2 id="MTD（记忆增强测试驱动）方法"><a href="#MTD（记忆增强测试驱动）方法" class="headerlink" title="MTD（记忆增强测试驱动）方法"></a>MTD（记忆增强测试驱动）方法</h2>
       
     </div>
     
@@ -594,7 +594,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">双人零和游戏</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">1.2.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">1.3.</span> <span class="nav-text">组成部分</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">MinMax博弈树搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">2.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">2.2.</span> <span class="nav-text">伪代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">2.3.</span> <span class="nav-text">一个例子（A是max，B是min）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">$\alpha$-$\beta$剪枝</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">3.1.</span> <span class="nav-text">$\alpha$剪枝（$\beta$剪枝同理）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">3.2.</span> <span class="nav-text">伪代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">3.3.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">3.4.</span> <span class="nav-text">效果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">事先建树与实时搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">5.</span> <span class="nav-text">Negascout搜索算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">6.</span> <span class="nav-text">MTD（记忆增强测试驱动）方法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#双人零和游戏"><span class="nav-number">1.</span> <span class="nav-text">双人零和游戏</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特点"><span class="nav-number">1.1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">1.2.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组成部分"><span class="nav-number">1.3.</span> <span class="nav-text">组成部分</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MinMax博弈树搜索"><span class="nav-number">2.</span> <span class="nav-text">MinMax博弈树搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原理"><span class="nav-number">2.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#伪代码"><span class="nav-number">2.2.</span> <span class="nav-text">伪代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一个例子（A是max，B是min）"><span class="nav-number">2.3.</span> <span class="nav-text">一个例子（A是max，B是min）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#alpha-beta-剪枝"><span class="nav-number">3.</span> <span class="nav-text">$\alpha$-$\beta$剪枝</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#alpha-剪枝（-beta-剪枝同理）"><span class="nav-number">3.1.</span> <span class="nav-text">$\alpha$剪枝（$\beta$剪枝同理）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#伪代码-1"><span class="nav-number">3.2.</span> <span class="nav-text">伪代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">3.3.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#效果"><span class="nav-number">3.4.</span> <span class="nav-text">效果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事先建树与实时搜索"><span class="nav-number">4.</span> <span class="nav-text">事先建树与实时搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Negascout搜索算法"><span class="nav-number">5.</span> <span class="nav-text">Negascout搜索算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MTD（记忆增强测试驱动）方法"><span class="nav-number">6.</span> <span class="nav-text">MTD（记忆增强测试驱动）方法</span></a></li></ol></div>
             
 
           </div>
@@ -829,7 +829,24 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 

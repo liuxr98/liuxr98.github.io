@@ -7,7 +7,7 @@
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
@@ -136,7 +136,7 @@
 
 
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -145,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -360,10 +360,10 @@
       
 
       
-        <h2><span id="qml">QML</span></h2><p>Qml类似于CSS语法，</p>
-<h2><span id="qml编程规范">QML编程规范</span></h2><h3><span id="导入模块">导入模块</span></h3><figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// import &lt;ModuleIdentifier&gt; &lt;Version.Number&gt; [as &lt;Qualifier&gt;]</span></span><br><span class="line"><span class="keyword">import</span> QtQuick <span class="number">2.0</span></span><br><span class="line"><span class="keyword">import</span> QtQuick <span class="number">2.0</span> <span class="keyword">as</span> Quick</span><br></pre></td></tr></table></figure>
+        <h2 id="QML"><a href="#QML" class="headerlink" title="QML"></a>QML</h2><p>Qml类似于CSS语法，</p>
+<h2 id="QML编程规范"><a href="#QML编程规范" class="headerlink" title="QML编程规范"></a>QML编程规范</h2><h3 id="导入模块"><a href="#导入模块" class="headerlink" title="导入模块"></a>导入模块</h3><figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// import &lt;ModuleIdentifier&gt; &lt;Version.Number&gt; [as &lt;Qualifier&gt;]</span></span><br><span class="line"><span class="keyword">import</span> QtQuick <span class="number">2.0</span></span><br><span class="line"><span class="keyword">import</span> QtQuick <span class="number">2.0</span> <span class="keyword">as</span> Quick</span><br></pre></td></tr></table></figure>
 
-<h2><span id="qml-type-system">QML Type System</span></h2><p><a href="https://doc.qt.io/qt-5/qtqml-typesystem-topic.html" target="_blank" rel="noopener">The QML Type System</a></p>
+<h2 id="QML-Type-System"><a href="#QML-Type-System" class="headerlink" title="QML Type System"></a>QML Type System</h2><p><a href="https://doc.qt.io/qt-5/qtqml-typesystem-topic.html" target="_blank" rel="noopener">The QML Type System</a></p>
 <p>The types which may be used in the definition of an object hierarchy in a QML document can come from various sources. They may be:</p>
 <ul>
 <li>provided natively by the QML language</li>
@@ -372,12 +372,12 @@
 </ul>
 <p>Furthermore, application developers can provide their own types, either by registering C++ types directly, or by defining reusable components in QML documents which can then be imported.</p>
 <p>Wherever the type definitions come from, the engine will enforce type-safety for properties and instances of those types.</p>
-<h3><span id="basic-types">Basic Types</span></h3><p>The QML language has built-in support for various primitive types including integers, double-precision floating point numbers, strings, and boolean values. Objects may have properties of these types, and values of these types may be passed as arguments to methods of objects.</p>
+<h3 id="Basic-Types"><a href="#Basic-Types" class="headerlink" title="Basic Types"></a>Basic Types</h3><p>The QML language has built-in support for various primitive types including integers, double-precision floating point numbers, strings, and boolean values. Objects may have properties of these types, and values of these types may be passed as arguments to methods of objects.</p>
 <p>See the <a href="https://doc.qt.io/qt-5/qtqml-typesystem-basictypes.html" target="_blank" rel="noopener">QML Basic Types</a> documentation for more information about basic types.</p>
-<h3><span id="javascript-types">JavaScript Types</span></h3><p>JavaScript objects and arrays are supported by the QML engine. Any standard JavaScript type can be created and stored using the generic <a href="https://doc.qt.io/qt-5/qml-var.html" target="_blank" rel="noopener">var</a> type.</p>
+<h3 id="JavaScript-Types"><a href="#JavaScript-Types" class="headerlink" title="JavaScript Types"></a>JavaScript Types</h3><p>JavaScript objects and arrays are supported by the QML engine. Any standard JavaScript type can be created and stored using the generic <a href="https://doc.qt.io/qt-5/qml-var.html" target="_blank" rel="noopener">var</a> type.</p>
 <figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> QtQuick <span class="number">2.0</span></span><br><span class="line"></span><br><span class="line"><span class="title">Item</span> &#123;</span><br><span class="line">    <span class="keyword">property</span><span class="string"> var theArray</span>: []</span><br><span class="line">    <span class="keyword">property</span><span class="string"> var theDate</span>: <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line"></span><br><span class="line">    <span class="attribute">Component.onCompleted</span>: &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">            theArray.push(<span class="string">"Item "</span> + i)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"There are"</span>, theArray.length, <span class="string">"items in the array"</span>)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"The time is"</span>, theDate.toUTCString())</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3><span id="qml-object-types">QML Object Types</span></h3><p>A QML object type is a type from which a QML object can be instantiated. QML object types are derived from <a href="https://doc.qt.io/qt-5/qml-qtqml-qtobject.html" target="_blank" rel="noopener">QtObject</a>, and are provided by QML modules. Applications can import these modules to use the object types they provide. The <code>QtQuick</code> module provides the most common object types needed to create user interfaces in QML.</p>
+<h3 id="QML-Object-Types"><a href="#QML-Object-Types" class="headerlink" title="QML Object Types"></a>QML Object Types</h3><p>A QML object type is a type from which a QML object can be instantiated. QML object types are derived from <a href="https://doc.qt.io/qt-5/qml-qtqml-qtobject.html" target="_blank" rel="noopener">QtObject</a>, and are provided by QML modules. Applications can import these modules to use the object types they provide. The <code>QtQuick</code> module provides the most common object types needed to create user interfaces in QML.</p>
 <p>Finally, every QML document implicitly defines a QML object type, which can be re-used in other QML documents. See the documentation about <a href="https://doc.qt.io/qt-5/qtqml-typesystem-objecttypes.html" target="_blank" rel="noopener">object types in the QML type system</a> for in-depth information about object types.</p>
 
       
@@ -561,7 +561,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">QML</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">QML编程规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">2.1.</span> <span class="nav-text">导入模块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">QML Type System</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">3.1.</span> <span class="nav-text">Basic Types</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">3.2.</span> <span class="nav-text">JavaScript Types</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">3.3.</span> <span class="nav-text">QML Object Types</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#QML"><span class="nav-number">1.</span> <span class="nav-text">QML</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QML编程规范"><span class="nav-number">2.</span> <span class="nav-text">QML编程规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导入模块"><span class="nav-number">2.1.</span> <span class="nav-text">导入模块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QML-Type-System"><span class="nav-number">3.</span> <span class="nav-text">QML Type System</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-Types"><span class="nav-number">3.1.</span> <span class="nav-text">Basic Types</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript-Types"><span class="nav-number">3.2.</span> <span class="nav-text">JavaScript Types</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QML-Object-Types"><span class="nav-number">3.3.</span> <span class="nav-text">QML Object Types</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -796,7 +796,24 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 
