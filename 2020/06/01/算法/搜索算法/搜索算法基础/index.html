@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="搜索算法基础搜索算法  搜索算法的性能 树搜索与图搜索  环检测是什么环检测将图搜索转换为树搜索？  环检测–单路经检测  环检测–多路路径检测其实就是我们正常使用BFS使用的visited数组    环检测，一致代价搜索，dijkstra算法 环检测的空间复杂度指数级别。 各算法总结 各算法是否使用环检测   算法 能否使用环检测    BFS √   UFS √   BS √   DFS ×">
+<meta name="description" content="搜索算法  搜索算法的性能 树搜索与图搜索  环检测是什么环检测将图搜索转换为树搜索？  环检测–单路经检测  环检测–多路路径检测其实就是我们正常使用BFS使用的visited数组    环检测，一致代价搜索，dijkstra算法 环检测的空间复杂度指数级别。 各算法总结 各算法是否使用环检测   算法 能否使用环检测    BFS √   UFS √   BS √   DFS ×   IDS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="搜索算法基础">
 <meta property="og:url" content="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="RBlog">
-<meta property="og:description" content="搜索算法基础搜索算法  搜索算法的性能 树搜索与图搜索  环检测是什么环检测将图搜索转换为树搜索？  环检测–单路经检测  环检测–多路路径检测其实就是我们正常使用BFS使用的visited数组    环检测，一致代价搜索，dijkstra算法 环检测的空间复杂度指数级别。 各算法总结 各算法是否使用环检测   算法 能否使用环检测    BFS √   UFS √   BS √   DFS ×">
+<meta property="og:description" content="搜索算法  搜索算法的性能 树搜索与图搜索  环检测是什么环检测将图搜索转换为树搜索？  环检测–单路经检测  环检测–多路路径检测其实就是我们正常使用BFS使用的visited数组    环检测，一致代价搜索，dijkstra算法 环检测的空间复杂度指数级别。 各算法总结 各算法是否使用环检测   算法 能否使用环检测    BFS √   UFS √   BS √   DFS ×   IDS">
 <meta property="og:image" content="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104201100759.png">
 <meta property="og:image" content="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-2019010510263152.png">
 <meta property="og:image" content="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190105102012872.png">
@@ -100,7 +100,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/1.svg">
 <meta property="og:image" content="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190105094214297.png">
 <meta property="article:published_time" content="2020-06-01T09:47:59.000Z">
-<meta property="article:modified_time" content="2020-06-01T09:49:18.925Z">
+<meta property="article:modified_time" content="2020-06-01T10:03:40.222Z">
 <meta property="article:author" content="Ryan">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104201100759.png">
@@ -384,7 +384,7 @@
       
 
       
-        <h1><span id="搜索算法基础">搜索算法基础</span></h1><h2><span id="搜索算法">搜索算法</span></h2><p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104201100759.png" alt></p>
+        <h2><span id="搜索算法">搜索算法</span></h2><p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104201100759.png" alt></p>
 <p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-2019010510263152.png" alt></p>
 <h2><span id="搜索算法的性能">搜索算法的性能</span></h2><p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190105102012872.png" alt></p>
 <h2><span id="树搜索与图搜索">树搜索与图搜索</span></h2><p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190105101116333.png" alt></p>
@@ -612,7 +612,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">搜索算法基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text">搜索算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.2.</span> <span class="nav-text">搜索算法的性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.3.</span> <span class="nav-text">树搜索与图搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.4.</span> <span class="nav-text">环检测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">1.4.1.</span> <span class="nav-text">是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">1.4.2.</span> <span class="nav-text">环检测–单路经检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">1.4.3.</span> <span class="nav-text">环检测–多路路径检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">1.4.4.</span> <span class="nav-text">环检测，一致代价搜索，dijkstra算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">1.4.5.</span> <span class="nav-text">环检测的空间复杂度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.5.</span> <span class="nav-text">各算法总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">1.5.1.</span> <span class="nav-text">各算法是否使用环检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">1.5.2.</span> <span class="nav-text">性能对比</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">搜索算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">搜索算法的性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">树搜索与图搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">环检测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">4.1.</span> <span class="nav-text">是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">4.2.</span> <span class="nav-text">环检测–单路经检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">4.3.</span> <span class="nav-text">环检测–多路路径检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">4.4.</span> <span class="nav-text">环检测，一致代价搜索，dijkstra算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">4.5.</span> <span class="nav-text">环检测的空间复杂度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">5.</span> <span class="nav-text">各算法总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">5.1.</span> <span class="nav-text">各算法是否使用环检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">5.2.</span> <span class="nav-text">性能对比</span></a></li></ol></li></ol></div>
             
 
           </div>
