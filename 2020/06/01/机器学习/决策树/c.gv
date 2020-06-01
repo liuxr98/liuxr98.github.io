@@ -1,0 +1,10 @@
+digraph a{
+    rankdir = TB
+    node[fontname="fangsong",shape=rectangle]
+    "root" 
+    node[shape=triangle]
+    "root"-> "u1"[label="u=u1"]
+    "root"-> "u2"[label="u=u2"]
+    "root"-> "..."
+    "root"-> "u14"[label="u=u14"]
+}

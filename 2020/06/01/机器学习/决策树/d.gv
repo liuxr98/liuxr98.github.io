@@ -1,0 +1,25 @@
+digraph a{
+    rankdir = TB
+    node[fontname="fangsong",shape=rectangle]
+    subgraph cluster_1{
+        color=white;
+        "root1" 
+        node[shape=ellipse]
+        "root1"-> {"yn","....","y2","y1"}
+    }
+    subgraph cluster_2{
+        color=white;
+        "root2" 
+        node[shape=ellipse]
+        "root2"-> {"xin","...","xi2","xi1"}
+    }
+    node[shape=plaintext]
+    edge[color=white]
+    1[label="H(Y)"]
+    3[label="H(Xi)"]
+    2[label=""]
+    4[label=""]
+    1 -> 2 -> 3 -> 4
+    {rank=same 1,"root1" }
+    {rank=same 3,"root2"}
+}
