@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="支持向量机有以下三种：  线性可分支持向量机（硬间隔支持向量机） 线性支持向量机（软间隔支持向量机） 非线性支持向量机（核函数+软间隔）  函数间隔与几何间隔函数间隔​    对于给定的训练数据集$T$$$T&#x3D;{(\boldsymbol{x}1,y_1),(\boldsymbol{x}_2,y_2),\cdots,(\boldsymbol{x}_N,y_N)}$$定义给定的超平面$(\boldsy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="支持向量机">
+<meta property="og:url" content="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/index.html">
+<meta property="og:site_name" content="RBlog">
+<meta property="og:description" content="支持向量机有以下三种：  线性可分支持向量机（硬间隔支持向量机） 线性支持向量机（软间隔支持向量机） 非线性支持向量机（核函数+软间隔）  函数间隔与几何间隔函数间隔​    对于给定的训练数据集$T$$$T&#x3D;{(\boldsymbol{x}1,y_1),(\boldsymbol{x}_2,y_2),\cdots,(\boldsymbol{x}_N,y_N)}$$定义给定的超平面$(\boldsy">
+<meta property="og:image" content="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/1556799716345.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/1556797134480.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/1556799681634.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/1556811110077.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/1556813248646.png">
+<meta property="article:published_time" content="2020-06-01T09:57:49.000Z">
+<meta property="article:modified_time" content="2020-06-01T09:42:28.918Z">
+<meta property="article:author" content="Ryan">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/1556799716345.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/06/01/算法/机器学习/支持向量机/"/>
+
+
+
+
+
+  <title>支持向量机 | RBlog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">支持向量机</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-01T17:57:49+08:00">
+                2020-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>支持向量机有以下三种：</p>
+<ol>
+<li>线性可分支持向量机（硬间隔支持向量机）</li>
+<li>线性支持向量机（软间隔支持向量机）</li>
+<li>非线性支持向量机（核函数+软间隔）</li>
+</ol>
+<h1><span id="函数间隔与几何间隔">函数间隔与几何间隔</span></h1><h2><span id="函数间隔">函数间隔</span></h2><p>​    对于给定的训练数据集$T$<br>$$<br>T={(\boldsymbol{x}<em>1,y_1),(\boldsymbol{x}_2,y_2),\cdots,(\boldsymbol{x}_N,y_N)}<br>$$<br>定义<strong>给定的</strong>超平面$(\boldsymbol{w},b)$关于样本点$(\boldsymbol{x_i},y_i)$的函数间隔为<br>$$<br>\hat{\gamma_i}=|\boldsymbol{w}\cdot\boldsymbol{x_i}+b|=y_i(\boldsymbol{w}\cdot\boldsymbol{x_i}+b)<br>$$<br>定义超平面$(\boldsymbol{w},b)$关于训练数据集$T$的函数间隔为超平面$(\boldsymbol{w},b)$关于$T$中所有样本点$(\boldsymbol{x_i},y_i)$的函数间隔的最小值，即<br>$$<br>\hat{\gamma}=\min</em>{i\in[1,N]}\hat{\gamma_i}<br>$$</p>
+<p>​    在超平面给定的情况下，函数间隔可以衡量一个点分类预测的确信程度。</p>
+<h2><span id="几何间隔">几何间隔</span></h2><p>​    对于给定的训练数据集$T$<br>$$<br>T={(\boldsymbol{x}<em>1,y_1),(\boldsymbol{x}_2,y_2),\cdots,(\boldsymbol{x}_N,y_N)}<br>$$<br>定义超平面$(\boldsymbol{w},b)$关于样本点$(\boldsymbol{x_i},y_i)$的几何间隔为<br>$$<br>\gamma_i=\dfrac{1}{\parallel\boldsymbol{w}\parallel}|\boldsymbol{w}\cdot\boldsymbol{x_i}+b|=\dfrac{1}{\parallel\boldsymbol{w}\parallel}y_i(\boldsymbol{w}\cdot\boldsymbol{x_i}+b)<br>$$<br>定义超平面$(\boldsymbol{w},b)$关于训练数据集$T$的几何间隔为超平面$(\boldsymbol{w},b)$关于$T$中所有样本点$(\boldsymbol{x_i},y_i)$的几何间隔的最小值，即<br>$$<br>\gamma=\min</em>{i\in[1,N]}\gamma_i<br>$$</p>
+<h2><span id="两种间隔的比较以及在感知机与svm中的应用">两种间隔的比较以及在感知机与SVM中的应用</span></h2><p>​    从两种间隔的定义可以得知，函数间隔和几何间隔之间的关系为<br>$$<br>\gamma_i=\dfrac{\hat{\gamma_i}}{\parallel\boldsymbol{w}\parallel},\quad\gamma=\dfrac{\hat{\gamma}}{\parallel\boldsymbol{w}\parallel}<br>$$<br>如果$\parallel\boldsymbol{w}\parallel=1$，那么函数间隔和几何间隔相等。如果超平面$S:\boldsymbol{w}\cdot\boldsymbol{x}+b=0$的参数$\boldsymbol{w},b$成比例地改变（超平面并没有改变），函数间隔也按此比例改变而几何间隔不变。</p>
+<p>​    感知机模型中使用函数间隔作为损失函数，因为需要找出的是一个比较“相对”的最优超平面，只需要能够将数据集划分成两部分即可，因此不需要对参数$\boldsymbol{w}$进行归一化；而SVM使用几何间隔，这时因为SVM要找出来的是一个比较“绝对”的最优超平面，因此需要对参数$\boldsymbol{w}$进行归一化。</p>
+<h1><span id="线性可分支持向量机">线性可分支持向量机</span></h1><h2><span id="线性可分支持向量机模型">线性可分支持向量机模型</span></h2><p>​    假定给定一个特征空间上的训练数据集<br>$$<br>T={(\boldsymbol{x}_1,y_1),(\boldsymbol{x}_2,y_2),\cdots,(\boldsymbol{x}_N,y_N)}<br>$$<br>其中$\boldsymbol{x}\in\mathcal{X}=\mathbb{R}^n$，$y_i\in\mathcal{Y}={-1,+1}$，$i\in[1,N]$。假设数据集是线性可分的。</p>
+<p>​    感知机算法学习一个分离超平面$S$能将实例分到不同的类，但是可能存在多个满足条件的超平面，支持向量机选择最佳的一个超平面$S^*$。    </p>
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/1556799716345.png" alt="1556799716345" style="zoom: 67%;">
+
+<h2><span id="线性可分支持向量机学习策略">线性可分支持向量机学习策略</span></h2><p>​    感知机算法的目标是最大化几何间隔，可以用下列公式表示：<br>$$<br>\begin{array}{rl}<br>&amp;\max\limits_{\boldsymbol{w},b}\min\limits_{i\in[1,N]}\dfrac{|\boldsymbol{w}\cdot\boldsymbol{x_i}+b|}{\parallel\boldsymbol{w}\parallel}\<br>\Leftrightarrow&amp;\max\limits_{\boldsymbol{w},b}\min\limits_{i\in[1,N]}\left(\dfrac{1}{\parallel\boldsymbol{w}\parallel}y_i(\boldsymbol{w}\cdot\boldsymbol{x_i}+b)\right)<br>\end{array}<br>$$<br>这是一个约束最优化问题，可以重写为<br>$$<br>\begin{array}{l}<br>\max\limits_{\boldsymbol{w},b}\quad\gamma \<br>\text{s.t.}\quad \dfrac{1}{\parallel\boldsymbol{w}\parallel}y_i(\boldsymbol{w}\cdot\boldsymbol{x_i}+b)\geqslant\gamma,\quad i\in[1,N]<br>\end{array}<br>$$<br>考虑到几何间隔与函数间隔的关系，该问题可以重写为<br>$$<br>\begin{array}{l}<br>\max\limits_{\boldsymbol{w},b}\quad\dfrac{\hat{\gamma}}{\parallel\boldsymbol{w}\parallel} \<br>\text{s.t.}\quad y_i(\boldsymbol{w}\cdot\boldsymbol{x_i}+b)\geqslant\hat{\gamma},\quad i\in[1,N]<br>\end{array}<br>$$<br>注意到上述问题等价于<br>$$<br>\begin{array}{l}<br>\max\limits_{\boldsymbol{w},b}\quad\dfrac{\alpha\hat{\gamma}}{\parallel\boldsymbol{w}\parallel} \<br>\text{s.t.}\quad \alpha y_i(\boldsymbol{w}\cdot\boldsymbol{x_i}+b)\geqslant\alpha\hat{\gamma},\quad i\in[1,N]<br>\end{array}<br>$$<br>令$\alpha=\dfrac{1}{\hat{\gamma}}$，则得到<br>$$<br>\begin{array}{l}<br>\max\limits_{\boldsymbol{w},b}\quad\dfrac{1}{\parallel\boldsymbol{w}\parallel} \<br>\text{s.t.}\quad y_i(\boldsymbol{w}\cdot\boldsymbol{x_i}+b)\geqslant 1,\quad i\in[1,N]<br>\end{array}<br>$$<br>该问题等价于<br>$$<br>\begin{array}{l}<br>\min\limits_{\boldsymbol{w},b}\quad\dfrac{1}{2}\parallel\boldsymbol{w}\parallel^2 \<br>\text{s.t.}\quad y_i(\boldsymbol{w}\cdot\boldsymbol{x_i}+b)-1\geqslant 0,\quad i\in[1,N]<br>\end{array}<br>$$<br>这是一个凸二次规划问题。对该问题求解得到$\boldsymbol{w}^<em>,b^</em>$即得到最大间隔分离超平面$S^<em>:\boldsymbol{w}^</em>\cdot\boldsymbol{x}+b=0$以及分类决策函数$f(\boldsymbol{x})=\text{sign}(\boldsymbol{w}^*\cdot\boldsymbol{x}+b)$，即线性可分支持向量机模型。</p>
+<h2><span id="线性可分支持向量机算法">线性可分支持向量机算法</span></h2><h3><span id="原始算法">原始算法</span></h3><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/1556797134480.png" style="zoom: 60%;">
+
+<h3><span id="对偶算法">对偶算法</span></h3><h1><span id="线性支持向量机">线性支持向量机</span></h1><h2><span id="线性支持向量机模型">线性支持向量机模型</span></h2><p>​    假定给定一个特征空间上的训练数据集<br>$$<br>T={(\boldsymbol{x}_1,y_1),(\boldsymbol{x}_2,y_2),\cdots,(\boldsymbol{x}_N,y_N)}<br>$$<br>其中$\boldsymbol{x}\in\mathcal{X}=\mathbb{R}^n$，$y_i\in\mathcal{Y}={-1,+1}$，$i\in[1,N]$。假设数据集不是线性可分的。通常情况是，训练数据中有一些特异点，将这些特异点去除后，剩下大部分的样本点组成的集合是线性可分的。</p>
+<p>​    感知机算法学习一个分离超平面$S$能将实例分到不同的类，但是可能存在多个满足条件的超平面，支持向量机选择最佳的一个超平面$S^*$。</p>
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/1556799681634.png" alt="1556799681634" style="zoom: 67%;">
+
+<h2><span id="线性支持向量机学习策略">线性支持向量机学习策略</span></h2><p>​    线性不可分意味着某些样本点$(\boldsymbol{x_i},y_i)$不能满足函数间隔大于等于1的约束条件，为了解决这个问题，可以对每个样本点$(\boldsymbol{x_i},y_i)$引进一个松弛变量$\xi_i\geqslant 0$，使函数间隔加上松弛变量大于等于1。这样，约束条件就变为<br>$$<br>y_i(\boldsymbol{w}\cdot\boldsymbol{x_i}+b)\geqslant 1-\xi_i<br>$$<br>同时，对每个松弛变量$\xi_i$支付一个代价$\xi_i$。目标函数由原来的$\dfrac{1}{2}\parallel\boldsymbol{w}\parallel^2$变为<br>$$<br>\dfrac{1}{2}\parallel\boldsymbol{w}\parallel^2+C\sum_{i=1}^N\xi_i<br>$$<br>这里$C$成为惩罚参数，一般由应用问题决定。最小化该目标函数有两层含义：</p>
+<ol>
+<li>使$\dfrac{1}{2}\parallel\boldsymbol{w}\parallel^2$尽量小，即间隔尽量大</li>
+<li>使误分类点的个数尽量少</li>
+</ol>
+<p>$C$是调和二者的参数。</p>
+<p>​    线性不可分的支持向量机的学习问题变为如下凸二次规划问题：<br>$$<br>\begin{array}{rl}<br>&amp;\min\limits_{\boldsymbol{w},b,\boldsymbol{\xi}}\quad\dfrac{1}{2}\parallel\boldsymbol{w}\parallel^2+C\displaystyle\sum\limits_{i=1}^N\xi_i \<br>\text{s.t.}&amp;y_i(\boldsymbol{w}\cdot\boldsymbol{x_i}+b)\geqslant 1-\xi_i,\quad i\in[1,N]\<br>&amp;\xi_i\geqslant 0,\quad i\in[1,N]<br>\end{array}<br>$$<br>$\boldsymbol{w}$的解是唯一的，但是$b$的解可能不唯一，而是存在一个区间。</p>
+<h1><span id="非线性支持向量机">非线性支持向量机</span></h1><h2><span id="核函数">核函数</span></h2><p>​    假定给定一个特征空间上的训练数据集<br>$$<br>T={(\boldsymbol{x}_1,y_1),(\boldsymbol{x}_2,y_2),\cdots,(\boldsymbol{x}_N,y_N)}<br>$$<br>其中$\boldsymbol{x}\in\mathcal{X}=\mathbb{R}^n$，$y_i\in\mathcal{Y}={-1,+1}$，$i\in[1,N]$。</p>
+<p>​    很多时候$T$不是线性可分的，但是可能存在一个超曲面$S\in\mathbb{R}^n$能够将正负例分开，这时称该问题是一个非线性可分问题。</p>
+<p>​    <strong>核函数</strong>：设$\mathcal{X}$是输入空间（欧式空间$\mathbb{R}^n$的子集或离散集合），又设$\mathcal{H}$为特征空间（希尔伯特空间），如果存在一个从$\mathcal{X}$到$\mathcal{H}$的映射<br>$$<br>\phi(\boldsymbol{x}):\mathcal{X}\rightarrow\mathcal{H}<br>$$<br>使得对$\forall \boldsymbol{x},\boldsymbol{z}\in\mathcal{X}$，函数$K(\boldsymbol{x},\boldsymbol{z})$满足条件<br>$$<br>K(\boldsymbol{x},\boldsymbol{z})=\phi(\boldsymbol{x})\cdot\phi(\boldsymbol{z})<br>$$<br>则称$K(\boldsymbol{x},\boldsymbol{z})$为核函数，$\phi(\boldsymbol{x})$为映射函数，式中$\phi(\boldsymbol{x})\cdot\phi(\boldsymbol{z})$为$\phi(\boldsymbol{x})$和$\phi(\boldsymbol{z})$的内积。</p>
+<p>​    核技巧应用到支持向量机，其基本思想是通过一个非线性变换将输入空间对应于一个特征空间，使得在输入空间中的超曲面模型对应于特征空间中的超平面模型，这样分类问题的学习任务通过在特征空间中求解线性支持向量机就可以完成。</p>
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/1556811110077.png" alt="1556811110077" style="zoom:67%;">
+
+<p><a href="https://www.zhihu.com/question/24627666/answer/115820347" target="_blank" rel="noopener">机器学习有很多关于核函数的说法，核函数的定义和作用是什么？ - 魏晋的回答 - 知乎</a></p>
+<h2><span id="正定核">正定核</span></h2><h2><span id="常用核函数">常用核函数</span></h2><h2><span id="非线性支持向量机模型">非线性支持向量机模型</span></h2><p>​    从非线性分类训练集，通过核函数与软间隔最大化或凸二次规划学习得到的分类决策函数<br>$$<br>f(\boldsymbol{x})=\text{sign}\left(\sum_{i=1}^N\alpha_i^<em>y_iK(\boldsymbol{x},x_i)+b^</em>\right)<br>$$<br>称为非线性支持向量机，$K(\boldsymbol{x},\boldsymbol{z})$是正定核函数。</p>
+<h2><span id="非线性支持向量机算法">非线性支持向量机算法</span></h2><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/1556813248646.png" alt="1556813248646" style="zoom:67%;">
+
+<h1><span id="序列最小最优化smo算法">序列最小最优化（SMO）算法</span></h1><p>​    用于高效地实现支持向量机的学习。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98/" rel="next" title="约束满足问题">
+                <i class="fa fa-chevron-left"></i> 约束满足问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ryan</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/liuxr98" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">函数间隔与几何间隔</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text">函数间隔</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.2.</span> <span class="nav-text">几何间隔</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.3.</span> <span class="nav-text">两种间隔的比较以及在感知机与SVM中的应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">线性可分支持向量机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.1.</span> <span class="nav-text">线性可分支持向量机模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.2.</span> <span class="nav-text">线性可分支持向量机学习策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.3.</span> <span class="nav-text">线性可分支持向量机算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">2.3.1.</span> <span class="nav-text">原始算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">2.3.2.</span> <span class="nav-text">对偶算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">线性支持向量机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.1.</span> <span class="nav-text">线性支持向量机模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.2.</span> <span class="nav-text">线性支持向量机学习策略</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">非线性支持向量机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.1.</span> <span class="nav-text">核函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.2.</span> <span class="nav-text">正定核</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.3.</span> <span class="nav-text">常用核函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.4.</span> <span class="nav-text">非线性支持向量机模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.5.</span> <span class="nav-text">非线性支持向量机算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">5.</span> <span class="nav-text">序列最小最优化（SMO）算法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ryan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

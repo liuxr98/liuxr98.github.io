@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="最终效果 加载地图1234567891011Map &amp;#123;	id: map    &#x2F;&#x2F; set the basemap    Basemap &amp;#123;    	RasterLayer &amp;#123;        	Raster &amp;#123;            	path: &quot;file:&#x2F;&#x2F;&#x2F;G:&#x2F;Qt&#x2F;map&#x2F;map_file&#x2F;地图_墨卡托坐标系.tif&quot;			&amp;#125;		&amp;#1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于ArcGIS的地图小程序">
+<meta property="og:url" content="http://yoursite.com/2020/05/27/%E5%89%8D%E7%AB%AF/Qt/ArcGIS/%E5%9F%BA%E4%BA%8EArcGIS%E7%9A%84%E5%9C%B0%E5%9B%BE%E5%B0%8F%E7%A8%8B%E5%BA%8F/index.html">
+<meta property="og:site_name" content="RBlog">
+<meta property="og:description" content="最终效果 加载地图1234567891011Map &amp;#123;	id: map    &#x2F;&#x2F; set the basemap    Basemap &amp;#123;    	RasterLayer &amp;#123;        	Raster &amp;#123;            	path: &quot;file:&#x2F;&#x2F;&#x2F;G:&#x2F;Qt&#x2F;map&#x2F;map_file&#x2F;地图_墨卡托坐标系.tif&quot;			&amp;#125;		&amp;#1">
+<meta property="og:image" content="http://yoursite.com/2020/05/27/%E5%89%8D%E7%AB%AF/Qt/ArcGIS/%E5%9F%BA%E4%BA%8EArcGIS%E7%9A%84%E5%9C%B0%E5%9B%BE%E5%B0%8F%E7%A8%8B%E5%BA%8F/demo.gif">
+<meta property="article:published_time" content="2020-05-27T15:20:21.000Z">
+<meta property="article:modified_time" content="2020-05-29T09:12:50.051Z">
+<meta property="article:author" content="Ryan">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/05/27/%E5%89%8D%E7%AB%AF/Qt/ArcGIS/%E5%9F%BA%E4%BA%8EArcGIS%E7%9A%84%E5%9C%B0%E5%9B%BE%E5%B0%8F%E7%A8%8B%E5%BA%8F/demo.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/05/27/前端/Qt/ArcGIS/基于ArcGIS的地图小程序/"/>
+
+
+
+
+
+  <title>基于ArcGIS的地图小程序 | RBlog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/27/%E5%89%8D%E7%AB%AF/Qt/ArcGIS/%E5%9F%BA%E4%BA%8EArcGIS%E7%9A%84%E5%9C%B0%E5%9B%BE%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基于ArcGIS的地图小程序</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-27T23:20:21+08:00">
+                2020-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Qt/" itemprop="url" rel="index">
+                    <span itemprop="name">Qt</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Qt/%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B/" itemprop="url" rel="index">
+                    <span itemprop="name">编程示例</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Qt/%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B/ArcGIS/" itemprop="url" rel="index">
+                    <span itemprop="name">ArcGIS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2><span id="最终效果">最终效果</span></h2><p><img src="/2020/05/27/%E5%89%8D%E7%AB%AF/Qt/ArcGIS/%E5%9F%BA%E4%BA%8EArcGIS%E7%9A%84%E5%9C%B0%E5%9B%BE%E5%B0%8F%E7%A8%8B%E5%BA%8F/demo.gif" alt="demo"></p>
+<h2><span id="加载地图">加载地图</span></h2><figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">Map</span> &#123;</span><br><span class="line">	<span class="attribute">id:</span><span class="string"> map</span></span><br><span class="line">    <span class="comment">// set the basemap</span></span><br><span class="line">    <span class="title">Basemap</span> &#123;</span><br><span class="line">    	<span class="title">RasterLayer</span> &#123;</span><br><span class="line">        	<span class="title">Raster</span> &#123;</span><br><span class="line">            	<span class="attribute">path</span>: <span class="string">"file:///G:/Qt/map/map_file/地图_墨卡托坐标系.tif"</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3><span id="map">Map</span></h3><p><a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-map.html" target="_blank" rel="noopener">Map QML Type</a></p>
+<blockquote>
+<p>A map represents the model in an MVC architecture and a map view represents the view. A map specifies how the geographic data is organized, and a map view renders the data and allows users to interact with it.</p>
+<p>A map derives its geographic content from its basemap and operational layers. A basemap provides a geographical context for the content you want to display on the map. It is a background locational reference where you can overlay your operational layers. The basemap content is typically geographic features that do not change frequently, such as streets, parcel boundaries, or rivers. Operational layers provide application content for the task at hand. Their content might change frequently with updates from earthquake, traffic, or weather reports.</p>
+<p>The map has a spatial reference that specifies how the geographic content from its basemap and operational layers are aligned when combined together. The first layer that is added to the map will set the spatial reference.</p>
+<p>Once the map’s spatial reference is set, it cannot be changed, even by changing the basemap.</p>
+<p>You can initialize the map in several different ways: creating from an <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-arcgisitem.html" target="_blank" rel="noopener">ArcGISItem</a> (a web map); a URL to a <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-arcgisitem.html#portalitem" target="_blank" rel="noopener">PortalItem</a>, creating from a basemap (either your own, or an Esri-provided basemap); or by defining the spatial reference. Each method of initialization is mutually exclusive. For example, you should not set both the item and <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-map.html#basemap-prop" target="_blank" rel="noopener">basemap</a> properties. Doing so will print a warning message at the console.</p>
+<p>In the event that any combination of <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-map.html#item-prop" target="_blank" rel="noopener">item</a>, <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-map.html#initUrl-prop" target="_blank" rel="noopener">initUrl</a>, <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-map.html#basemap-prop" target="_blank" rel="noopener">basemap</a>, and <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-map.html#spatialReference-prop" target="_blank" rel="noopener">spatialReference</a> properties are set when the map initializes, the software chooses how to initialize the map depending on which properties are set. The precedence order for these properties is as follows.</p>
+<ul>
+<li>1: <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-map.html#item-prop" target="_blank" rel="noopener">item</a></li>
+<li>2: <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-map.html#initUrl-prop" target="_blank" rel="noopener">initUrl</a></li>
+<li>3: <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-map.html#basemap-prop" target="_blank" rel="noopener">basemap</a></li>
+<li>4: <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-map.html#spatialReference-prop" target="_blank" rel="noopener">spatialReference</a></li>
+</ul>
+<p>The <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-map.html#spatialReference-prop" target="_blank" rel="noopener">spatialReference</a>, <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-map.html#initUrl-prop" target="_blank" rel="noopener">initUrl</a> and <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-map.html#item-prop" target="_blank" rel="noopener">item</a> properties can only be set at map initialization time. For example, if a map is created using a basemap, and later the item property is set in a JavaScript function, nothing will happen because the map was already initialized with the basemap.</p>
+</blockquote>
+<h3><span id="rasterlayer">RasterLayer</span></h3><p><a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-rasterlayer.html" target="_blank" rel="noopener">RasterLayer QML Type</a></p>
+<blockquote>
+<p>A <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-rasterlayer.html" target="_blank" rel="noopener">RasterLayer</a> is used to render data from a <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-raster.html" target="_blank" rel="noopener">Raster</a> onto a Map.</p>
+</blockquote>
+<h3><span id="raster">Raster</span></h3><p><a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-raster.html" target="_blank" rel="noopener">Raster QML Type</a></p>
+<blockquote>
+<p>A raster consists of a matrix of cells (or pixels) organized into rows and columns (or a grid) where each cell contains a value representing information, such as temperature. Rasters are digital aerial photographs, imagery from satellites, digital pictures, or even scanned maps.</p>
+<p>It can be created from a raster file on device or from a raster function.</p>
+<p>Supported Raster formats include:</p>
+<ul>
+<li>ASRP/USRP</li>
+<li>CIB1, 5, 10</li>
+<li>DTED0, 1, 2</li>
+<li>GeoTIFF</li>
+<li>HFA</li>
+<li>HRE</li>
+<li>IMG</li>
+<li>JPEG</li>
+<li>JPEG 2000</li>
+<li>NITF</li>
+<li>PNG</li>
+<li>RPF</li>
+<li>SRTM1, 2</li>
+<li>Mosaic Dataset in SQLite (read-only)</li>
+</ul>
+<p>Learn more about rasters from the <a href="http://links.esri.com/qt/rasters" target="_blank" rel="noopener">ArcGIS Desktop documentation</a>.</p>
+</blockquote>
+<h2><span id="标记">标记</span></h2><figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">GraphicsOverlay</span> &#123;</span><br><span class="line">    <span class="attribute">id:</span><span class="string"> graphicsOverlay</span></span><br><span class="line">    <span class="comment">// assign a render to the graphics overlay</span></span><br><span class="line">    <span class="title">SimpleRenderer</span> &#123;</span><br><span class="line">        <span class="title">SimpleMarkerSymbol</span> &#123;</span><br><span class="line">            <span class="attribute">style</span>: Enums.SimpleMarkerSymbolStyleX</span><br><span class="line">            <span class="attribute">color</span>: Qt.rgba(<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>)</span><br><span class="line">            <span class="attribute">size</span>: <span class="number">15.0</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title">Graphic</span> &#123;</span><br><span class="line">        <span class="attribute">id:</span><span class="string"> locationGraphic</span></span><br><span class="line">        <span class="title">Point</span> &#123;</span><br><span class="line">            <span class="attribute">x</span>: <span class="number">-117.195</span></span><br><span class="line">            <span class="attribute">y</span>: <span class="number">34.056195</span></span><br><span class="line">            <span class="title">SpatialReference</span> &#123;</span><br><span class="line">                <span class="attribute">wkid</span>: <span class="number">4326</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="attribute">onComponentCompleted</span>: &#123;</span><br><span class="line">            setTextFromPoint(locationGraphic.geometry);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3><span id="graphicsoverlay">GraphicsOverlay</span></h3><p><a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-graphicsoverlay.html" target="_blank" rel="noopener">GraphicsOverlay QML Type</a></p>
+<blockquote>
+<p>Graphics may represent temporary data in your application, such as the results of a query or an analysis, or may be used to highlight existing content in the map.</p>
+<p>Each graphic contains a geometry describing the location and the shape of the graphic. A graphics overlay typically contains graphics based on a single geometry type (Point, Multipoint, Polyline, or Polygon). Each graphic can be associated with a symbol which controls how the graphic looks. Alternatively, the overlay can be associated with a renderer which manages the appearance of all the graphics in the overlay that do not have specific symbols associate with each of them.</p>
+</blockquote>
+<h3><span id="simplerenderer">SimpleRenderer</span></h3><p><a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-simplerenderer.html" target="_blank" rel="noopener">SimpleRenderer QML Type</a></p>
+<blockquote>
+<p>Simple renderers symbolize all graphics in a graphics overlay or features in a feature layer according to a given scheme. Simple renderers use a simple scheme, meaning the same symbol is used for all graphics and features, regardless of their attribute values.</p>
+</blockquote>
+<h3><span id="simplemarkersymbol">SimpleMarkerSymbol</span></h3><p><a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-simplemarkersymbol.html" target="_blank" rel="noopener">SimpleMarkerSymbol QML Type</a></p>
+<blockquote>
+<p>Symbols describe how graphics and features look on a map. Different symbols are used with different geometry types. Instances of this type represent simple marker symbols. Marker symbols are used to display those graphics and features which are based on point or multipoint geometry. Simple marker symbols display simple, predefined markers such as circle, cross, and so on. In addition, the markers can have an optional outline, which is defined by a line symbol.</p>
+</blockquote>
+<h3><span id="graphic">Graphic</span></h3><p><a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-graphic.html" target="_blank" rel="noopener">Graphic QML Type</a></p>
+<blockquote>
+<p>Graphics are displayed on the map through a graphics overlay. Common uses of graphics include providing input to a task, displaying output from a task, or <strong>marking a location based on user interaction with the map</strong>.</p>
+<p>Each graphic must contain a geometry describing the location and the shape of the graphic. The geometry preferably should be in the same spatial reference as the map, otherwise it will be reprojected on-the-fly (computationally expensive for large number of graphics).</p>
+<p>A graphic can be associated with a symbol which determines how the graphic looks. Alternatively, the graphics overlay can be assigned a renderer which determines the appearance of all graphics in the overlay. If the graphic has an associated symbol, that symbol will override the renderer when displaying that graphic. The symbol used depends upon the geometry type associated with the graphic. A <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-markersymbol.html" target="_blank" rel="noopener">MarkerSymbol</a> is used for point and multipoint geometries, <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-linesymbol.html" target="_blank" rel="noopener">LineSymbol</a> for polyline geometries, and <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-fillsymbol.html" target="_blank" rel="noopener">FillSymbol</a> for polygon geometries.</p>
+<p>A graphic can contain a list model of attributes (key-value pairs) providing more information about the graphic.</p>
+</blockquote>
+<p>Properties：</p>
+<ul>
+<li><strong><a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-graphic.html#attributes-prop" target="_blank" rel="noopener">attributes</a></strong> : AttributeListModel</li>
+<li><strong><a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-graphic.html#geometry-prop" target="_blank" rel="noopener">geometry</a></strong> : Geometry</li>
+<li><strong><a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-graphic.html#graphicsOverlay-prop" target="_blank" rel="noopener">graphicsOverlay</a></strong> : GraphicsOverlay</li>
+<li><strong><a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-graphic.html#selected-prop" target="_blank" rel="noopener">selected</a></strong> : bool</li>
+<li><strong><a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-graphic.html#symbol-prop" target="_blank" rel="noopener">symbol</a></strong> : Symbol</li>
+<li><strong><a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-graphic.html#visible-prop" target="_blank" rel="noopener">visible</a></strong> : bool</li>
+<li><strong><a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-graphic.html#zIndex-prop" target="_blank" rel="noopener">zIndex</a></strong> : int</li>
+</ul>
+<h3><span id="geometry">Geometry</span></h3><p><a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-geometry.html" target="_blank" rel="noopener">Geometry QML Type</a></p>
+<blockquote>
+<p><strong>Note:</strong> You cannot declare or create a component of this type in QML code.</p>
+<p>This type is the base type for two-dimensional (x,y) or three-dimensional (x,y,z) geometries such as Point and Polyline objects. Objects that inherit from the Geometry type may also include an m (measure) value for each vertex.</p>
+<p>Geometries are used throughout the API, for example to define the shape of a feature or graphic, the extent of a layer, or as inputs and outputs of different types of task.</p>
+</blockquote>
+<h3><span id="point">Point</span></h3><p><a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-point.html" target="_blank" rel="noopener">Point QML Type</a></p>
+<blockquote>
+<p>Points can optionally have z (height) and m (measure) attributes.</p>
+<p>If the <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-spatialreference.html" target="_blank" rel="noopener">SpatialReference</a> is a geographic coordinate system, the x-coordinate defines <strong>longitude</strong> and the y-coordinate defines <strong>latitude</strong>.</p>
+<p>Point is immutable. Instead of changing the properties of an existing Point, create new Point instances, or use <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-pointbuilder.html" target="_blank" rel="noopener">PointBuilder</a>.</p>
+<p><strong>Points can be used as the Geometry of a Feature.</strong></p>
+</blockquote>
+<h3><span id="spatialreference">SpatialReference</span></h3><p><a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-spatialreference.html" target="_blank" rel="noopener">SpatialReference QML Type</a></p>
+<blockquote>
+<p>Instances of this type represent a specific coordinate system, identified by a well-known ID (WKID) number or well-known text (WKT) string. SpatialReferences are immutable.</p>
+<p>SpatialReferences allow disparate spatial data to be consistently viewed and analyzed together. Geometry, Layer, and <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-graphicsoverlay.html" target="_blank" rel="noopener">GraphicsOverlay</a> types have a <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-spatialreference.html" target="_blank" rel="noopener">SpatialReference</a> that determines the system in which the data is stored, and the <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-spatialreference.html" target="_blank" rel="noopener">SpatialReference</a> of each <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-geoview.html" target="_blank" rel="noopener">GeoView</a> determines how it displays the data it contains. There are two main categories of coordinate system that can be represented by a <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-spatialreference.html" target="_blank" rel="noopener">SpatialReference</a>:</p>
+<ul>
+<li>Geographic coordinate systems use a three-dimensional spherical surface to define locations on the earth. Coordinates are defined using angular units such as degrees.</li>
+<li>Projected coordinate systems use flat, two-dimensional surface to define locations on the earth. Coordinates are defined using linear units such as meters or miles.</li>
+</ul>
+<p>In some cases, more than one WKID value refer to the same spatial reference. For example, 3857 and 102100 both refer to WGS 1984 Web Mercator (Auxiliary Sphere). There can also be subtle differences between two WKT strings that that represent the same spatial reference. To mitigate this situation, the <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-spatialreference.html" target="_blank" rel="noopener">SpatialReference</a> type provides spatial reference comparison methods.</p>
+<p>Use the create method to create a <a href="https://developers.arcgis.com/qt/latest/qml/api-reference/qml-esri-arcgisruntime-spatialreference.html" target="_blank" rel="noopener">SpatialReference</a> by specifying the WKID of a coordinate system, or use the members of SpatialReferences to return instances of the most commonly used SpatialReferences.</p>
+<p>See <a href="http://resources.arcgis.com/en/help/arcgis-rest-api/index.html#/Projected_coordinate_systems/02r3000000vt000000/" target="_blank" rel="noopener">Projected Coordinate Systems</a> and <a href="http://resources.arcgis.com/en/help/arcgis-rest-api/index.html#/Geographic_coordinate_systems/02r300000105000000/" target="_blank" rel="noopener">Geographic Coordinate Systems</a> for the list of supported spatial references and their corresponding definition strings.</p>
+</blockquote>
+<h2><span id="other-references">Other References</span></h2><ul>
+<li><a href="https://developers.arcgis.com/qt/latest/qml/guide/add-raster-data.htm" target="_blank" rel="noopener">Add raster data</a></li>
+<li><a href="https://developers.arcgis.com/qt/latest/qml/sample-code/format-coordinates/" target="_blank" rel="noopener">Format coordinates</a></li>
+</ul>
+<h2><span id="代码实现">代码实现</span></h2><figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">Rectangle</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">800</span></span><br><span class="line">    <span class="attribute">height</span>: <span class="number">800</span></span><br><span class="line">    </span><br><span class="line">    readonly <span class="keyword">property</span><span class="string"> int labelWidth</span>: <span class="number">100</span></span><br><span class="line">    readonly <span class="keyword">property</span><span class="string"> int coordinateTextWidth</span>: <span class="number">200</span></span><br><span class="line">    readonly <span class="keyword">property</span><span class="string"> int fontPixelSize</span>: <span class="number">14</span></span><br><span class="line">    readonly <span class="keyword">property</span><span class="string"> int textPadding</span>: <span class="number">4</span></span><br><span class="line">    readonly <span class="keyword">property</span><span class="string"> string strDecimalDegrees</span>: qsTr(<span class="string">"Degrees"</span>)</span><br><span class="line">    readonly <span class="keyword">property</span><span class="string"> string strDegreesMinutesSeconds</span>: qsTr(<span class="string">"DMS"</span>)</span><br><span class="line">    <span class="keyword">property</span><span class="string"> string labelSuffix</span>: <span class="string">":  "</span></span><br><span class="line"></span><br><span class="line">    <span class="title">MapView</span> &#123;</span><br><span class="line">        <span class="attribute">id:</span><span class="string"> mapView</span></span><br><span class="line"></span><br><span class="line">        <span class="title">anchors</span> &#123;</span><br><span class="line">            <span class="attribute">top</span>: <span class="built_in">parent</span>.top</span><br><span class="line">            <span class="attribute">left</span>: <span class="built_in">parent</span>.left</span><br><span class="line">            <span class="attribute">right</span>: <span class="built_in">parent</span>.right</span><br><span class="line">            <span class="attribute">bottom</span>: formatRect.top</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="title">Map</span> &#123;</span><br><span class="line">            <span class="attribute">id:</span><span class="string"> map</span></span><br><span class="line">            <span class="comment">// set the basemap</span></span><br><span class="line">            <span class="title">Basemap</span> &#123;</span><br><span class="line">                <span class="title">RasterLayer</span> &#123;</span><br><span class="line">                   <span class="title">Raster</span> &#123;</span><br><span class="line">                       <span class="attribute">path</span>: <span class="string">"file:///G:/Qt/map/map_file/地图_墨卡托坐标系.tif"</span></span><br><span class="line">                   &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Add a graphics overlay to the map view</span></span><br><span class="line">        <span class="title">GraphicsOverlay</span> &#123;</span><br><span class="line">            <span class="attribute">id:</span><span class="string"> graphicsOverlay</span></span><br><span class="line">            <span class="comment">// assign a render to the graphics overlay</span></span><br><span class="line">            <span class="title">SimpleRenderer</span> &#123;</span><br><span class="line">                <span class="title">SimpleMarkerSymbol</span> &#123;</span><br><span class="line">                    <span class="attribute">style</span>: Enums.SimpleMarkerSymbolStyleX</span><br><span class="line">                    <span class="attribute">color</span>: Qt.rgba(<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>)</span><br><span class="line">                    <span class="attribute">size</span>: <span class="number">15.0</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="title">Graphic</span> &#123;</span><br><span class="line">                <span class="attribute">id:</span><span class="string"> locationGraphic</span></span><br><span class="line">                <span class="title">Point</span> &#123;</span><br><span class="line">                    <span class="attribute">x</span>: <span class="number">12148289.779419606551528</span></span><br><span class="line">                    <span class="attribute">y</span>: <span class="number">2081791.129232412204146</span></span><br><span class="line">                    <span class="title">SpatialReference</span> &#123;</span><br><span class="line">                        <span class="attribute">wkid</span>: <span class="number">3857</span>  <span class="comment">// Web墨卡托坐标系</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="attribute">onComponentCompleted</span>: &#123;</span><br><span class="line">                    setTextFromPoint(locationGraphic.geometry);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">onMouseClicked</span>: &#123;  <span class="comment">// on MapView</span></span><br><span class="line">            handleLocationUpdate(mouse.mapPoint);   </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title">Rectangle</span> &#123;</span><br><span class="line">        <span class="attribute">id:</span><span class="string"> formatRect</span></span><br><span class="line">        <span class="title">anchors</span> &#123;</span><br><span class="line">            <span class="attribute">left</span>: <span class="built_in">parent</span>.left</span><br><span class="line">            <span class="attribute">bottom</span>: <span class="built_in">parent</span>.bottom</span><br><span class="line">            <span class="attribute">right</span>: <span class="built_in">parent</span>.right</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="attribute">height</span>: childrenRect.height</span><br><span class="line"></span><br><span class="line">        <span class="title">GridLayout</span> &#123;</span><br><span class="line">            <span class="attribute">columns</span>: <span class="number">2</span></span><br><span class="line">            <span class="attribute">width</span>: <span class="built_in">parent</span>.width</span><br><span class="line">            <span class="title">Text</span> &#123;</span><br><span class="line">                <span class="attribute">id:</span><span class="string"> labelDD</span></span><br><span class="line">                <span class="attribute">font.pixelSize</span>: fontPixelSize</span><br><span class="line">                <span class="attribute">padding</span>: textPadding</span><br><span class="line">                <span class="attribute">horizontalAlignment</span>: Text.AlignRight</span><br><span class="line">                <span class="attribute">text</span>: strDecimalDegrees + labelSuffix</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="title">TextField</span> &#123;</span><br><span class="line">                <span class="attribute">id:</span><span class="string"> textDD</span></span><br><span class="line">                <span class="attribute">font.pixelSize</span>: fontPixelSize</span><br><span class="line">                <span class="attribute">text</span>: coordinatesInDD.length === <span class="number">0</span> ? <span class="string">"invalid point"</span> : coordinatesInDD</span><br><span class="line">                <span class="attribute">Layout.fillWidth</span>: <span class="literal">true</span></span><br><span class="line">                <span class="attribute">onAccepted</span>: &#123;</span><br><span class="line">                    handleTextUpdate(strDecimalDegrees, text);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="title">Text</span> &#123;</span><br><span class="line">                <span class="attribute">id:</span><span class="string"> labelDMS</span></span><br><span class="line">                <span class="attribute">font.pixelSize</span>: fontPixelSize</span><br><span class="line">                <span class="attribute">padding</span>: textPadding</span><br><span class="line">                <span class="attribute">horizontalAlignment</span>: Text.AlignRight</span><br><span class="line">                <span class="attribute">text</span>: strDegreesMinutesSeconds + labelSuffix</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="title">TextField</span> &#123;</span><br><span class="line">                <span class="attribute">id:</span><span class="string"> textDMS</span></span><br><span class="line">                <span class="attribute">font.pixelSize</span>: fontPixelSize</span><br><span class="line">                <span class="attribute">text</span>: coordinatesInDMS.length === <span class="number">0</span> ? <span class="string">"invalid point"</span> : coordinatesInDMS</span><br><span class="line">                <span class="attribute">Layout.fillWidth</span>: <span class="literal">true</span></span><br><span class="line">                <span class="attribute">onAccepted</span>: &#123;</span><br><span class="line">                    handleTextUpdate(strDegreesMinutesSeconds, text);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">handleLocationUpdate</span>(<span class="params">point</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="built_in">point</span>.isEmpty)</span><br><span class="line">        &#123;</span><br><span class="line">            locationGraphic.geometry = <span class="built_in">point</span>;</span><br><span class="line">            setTextFromPoint(<span class="built_in">point</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">setTextFromPoint</span>(<span class="params">point</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">point</span>.isEmpty) <span class="keyword">return</span>;</span><br><span class="line">        <span class="comment">//! [FormatCoordinates CoordinateFormatter point to text]</span></span><br><span class="line">        <span class="keyword">var</span> decimalPlaces = <span class="number">6</span>;</span><br><span class="line">        textDD.text   = CoordinateFormatter.toLatitudeLongitude(</span><br><span class="line">                    <span class="built_in">point</span>, Enums.LatitudeLongitudeFormatDecimalDegrees, decimalPlaces);</span><br><span class="line">        textDMS.text  = CoordinateFormatter.toLatitudeLongitude(</span><br><span class="line">                    <span class="built_in">point</span>, Enums.LatitudeLongitudeFormatDegreesMinutesSeconds, decimalPlaces);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// check for invalid points and update the text boxes</span></span><br><span class="line">        textDD.text = textDD.text.length === <span class="number">0</span>? <span class="string">"invalid point"</span>: textDD.text;</span><br><span class="line">        textDMS.text = textDMS.text.length === <span class="number">0</span>? <span class="string">"invalid point"</span>: textDMS.text;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">handleTextUpdate</span>(<span class="params">textType, text</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> <span class="built_in">point</span> = createPointFromText(textType, text);</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">point</span>)</span><br><span class="line">            handleLocationUpdate(<span class="built_in">point</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">createPointFromText</span>(<span class="params">textType, text</span>) </span>&#123;</span><br><span class="line">        <span class="comment">//! [FormatCoordinates CoordinateFormatter text to point]</span></span><br><span class="line">        <span class="keyword">return</span> CoordinateFormatter.fromLatitudeLongitude(text, map.spatialReference);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/25/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/UML%E5%BB%BA%E6%A8%A1%E5%9F%BA%E6%9C%AC%E4%BA%86%E8%A7%A3/" rel="next" title="UML建模基本了解">
+                <i class="fa fa-chevron-left"></i> UML建模基本了解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/" rel="prev" title="EA建模初步使用">
+                EA建模初步使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ryan</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/liuxr98" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">最终效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">加载地图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">2.1.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">2.2.</span> <span class="nav-text">RasterLayer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">2.3.</span> <span class="nav-text">Raster</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">标记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">3.1.</span> <span class="nav-text">GraphicsOverlay</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">3.2.</span> <span class="nav-text">SimpleRenderer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">3.3.</span> <span class="nav-text">SimpleMarkerSymbol</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">3.4.</span> <span class="nav-text">Graphic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">3.5.</span> <span class="nav-text">Geometry</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">3.6.</span> <span class="nav-text">Point</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">3.7.</span> <span class="nav-text">SpatialReference</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">Other References</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">5.</span> <span class="nav-text">代码实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ryan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
