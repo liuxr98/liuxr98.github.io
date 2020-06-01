@@ -1731,163 +1731,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/" itemprop="url">决策树</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-01T17:30:15+08:00">
-                2020-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1><span id="决策树算法">决策树算法</span></h1><h1><span id="基本了解">基本了解</span></h1><p>决策树的一个示例如下：</p>
-<img src="/2020/06/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/markdown-img-paste-2018092014184172.png" style="zoom:0.5">
-
-<img src="/2020/06/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/markdown-img-paste-20180920141849555.png" style="zoom:0.5">
-
-<p>能够看到，决策树的每一个条目仍然是由多个特征与类型组成，其中类型只在叶子结点，特征只在非叶子结点。叶子结点可包含特征与类型，非叶子结点只能包含特征。</p>
-<p>划分停止的条件（不包含剪枝）有以下几种情况：</p>
-<ol>
-<li>特征列全部用完（采用多数投票决定叶子的类型）</li>
-<li>叶子节点中所有样本都是一个种类</li>
-</ol>
-<h1><span id="信息论相关内容">信息论相关内容</span></h1><h2><span id="熵">熵</span></h2><p>熵：用来衡量离散变量的不确定性，如抛硬币、掷骰子</p>
-<p>对于离散变量$X$，其熵的计算公式为<br>$$H(X)=-\displaystyle\sum\limits_{x\in X}p(x_i)\cdot log_2[p(x_i)]=\displaystyle\sum\limits_{x_i\in X}p(x_i)log_2\left[\dfrac{1}{p(x_i)}\right]=E\left(log_2\left[\dfrac{1}{p(X)}\right]\right)$$<br>其中$x_i$表示离散变量$X$的取值。该公式用于计算一棵深度为1的树的熵。</p>
-<p><img src="/2020/06/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/a.svg" alt></p>
-<h2><span id="条件熵">条件熵</span></h2><p>如果对于下面这样子的决策树，其熵的计算就有些不同<br><img src="/2020/06/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/b.svg" alt></p>
-<p>该决策树是原始决策树引进一个特征后构成的深度为2的树，整棵树的熵可以通过下列公式进行计算：<br>$$H(Y\mid X)=\displaystyle\sum\limits_{x\in X}p(x)H(Y\mid X=x)$$<br>其中 $H(Y\mid X=x)$ 即是对应子树的熵。</p>
-<h2><span id="联合熵与互信息信息增益">联合熵与互信息（信息增益）</span></h2><p>联合熵：<br>$$H(X,Y)=H(Y)+H(X\mid Y)=H(X)+H(Y\mid X)$$</p>
-<p>互信息：<br>$$I(X,Y)=H(Y)-H(Y\mid X)=H(X)-H(X\mid Y)$$<br>互信息衡量的是离散变量$X,Y$之间的相关程度。</p>
-<img src="/2020/06/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/markdown-img-paste-20180920150434709.png" style="zoom:0.5">
-
-<h1><span id="基于信息增益的id3模型">基于信息增益的ID3模型</span></h1><p>遍历所有的特征$X_i$，选出使得<br>$$Gain(Y,X_i)=I(Y,X_i) = H(Y)-H(Y\mid X_i)$$<br>最大的$X_i$用来扩展决策树的深度。</p>
-<p>这种模型的缺陷在于倾向于构建一棵很矮很胖的树，每一次都会倾向于选择取值最多的特征。</p>
-<img src="/2020/06/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/markdown-img-paste-20180920152432652.png" style="zoom:0.5">
-
-<p>​    比如上图中的例子，如果用ID3模型来构建决策树，那么必定得到如下的树：</p>
-<p><img src="/2020/06/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/c.svg" alt></p>
-<p>该决策树毫无意义。</p>
-<h1><span id="基于信息增益率的c45模型">基于信息增益率的C4.5模型</span></h1><p>​    遍历所有的特征$X_i$，选出使得<br>$$<br>GainRatio(Y,X_i) = \dfrac{H(Y)-H(Y\mid X_i)}{H(A)}=\dfrac{Gain(Y,X_i)}{H(A)}<br>$$<br>最大的$X_i$用来扩展决策树的深度。</p>
-<p>​    其中$H(X_i)$ 表示指标本身的熵，其计算方法与 $H(Y)$ 基本相同，区别是特征与类型的选取不同。计算 $H(Y)$ 时将$Y$看做是类型，将$X_i$看做特征；计算 $H(X_i)$ 时将$X_i$看做是类型，将$Y$看做特征。如下图所示：</p>
-<p><img src="/2020/06/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/d.svg" alt></p>
-<h1><span id="基于gini指数的cart模型">基于Gini指数的CART模型</span></h1><p>​    基尼指数与熵的概念类似。如果一个数据集$D$包含来自$n$个类的样本，那么基尼指数，$gini(D)$定义如下：<br>$$<br>gini(D)=\displaystyle\sum\limits_{j=1}^{n}p_j(1-p_j)=1-\displaystyle\sum\limits_{j=1}^{n}p_j^2<br>$$<br>其中$p_j$是类$j$在数据集$D$出现的频率。该公式用于计算深度为1的树的基尼指数：</p>
-<p><img src="/2020/06/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/a.svg" alt></p>
-<p>​    如果要计算深度大于1的树的基尼指数，比如下图</p>
-<p><img src="/2020/06/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/b.svg" alt></p>
-<p>则<br>$$<br>gini{split}(D)=\displaystyle\sum\limits{x_i\in X}p(x_i)\cdot gini(D_i)<br>$$<br>在选取属性来分裂节点（加深树）时，选取使得$gini_{split}(D)$ 最小的属性进行分裂（对每个属性，需要遍历所有可能的分裂位置点）。</p>
-<h1><span id="剪枝">剪枝</span></h1><h1><span id="随机森林">随机森林</span></h1><h1><span id="应用决策树做分类">应用决策树做分类</span></h1><h1><span id="应用决策树做回归">应用决策树做回归</span></h1><h1><span id="others">Others</span></h1><p>每一个样本都是特征空间中的一个点，构建决策树的过程其实就是划分特征空间的过程。</p>
-<p>假设有$n$个特征，每个特征取值可能个数为$m_i$，一棵完全的决策树将特征空间划分为 $\displaystyle\prod\limits_{i=1}^{n}m_i$ 个区域（一棵不完全的/剪枝的决策树划分出来的区域数量则少一些），对于区域$j$，统计落在区域$j$中样本数量与种类，通过投票决定该区域的标签。</p>
-<p>划分区域的过程可以称为决策树的结构学习（决策树是否加深？加深的话选择哪个属性？），决定各区域标签的过程可以称为决策树的参数学习。</p>
-<p>通过这两个过程就可以得到决策树的模型，然后通过该模型就可以进行分类任务了。</p>
-<p><img src="/2020/06/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/markdown-img-paste-20190109184222663.png" alt></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/NLP/NLP%E6%80%BB%E8%A7%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2014,6 +1857,221 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/" itemprop="url">EA建模初步使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-31T21:12:03+08:00">
+                2020-05-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UML/" itemprop="url" rel="index">
+                    <span itemprop="name">UML</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UML/EA/" itemprop="url" rel="index">
+                    <span itemprop="name">EA</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2><span id="新建一个项目">新建一个项目</span></h2><h3><span id="模型向导">模型向导</span></h3><img src="/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200531222844900.png" alt="image-20200531222844900" style="zoom: 67%;">
+
+<ul>
+<li>Use Case（用例图）: System behavior described with Use Cases and Actors.</li>
+<li>Domain Model: Domain specific objects and their relationships.</li>
+<li>Class（类图）: Type hierarchies, relationships and abstractions.</li>
+<li>Component（组件）: Software artificates and components.</li>
+<li>Deployment（部署）: Physical hardware, clients and network topologies.</li>
+</ul>
+<h3><span id="toolbox">ToolBox</span></h3><img src="/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200531233808738.png" alt="image-20200531233808738" style="zoom:80%;">
+
+<p>通过工具箱添加内容，从更多的工具中选取其他的工具，例如profile</p>
+<h2><span id="create-a-profile-package">Create a Profile Package</span></h2><blockquote>
+<p> Profiles将stereotypes、tagged values(标记值)和constraints(约束)应用于具体的模型元素比如类、属性、操作和活动。一个Profile对象就是一系列为特定领域(比如，航空航天、保健、金融)或平台(J2EE、.NET)自定义的UML集合。</p>
+<p><strong>profile 作用</strong>：帮助你分析并发现程序运行的瓶颈，找到耗时所在，同时也能帮助你发现不会被执行的代码。从而最终实现程序的优化。</p>
+</blockquote>
+<p><a href="https://www.uml-diagrams.org/profile.html" target="_blank" rel="noopener">UML Profile</a></p>
+<p><a href="https://sparxsystems.com/enterprise_architect_user_guide/14.0/modeling_tools/createprofile.html" target="_blank" rel="noopener">Create a Profile Package</a></p>
+<p>在包中新建Package diagram：</p>
+<p><img src="/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601140344602.png" alt="image-20200601140344602"></p>
+<p><img src="/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601140211450.png" alt="image-20200601140211450"></p>
+<p>建完后，FirstPackage目录下的Class Model内容如下：</p>
+<p><img src="/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601140652981.png" alt="image-20200601140652981"></p>
+<p>然后可以在新建的profile中建模：</p>
+<p><img src="/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601140329778.png" alt="image-20200601140329778"></p>
+<h2><span id="add-metaclasses-and-stereotypes-to-a-profile">Add Metaclasses and Stereotypes to a Profile</span></h2><p><a href="https://sparxsystems.com/enterprise_architect_user_guide/14.0/modeling_tools/addingelementsandmetaclass.html" target="_blank" rel="noopener">Add Stereotypes and Metaclasses</a></p>
+<p><a href="https://www.uml-diagrams.org/stereotype.html" target="_blank" rel="noopener">UML Stereotype</a></p>
+<p><a href="https://www.uml-diagrams.org/profile-metaclass.html" target="_blank" rel="noopener">UML Profile Metaclass</a></p>
+<p>When you are extending the UML to develop a domain-specific toolset, you start by creating a Profile Package for the stereotypes you intend to customize. This Package has at least one child Class diagram, and it is on this child diagram that you specify:</p>
+<ul>
+<li>The types of object that you are extending, represented by Metaclass elements, and</li>
+<li>The way in which each object is extended, represented by Stereotype elements</li>
+</ul>
+<p>You can qualify the effect of a Stereotype on a Metaclass using a range of other tools, including:</p>
+<ul>
+<li>Shape Scripts in the Stereotype</li>
+<li><strong>Tagged Values</strong>, defined by attributes in the Stereotype element</li>
+<li>Structured <strong>Tagged Value</strong> Classes, defined using attributes in the Stereotype element</li>
+<li>Enumerations, defined using attributes in the Stereotype element</li>
+<li>Tagged Value connectors, to identify possible values for a Tagged Value in an element generated with a Stereotype</li>
+<li>Constraints on the Stereotype element</li>
+<li>Special attributes, that define specific default behavior of stereotyped elements, such as the initial size and color of the element</li>
+<li>Modifying the default appearance of the Stereotype element</li>
+</ul>
+<p>一个MetaClass与Stereotype的例子：</p>
+<img src="/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601150015744.png" alt="image-20200601150015744" style="zoom:67%;">
+
+<h2><span id="define-stereotype-tagged-values">Define Stereotype Tagged Values</span></h2><p><a href="https://sparxsystems.com/enterprise_architect_user_guide/14.0/modeling_tools/definestereotypetags.html" target="_blank" rel="noopener">Define Stereotype Tagged Values</a></p>
+<p>向构造型中添加属性，操作方式如下（或者先选中Stereotype然后按F9）：</p>
+<img src="/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601150918319.png" alt="image-20200601150918319" style="zoom:80%;">
+
+
+
+
+
+<img src="/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601151146745.png" alt="image-20200601151146745" style="zoom: 67%;">
+
+<p>添加完毕后：</p>
+<p><img src="/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601151232801.png" alt="image-20200601151232801"></p>
+<h2><span id="add-shape-scripts">Add Shape Scripts</span></h2><p><a href="https://sparxsystems.com/enterprise_architect_user_guide/14.0/modeling_tools/add_shape_scripts_to_uml_profi.html" target="_blank" rel="noopener">Add Shape Scripts</a></p>
+<p><a href="https://sparxsystems.com/enterprise_architect_user_guide/14.0/modeling_tools/shape_editor_2.html" target="_blank" rel="noopener">Shape Scripts</a></p>
+<img src="/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601152810544.png" alt="image-20200601152810544" style="zoom: 67%;">
+
+
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -2064,7 +2122,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
