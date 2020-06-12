@@ -268,6 +268,508 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" itemprop="url">线性回归</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-01T17:37:42+08:00">
+                2020-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="线性回归模型"><a href="#线性回归模型" class="headerlink" title="线性回归模型"></a>线性回归模型</h1><p>​    给定数据集如下：<br>$$<br>T={(\boldsymbol{x}<em>1,y_1),(\boldsymbol{x}_2,y_2),\cdots,(\boldsymbol{x}_N,y_N)}<br>$$<br>线性回归模型比较简单，即是一个线性组合的形式<br>$$<br>f(\boldsymbol{x})=\displaystyle\sum</em>{i=1}^{n}w_ix_i+b=\boldsymbol{w}\cdot\boldsymbol{x}+b<br>$$</p>
+<h1 id="线性回归学习策略"><a href="#线性回归学习策略" class="headerlink" title="线性回归学习策略"></a>线性回归学习策略</h1><p>​    其损失函数为<br>$$<br>E(\boldsymbol{w},b)=\displaystyle\sum_{i=1}^{N}(f(\boldsymbol{x}<em>i)-y_i)^2<br>$$<br>为了求导方便，在前面加上一个系数$\dfrac{1}{2}$，即令<br>$$<br>E(\boldsymbol{w},b)=\dfrac{1}{2}\displaystyle\sum</em>{i=1}^{N}(f(\boldsymbol{x}<em>i)-y_i)^2<br>$$<br>显然，参数$\boldsymbol{w},b$应该使得损失函数最小，即<br>$$<br>\begin{array}{rl}\boldsymbol{w}^<em>,b^</em>=&amp;\arg\min\limits</em>{\boldsymbol{w},b}\left{E(\boldsymbol{w},b)\right}\=&amp; \arg\min\limits_{\boldsymbol{w},b}\left{\dfrac{1}{2}\displaystyle\sum_{i=1}^{N}(f(\boldsymbol{x}_i)-y_i)^2\right}\end{array}<br>$$</p>
+<h1 id="线性回归算法"><a href="#线性回归算法" class="headerlink" title="线性回归算法"></a>线性回归算法</h1><p>​    对于线性回归来说，通过对误差函数求偏导是可以得到一个方程组的，但是求解起来基本是不可能的，因此使用梯度下降方法。</p>
+<h2 id="梯度下降"><a href="#梯度下降" class="headerlink" title="梯度下降"></a>梯度下降</h2><p>​    曲面上沿着梯度的方向是函数值变化（增大）最快的方向，而我们希望求函数值减小最快的方向，因此在更新参数时使用参数当前值减去步长和导数的乘积，公式如下：<br>$$<br>\begin{array}{l}<br>\boldsymbol{w}\leftarrow\boldsymbol{w}-\alpha\nabla\boldsymbol{w}\<br>b\leftarrow b-\alpha\nabla b<br>\end{array}<br>$$<br>​    梯度下降方法中，$\nabla\boldsymbol{w},\nabla b$的求解公式如下：<br>$$<br>\begin{array}{l}<br>\nabla \boldsymbol{w} = \dfrac{\partial E(\boldsymbol{w},b)}{\partial \boldsymbol{w}} = \dfrac{\partial}{\partial \boldsymbol{w}}\left(\dfrac{1}{2}\sum_{i=1}^{N}(f(\boldsymbol{x_i}-y_i)^2)\right)\<br>\nabla b = \dfrac{\partial E(\boldsymbol{w},b)}{\partial b} = \dfrac{\partial}{\partial b}\left(\dfrac{1}{2}\sum_{i=1}^{N}(f(\boldsymbol{x_i}-y_i)^2)\right)<br>\end{array}<br>$$<br>​    参数$\boldsymbol{w},b$的每一次更新使用所有的样本，计算得到的是一个标准梯度，更新一次的幅度较大。样本不大的情况，收敛速度可以接受；但是若样本太大，收敛会很慢。    </p>
+<h2 id="批量梯度下降"><a href="#批量梯度下降" class="headerlink" title="批量梯度下降"></a>批量梯度下降</h2><p>​    每次使用训练数据中的一个样本更新，因而随机梯度下降是会带来一定的问题，因为计算得到的并不是准确的一个梯度，容易陷入到局部最优解中。一直不会收敛，只是在最小值附近波动。</p>
+<h2 id="随机梯度下降"><a href="#随机梯度下降" class="headerlink" title="随机梯度下降"></a>随机梯度下降</h2><p>​    批量的梯度下降就是一种折中的方法，他用了一些小样本来近似全部的样本。即：每次更新参数$\boldsymbol{w},b$使用一批样本。</p>
+<h2 id="迭代过程中的步长设置"><a href="#迭代过程中的步长设置" class="headerlink" title="迭代过程中的步长设置"></a>迭代过程中的步长设置</h2><p>步长$\eta$的选取也是一个值得注意的问题。事实上，在梯度下降过程中，步长$\eta$可以根据损失函数$C(\boldsymbol{\tilde{w}})$的变化进行更改：如果$C(\boldsymbol{\tilde{w}}^{(k+1)})&lt;C(\boldsymbol{\tilde{w}}^{(k)})$，那么说明步长$\eta$可以适当增大，因为这时正在向$C(\boldsymbol{\tilde{w}})$的极小值点逼近，通过增大步长可以加快收敛速度；如果$C(\boldsymbol{\tilde{w}}^{(k+1)})&gt;C(\boldsymbol{\tilde{w}}^{(k)})$，那么说明正在远离极小值点，应当缩小步长使之重新靠近极小值点。</p>
+<p>迭代终止条件可以有以下两种：①定义一个合理的阈值，当两次迭代之间的差值小于该阈值时，迭代结束。②设置一个大概的迭代步数，比如1000或500。</p>
+<p>梯度下降法最终的迭代肯定会收敛，只要达到相应迭代次数，多了也没关系。因为迭代次数多了后，在到达极值点时，函数对变量的导数已近乎为0，即使过了极值点，导数就变为正数了，之前的导数为负数。这个时候，变量x的值减去步长与导数的乘积反倒变小了。所以即使步数多了，结果也基本上就在极值点处左右徘徊，几乎等于极值点，因此没有问题。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/NLP/NLP%E6%80%BB%E8%A7%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/01/%E7%AE%97%E6%B3%95/NLP/NLP%E6%80%BB%E8%A7%88/" itemprop="url">NLP总览</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-01T17:21:13+08:00">
+                2020-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/" itemprop="url" rel="index">
+                    <span itemprop="name">NLP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/" itemprop="url">EA建模初步使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-31T21:12:03+08:00">
+                2020-05-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UML/" itemprop="url" rel="index">
+                    <span itemprop="name">UML</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UML/EA/" itemprop="url" rel="index">
+                    <span itemprop="name">EA</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="新建一个项目"><a href="#新建一个项目" class="headerlink" title="新建一个项目"></a>新建一个项目</h2><h3 id="模型向导"><a href="#模型向导" class="headerlink" title="模型向导"></a>模型向导</h3><img src="/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200531222844900.png" alt="image-20200531222844900" style="zoom: 67%;">
+
+<ul>
+<li>Use Case（用例图）: System behavior described with Use Cases and Actors.</li>
+<li>Domain Model: Domain specific objects and their relationships.</li>
+<li>Class（类图）: Type hierarchies, relationships and abstractions.</li>
+<li>Component（组件）: Software artificates and components.</li>
+<li>Deployment（部署）: Physical hardware, clients and network topologies.</li>
+</ul>
+<h3 id="ToolBox"><a href="#ToolBox" class="headerlink" title="ToolBox"></a>ToolBox</h3><img src="/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200531233808738.png" alt="image-20200531233808738" style="zoom:80%;">
+
+<p>通过工具箱添加内容，从更多的工具中选取其他的工具，例如profile</p>
+<h2 id="Create-a-Profile-Package"><a href="#Create-a-Profile-Package" class="headerlink" title="Create a Profile Package"></a>Create a Profile Package</h2><blockquote>
+<p> Profiles将stereotypes、tagged values(标记值)和constraints(约束)应用于具体的模型元素比如类、属性、操作和活动。一个Profile对象就是一系列为特定领域(比如，航空航天、保健、金融)或平台(J2EE、.NET)自定义的UML集合。</p>
+<p><strong>profile 作用</strong>：帮助你分析并发现程序运行的瓶颈，找到耗时所在，同时也能帮助你发现不会被执行的代码。从而最终实现程序的优化。</p>
+</blockquote>
+<p><a href="https://www.uml-diagrams.org/profile.html" target="_blank" rel="noopener">UML Profile</a></p>
+<p><a href="https://sparxsystems.com/enterprise_architect_user_guide/14.0/modeling_tools/createprofile.html" target="_blank" rel="noopener">Create a Profile Package</a></p>
+<p>在包中新建Package diagram：</p>
+<p><img src="/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601140344602.png" alt="image-20200601140344602"></p>
+<p><img src="/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601140211450.png" alt="image-20200601140211450"></p>
+<p>建完后，FirstPackage目录下的Class Model内容如下：</p>
+<p><img src="/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601140652981.png" alt="image-20200601140652981"></p>
+<p>然后可以在新建的profile中建模：</p>
+<p><img src="/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601140329778.png" alt="image-20200601140329778"></p>
+<h2 id="Add-Metaclasses-and-Stereotypes-to-a-Profile"><a href="#Add-Metaclasses-and-Stereotypes-to-a-Profile" class="headerlink" title="Add Metaclasses and Stereotypes to a Profile"></a>Add Metaclasses and Stereotypes to a Profile</h2><p><a href="https://sparxsystems.com/enterprise_architect_user_guide/14.0/modeling_tools/addingelementsandmetaclass.html" target="_blank" rel="noopener">Add Stereotypes and Metaclasses</a></p>
+<p><a href="https://www.uml-diagrams.org/stereotype.html" target="_blank" rel="noopener">UML Stereotype</a></p>
+<p><a href="https://www.uml-diagrams.org/profile-metaclass.html" target="_blank" rel="noopener">UML Profile Metaclass</a></p>
+<p>When you are extending the UML to develop a domain-specific toolset, you start by creating a Profile Package for the stereotypes you intend to customize. This Package has at least one child Class diagram, and it is on this child diagram that you specify:</p>
+<ul>
+<li>The types of object that you are extending, represented by Metaclass elements, and</li>
+<li>The way in which each object is extended, represented by Stereotype elements</li>
+</ul>
+<p>You can qualify the effect of a Stereotype on a Metaclass using a range of other tools, including:</p>
+<ul>
+<li>Shape Scripts in the Stereotype</li>
+<li><strong>Tagged Values</strong>, defined by attributes in the Stereotype element</li>
+<li>Structured <strong>Tagged Value</strong> Classes, defined using attributes in the Stereotype element</li>
+<li>Enumerations, defined using attributes in the Stereotype element</li>
+<li>Tagged Value connectors, to identify possible values for a Tagged Value in an element generated with a Stereotype</li>
+<li>Constraints on the Stereotype element</li>
+<li>Special attributes, that define specific default behavior of stereotyped elements, such as the initial size and color of the element</li>
+<li>Modifying the default appearance of the Stereotype element</li>
+</ul>
+<p>一个MetaClass与Stereotype的例子：</p>
+<img src="/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601150015744.png" alt="image-20200601150015744" style="zoom:67%;">
+
+<h2 id="Define-Stereotype-Tagged-Values"><a href="#Define-Stereotype-Tagged-Values" class="headerlink" title="Define Stereotype Tagged Values"></a>Define Stereotype Tagged Values</h2><p><a href="https://sparxsystems.com/enterprise_architect_user_guide/14.0/modeling_tools/definestereotypetags.html" target="_blank" rel="noopener">Define Stereotype Tagged Values</a></p>
+<p>向构造型中添加属性，操作方式如下（或者先选中Stereotype然后按F9）：</p>
+<img src="/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601150918319.png" alt="image-20200601150918319" style="zoom:80%;">
+
+
+
+
+
+<img src="/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601151146745.png" alt="image-20200601151146745" style="zoom: 67%;">
+
+<p>添加完毕后：</p>
+<p><img src="/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601151232801.png" alt="image-20200601151232801"></p>
+<h2 id="Add-Shape-Scripts"><a href="#Add-Shape-Scripts" class="headerlink" title="Add Shape Scripts"></a>Add Shape Scripts</h2><p><a href="https://sparxsystems.com/enterprise_architect_user_guide/14.0/modeling_tools/add_shape_scripts_to_uml_profi.html" target="_blank" rel="noopener">Add Shape Scripts</a></p>
+<p><a href="https://sparxsystems.com/enterprise_architect_user_guide/14.0/modeling_tools/shape_editor_2.html" target="_blank" rel="noopener">Shape Scripts</a></p>
+<img src="/2020/05/31/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1/EA%E5%BB%BA%E6%A8%A1%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/image-20200601152810544.png" alt="image-20200601152810544" style="zoom: 67%;">
+
+
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/27/%E5%89%8D%E7%AB%AF/Qt/ArcGIS/%E5%9F%BA%E4%BA%8EArcGIS%E7%9A%84%E5%9C%B0%E5%9B%BE%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1158,7 +1660,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/22/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%BC%96%E7%A8%8B%E6%9C%BA%E5%88%B6/QML%E5%85%83%E7%B4%A0%E5%B8%83%E5%B1%80/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/22/%E5%89%8D%E7%AB%AF/Qt/QML/QML%E5%85%83%E7%B4%A0%E5%B8%83%E5%B1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ryan">
@@ -1177,7 +1679,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/05/22/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%BC%96%E7%A8%8B%E6%9C%BA%E5%88%B6/QML%E5%85%83%E7%B4%A0%E5%B8%83%E5%B1%80/" itemprop="url">QML元素布局</a></h1>
+                <a class="post-title-link" href="/2020/05/22/%E5%89%8D%E7%AB%AF/Qt/QML/QML%E5%85%83%E7%B4%A0%E5%B8%83%E5%B1%80/" itemprop="url">QML元素布局</a></h1>
         
 
         <div class="post-meta">
@@ -1449,491 +1951,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/22/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%BC%96%E7%A8%8B%E6%9C%BA%E5%88%B6/slot-signal%E6%9C%BA%E5%88%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/22/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%BC%96%E7%A8%8B%E6%9C%BA%E5%88%B6/slot-signal%E6%9C%BA%E5%88%B6/" itemprop="url">slot-signal机制</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-22T10:21:00+08:00">
-                2020-05-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Qt/" itemprop="url" rel="index">
-                    <span itemprop="name">Qt</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Qt/%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6/" itemprop="url" rel="index">
-                    <span itemprop="name">核心机制</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="signals-and-slots"><a href="#signals-and-slots" class="headerlink" title="signals and slots"></a>signals and slots</h2><p><img src="/2020/05/22/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%BC%96%E7%A8%8B%E6%9C%BA%E5%88%B6/slot-signal%E6%9C%BA%E5%88%B6/abstract-connections.png" alt="img"></p>
-<p>The signals and slots mechanism is type safe: <strong>The signature of a signal must match the signature of the receiving slot.</strong> (In fact a slot may have a shorter signature than the signal it receives because it can ignore extra arguments.) </p>
-<h2 id="slot"><a href="#slot" class="headerlink" title="slot"></a>slot</h2><ul>
-<li>slot是一种特殊的C++类成员函数</li>
-</ul>
-<h2 id="signal"><a href="#signal" class="headerlink" title="signal"></a>signal</h2><ul>
-<li>signal可以是C++类成员函数，也可以是？</li>
-</ul>
-<h2 id="Qt的C-类与一般的C-类对比"><a href="#Qt的C-类与一般的C-类对比" class="headerlink" title="Qt的C++类与一般的C++类对比"></a>Qt的C++类与一般的C++类对比</h2><p>A minimal C++ class declaration might read:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Counter() &#123; m_value = <span class="number">0</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">value</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> m_value; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setValue</span><span class="params">(<span class="keyword">int</span> value)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> m_value;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>A small <a href="https://doc.qt.io/qt-5/qobject.html" target="_blank" rel="noopener">QObject</a>-based class might read:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QObject&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> :</span> <span class="keyword">public</span> QObject</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Counter() &#123; m_value = <span class="number">0</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">value</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> m_value; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> slots:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setValue</span><span class="params">(<span class="keyword">int</span> value)</span></span>;</span><br><span class="line"></span><br><span class="line">signals:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">valueChanged</span><span class="params">(<span class="keyword">int</span> newValue)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> m_value;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Counter::setValue</span><span class="params">(<span class="keyword">int</span> value)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (value != m_value) &#123;</span><br><span class="line">        m_value = value;</span><br><span class="line">        <span class="function">emit <span class="title">valueChanged</span><span class="params">(value)</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Counter a, b;</span><br><span class="line">QObject::<span class="built_in">connect</span>(&amp;a, &amp;Counter::valueChanged,</span><br><span class="line">                 &amp;b, &amp;Counter::setValue);</span><br><span class="line"></span><br><span class="line">a.setValue(<span class="number">12</span>);     <span class="comment">// a.value() == 12, b.value() == 12</span></span><br><span class="line">b.setValue(<span class="number">48</span>);     <span class="comment">// a.value() == 12, b.value() == 48</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
-<li><a href="https://doc.qt.io/qt-5/signalsandslots.html" target="_blank" rel="noopener">Signals &amp; Slots</a></li>
-<li><a href="https://doc.qt.io/qt-5/qtcore-index.html" target="_blank" rel="noopener">Qt Core</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/21/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%BC%96%E7%A8%8B%E6%9C%BA%E5%88%B6/qml%E5%85%A5%E9%97%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/21/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%BC%96%E7%A8%8B%E6%9C%BA%E5%88%B6/qml%E5%85%A5%E9%97%A8/" itemprop="url">qml入门</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-21T15:22:17+08:00">
-                2020-05-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Qt/" itemprop="url" rel="index">
-                    <span itemprop="name">Qt</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="QML"><a href="#QML" class="headerlink" title="QML"></a>QML</h2><p>Qml类似于CSS语法，</p>
-<h2 id="QML编程规范"><a href="#QML编程规范" class="headerlink" title="QML编程规范"></a>QML编程规范</h2><h3 id="导入模块"><a href="#导入模块" class="headerlink" title="导入模块"></a>导入模块</h3><figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// import &lt;ModuleIdentifier&gt; &lt;Version.Number&gt; [as &lt;Qualifier&gt;]</span></span><br><span class="line"><span class="keyword">import</span> QtQuick <span class="number">2.0</span></span><br><span class="line"><span class="keyword">import</span> QtQuick <span class="number">2.0</span> <span class="keyword">as</span> Quick</span><br></pre></td></tr></table></figure>
-
-<h2 id="QML-Type-System"><a href="#QML-Type-System" class="headerlink" title="QML Type System"></a>QML Type System</h2><p><a href="https://doc.qt.io/qt-5/qtqml-typesystem-topic.html" target="_blank" rel="noopener">The QML Type System</a></p>
-<p>The types which may be used in the definition of an object hierarchy in a QML document can come from various sources. They may be:</p>
-<ul>
-<li>provided natively by the QML language</li>
-<li>registered via C++ by QML modules</li>
-<li>provided as QML documents by QML modules</li>
-</ul>
-<p>Furthermore, application developers can provide their own types, either by registering C++ types directly, or by defining reusable components in QML documents which can then be imported.</p>
-<p>Wherever the type definitions come from, the engine will enforce type-safety for properties and instances of those types.</p>
-<h3 id="Basic-Types"><a href="#Basic-Types" class="headerlink" title="Basic Types"></a>Basic Types</h3><p>The QML language has built-in support for various primitive types including integers, double-precision floating point numbers, strings, and boolean values. Objects may have properties of these types, and values of these types may be passed as arguments to methods of objects.</p>
-<p>See the <a href="https://doc.qt.io/qt-5/qtqml-typesystem-basictypes.html" target="_blank" rel="noopener">QML Basic Types</a> documentation for more information about basic types.</p>
-<h3 id="JavaScript-Types"><a href="#JavaScript-Types" class="headerlink" title="JavaScript Types"></a>JavaScript Types</h3><p>JavaScript objects and arrays are supported by the QML engine. Any standard JavaScript type can be created and stored using the generic <a href="https://doc.qt.io/qt-5/qml-var.html" target="_blank" rel="noopener">var</a> type.</p>
-<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> QtQuick <span class="number">2.0</span></span><br><span class="line"></span><br><span class="line"><span class="title">Item</span> &#123;</span><br><span class="line">    <span class="keyword">property</span><span class="string"> var theArray</span>: []</span><br><span class="line">    <span class="keyword">property</span><span class="string"> var theDate</span>: <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line"></span><br><span class="line">    <span class="attribute">Component.onCompleted</span>: &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">            theArray.push(<span class="string">"Item "</span> + i)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"There are"</span>, theArray.length, <span class="string">"items in the array"</span>)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"The time is"</span>, theDate.toUTCString())</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="QML-Object-Types"><a href="#QML-Object-Types" class="headerlink" title="QML Object Types"></a>QML Object Types</h3><p>A QML object type is a type from which a QML object can be instantiated. QML object types are derived from <a href="https://doc.qt.io/qt-5/qml-qtqml-qtobject.html" target="_blank" rel="noopener">QtObject</a>, and are provided by QML modules. Applications can import these modules to use the object types they provide. The <code>QtQuick</code> module provides the most common object types needed to create user interfaces in QML.</p>
-<p>Finally, every QML document implicitly defines a QML object type, which can be re-used in other QML documents. See the documentation about <a href="https://doc.qt.io/qt-5/qtqml-typesystem-objecttypes.html" target="_blank" rel="noopener">object types in the QML type system</a> for in-depth information about object types.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/21/%E5%85%B6%E4%BB%96/%E8%87%AA%E6%88%91%E7%AE%A1%E7%90%86/%E7%9B%AE%E6%A0%87%E7%AE%A1%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/21/%E5%85%B6%E4%BB%96/%E8%87%AA%E6%88%91%E7%AE%A1%E7%90%86/%E7%9B%AE%E6%A0%87%E7%AE%A1%E7%90%86/" itemprop="url">目标管理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-21T00:44:10+08:00">
-                2020-05-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%87%AA%E6%88%91%E7%AE%A1%E7%90%86/" itemprop="url" rel="index">
-                    <span itemprop="name">自我管理</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="目标管理的目的"><a href="#目标管理的目的" class="headerlink" title="目标管理的目的"></a>目标管理的目的</h2><ol>
-<li>指导自己如何前进；</li>
-</ol>
-<h2 id="目标树"><a href="#目标树" class="headerlink" title="目标树"></a>目标树</h2><p>构建一棵目标树，从根节点（预期实现的最终目标）开始，逐渐向下拓展与细化。</p>
-<p>示例如下：</p>
-<pre class="mermaid">graph BT;
-A["最终目标：对金融较为了解，并可从中获利"]
-B["理论金融：能够理解并利用金融学原理来解释一些现象"] --> A
-C["量化金融：构思与实现各种量化交易策略"] --> A
-D["..."] --> B
-E["..."] --> B
-F["..."] --> B
-G["..."] --> C
-H["..."] --> C</pre>
-
-<p>使用树形结构的原因在于，在把握大方向的前提下，能够通过细化的分支来明确当前应该做的事情，同时保证做的所有事情能够建立体系，从而点滴的积累能够汇聚到一起。</p>
-<h2 id="目标的优先级"><a href="#目标的优先级" class="headerlink" title="目标的优先级"></a>目标的优先级</h2><p>每天在两个目标的指导下前进：主要目标和次要目标。</p>
-<p>IT技术相关的目标是第一优先级，应该是每天主要做的事情，其他的目标（例如金融、音乐等）应该进行轮转，例如设置金融周，在本周内完成主要目标剩下的时间就集中学习金融方面的知识。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1984,7 +2001,7 @@ H["..."] --> C</pre>
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1995,7 +2012,7 @@ H["..."] --> C</pre>
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

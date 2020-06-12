@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Qt,Qml," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="QMLQml类似于CSS语法， QML编程规范导入模块123&#x2F;&#x2F; import &lt;ModuleIdentifier&gt; &lt;Version.Number&gt; [as &lt;Qualifier&gt;]import QtQuick 2.0import QtQuick 2.0 as Quick  QML Type SystemThe QML Type System The type">
+<meta name="description" content="signals and slots The signals and slots mechanism is type safe: The signature of a signal must match the signature of the receiving slot. (In fact a slot may have a shorter signature than the signal i">
 <meta property="og:type" content="article">
-<meta property="og:title" content="qml入门">
-<meta property="og:url" content="http://yoursite.com/2020/05/21/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%BC%96%E7%A8%8B%E6%9C%BA%E5%88%B6/qml%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:title" content="slot-signal机制">
+<meta property="og:url" content="http://yoursite.com/2020/05/22/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E7%A1%80/slot-signal%E6%9C%BA%E5%88%B6/index.html">
 <meta property="og:site_name" content="RBlog">
-<meta property="og:description" content="QMLQml类似于CSS语法， QML编程规范导入模块123&#x2F;&#x2F; import &lt;ModuleIdentifier&gt; &lt;Version.Number&gt; [as &lt;Qualifier&gt;]import QtQuick 2.0import QtQuick 2.0 as Quick  QML Type SystemThe QML Type System The type">
-<meta property="article:published_time" content="2020-05-21T07:22:17.000Z">
-<meta property="article:modified_time" content="2020-05-21T08:51:25.253Z">
+<meta property="og:description" content="signals and slots The signals and slots mechanism is type safe: The signature of a signal must match the signature of the receiving slot. (In fact a slot may have a shorter signature than the signal i">
+<meta property="og:image" content="http://yoursite.com/2020/05/22/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E7%A1%80/slot-signal%E6%9C%BA%E5%88%B6/abstract-connections.png">
+<meta property="article:published_time" content="2020-05-22T02:21:00.000Z">
+<meta property="article:modified_time" content="2020-05-22T10:58:43.583Z">
 <meta property="article:author" content="Ryan">
-<meta property="article:tag" content="Qt">
-<meta property="article:tag" content="Qml">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/05/22/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E7%A1%80/slot-signal%E6%9C%BA%E5%88%B6/abstract-connections.png">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/05/21/前端/Qt/Qt基本使用与编程机制/qml入门/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/05/22/前端/Qt/Qt基础/slot-signal机制/"/>
 
 
 
 
 
-  <title>qml入门 | RBlog</title>
+  <title>slot-signal机制 | RBlog</title>
   
 
 
@@ -273,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/21/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%BC%96%E7%A8%8B%E6%9C%BA%E5%88%B6/qml%E5%85%A5%E9%97%A8/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/22/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E7%A1%80/slot-signal%E6%9C%BA%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ryan">
@@ -290,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">qml入门</h1>
+          <h1 class="post-title" itemprop="name headline">slot-signal机制</h1>
         
 
         <div class="post-meta">
@@ -302,8 +302,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-21T15:22:17+08:00">
-                2020-05-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-22T10:21:00+08:00">
+                2020-05-22
               </time>
             
 
@@ -327,6 +327,17 @@
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Qt/" itemprop="url" rel="index">
                     <span itemprop="name">Qt</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Qt/%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">核心机制</span>
                   </a>
                 </span>
 
@@ -360,25 +371,26 @@
       
 
       
-        <h2 id="QML"><a href="#QML" class="headerlink" title="QML"></a>QML</h2><p>Qml类似于CSS语法，</p>
-<h2 id="QML编程规范"><a href="#QML编程规范" class="headerlink" title="QML编程规范"></a>QML编程规范</h2><h3 id="导入模块"><a href="#导入模块" class="headerlink" title="导入模块"></a>导入模块</h3><figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// import &lt;ModuleIdentifier&gt; &lt;Version.Number&gt; [as &lt;Qualifier&gt;]</span></span><br><span class="line"><span class="keyword">import</span> QtQuick <span class="number">2.0</span></span><br><span class="line"><span class="keyword">import</span> QtQuick <span class="number">2.0</span> <span class="keyword">as</span> Quick</span><br></pre></td></tr></table></figure>
-
-<h2 id="QML-Type-System"><a href="#QML-Type-System" class="headerlink" title="QML Type System"></a>QML Type System</h2><p><a href="https://doc.qt.io/qt-5/qtqml-typesystem-topic.html" target="_blank" rel="noopener">The QML Type System</a></p>
-<p>The types which may be used in the definition of an object hierarchy in a QML document can come from various sources. They may be:</p>
-<ul>
-<li>provided natively by the QML language</li>
-<li>registered via C++ by QML modules</li>
-<li>provided as QML documents by QML modules</li>
+        <h2 id="signals-and-slots"><a href="#signals-and-slots" class="headerlink" title="signals and slots"></a>signals and slots</h2><p><img src="/2020/05/22/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E7%A1%80/slot-signal%E6%9C%BA%E5%88%B6/abstract-connections.png" alt="img"></p>
+<p>The signals and slots mechanism is type safe: <strong>The signature of a signal must match the signature of the receiving slot.</strong> (In fact a slot may have a shorter signature than the signal it receives because it can ignore extra arguments.) </p>
+<h2 id="slot"><a href="#slot" class="headerlink" title="slot"></a>slot</h2><ul>
+<li>slot是一种特殊的C++类成员函数</li>
 </ul>
-<p>Furthermore, application developers can provide their own types, either by registering C++ types directly, or by defining reusable components in QML documents which can then be imported.</p>
-<p>Wherever the type definitions come from, the engine will enforce type-safety for properties and instances of those types.</p>
-<h3 id="Basic-Types"><a href="#Basic-Types" class="headerlink" title="Basic Types"></a>Basic Types</h3><p>The QML language has built-in support for various primitive types including integers, double-precision floating point numbers, strings, and boolean values. Objects may have properties of these types, and values of these types may be passed as arguments to methods of objects.</p>
-<p>See the <a href="https://doc.qt.io/qt-5/qtqml-typesystem-basictypes.html" target="_blank" rel="noopener">QML Basic Types</a> documentation for more information about basic types.</p>
-<h3 id="JavaScript-Types"><a href="#JavaScript-Types" class="headerlink" title="JavaScript Types"></a>JavaScript Types</h3><p>JavaScript objects and arrays are supported by the QML engine. Any standard JavaScript type can be created and stored using the generic <a href="https://doc.qt.io/qt-5/qml-var.html" target="_blank" rel="noopener">var</a> type.</p>
-<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> QtQuick <span class="number">2.0</span></span><br><span class="line"></span><br><span class="line"><span class="title">Item</span> &#123;</span><br><span class="line">    <span class="keyword">property</span><span class="string"> var theArray</span>: []</span><br><span class="line">    <span class="keyword">property</span><span class="string"> var theDate</span>: <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line"></span><br><span class="line">    <span class="attribute">Component.onCompleted</span>: &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">            theArray.push(<span class="string">"Item "</span> + i)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"There are"</span>, theArray.length, <span class="string">"items in the array"</span>)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"The time is"</span>, theDate.toUTCString())</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="signal"><a href="#signal" class="headerlink" title="signal"></a>signal</h2><ul>
+<li>signal可以是C++类成员函数，也可以是？</li>
+</ul>
+<h2 id="Qt的C-类与一般的C-类对比"><a href="#Qt的C-类与一般的C-类对比" class="headerlink" title="Qt的C++类与一般的C++类对比"></a>Qt的C++类与一般的C++类对比</h2><p>A minimal C++ class declaration might read:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Counter() &#123; m_value = <span class="number">0</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">value</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> m_value; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setValue</span><span class="params">(<span class="keyword">int</span> value)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> m_value;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h3 id="QML-Object-Types"><a href="#QML-Object-Types" class="headerlink" title="QML Object Types"></a>QML Object Types</h3><p>A QML object type is a type from which a QML object can be instantiated. QML object types are derived from <a href="https://doc.qt.io/qt-5/qml-qtqml-qtobject.html" target="_blank" rel="noopener">QtObject</a>, and are provided by QML modules. Applications can import these modules to use the object types they provide. The <code>QtQuick</code> module provides the most common object types needed to create user interfaces in QML.</p>
-<p>Finally, every QML document implicitly defines a QML object type, which can be re-used in other QML documents. See the documentation about <a href="https://doc.qt.io/qt-5/qtqml-typesystem-objecttypes.html" target="_blank" rel="noopener">object types in the QML type system</a> for in-depth information about object types.</p>
+<p>A small <a href="https://doc.qt.io/qt-5/qobject.html" target="_blank" rel="noopener">QObject</a>-based class might read:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QObject&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> :</span> <span class="keyword">public</span> QObject</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Counter() &#123; m_value = <span class="number">0</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">value</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> m_value; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> slots:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setValue</span><span class="params">(<span class="keyword">int</span> value)</span></span>;</span><br><span class="line"></span><br><span class="line">signals:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">valueChanged</span><span class="params">(<span class="keyword">int</span> newValue)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> m_value;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Counter::setValue</span><span class="params">(<span class="keyword">int</span> value)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (value != m_value) &#123;</span><br><span class="line">        m_value = value;</span><br><span class="line">        <span class="function">emit <span class="title">valueChanged</span><span class="params">(value)</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Counter a, b;</span><br><span class="line">QObject::<span class="built_in">connect</span>(&amp;a, &amp;Counter::valueChanged,</span><br><span class="line">                 &amp;b, &amp;Counter::setValue);</span><br><span class="line"></span><br><span class="line">a.setValue(<span class="number">12</span>);     <span class="comment">// a.value() == 12, b.value() == 12</span></span><br><span class="line">b.setValue(<span class="number">48</span>);     <span class="comment">// a.value() == 12, b.value() == 48</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
+<li><a href="https://doc.qt.io/qt-5/signalsandslots.html" target="_blank" rel="noopener">Signals &amp; Slots</a></li>
+<li><a href="https://doc.qt.io/qt-5/qtcore-index.html" target="_blank" rel="noopener">Qt Core</a></li>
+</ul>
 
       
     </div>
@@ -394,14 +406,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Qt/" rel="tag"># Qt</a>
-          
-            <a href="/tags/Qml/" rel="tag"># Qml</a>
-          
-        </div>
-      
 
       
       
@@ -411,8 +415,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/05/21/%E5%85%B6%E4%BB%96/%E8%87%AA%E6%88%91%E7%AE%A1%E7%90%86/%E7%9B%AE%E6%A0%87%E7%AE%A1%E7%90%86/" rel="next" title="目标管理">
-                <i class="fa fa-chevron-left"></i> 目标管理
+              <a href="/2020/05/21/%E5%89%8D%E7%AB%AF/Qt/QML/qml%E5%85%A5%E9%97%A8/" rel="next" title="qml入门">
+                <i class="fa fa-chevron-left"></i> qml入门
               </a>
             
           </div>
@@ -421,8 +425,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/05/22/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%BC%96%E7%A8%8B%E6%9C%BA%E5%88%B6/slot-signal%E6%9C%BA%E5%88%B6/" rel="prev" title="slot-signal机制">
-                slot-signal机制 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/05/22/%E5%89%8D%E7%AB%AF/Qt/%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84CS%E6%9E%B6%E6%9E%84%E7%9A%84%E5%8A%A0%E6%B3%95%E8%AE%A1%E7%AE%97%E5%99%A8/" rel="prev" title="一个简单的CS架构的加法计算器">
+                一个简单的CS架构的加法计算器 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -496,7 +500,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -507,7 +511,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -561,7 +565,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#QML"><span class="nav-number">1.</span> <span class="nav-text">QML</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QML编程规范"><span class="nav-number">2.</span> <span class="nav-text">QML编程规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导入模块"><span class="nav-number">2.1.</span> <span class="nav-text">导入模块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QML-Type-System"><span class="nav-number">3.</span> <span class="nav-text">QML Type System</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-Types"><span class="nav-number">3.1.</span> <span class="nav-text">Basic Types</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript-Types"><span class="nav-number">3.2.</span> <span class="nav-text">JavaScript Types</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QML-Object-Types"><span class="nav-number">3.3.</span> <span class="nav-text">QML Object Types</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#signals-and-slots"><span class="nav-number">1.</span> <span class="nav-text">signals and slots</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#slot"><span class="nav-number">2.</span> <span class="nav-text">slot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#signal"><span class="nav-number">3.</span> <span class="nav-text">signal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Qt的C-类与一般的C-类对比"><span class="nav-number">4.</span> <span class="nav-text">Qt的C++类与一般的C++类对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>
