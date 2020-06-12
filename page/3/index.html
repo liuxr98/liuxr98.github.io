@@ -370,23 +370,28 @@
       
         
           
-            <h2 id="signals-and-slots"><a href="#signals-and-slots" class="headerlink" title="signals and slots"></a>signals and slots</h2><p><img src="/2020/05/22/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E7%A1%80/slot-signal%E6%9C%BA%E5%88%B6/abstract-connections.png" alt="img"></p>
-<p>The signals and slots mechanism is type safe: <strong>The signature of a signal must match the signature of the receiving slot.</strong> (In fact a slot may have a shorter signature than the signal it receives because it can ignore extra arguments.) </p>
-<h2 id="slot"><a href="#slot" class="headerlink" title="slot"></a>slot</h2><ul>
+            <h2 id="signals-and-slots">signals and slots</h2>
+<div class="figure">
+<img src="/2020/05/22/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E7%A1%80/slot-signal%E6%9C%BA%E5%88%B6/abstract-connections.png" alt="img">
+<p class="caption">img</p>
+</div>
+<p>The signals and slots mechanism is type safe: <strong>The signature of a signal must match the signature of the receiving slot.</strong> (In fact a slot may have a shorter signature than the signal it receives because it can ignore extra arguments.)</p>
+<h2 id="slot">slot</h2>
+<ul>
 <li>slot是一种特殊的C++类成员函数</li>
 </ul>
-<h2 id="signal"><a href="#signal" class="headerlink" title="signal"></a>signal</h2><ul>
+<h2 id="signal">signal</h2>
+<ul>
 <li>signal可以是C++类成员函数，也可以是？</li>
 </ul>
-<h2 id="Qt的C-类与一般的C-类对比"><a href="#Qt的C-类与一般的C-类对比" class="headerlink" title="Qt的C++类与一般的C++类对比"></a>Qt的C++类与一般的C++类对比</h2><p>A minimal C++ class declaration might read:</p>
+<h2 id="qt的c类与一般的c类对比">Qt的C++类与一般的C++类对比</h2>
+<p>A minimal C++ class declaration might read:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Counter() &#123; m_value = <span class="number">0</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">value</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> m_value; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setValue</span><span class="params">(<span class="keyword">int</span> value)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> m_value;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>A small <a href="https://doc.qt.io/qt-5/qobject.html" target="_blank" rel="noopener">QObject</a>-based class might read:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QObject&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> :</span> <span class="keyword">public</span> QObject</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Counter() &#123; m_value = <span class="number">0</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">value</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> m_value; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> slots:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setValue</span><span class="params">(<span class="keyword">int</span> value)</span></span>;</span><br><span class="line"></span><br><span class="line">signals:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">valueChanged</span><span class="params">(<span class="keyword">int</span> newValue)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> m_value;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Counter::setValue</span><span class="params">(<span class="keyword">int</span> value)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (value != m_value) &#123;</span><br><span class="line">        m_value = value;</span><br><span class="line">        <span class="function">emit <span class="title">valueChanged</span><span class="params">(value)</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Counter a, b;</span><br><span class="line">QObject::<span class="built_in">connect</span>(&amp;a, &amp;Counter::valueChanged,</span><br><span class="line">                 &amp;b, &amp;Counter::setValue);</span><br><span class="line"></span><br><span class="line">a.setValue(<span class="number">12</span>);     <span class="comment">// a.value() == 12, b.value() == 12</span></span><br><span class="line">b.setValue(<span class="number">48</span>);     <span class="comment">// a.value() == 12, b.value() == 48</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
+<h2 id="references">References</h2>
+<ul>
 <li><a href="https://doc.qt.io/qt-5/signalsandslots.html" target="_blank" rel="noopener">Signals &amp; Slots</a></li>
 <li><a href="https://doc.qt.io/qt-5/qtcore-index.html" target="_blank" rel="noopener">Qt Core</a></li>
 </ul>
@@ -529,10 +534,13 @@
       
         
           
-            <h2 id="QML"><a href="#QML" class="headerlink" title="QML"></a>QML</h2><p>Qml类似于CSS语法，</p>
-<h2 id="QML编程规范"><a href="#QML编程规范" class="headerlink" title="QML编程规范"></a>QML编程规范</h2><h3 id="导入模块"><a href="#导入模块" class="headerlink" title="导入模块"></a>导入模块</h3><figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// import &lt;ModuleIdentifier&gt; &lt;Version.Number&gt; [as &lt;Qualifier&gt;]</span></span><br><span class="line"><span class="keyword">import</span> QtQuick <span class="number">2.0</span></span><br><span class="line"><span class="keyword">import</span> QtQuick <span class="number">2.0</span> <span class="keyword">as</span> Quick</span><br></pre></td></tr></table></figure>
-
-<h2 id="QML-Type-System"><a href="#QML-Type-System" class="headerlink" title="QML Type System"></a>QML Type System</h2><p><a href="https://doc.qt.io/qt-5/qtqml-typesystem-topic.html" target="_blank" rel="noopener">The QML Type System</a></p>
+            <h2 id="qml">QML</h2>
+<p>Qml类似于CSS语法，</p>
+<h2 id="qml编程规范">QML编程规范</h2>
+<h3 id="导入模块">导入模块</h3>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// import &lt;ModuleIdentifier&gt; &lt;Version.Number&gt; [as &lt;Qualifier&gt;]</span></span><br><span class="line"><span class="keyword">import</span> QtQuick <span class="number">2.0</span></span><br><span class="line"><span class="keyword">import</span> QtQuick <span class="number">2.0</span> <span class="keyword">as</span> Quick</span><br></pre></td></tr></table></figure>
+<h2 id="qml-type-system">QML Type System</h2>
+<p><a href="https://doc.qt.io/qt-5/qtqml-typesystem-topic.html" target="_blank" rel="noopener">The QML Type System</a></p>
 <p>The types which may be used in the definition of an object hierarchy in a QML document can come from various sources. They may be:</p>
 <ul>
 <li>provided natively by the QML language</li>
@@ -541,12 +549,14 @@
 </ul>
 <p>Furthermore, application developers can provide their own types, either by registering C++ types directly, or by defining reusable components in QML documents which can then be imported.</p>
 <p>Wherever the type definitions come from, the engine will enforce type-safety for properties and instances of those types.</p>
-<h3 id="Basic-Types"><a href="#Basic-Types" class="headerlink" title="Basic Types"></a>Basic Types</h3><p>The QML language has built-in support for various primitive types including integers, double-precision floating point numbers, strings, and boolean values. Objects may have properties of these types, and values of these types may be passed as arguments to methods of objects.</p>
+<h3 id="basic-types">Basic Types</h3>
+<p>The QML language has built-in support for various primitive types including integers, double-precision floating point numbers, strings, and boolean values. Objects may have properties of these types, and values of these types may be passed as arguments to methods of objects.</p>
 <p>See the <a href="https://doc.qt.io/qt-5/qtqml-typesystem-basictypes.html" target="_blank" rel="noopener">QML Basic Types</a> documentation for more information about basic types.</p>
-<h3 id="JavaScript-Types"><a href="#JavaScript-Types" class="headerlink" title="JavaScript Types"></a>JavaScript Types</h3><p>JavaScript objects and arrays are supported by the QML engine. Any standard JavaScript type can be created and stored using the generic <a href="https://doc.qt.io/qt-5/qml-var.html" target="_blank" rel="noopener">var</a> type.</p>
+<h3 id="javascript-types">JavaScript Types</h3>
+<p>JavaScript objects and arrays are supported by the QML engine. Any standard JavaScript type can be created and stored using the generic <a href="https://doc.qt.io/qt-5/qml-var.html" target="_blank" rel="noopener">var</a> type.</p>
 <figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> QtQuick <span class="number">2.0</span></span><br><span class="line"></span><br><span class="line"><span class="title">Item</span> &#123;</span><br><span class="line">    <span class="keyword">property</span><span class="string"> var theArray</span>: []</span><br><span class="line">    <span class="keyword">property</span><span class="string"> var theDate</span>: <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line"></span><br><span class="line">    <span class="attribute">Component.onCompleted</span>: &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">            theArray.push(<span class="string">"Item "</span> + i)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"There are"</span>, theArray.length, <span class="string">"items in the array"</span>)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"The time is"</span>, theDate.toUTCString())</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="QML-Object-Types"><a href="#QML-Object-Types" class="headerlink" title="QML Object Types"></a>QML Object Types</h3><p>A QML object type is a type from which a QML object can be instantiated. QML object types are derived from <a href="https://doc.qt.io/qt-5/qml-qtqml-qtobject.html" target="_blank" rel="noopener">QtObject</a>, and are provided by QML modules. Applications can import these modules to use the object types they provide. The <code>QtQuick</code> module provides the most common object types needed to create user interfaces in QML.</p>
+<h3 id="qml-object-types">QML Object Types</h3>
+<p>A QML object type is a type from which a QML object can be instantiated. QML object types are derived from <a href="https://doc.qt.io/qt-5/qml-qtqml-qtobject.html" target="_blank" rel="noopener">QtObject</a>, and are provided by QML modules. Applications can import these modules to use the object types they provide. The <code>QtQuick</code> module provides the most common object types needed to create user interfaces in QML.</p>
 <p>Finally, every QML document implicitly defines a QML object type, which can be re-used in other QML documents. See the documentation about <a href="https://doc.qt.io/qt-5/qtqml-typesystem-objecttypes.html" target="_blank" rel="noopener">object types in the QML type system</a> for in-depth information about object types.</p>
 
           
@@ -687,10 +697,12 @@
       
         
           
-            <h2 id="目标管理的目的"><a href="#目标管理的目的" class="headerlink" title="目标管理的目的"></a>目标管理的目的</h2><ol>
+            <h2 id="目标管理的目的">目标管理的目的</h2>
+<ol style="list-style-type: decimal">
 <li>指导自己如何前进；</li>
 </ol>
-<h2 id="目标树"><a href="#目标树" class="headerlink" title="目标树"></a>目标树</h2><p>构建一棵目标树，从根节点（预期实现的最终目标）开始，逐渐向下拓展与细化。</p>
+<h2 id="目标树">目标树</h2>
+<p>构建一棵目标树，从根节点（预期实现的最终目标）开始，逐渐向下拓展与细化。</p>
 <p>示例如下：</p>
 <pre class="mermaid">graph BT;
 A["最终目标：对金融较为了解，并可从中获利"]
@@ -701,9 +713,9 @@ E["..."] --> B
 F["..."] --> B
 G["..."] --> C
 H["..."] --> C</pre>
-
 <p>使用树形结构的原因在于，在把握大方向的前提下，能够通过细化的分支来明确当前应该做的事情，同时保证做的所有事情能够建立体系，从而点滴的积累能够汇聚到一起。</p>
-<h2 id="目标的优先级"><a href="#目标的优先级" class="headerlink" title="目标的优先级"></a>目标的优先级</h2><p>每天在两个目标的指导下前进：主要目标和次要目标。</p>
+<h2 id="目标的优先级">目标的优先级</h2>
+<p>每天在两个目标的指导下前进：主要目标和次要目标。</p>
 <p>IT技术相关的目标是第一优先级，应该是每天主要做的事情，其他的目标（例如金融、音乐等）应该进行轮转，例如设置金融周，在本周内完成主要目标剩下的时间就集中学习金融方面的知识。</p>
 
           
@@ -846,7 +858,8 @@ H["..."] --> C</pre>
       
         
           
-            <h2 id="职业"><a href="#职业" class="headerlink" title="职业"></a>职业</h2><ol>
+            <h2 id="职业">职业</h2>
+<ol style="list-style-type: decimal">
 <li>算法工程师</li>
 <li>后端工程师</li>
 <li>前端工程师</li>
@@ -1014,24 +1027,25 @@ H["..."] --> C</pre>
       
         
           
-            <h2 id="Qt-Widgets和Qt-Quick-QML的区别"><a href="#Qt-Widgets和Qt-Quick-QML的区别" class="headerlink" title="Qt Widgets和Qt Quick/QML的区别"></a>Qt Widgets和Qt Quick/QML的区别</h2><ul>
-<li>QML <ul>
+            <h2 id="qt-widgets和qt-quickqml的区别">Qt Widgets和Qt Quick/QML的区别</h2>
+<ul>
+<li>QML
+<ul>
 <li>QML is a user interface specification and programming <strong>language</strong>. It allows developers and designers alike to create highly performant, fluidly animated and visually appealing applications. QML offers a highly readable, declarative, JSON-like syntax with support for imperative JavaScript expressions combined with dynamic property bindings.</li>
 <li>QML 是一种用户界面规范和标记语言，允许开发人员和设计师创建高性能、流畅的动画和视觉吸引人的应用程序。</li>
 <li>像 C++ 一样，QML 是一种语言，文件格式以 .qml 结尾</li>
 <li>QML是<strong>Q</strong>t <strong>M</strong>eta-object <strong>L</strong>anguage的首字母缩写词。它是一种声明性编程语言，是Qt框架的一部分。 QML的主要目的是快速轻松地为桌面，移动和嵌入式系统创建用户界面。 QML允许<a href="https://riptutorial.com/fr/topic/185" target="_blank" rel="noopener">JavaScript</a>直接在QML代码中或通过包含JavaScript文件无缝集成。</li>
-</ul>
-</li>
-<li>Qt Quick<ul>
+</ul></li>
+<li>Qt Quick
+<ul>
 <li>The Qt Quick module is <strong>the standard library for writing QML applications</strong>. While the <strong>Qt QML</strong> module provides the QML engine and language infrastructure, the Qt Quick module provides all the basic types necessary for creating user interfaces with QML. It provides a visual canvas and includes types for creating and animating visual components, receiving user input, creating data models and views and delayed object instantiation.</li>
 <li>The Qt Quick module provides both a <strong>QML API</strong> which supplies QML types for creating user interfaces with the QML language, and a <strong>C++ API</strong> for extending QML applications with C++ code.</li>
-</ul>
-</li>
-<li>Qt Widgets<ul>
-<li>The <strong>Qt Widgets Module</strong> provides a set of UI elements to create classic desktop-style user interfaces. See the <strong>User Interfaces</strong> overview for more information on using widgets. </li>
+</ul></li>
+<li>Qt Widgets
+<ul>
+<li>The <strong>Qt Widgets Module</strong> provides a set of UI elements to create classic desktop-style user interfaces. See the <strong>User Interfaces</strong> overview for more information on using widgets.</li>
 <li>一种传统的开发桌面程序的UI工具模块</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <p>Qt Widget和Qt Quick对比：</p>
 <ul>
@@ -1041,7 +1055,7 @@ H["..."] --> C</pre>
 <p>References:</p>
 <ul>
 <li><a href="https://www.cnblogs.com/lsgxeva/p/7826761.html" target="_blank" rel="noopener">Qt Widgets、QML、Qt Quick的区别</a></li>
-<li><a href="https://wizardforcel.gitbooks.io/qt-beginning/61.html" target="_blank" rel="noopener">https://wizardforcel.gitbooks.io/qt-beginning/61.html</a></li>
+<li>https://wizardforcel.gitbooks.io/qt-beginning/61.html</li>
 </ul>
 
           
@@ -1195,22 +1209,44 @@ H["..."] --> C</pre>
       
         
           
-            <h2 id="Qt简介"><a href="#Qt简介" class="headerlink" title="Qt简介"></a>Qt简介</h2><p>Qt是一个1991年由Qt Company开发的<strong>跨平台C++图形用户界面应用程序开发框架</strong>。它既可以开发GUI程序，也可用于开发非GUI程序，比如控制台工具和服务器。Qt是面向对象的框架，使用特殊的代码生成扩展（称为元对象编译器(Meta Object Compiler, moc)）以及一些宏，Qt很容易扩展，并且允许真正地组件编程。2008年，Qt Company科技被诺基亚公司收购，Qt也因此成为诺基亚旗下的编程语言工具。2012年，Qt被Digia收购。2014年4月，跨平台集成开发环境Qt Creator 3.1.0正式发布，实现了对于iOS的完全支持，新增WinRT、Beautifier等插件，废弃了无Python接口的GDB调试支持，集成了基于Clang的C/C++代码模块，并对Android支持做出了调整，至此实现了全面支持iOS、Android、WP,它提供给应用程序开发者建立艺术级的图形用户界面所需的所有功能。基本上，Qt 同X Window上的 Motif，Openwin，GTK 等图形界 面库和 Windows 平台上的MFC，OWL，VCL，ATL 是同类型的东西。</p>
-<h2 id="Qt的下载与安装"><a href="#Qt的下载与安装" class="headerlink" title="Qt的下载与安装"></a>Qt的下载与安装</h2><p>在<a href="http://download.qt.io/archive/qt/" target="_blank" rel="noopener">Qt Download</a>下载需要的开源版本，我选的是5.12.8。</p>
+            <h2 id="qt简介">Qt简介</h2>
+<p>Qt是一个1991年由Qt Company开发的<strong>跨平台C++图形用户界面应用程序开发框架</strong>。它既可以开发GUI程序，也可用于开发非GUI程序，比如控制台工具和服务器。Qt是面向对象的框架，使用特殊的代码生成扩展（称为元对象编译器(Meta Object Compiler, moc)）以及一些宏，Qt很容易扩展，并且允许真正地组件编程。2008年，Qt Company科技被诺基亚公司收购，Qt也因此成为诺基亚旗下的编程语言工具。2012年，Qt被Digia收购。2014年4月，跨平台集成开发环境Qt Creator 3.1.0正式发布，实现了对于iOS的完全支持，新增WinRT、Beautifier等插件，废弃了无Python接口的GDB调试支持，集成了基于Clang的C/C++代码模块，并对Android支持做出了调整，至此实现了全面支持iOS、Android、WP,它提供给应用程序开发者建立艺术级的图形用户界面所需的所有功能。基本上，Qt 同X Window上的 Motif，Openwin，GTK 等图形界 面库和 Windows 平台上的MFC，OWL，VCL，ATL 是同类型的东西。</p>
+<h2 id="qt的下载与安装">Qt的下载与安装</h2>
+<p>在<a href="http://download.qt.io/archive/qt/" target="_blank" rel="noopener">Qt Download</a>下载需要的开源版本，我选的是5.12.8。</p>
 <p>需要注册一个Qt的账户。</p>
 <p>安装在D盘中：</p>
-<p><img src="/2020/05/16/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E7%A1%80/Qt%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/image-20200515214900981.png" alt="image-20200515214900981"></p>
+<div class="figure">
+<img src="/2020/05/16/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E7%A1%80/Qt%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/image-20200515214900981.png" alt="image-20200515214900981">
+<p class="caption">image-20200515214900981</p>
+</div>
 <p>安装时，选择需要的组件：</p>
-<p><img src="/2020/05/16/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E7%A1%80/Qt%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/image-20200515215150233.png" alt="image-20200515215150233"></p>
-<p><img src="/2020/05/16/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E7%A1%80/Qt%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/image-20200515215208948.png" alt="image-20200515215208948"></p>
+<div class="figure">
+<img src="/2020/05/16/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E7%A1%80/Qt%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/image-20200515215150233.png" alt="image-20200515215150233">
+<p class="caption">image-20200515215150233</p>
+</div>
+<div class="figure">
+<img src="/2020/05/16/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E7%A1%80/Qt%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/image-20200515215208948.png" alt="image-20200515215208948">
+<p class="caption">image-20200515215208948</p>
+</div>
 <p>安装结束后，需要添加环境变量：</p>
-<p><img src="/2020/05/16/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E7%A1%80/Qt%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/image-20200515223628139.png" alt="image-20200515223628139"></p>
-<h2 id="更新组件"><a href="#更新组件" class="headerlink" title="更新组件"></a>更新组件</h2><p>在Qt的安装目录下找到MaintenanceTool.exe运行。</p>
-<h2 id="使用Qt的三种方法"><a href="#使用Qt的三种方法" class="headerlink" title="使用Qt的三种方法"></a>使用Qt的三种方法</h2><h3 id="通过Qt-creator使用Qt"><a href="#通过Qt-creator使用Qt" class="headerlink" title="通过Qt creator使用Qt"></a>通过Qt creator使用Qt</h3><p>QtCreator是Qt自带的IDE环境，是跨平台的，编译器使用GCC，默认编码格式为UTF-8。</p>
-<p><img src="/2020/05/16/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E7%A1%80/Qt%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/image-20200515231240816.png" alt="image-20200515231240816"></p>
-<h3 id="通过VS使用Qt"><a href="#通过VS使用Qt" class="headerlink" title="通过VS使用Qt"></a>通过VS使用Qt</h3><p><a href="http://www.mamicode.com/info-detail-2995135.html" target="_blank" rel="noopener">http://www.mamicode.com/info-detail-2995135.html</a></p>
+<div class="figure">
+<img src="/2020/05/16/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E7%A1%80/Qt%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/image-20200515223628139.png" alt="image-20200515223628139">
+<p class="caption">image-20200515223628139</p>
+</div>
+<h2 id="更新组件">更新组件</h2>
+<p>在Qt的安装目录下找到MaintenanceTool.exe运行。</p>
+<h2 id="使用qt的三种方法">使用Qt的三种方法</h2>
+<h3 id="通过qt-creator使用qt">通过Qt creator使用Qt</h3>
+<p>QtCreator是Qt自带的IDE环境，是跨平台的，编译器使用GCC，默认编码格式为UTF-8。</p>
+<div class="figure">
+<img src="/2020/05/16/%E5%89%8D%E7%AB%AF/Qt/Qt%E5%9F%BA%E7%A1%80/Qt%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/image-20200515231240816.png" alt="image-20200515231240816">
+<p class="caption">image-20200515231240816</p>
+</div>
+<h3 id="通过vs使用qt">通过VS使用Qt</h3>
+<p>http://www.mamicode.com/info-detail-2995135.html</p>
 <p>VS中使用Qt需要安装相应的插件，默认编码为GBK。与Qt creator相比，VS编译与调试效率较高，但是VS比较臃肿，而且不具有跨平台的特性。</p>
-<h3 id="通过python中使用Qt"><a href="#通过python中使用Qt" class="headerlink" title="通过python中使用Qt"></a>通过python中使用Qt</h3><p>PyQt</p>
+<h3 id="通过python中使用qt">通过python中使用Qt</h3>
+<p>PyQt</p>
 
           
         

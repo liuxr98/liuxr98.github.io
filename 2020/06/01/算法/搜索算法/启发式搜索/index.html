@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="启发式函数$$h(n)$$通过启发式函数可以对状态进行评估：$$f(n)&#x3D;g(n)+h(n)$$ 符号注解   符号 含义    $n$ 节点   $h(n)$ 从节点$n$到目标节点的估计代价   $h^*(n)$ 从节点$n$到目标节点的实际最优代价($\infty$表示不可达)   $g(n)$ 从起点到节点$n$的实际代价   $f(n)$ 从起点到终点的估计代价   容易看出，对于 $\">
+<meta name="description" content="启发式函数 \[h(n)\] 通过启发式函数可以对状态进行评估： \[f(n)&#x3D;g(n)+h(n)\] 符号注解    符号 含义     \(n\) 节点   \(h(n)\) 从节点\(n\)到目标节点的估计代价   \(h^*(n)\) 从节点\(n\)到目标节点的实际最优代价(\(\infty\)表示不可达)   \(g(n)\) 从起点到">
 <meta property="og:type" content="article">
 <meta property="og:title" content="启发式搜索">
 <meta property="og:url" content="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/index.html">
 <meta property="og:site_name" content="RBlog">
-<meta property="og:description" content="启发式函数$$h(n)$$通过启发式函数可以对状态进行评估：$$f(n)&#x3D;g(n)+h(n)$$ 符号注解   符号 含义    $n$ 节点   $h(n)$ 从节点$n$到目标节点的估计代价   $h^*(n)$ 从节点$n$到目标节点的实际最优代价($\infty$表示不可达)   $g(n)$ 从起点到节点$n$的实际代价   $f(n)$ 从起点到终点的估计代价   容易看出，对于 $\">
+<meta property="og:description" content="启发式函数 \[h(n)\] 通过启发式函数可以对状态进行评估： \[f(n)&#x3D;g(n)+h(n)\] 符号注解    符号 含义     \(n\) 节点   \(h(n)\) 从节点\(n\)到目标节点的估计代价   \(h^*(n)\) 从节点\(n\)到目标节点的实际最优代价(\(\infty\)表示不可达)   \(g(n)\) 从起点到">
 <meta property="og:image" content="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011411407.png">
 <meta property="og:image" content="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011223339.png">
 <meta property="og:image" content="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011240461.png">
@@ -383,70 +383,131 @@
       
 
       
-        <h2 id="启发式函数"><a href="#启发式函数" class="headerlink" title="启发式函数"></a>启发式函数</h2><p>$$h(n)$$<br>通过启发式函数可以对状态进行评估：<br>$$f(n)=g(n)+h(n)$$</p>
-<h3 id="符号注解"><a href="#符号注解" class="headerlink" title="符号注解"></a>符号注解</h3><table>
+        <h2 id="启发式函数">启发式函数</h2>
+<p><span class="math display">\[h(n)\]</span> 通过启发式函数可以对状态进行评估： <span class="math display">\[f(n)=g(n)+h(n)\]</span></p>
+<h3 id="符号注解">符号注解</h3>
+<table>
 <thead>
-<tr>
+<tr class="header">
 <th>符号</th>
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
-<td>$n$</td>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(n\)</span></td>
 <td>节点</td>
 </tr>
-<tr>
-<td>$h(n)$</td>
-<td>从节点$n$到目标节点的估计代价</td>
+<tr class="even">
+<td><span class="math inline">\(h(n)\)</span></td>
+<td>从节点<span class="math inline">\(n\)</span>到目标节点的估计代价</td>
 </tr>
-<tr>
-<td>$h^*(n)$</td>
-<td>从节点$n$到目标节点的实际最优代价($\infty$表示不可达)</td>
+<tr class="odd">
+<td><span class="math inline">\(h^*(n)\)</span></td>
+<td>从节点<span class="math inline">\(n\)</span>到目标节点的实际最优代价(<span class="math inline">\(\infty\)</span>表示不可达)</td>
 </tr>
-<tr>
-<td>$g(n)$</td>
-<td>从起点到节点$n$的实际代价</td>
+<tr class="even">
+<td><span class="math inline">\(g(n)\)</span></td>
+<td>从起点到节点<span class="math inline">\(n\)</span>的实际代价</td>
 </tr>
-<tr>
-<td>$f(n)$</td>
+<tr class="odd">
+<td><span class="math inline">\(f(n)\)</span></td>
 <td>从起点到终点的估计代价</td>
 </tr>
-</tbody></table>
-<p>容易看出，对于 $\forall i,g(i)=0$，如果目标节点$t$是不可达的，那么$h(t)=\infty$.</p>
-<h3 id="可采纳性"><a href="#可采纳性" class="headerlink" title="可采纳性"></a>可采纳性</h3><p>如果 $\forall n,h(n)\leqslant h^*(n)$，那么称该启发式函数为可采纳的(admissible)。</p>
+</tbody>
+</table>
+<p>容易看出，对于 <span class="math inline">\(\forall i,g(i)=0\)</span>，如果目标节点<span class="math inline">\(t\)</span>是不可达的，那么<span class="math inline">\(h(t)=\infty\)</span>.</p>
+<h3 id="可采纳性">可采纳性</h3>
+<p>如果 <span class="math inline">\(\forall n,h(n)\leqslant h^*(n)\)</span>，那么称该启发式函数为可采纳的(admissible)。</p>
 <p>可采纳性保证找到的解是最优解。</p>
-<p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011411407.png" alt></p>
-<h3 id="单调性-一致性"><a href="#单调性-一致性" class="headerlink" title="单调性/一致性"></a>单调性/一致性</h3><p>如果 $\forall n_1,n_2, h(n_1)\leqslant c(n_1\rightarrow n_2)+h(n_2)$，那么称该启发式函数为单调的。</p>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011411407.png">
+
+</div>
+<h3 id="单调性一致性">单调性/一致性</h3>
+<p>如果 <span class="math inline">\(\forall n_1,n_2, h(n_1)\leqslant c(n_1\rightarrow n_2)+h(n_2)\)</span>，那么称该启发式函数为单调的。</p>
 <p>容易证明，单调性蕴含着可采纳性。</p>
 <p>满足单调性能够使得搜索速度大大加快。</p>
 <hr>
-<h2 id="A"><a href="#A" class="headerlink" title="$A^*$"></a>$A^*$</h2><h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><p>BFS的进化版本，也是uniform-cost的进化，三者之间的关系如下：</p>
-<p>$$A^*\stackrel{h(n)=0}{\longrightarrow}UCS\stackrel{c(n_1)=c(n_2)}{\longrightarrow}BFS$$</p>
-<h3 id="一个例子"><a href="#一个例子" class="headerlink" title="一个例子"></a>一个例子</h3><p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011223339.png" alt></p>
-<h3 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h3><h4 id="最优性"><a href="#最优性" class="headerlink" title="最优性"></a>最优性</h4><p>如果启发式函数具有可采纳性，那么$A^{*}$ 算法的树搜索版本（图中不存在环）是最优的；</p>
-<p>如果启发式函数具有一致性，那么$A^{*}$ 算法的树搜索和图搜索版本（图中可以存在环）都是最优的。</p>
-<p>另外，在这类最优算法中——从根结点开始扩展搜索解路径的算法，$A^{*}$ 算法对于任何给定的一致的启发式函数都是效率最优的。</p>
-<h4 id="完备性"><a href="#完备性" class="headerlink" title="完备性"></a>完备性</h4><p>$A^{*}$ 算法是完备的。</p>
-<h4 id="时间-空间复杂度"><a href="#时间-空间复杂度" class="headerlink" title="时间/空间复杂度"></a>时间/空间复杂度</h4><p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011240461.png" alt></p>
+<h2 id="a"><span class="math inline">\(A^*\)</span></h2>
+<h3 id="基本原理">基本原理</h3>
+<p>BFS的进化版本，也是uniform-cost的进化，三者之间的关系如下：</p>
+<p><span class="math display">\[A^*\stackrel{h(n)=0}{\longrightarrow}UCS\stackrel{c(n_1)=c(n_2)}{\longrightarrow}BFS\]</span></p>
+<h3 id="一个例子">一个例子</h3>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011223339.png">
+
+</div>
+<h3 id="性能分析">性能分析</h3>
+<h4 id="最优性">最优性</h4>
+<p>如果启发式函数具有可采纳性，那么<span class="math inline">\(A^{*}\)</span> 算法的树搜索版本（图中不存在环）是最优的；</p>
+<p>如果启发式函数具有一致性，那么<span class="math inline">\(A^{*}\)</span> 算法的树搜索和图搜索版本（图中可以存在环）都是最优的。</p>
+<p>另外，在这类最优算法中——从根结点开始扩展搜索解路径的算法，<span class="math inline">\(A^{*}\)</span> 算法对于任何给定的一致的启发式函数都是效率最优的。</p>
+<h4 id="完备性">完备性</h4>
+<p><span class="math inline">\(A^{*}\)</span> 算法是完备的。</p>
+<h4 id="时间空间复杂度">时间/空间复杂度</h4>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011240461.png">
+
+</div>
 <p>时间空间复杂度都是指数级别的。</p>
-<h3 id="环检测"><a href="#环检测" class="headerlink" title="环检测"></a>环检测</h3><p>联系BFS中的“完全展开”、“路径中无环”以及“树”。</p>
-<p>使用可采纳但不一致的启发式函数的$A^*$ 图搜索不能够保证结果是最优的。</p>
-<p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-2019010501174264.png" alt></p>
-<h3 id="一些性质"><a href="#一些性质" class="headerlink" title="一些性质"></a>一些性质</h3><p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011533417.png" alt></p>
-<p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011542756.png" alt></p>
-<p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011621244.png" alt></p>
-<p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011628283.png" alt></p>
+<h3 id="环检测">环检测</h3>
+<p>联系BFS中的“完全展开”、“路径中无环”以及“树”。</p>
+<p>使用可采纳但不一致的启发式函数的<span class="math inline">\(A^*\)</span> 图搜索不能够保证结果是最优的。</p>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-2019010501174264.png">
+
+</div>
+<h3 id="一些性质">一些性质</h3>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011533417.png">
+
+</div>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011542756.png">
+
+</div>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011621244.png">
+
+</div>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011628283.png">
+
+</div>
 <hr>
-<h2 id="IDA"><a href="#IDA" class="headerlink" title="$IDA^*$"></a>$IDA^*$</h2><p>迭代加深搜索的进化版本</p>
-<p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105020822769.png" alt></p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>cycle check是不走环路还是走环路？</p>
-<h2 id="构建启发式函数"><a href="#构建启发式函数" class="headerlink" title="构建启发式函数"></a>构建启发式函数</h2><ol>
+<h2 id="ida"><span class="math inline">\(IDA^*\)</span></h2>
+<p>迭代加深搜索的进化版本</p>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105020822769.png">
+
+</div>
+<h2 id="问题">问题</h2>
+<p>cycle check是不走环路还是走环路？</p>
+<h2 id="构建启发式函数">构建启发式函数</h2>
+<ol style="list-style-type: decimal">
 <li>放松问题的某些条件</li>
 </ol>
-<p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105021151787.png" alt></p>
-<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><h3 id="8-puzzle"><a href="#8-puzzle" class="headerlink" title="8-puzzle"></a>8-puzzle</h3><p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105021248160.png" alt></p>
-<h3 id="滑动积木块"><a href="#滑动积木块" class="headerlink" title="滑动积木块"></a>滑动积木块</h3><h3 id="MC问题"><a href="#MC问题" class="headerlink" title="MC问题"></a>MC问题</h3><p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105021435444.png" alt></p>
-<p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-2019010502144107.png" alt></p>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105021151787.png">
+
+</div>
+<h2 id="问题-1">问题</h2>
+<h3 id="puzzle">8-puzzle</h3>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105021248160.png">
+
+</div>
+<h3 id="滑动积木块">滑动积木块</h3>
+<h3 id="mc问题">MC问题</h3>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105021435444.png">
+
+</div>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-2019010502144107.png">
+
+</div>
 
       
     </div>
@@ -621,7 +682,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#启发式函数"><span class="nav-number">1.</span> <span class="nav-text">启发式函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#符号注解"><span class="nav-number">1.1.</span> <span class="nav-text">符号注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可采纳性"><span class="nav-number">1.2.</span> <span class="nav-text">可采纳性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单调性-一致性"><span class="nav-number">1.3.</span> <span class="nav-text">单调性&#x2F;一致性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A"><span class="nav-number">2.</span> <span class="nav-text">$A^*$</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本原理"><span class="nav-number">2.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一个例子"><span class="nav-number">2.2.</span> <span class="nav-text">一个例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性能分析"><span class="nav-number">2.3.</span> <span class="nav-text">性能分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#最优性"><span class="nav-number">2.3.1.</span> <span class="nav-text">最优性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#完备性"><span class="nav-number">2.3.2.</span> <span class="nav-text">完备性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时间-空间复杂度"><span class="nav-number">2.3.3.</span> <span class="nav-text">时间&#x2F;空间复杂度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环检测"><span class="nav-number">2.4.</span> <span class="nav-text">环检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些性质"><span class="nav-number">2.5.</span> <span class="nav-text">一些性质</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IDA"><span class="nav-number">3.</span> <span class="nav-text">$IDA^*$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">4.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建启发式函数"><span class="nav-number">5.</span> <span class="nav-text">构建启发式函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题-1"><span class="nav-number">6.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-puzzle"><span class="nav-number">6.1.</span> <span class="nav-text">8-puzzle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#滑动积木块"><span class="nav-number">6.2.</span> <span class="nav-text">滑动积木块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MC问题"><span class="nav-number">6.3.</span> <span class="nav-text">MC问题</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#启发式函数"><span class="nav-number">1.</span> <span class="nav-text">启发式函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#符号注解"><span class="nav-number">1.1.</span> <span class="nav-text">符号注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可采纳性"><span class="nav-number">1.2.</span> <span class="nav-text">可采纳性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单调性一致性"><span class="nav-number">1.3.</span> <span class="nav-text">单调性&#x2F;一致性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#a"><span class="nav-number">2.</span> <span class="nav-text">\(A^*\)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本原理"><span class="nav-number">2.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一个例子"><span class="nav-number">2.2.</span> <span class="nav-text">一个例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性能分析"><span class="nav-number">2.3.</span> <span class="nav-text">性能分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#最优性"><span class="nav-number">2.3.1.</span> <span class="nav-text">最优性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#完备性"><span class="nav-number">2.3.2.</span> <span class="nav-text">完备性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时间空间复杂度"><span class="nav-number">2.3.3.</span> <span class="nav-text">时间&#x2F;空间复杂度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环检测"><span class="nav-number">2.4.</span> <span class="nav-text">环检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些性质"><span class="nav-number">2.5.</span> <span class="nav-text">一些性质</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ida"><span class="nav-number">3.</span> <span class="nav-text">\(IDA^*\)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">4.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建启发式函数"><span class="nav-number">5.</span> <span class="nav-text">构建启发式函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题-1"><span class="nav-number">6.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#puzzle"><span class="nav-number">6.1.</span> <span class="nav-text">8-puzzle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#滑动积木块"><span class="nav-number">6.2.</span> <span class="nav-text">滑动积木块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mc问题"><span class="nav-number">6.3.</span> <span class="nav-text">MC问题</span></a></li></ol></li></ol></div>
             
 
           </div>
