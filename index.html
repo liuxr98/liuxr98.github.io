@@ -268,6 +268,127 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/21/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%9C%A8docker%E4%B8%AD%E9%83%A8%E7%BD%B2mongodb/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/21/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%9C%A8docker%E4%B8%AD%E9%83%A8%E7%BD%B2mongodb/" itemprop="url">在docker中部署mongodb</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-21T23:59:14+08:00">
+                2020-09-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <div class="figure">
+<img src="/2020/09/21/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%9C%A8docker%E4%B8%AD%E9%83%A8%E7%BD%B2mongodb/image-20200922000342380.png" alt="image-20200922000342380">
+<p class="caption">image-20200922000342380</p>
+</div>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/20/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/pandas%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -337,7 +458,290 @@
       
         
           
-            
+            <p><strong>1. 导入 Pandas：</strong></p>
+<p><strong>2. 查看 Pandas 版本信息：</strong></p>
+<h3 id="创建-series-数据类型">创建 Series 数据类型</h3>
+<p><strong>3. 从列表创建 Series：</strong></p>
+<p><strong>4. 从 Ndarray 创建 Series：</strong></p>
+<p><strong>5. 从字典创建 Series：</strong></p>
+<h3 id="series-基本操作">Series 基本操作</h3>
+<p><strong>6. 修改 Series 索引：</strong></p>
+<p><strong>7. Series 纵向拼接：</strong></p>
+<p><strong>8. Series 按指定索引删除元素：</strong></p>
+<p><strong>9. Series 修改指定索引元素：</strong></p>
+<p><strong>10. Series 按指定索引查找元素：</strong></p>
+<p><strong>11. Series 切片操作：</strong></p>
+<h3 id="series-运算">Series 运算</h3>
+<p><strong>12. Series 加法运算：</strong></p>
+<p>Series 的加法运算是按照索引计算，如果索引不同则填充为 <code>NaN</code>（空值）。</p>
+<p><strong>13. Series 减法运算：</strong></p>
+<p>Series的减法运算是按照索引对应计算，如果索引不同则填充为 <code>NaN</code>（空值）。</p>
+<p><strong>14. Series 乘法运算：</strong></p>
+<p>Series 的乘法运算是按照索引对应计算，如果索引不同则填充为 <code>NaN</code>（空值）。</p>
+<p><strong>15. Series 除法运算：</strong></p>
+<p>Series 的除法运算是按照索引对应计算，如果索引不同则填充为 <code>NaN</code>（空值）。</p>
+<p><strong>16. Series 求中位数：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s4.median()</span><br></pre></td></tr></table></figure>
+<p><strong>17. Series 求和：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s4.sum()</span><br></pre></td></tr></table></figure>
+<p><strong>18. Series 求最大值：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s4.max()</span><br></pre></td></tr></table></figure>
+<p><strong>19. Series 求最小值：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s4.min()</span><br></pre></td></tr></table></figure>
+<h3 id="创建-dataframe-数据类型">创建 DataFrame 数据类型</h3>
+<p>与 Sereis 不同，DataFrame 可以存在多列数据。一般情况下，DataFrame 也更加常用。</p>
+<p><strong>20. 通过 NumPy 数组创建 DataFrame：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dates = pd.date_range(<span class="string">'today'</span>, periods=<span class="number">6</span>)  <span class="comment"># 定义时间序列作为 index</span></span><br><span class="line">num_arr = np.random.randn(<span class="number">6</span>, <span class="number">4</span>)  <span class="comment"># 传入 numpy 随机数组</span></span><br><span class="line">columns = [<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>, <span class="string">'D'</span>]  <span class="comment"># 将列表作为列名</span></span><br><span class="line">df1 = pd.DataFrame(num_arr, index=dates, columns=columns)</span><br><span class="line">df1</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr class="header">
+<th align="right"></th>
+<th align="right">A</th>
+<th align="right">B</th>
+<th align="right">C</th>
+<th align="right">D</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">2020-09-20 13:29:25.738247</td>
+<td align="right">-0.171676</td>
+<td align="right">0.537617</td>
+<td align="right">2.092084</td>
+<td align="right">-2.551330</td>
+</tr>
+<tr class="even">
+<td align="right">2020-09-21 13:29:25.738247</td>
+<td align="right">0.808240</td>
+<td align="right">0.282539</td>
+<td align="right">-1.190820</td>
+<td align="right">-1.156877</td>
+</tr>
+<tr class="odd">
+<td align="right">2020-09-22 13:29:25.738247</td>
+<td align="right">-0.072582</td>
+<td align="right">-1.147928</td>
+<td align="right">0.699244</td>
+<td align="right">0.475107</td>
+</tr>
+<tr class="even">
+<td align="right">2020-09-23 13:29:25.738247</td>
+<td align="right">0.406453</td>
+<td align="right">-0.538187</td>
+<td align="right">1.685149</td>
+<td align="right">0.767229</td>
+</tr>
+<tr class="odd">
+<td align="right">2020-09-24 13:29:25.738247</td>
+<td align="right">0.173618</td>
+<td align="right">0.548606</td>
+<td align="right">-2.305003</td>
+<td align="right">-0.347169</td>
+</tr>
+<tr class="even">
+<td align="right">2020-09-25 13:29:25.738247</td>
+<td align="right">0.104997</td>
+<td align="right">0.205435</td>
+<td align="right">0.005563</td>
+<td align="right">0.288006</td>
+</tr>
+</tbody>
+</table>
+<p><strong>21. 通过字典数组创建 DataFrame：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">data = &#123;<span class="string">'animal'</span>: [<span class="string">'cat'</span>, <span class="string">'cat'</span>, <span class="string">'snake'</span>, <span class="string">'dog'</span>, <span class="string">'dog'</span>, <span class="string">'cat'</span>, <span class="string">'snake'</span>, <span class="string">'cat'</span>, <span class="string">'dog'</span>, <span class="string">'dog'</span>],</span><br><span class="line">        <span class="string">'age'</span>: [<span class="number">2.5</span>, <span class="number">3</span>, <span class="number">0.5</span>, np.nan, <span class="number">5</span>, <span class="number">2</span>, <span class="number">4.5</span>, np.nan, <span class="number">7</span>, <span class="number">3</span>],</span><br><span class="line">        <span class="string">'visits'</span>: [<span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>],</span><br><span class="line">        <span class="string">'priority'</span>: [<span class="string">'yes'</span>, <span class="string">'yes'</span>, <span class="string">'no'</span>, <span class="string">'yes'</span>, <span class="string">'no'</span>, <span class="string">'no'</span>, <span class="string">'no'</span>, <span class="string">'yes'</span>, <span class="string">'no'</span>, <span class="string">'no'</span>]&#125;</span><br><span class="line"></span><br><span class="line">labels = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'e'</span>, <span class="string">'f'</span>, <span class="string">'g'</span>, <span class="string">'h'</span>, <span class="string">'i'</span>, <span class="string">'j'</span>]</span><br><span class="line">df2 = pd.DataFrame(data, index=labels)</span><br><span class="line">df2</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr class="header">
+<th align="right"></th>
+<th align="right">animal</th>
+<th align="right">age</th>
+<th align="right">visits</th>
+<th align="right">priority</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">a</td>
+<td align="right">cat</td>
+<td align="right">2.5</td>
+<td align="right">1</td>
+<td align="right">yes</td>
+</tr>
+<tr class="even">
+<td align="right">b</td>
+<td align="right">cat</td>
+<td align="right">3.0</td>
+<td align="right">3</td>
+<td align="right">yes</td>
+</tr>
+<tr class="odd">
+<td align="right">c</td>
+<td align="right">snake</td>
+<td align="right">0.5</td>
+<td align="right">2</td>
+<td align="right">no</td>
+</tr>
+<tr class="even">
+<td align="right">d</td>
+<td align="right">dog</td>
+<td align="right">NaN</td>
+<td align="right">3</td>
+<td align="right">yes</td>
+</tr>
+<tr class="odd">
+<td align="right">e</td>
+<td align="right">dog</td>
+<td align="right">5.0</td>
+<td align="right">2</td>
+<td align="right">no</td>
+</tr>
+<tr class="even">
+<td align="right">f</td>
+<td align="right">cat</td>
+<td align="right">2.0</td>
+<td align="right">3</td>
+<td align="right">no</td>
+</tr>
+<tr class="odd">
+<td align="right">g</td>
+<td align="right">snake</td>
+<td align="right">4.5</td>
+<td align="right">1</td>
+<td align="right">no</td>
+</tr>
+<tr class="even">
+<td align="right">h</td>
+<td align="right">cat</td>
+<td align="right">NaN</td>
+<td align="right">1</td>
+<td align="right">yes</td>
+</tr>
+<tr class="odd">
+<td align="right">i</td>
+<td align="right">dog</td>
+<td align="right">7.0</td>
+<td align="right">2</td>
+<td align="right">no</td>
+</tr>
+<tr class="even">
+<td align="right">j</td>
+<td align="right">dog</td>
+<td align="right">3.0</td>
+<td align="right">1</td>
+<td align="right">no</td>
+</tr>
+</tbody>
+</table>
+<p><strong>22. 查看 DataFrame 的数据类型：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df2.dtypes</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">animal       object</span><br><span class="line">age         float64</span><br><span class="line">visits        int64</span><br><span class="line">priority     object</span><br><span class="line">dtype: object</span><br></pre></td></tr></table></figure>
+<h3 id="dataframe-基本操作">DataFrame 基本操作</h3>
+<p><strong>23. 预览 DataFrame 的前 5 行数据：</strong></p>
+<p><code>df.head()</code></p>
+<p><strong>24. 查看 DataFrame 的后 3 行数据：</strong></p>
+<p><code>df.tail(3)</code></p>
+<p><strong>25.查看 DataFrame 的索引：</strong></p>
+<p><code>df2.index</code></p>
+<p><strong>26. 查看 DataFrame 的列名：</strong></p>
+<p><code>df2.columns</code></p>
+<p><strong>27. 查看 DataFrame 的数值：</strong></p>
+<p><code>df2.values</code></p>
+<p><strong>28. 查看 DataFrame 的统计数据：</strong></p>
+<p><code>df2.describe()</code></p>
+<table>
+<thead>
+<tr class="header">
+<th align="right"></th>
+<th align="right">age</th>
+<th align="right">visits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">count</td>
+<td align="right">8.000000</td>
+<td align="right">10.000000</td>
+</tr>
+<tr class="even">
+<td align="right">mean</td>
+<td align="right">3.437500</td>
+<td align="right">1.900000</td>
+</tr>
+<tr class="odd">
+<td align="right">std</td>
+<td align="right">2.007797</td>
+<td align="right">0.875595</td>
+</tr>
+<tr class="even">
+<td align="right">min</td>
+<td align="right">0.500000</td>
+<td align="right">1.000000</td>
+</tr>
+<tr class="odd">
+<td align="right">25%</td>
+<td align="right">2.375000</td>
+<td align="right">1.000000</td>
+</tr>
+<tr class="even">
+<td align="right">50%</td>
+<td align="right">3.000000</td>
+<td align="right">2.000000</td>
+</tr>
+<tr class="odd">
+<td align="right">75%</td>
+<td align="right">4.625000</td>
+<td align="right">2.750000</td>
+</tr>
+<tr class="even">
+<td align="right">max</td>
+<td align="right">7.000000</td>
+<td align="right">3.000000</td>
+</tr>
+</tbody>
+</table>
+<p><strong>29. DataFrame 转置操作：</strong></p>
+<p><code>df2.T</code></p>
+<p><strong>30. 对 DataFrame 进行按列排序：</strong></p>
+<p><code>df2.sort_values(by='age')</code></p>
+<p><strong>31. 对 DataFrame 数据切片：</strong></p>
+<p><strong>32. 对 DataFrame 通过标签查询（单列）：</strong></p>
+<p><code>df2['age']  # df2.age</code></p>
+<p><code>df2.age.c</code></p>
+<p><strong>33. 对 DataFrame 通过标签查询（多列）：</strong></p>
+<p><code>df2[['age', 'animal']]  # 传入一个列名组成的列表</code></p>
+<p><strong>34. 对 DataFrame 通过位置查询：</strong></p>
+<ul>
+<li><p><code>df2.iloc[1:3]</code></p></li>
+<li><p><code>df2.iloc[1,2]</code></p></li>
+<li><p><code>df2.iloc[1:3,2:3]</code></p></li>
+</ul>
+<p><strong>35. DataFrame 副本拷贝：</strong></p>
+<p><code>df3 = df2.copy()</code></p>
+<p><strong>36. 判断 DataFrame 元素是否为空：</strong></p>
+<p><code>df3.isnull()</code></p>
+<p><strong>37. 添加列数据：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">num = pd.Series([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>], index=df3.index)</span><br><span class="line"></span><br><span class="line">df3[<span class="string">'No.'</span>] = num  <span class="comment"># 添加以 'No.' 为列名的新数据列</span></span><br><span class="line">df3</span><br></pre></td></tr></table></figure>
+<p><strong>38. 根据 DataFrame 的下标值进行更改：</strong></p>
+<p><code>df3.iat[1, 1] = 2</code></p>
+<p><strong>39. 根据 DataFrame 的标签对数据进行修改：</strong></p>
+<p><code>df3.loc['f', 'age'] = 1.5</code></p>
+<p><strong>40. DataFrame 求平均值操作：</strong></p>
+<p><code>df3.mean()</code></p>
+<p><strong>41. 对 DataFrame 中任意列做求和操作：</strong></p>
+<p><code>df3['visits'].sum()</code></p>
+<h3 id="字符串操作">字符串操作</h3>
+<p><strong>42. 将字符串转化为小写字母：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">string = pd.Series([<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>, <span class="string">'Aaba'</span>, <span class="string">'Baca'</span>,</span><br><span class="line">                    np.nan, <span class="string">'CABA'</span>, <span class="string">'dog'</span>, <span class="string">'cat'</span>])</span><br><span class="line">print(string)</span><br><span class="line">string.str.lower()</span><br></pre></td></tr></table></figure>
+<p><strong>43. 将字符串转化为大写字母：</strong></p>
+<p><code>string.str.upper()</code></p>
+<h3 id="dataframe-缺失值操作">DataFrame 缺失值操作</h3>
+<p><strong>44. 对缺失值进行填充：</strong></p>
+<p><code>df4.fillna(value=3)</code></p>
+<p><strong>45. 删除存在缺失值的行：</strong></p>
+<p><code>df5.dropna(how='any')  # 任何存在 NaN 的行都将被删除</code></p>
+<p><strong>46. DataFrame 按指定列对齐：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">left = pd.DataFrame(&#123;<span class="string">'key'</span>: [<span class="string">'foo1'</span>, <span class="string">'foo2'</span>], <span class="string">'one'</span>: [<span class="number">1</span>, <span class="number">2</span>]&#125;)</span><br><span class="line">right = pd.DataFrame(&#123;<span class="string">'key'</span>: [<span class="string">'foo2'</span>, <span class="string">'foo3'</span>], <span class="string">'two'</span>: [<span class="number">4</span>, <span class="number">5</span>]&#125;)</span><br><span class="line"></span><br><span class="line">print(left)</span><br><span class="line">print(right)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按照 key 列对齐连接，只存在 foo2 相同，所以最后变成一行</span></span><br><span class="line">pd.merge(left, right, on=<span class="string">'key'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/09/20/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/pandas%E4%BD%BF%E7%94%A8/image-20200920220259425.png" alt="image-20200920220259425" style="zoom:50%;"></p>
 
           
         
@@ -1478,201 +1882,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/12/%E5%89%8D%E7%AB%AF/Qt/QML/QtQMLHelloWorld/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/12/%E5%89%8D%E7%AB%AF/Qt/QML/QtQMLHelloWorld/" itemprop="url">QtQMLHelloWorld</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-12T20:12:10+08:00">
-                2020-06-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Qt/" itemprop="url" rel="index">
-                    <span itemprop="name">Qt</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Qt/QML/" itemprop="url" rel="index">
-                    <span itemprop="name">QML</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="hello-world-qt-quickqml">Hello World: Qt Quick/QML</h2>
-<h3 id="项目结构">项目结构</h3>
-<p>新建一个Qt Quick的hello world项目（testclass为新建的类），项目结构如下：</p>
-<div class="figure">
-<img src="/2020/06/12/%E5%89%8D%E7%AB%AF/Qt/QML/QtQMLHelloWorld/image-20200520220339166.png" alt="image-20200520220339166">
-<p class="caption">image-20200520220339166</p>
-</div>
-<p>在项目名称节点下面，分组管理着项目内的各种源文件，几个文件及分组分别为以下几项：</p>
-<ul>
-<li>helloworld.pro 是项目管理文件，包括一些对项目的设置项。</li>
-<li>Headers 分组，该节点下是项目内的所有头文件（.h）</li>
-<li>Sources 分组：该节点下是项目内的所有 C++源文件（.cpp）。</li>
-<li>Resources分组：该分组包含项目内的所有.qml文件，即UI的设计文件。</li>
-</ul>
-<h3 id="类设计">类设计</h3>
-<p>自定义的类头文件（TestClass）如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> TESTCLASS_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TESTCLASS_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QObject&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestClass</span> :</span> <span class="keyword">public</span> QObject</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * // The Q_OBJECT macro must appear in the private section of a class definition</span></span><br><span class="line"><span class="comment">     * that declares its own signals and slots or that uses other services provided</span></span><br><span class="line"><span class="comment">     * by Qt's meta-object system.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">TestClass</span><span class="params">(QObject *parent = <span class="literal">nullptr</span>)</span></span>;</span><br><span class="line">    <span class="function">Q_INVOKABLE <span class="keyword">void</span> <span class="title">setValue</span><span class="params">(<span class="keyword">int</span> nValue)</span></span>;</span><br><span class="line">    <span class="function">Q_INVOKABLE <span class="keyword">int</span> <span class="title">getValue</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * Q_INVOKABLE: Apply this macro to declarations of member functions to allow</span></span><br><span class="line"><span class="comment">     * them to be invoked via the meta-object system.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">signals:</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> slots:</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> nValue;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// TESTCLASS_H</span></span></span><br></pre></td></tr></table></figure>
-<p>TestClass的定义如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"testclass.h"</span></span></span><br><span class="line"></span><br><span class="line">TestClass::TestClass(QObject *parent) : QObject(parent)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">this</span>-&gt;nValue = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">TestClass::setValue</span><span class="params">(<span class="keyword">int</span> nValue)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>-&gt;nValue = nValue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">TestClass::getValue</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> nValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="主程序入口">主程序入口</h3>
-<p>main.cpp如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QGuiApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QQmlApplicationEngine&gt;</span></span></span><br><span class="line"><span class="comment">// register a class into meta-object system</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QQmlContext&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"testclass.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * QCoreApplication::setAttribute(Qt::ApplicationAttribute attribute, bool on = true)</span></span><br><span class="line"><span class="comment">     *  - Sets the attribute attribute if on is true; otherwise clears the attribute.</span></span><br><span class="line"><span class="comment">     * - Note: Some application attributes must be set before creating a QCoreApplication instance.</span></span><br><span class="line"><span class="comment">     *   Refer to the Qt::ApplicationAttribute documentation for more information.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">    <span class="function">QGuiApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line">    <span class="comment">// The QGuiApplication class manages the GUI application's control flow and main settings.</span></span><br><span class="line"></span><br><span class="line">    QQmlApplicationEngine engine;</span><br><span class="line">    <span class="comment">// QQmlApplicationEngine provides a convenient way to load an application from a single QML file.</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将自定义的类注册到元对象系统中</span></span><br><span class="line">    TestClass testClass;</span><br><span class="line">    testClass.setValue(<span class="number">666</span>);</span><br><span class="line">    engine.rootContext()-&gt;setContextProperty(<span class="string">"testClass"</span>, &amp;testClass);</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * void QQmlContext::setContextProperty(const QString &amp;name, const QVariant &amp;value);</span></span><br><span class="line"><span class="comment">     * void QQmlContext::setContextProperty(const QString &amp;name, QObject *value);</span></span><br><span class="line"><span class="comment">     * void QQmlContext::setContextProperties(const QVector&lt;QQmlContext::PropertyPair&gt; &amp;properties);</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">const</span> QUrl <span class="title">url</span><span class="params">(QStringLiteral(<span class="string">"qrc:/main.qml"</span>))</span></span>;</span><br><span class="line">    <span class="comment">// The QUrl class provides a convenient interface for working with URLs.</span></span><br><span class="line"></span><br><span class="line">    QObject::<span class="built_in">connect</span>(&amp;engine, &amp;QQmlApplicationEngine::objectCreated,</span><br><span class="line">                     &amp;app, [url](QObject *obj, <span class="keyword">const</span> QUrl &amp;objUrl) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!obj &amp;&amp; url == objUrl)</span><br><span class="line">            QCoreApplication::<span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;, Qt::QueuedConnection);</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * [static] QMetaObject::Connection QObject::connect(</span></span><br><span class="line"><span class="comment">     *      const QObject *sender,</span></span><br><span class="line"><span class="comment">     *      const char *signal,</span></span><br><span class="line"><span class="comment">     *      const QObject *receiver,</span></span><br><span class="line"><span class="comment">     *      const char *method,</span></span><br><span class="line"><span class="comment">     *      Qt::ConnectionType type = Qt::AutoConnection</span></span><br><span class="line"><span class="comment">     * )</span></span><br><span class="line"><span class="comment">     * Creates a connection of the given type from the signal in the sender object</span></span><br><span class="line"><span class="comment">     * to the method in the receiver object.</span></span><br><span class="line"><span class="comment">     * Returns a handle to the connection that can be used to disconnect it later.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">    engine.load(url);</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * [slot] void QQmlApplicationEngine::load(const QUrl &amp;url)</span></span><br><span class="line"><span class="comment">     * Loads the root QML file located at url.</span></span><br><span class="line"><span class="comment">     * The object tree defined by the file is created immediately for local file urls.</span></span><br><span class="line"><span class="comment">     * Remote urls are loaded asynchronously, listen to the objectCreated signal to</span></span><br><span class="line"><span class="comment">     * determine when the object tree is ready.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="报错">报错</h4>
-<ul>
-<li>Property <em>&lt;function name&gt;</em> of <em>&lt;object name&gt;&lt;address&gt;</em>is not a function
-<ul>
-<li>在qml文件中调用的函数声明时没有加前缀<code>Q_INVOKABLE</code></li>
-</ul></li>
-</ul>
-<h3 id="界面设计">界面设计</h3>
-<p>界面设计如下：</p>
-<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> QtQuick <span class="number">2.12</span></span><br><span class="line"><span class="keyword">import</span> QtQuick.Window <span class="number">2.12</span></span><br><span class="line"><span class="keyword">import</span> QtQuick.Controls <span class="number">2.12</span></span><br><span class="line"></span><br><span class="line"><span class="title">Window</span> &#123;</span><br><span class="line">    <span class="attribute">visible</span>: <span class="literal">true</span></span><br><span class="line">    <span class="attribute">width</span>: <span class="number">640</span></span><br><span class="line">    <span class="attribute">height</span>: <span class="number">480</span></span><br><span class="line">    <span class="attribute">title</span>: qsTr(<span class="string">"Hello World"</span>)</span><br><span class="line">    <span class="title">Label</span> &#123;</span><br><span class="line">        <span class="attribute">x</span>: <span class="number">100</span></span><br><span class="line">        <span class="attribute">y</span>: <span class="number">100</span></span><br><span class="line">        <span class="attribute">text</span>: <span class="string">"Hello World."</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title">Button</span> &#123;</span><br><span class="line">        <span class="attribute">x</span>: <span class="number">200</span></span><br><span class="line">        <span class="attribute">y</span>: <span class="number">200</span></span><br><span class="line">        <span class="attribute">height</span>: <span class="number">40</span></span><br><span class="line">        <span class="attribute">width</span>: <span class="number">100</span></span><br><span class="line"></span><br><span class="line">        <span class="attribute">onClicked</span>: &#123;</span><br><span class="line">            text = testClass.getValue();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行结果如下：</p>
-<div class="figure">
-<img src="/2020/06/12/%E5%89%8D%E7%AB%AF/Qt/QML/QtQMLHelloWorld/image-20200520224620119.png" alt="image-20200520224620119">
-<p class="caption">image-20200520224620119</p>
-</div>
-<div class="figure">
-<img src="/2020/06/12/%E5%89%8D%E7%AB%AF/Qt/QML/QtQMLHelloWorld/image-20200520224554493.png" alt="image-20200520224554493">
-<p class="caption">image-20200520224554493</p>
-</div>
-<p>References:</p>
-<ul>
-<li><a href="https://cloud.tencent.com/developer/article/1169582" target="_blank" rel="noopener">QtQuick 系列教程之 QML 与 C++ 交互</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1723,7 +1932,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
