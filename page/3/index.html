@@ -268,6 +268,479 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/" itemprop="url">决策树</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-01T17:50:15+08:00">
+                2020-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="决策树算法">决策树算法</h1>
+<h1 id="基本了解">基本了解</h1>
+<p>决策树的一个示例如下：</p>
+<p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/markdown-img-paste-2018092014184172.png" style="zoom:0.5"></p>
+<p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/markdown-img-paste-20180920141849555.png" style="zoom:0.5"></p>
+<p>能够看到，决策树的每一个条目仍然是由多个特征与类型组成，其中类型只在叶子结点，特征只在非叶子结点。叶子结点可包含特征与类型，非叶子结点只能包含特征。</p>
+<p>划分停止的条件（不包含剪枝）有以下几种情况：</p>
+<ol style="list-style-type: decimal">
+<li>特征列全部用完（采用多数投票决定叶子的类型）</li>
+<li>叶子节点中所有样本都是一个种类</li>
+</ol>
+<h1 id="信息论相关内容">信息论相关内容</h1>
+<h2 id="熵">熵</h2>
+<p>熵：用来衡量离散变量的不确定性，如抛硬币、掷骰子</p>
+<p>对于离散变量<span class="math inline">\(X\)</span>，其熵的计算公式为 <span class="math display">\[H(X)=-\displaystyle\sum\limits_{x\in X}p(x_i)\cdot log_2[p(x_i)]=\displaystyle\sum\limits_{x_i\in X}p(x_i)log_2\left[\dfrac{1}{p(x_i)}\right]=E\left(log_2\left[\dfrac{1}{p(X)}\right]\right)\]</span> 其中<span class="math inline">\(x_i\)</span>表示离散变量<span class="math inline">\(X\)</span>的取值。该公式用于计算一棵深度为1的树的熵。</p>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/a.svg">
+
+</div>
+<h2 id="条件熵">条件熵</h2>
+<p>如果对于下面这样子的决策树，其熵的计算就有些不同 <img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/b.svg"></p>
+<p>该决策树是原始决策树引进一个特征后构成的深度为2的树，整棵树的熵可以通过下列公式进行计算： <span class="math display">\[H(Y\mid X)=\displaystyle\sum\limits_{x\in X}p(x)H(Y\mid X=x)\]</span> 其中 <span class="math inline">\(H(Y\mid X=x)\)</span> 即是对应子树的熵。</p>
+<h2 id="联合熵与互信息信息增益">联合熵与互信息（信息增益）</h2>
+<p>联合熵： <span class="math display">\[H(X,Y)=H(Y)+H(X\mid Y)=H(X)+H(Y\mid X)\]</span></p>
+<p>互信息： <span class="math display">\[I(X,Y)=H(Y)-H(Y\mid X)=H(X)-H(X\mid Y)\]</span> 互信息衡量的是离散变量<span class="math inline">\(X,Y\)</span>之间的相关程度。</p>
+<p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/markdown-img-paste-20180920150434709.png" style="zoom:0.5"></p>
+<h1 id="基于信息增益的id3模型">基于信息增益的ID3模型</h1>
+<p>遍历所有的特征<span class="math inline">\(X_i\)</span>，选出使得 <span class="math display">\[Gain(Y,X_i)=I(Y,X_i) = H(Y)-H(Y\mid X_i)\]</span> 最大的<span class="math inline">\(X_i\)</span>用来扩展决策树的深度。</p>
+<p>这种模型的缺陷在于倾向于构建一棵很矮很胖的树，每一次都会倾向于选择取值最多的特征。</p>
+<p><img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/markdown-img-paste-20180920152432652.png" style="zoom:0.5"></p>
+<p>​ 比如上图中的例子，如果用ID3模型来构建决策树，那么必定得到如下的树：</p>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/c.svg">
+
+</div>
+<p>该决策树毫无意义。</p>
+<h1 id="基于信息增益率的c4.5模型">基于信息增益率的C4.5模型</h1>
+<p>​ 遍历所有的特征<span class="math inline">\(X_i\)</span>，选出使得 <span class="math display">\[
+GainRatio(Y,X_i) = \dfrac{H(Y)-H(Y\mid X_i)}{H(A)}=\dfrac{Gain(Y,X_i)}{H(A)}
+\]</span> 最大的<span class="math inline">\(X_i\)</span>用来扩展决策树的深度。</p>
+<p>​ 其中<span class="math inline">\(H(X_i)\)</span> 表示指标本身的熵，其计算方法与 <span class="math inline">\(H(Y)\)</span> 基本相同，区别是特征与类型的选取不同。计算 <span class="math inline">\(H(Y)\)</span> 时将<span class="math inline">\(Y\)</span>看做是类型，将<span class="math inline">\(X_i\)</span>看做特征；计算 <span class="math inline">\(H(X_i)\)</span> 时将<span class="math inline">\(X_i\)</span>看做是类型，将<span class="math inline">\(Y\)</span>看做特征。如下图所示：</p>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/d.svg">
+
+</div>
+<h1 id="基于gini指数的cart模型">基于Gini指数的CART模型</h1>
+<p>​ 基尼指数与熵的概念类似。如果一个数据集<span class="math inline">\(D\)</span>包含来自<span class="math inline">\(n\)</span>个类的样本，那么基尼指数，<span class="math inline">\(gini(D)\)</span>定义如下： <span class="math display">\[
+gini(D)=\displaystyle\sum\limits_{j=1}^{n}p_j(1-p_j)=1-\displaystyle\sum\limits_{j=1}^{n}p_j^2
+\]</span> 其中<span class="math inline">\(p_j\)</span>是类<span class="math inline">\(j\)</span>在数据集<span class="math inline">\(D\)</span>出现的频率。该公式用于计算深度为1的树的基尼指数：</p>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/a.svg">
+
+</div>
+<p>​ 如果要计算深度大于1的树的基尼指数，比如下图</p>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/b.svg">
+
+</div>
+<p>则 <span class="math display">\[
+gini{split}(D)=\displaystyle\sum\limits{x_i\in X}p(x_i)\cdot gini(D_i)
+\]</span> 在选取属性来分裂节点（加深树）时，选取使得<span class="math inline">\(gini_{split}(D)\)</span> 最小的属性进行分裂（对每个属性，需要遍历所有可能的分裂位置点）。</p>
+<h1 id="剪枝">剪枝</h1>
+<h1 id="随机森林">随机森林</h1>
+<h1 id="应用决策树做分类">应用决策树做分类</h1>
+<h1 id="应用决策树做回归">应用决策树做回归</h1>
+<h1 id="others">Others</h1>
+<p>每一个样本都是特征空间中的一个点，构建决策树的过程其实就是划分特征空间的过程。</p>
+<p>假设有<span class="math inline">\(n\)</span>个特征，每个特征取值可能个数为<span class="math inline">\(m_i\)</span>，一棵完全的决策树将特征空间划分为 <span class="math inline">\(\displaystyle\prod\limits_{i=1}^{n}m_i\)</span> 个区域（一棵不完全的/剪枝的决策树划分出来的区域数量则少一些），对于区域<span class="math inline">\(j\)</span>，统计落在区域<span class="math inline">\(j\)</span>中样本数量与种类，通过投票决定该区域的标签。</p>
+<p>划分区域的过程可以称为决策树的结构学习（决策树是否加深？加深的话选择哪个属性？），决定各区域标签的过程可以称为决策树的参数学习。</p>
+<p>通过这两个过程就可以得到决策树的模型，然后通过该模型就可以进行分类任务了。</p>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/markdown-img-paste-20190109184222663.png">
+
+</div>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/" itemprop="url">搜索算法基础</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-01T17:47:59+08:00">
+                2020-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">搜索算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="搜索算法">搜索算法</h2>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104201100759.png">
+
+</div>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-2019010510263152.png">
+
+</div>
+<h2 id="搜索算法的性能">搜索算法的性能</h2>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190105102012872.png">
+
+</div>
+<h2 id="树搜索与图搜索">树搜索与图搜索</h2>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190105101116333.png">
+
+</div>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104203645524.png">
+
+</div>
+<h2 id="环检测">环检测</h2>
+<h3 id="是什么">是什么</h3>
+<p>环检测将图搜索转换为树搜索？</p>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190105092832253.png">
+
+</div>
+<h3 id="环检测--单路经检测">环检测--单路经检测</h3>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-2019010421172556.png">
+
+</div>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104211856900.png">
+
+</div>
+<h3 id="环检测--多路路径检测">环检测--多路路径检测</h3>
+<p>其实就是我们正常使用BFS使用的visited数组</p>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104212003585.png">
+
+</div>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-2019010421202306.png">
+
+</div>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104212028934.png">
+
+</div>
+<h3 id="环检测一致代价搜索dijkstra算法">环检测，一致代价搜索，dijkstra算法</h3>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104212336973.png">
+
+</div>
+<h3 id="环检测的空间复杂度">环检测的空间复杂度</h3>
+<p>指数级别。</p>
+<h2 id="各算法总结">各算法总结</h2>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/1.svg">
+
+</div>
+<h3 id="各算法是否使用环检测">各算法是否使用环检测</h3>
+<table>
+<thead>
+<tr class="header">
+<th>算法</th>
+<th>能否使用环检测</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>BFS</td>
+<td>√</td>
+</tr>
+<tr class="even">
+<td>UFS</td>
+<td>√</td>
+</tr>
+<tr class="odd">
+<td>BS</td>
+<td>√</td>
+</tr>
+<tr class="even">
+<td>DFS</td>
+<td>×</td>
+</tr>
+<tr class="odd">
+<td>IDS</td>
+<td>×</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(A^*\)</span></td>
+<td>√</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(IDA^*\)</span></td>
+<td>×</td>
+</tr>
+</tbody>
+</table>
+<h3 id="性能对比">性能对比</h3>
+<div class="figure">
+<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190105094214297.png">
+
+</div>
+<p><span class="math inline">\(IDA^*\)</span> 和 <span class="math inline">\(IDS\)</span>的复杂度相近，<span class="math inline">\(A^*\)</span> 与 <span class="math inline">\(UCS\)</span>复杂度相近。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1706,313 +2179,6 @@ b\leftarrow b-\alpha\nabla b
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/22/%E5%89%8D%E7%AB%AF/Qt/QML/QML%E5%85%83%E7%B4%A0%E5%B8%83%E5%B1%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/22/%E5%89%8D%E7%AB%AF/Qt/QML/QML%E5%85%83%E7%B4%A0%E5%B8%83%E5%B1%80/" itemprop="url">QML元素布局</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-22T16:30:51+08:00">
-                2020-05-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="利用绝对坐标">利用绝对坐标</h2>
-<h2 id="利用gridlayout">利用GridLayout</h2>
-<h2 id="利用anchor">利用anchor</h2>
-<p><a href="https://doc.qt.io/qt-5/qtquick-positioning-anchors.html" target="_blank" rel="noopener">Positioning with Anchors</a></p>
-<p><a href="https://doc-snapshots.qt.io/qt5-5.14/qtquicklayouts-overview.html" target="_blank" rel="noopener">Qt Quick Layouts Overview</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/22/%E5%89%8D%E7%AB%AF/Qt/%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84CS%E6%9E%B6%E6%9E%84%E7%9A%84%E5%8A%A0%E6%B3%95%E8%AE%A1%E7%AE%97%E5%99%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/22/%E5%89%8D%E7%AB%AF/Qt/%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84CS%E6%9E%B6%E6%9E%84%E7%9A%84%E5%8A%A0%E6%B3%95%E8%AE%A1%E7%AE%97%E5%99%A8/" itemprop="url">一个简单的CS架构的加法计算器</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-22T10:38:26+08:00">
-                2020-05-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Qt/" itemprop="url" rel="index">
-                    <span itemprop="name">Qt</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Qt/%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B/" itemprop="url" rel="index">
-                    <span itemprop="name">编程示例</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Qt/%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B/%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index">
-                    <span itemprop="name">基本使用</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="设计">设计</h2>
-<h3 id="架构与功能设计">架构与功能设计</h3>
-<p>项目使用Client-Server架构，Client端输入需要相加的两个数传输到Server端，Server端进行计算然后向Client端返回结果。</p>
-<h3 id="ui设计">UI设计</h3>
-<div class="figure">
-<img src="/2020/05/22/%E5%89%8D%E7%AB%AF/Qt/%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84CS%E6%9E%B6%E6%9E%84%E7%9A%84%E5%8A%A0%E6%B3%95%E8%AE%A1%E7%AE%97%E5%99%A8/image-20200522191841391.png" alt="image-20200522191841391">
-<p class="caption">image-20200522191841391</p>
-</div>
-<h2 id="client实现">Client实现</h2>
-<p>Client.h文件内容如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> CLIENT_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLIENT_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QObject&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span> :</span> <span class="keyword">public</span> QObject</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">Client</span><span class="params">(QObject *parent = <span class="literal">nullptr</span>)</span></span>;</span><br><span class="line">    <span class="function">Q_INVOKABLE <span class="keyword">void</span> <span class="title">setOperands</span><span class="params">(QString StrLeftOperand, QString StrRightOperand)</span></span>;</span><br><span class="line">    <span class="function">Q_INVOKABLE <span class="keyword">int</span> <span class="title">getSumedResult</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">signals:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">operandsChanged</span><span class="params">(<span class="keyword">int</span> leftOperand, <span class="keyword">int</span> rightOperand)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> slots:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">getResult</span><span class="params">(<span class="keyword">int</span> value)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> leftOperand, rightOperand, result;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// CLIENT_H</span></span></span><br></pre></td></tr></table></figure>
-<p>Client.cpp文件内容如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"client.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Client</span>::<span class="built_in">Client</span>(QObject *parent) : QObject(parent)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Client::setOperands</span><span class="params">(QString StrLeftOperand, QString StrRightOperand)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">bool</span> ok;</span><br><span class="line">    <span class="keyword">int</span> leftOperand = StrLeftOperand.toInt(&amp;ok, <span class="number">10</span>);</span><br><span class="line">    <span class="keyword">int</span> rightOperand = StrRightOperand.toInt(&amp;ok, <span class="number">10</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;leftOperand != leftOperand || <span class="keyword">this</span>-&gt;rightOperand != rightOperand)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;leftOperand = leftOperand;</span><br><span class="line">        <span class="keyword">this</span>-&gt;rightOperand = rightOperand;</span><br><span class="line">        <span class="function">emit <span class="title">operandsChanged</span><span class="params">(leftOperand, rightOperand)</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Client::getSumedResult</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Client::getResult</span><span class="params">(<span class="keyword">int</span> value)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    result = value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="server实现">Server实现</h2>
-<p>Server.h文件内容如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> SERVER_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SERVER_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QObject&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Server</span> :</span> <span class="keyword">public</span> QObject</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">Server</span><span class="params">(QObject *parent = <span class="literal">nullptr</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">signals:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">resultChanged</span><span class="params">(<span class="keyword">int</span> value)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> slots:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">getOperands</span><span class="params">(<span class="keyword">int</span> leftOperand, <span class="keyword">int</span> rightOperand)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// SERVER_H</span></span></span><br></pre></td></tr></table></figure>
-<p>Server.cpp文件内容如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"server.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Server</span>::<span class="built_in">Server</span>(QObject *parent) : QObject(parent)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Server::getOperands</span><span class="params">(<span class="keyword">int</span> leftOperand, <span class="keyword">int</span> rightOperand)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">emit <span class="title">resultChanged</span><span class="params">(leftOperand+rightOperand)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="qml文件">qml文件</h2>
-<p>main.qml文件如下：</p>
-<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> QtQuick <span class="number">2.12</span></span><br><span class="line"><span class="keyword">import</span> QtQuick.Window <span class="number">2.12</span></span><br><span class="line"><span class="keyword">import</span> QtQuick.Controls <span class="number">2.12</span></span><br><span class="line"></span><br><span class="line"><span class="title">Window</span> &#123;</span><br><span class="line">    <span class="attribute">visible</span>: <span class="literal">true</span></span><br><span class="line">    <span class="attribute">width</span>: <span class="number">640</span></span><br><span class="line">    <span class="attribute">height</span>: <span class="number">480</span></span><br><span class="line">    <span class="attribute">title</span>: qsTr(<span class="string">"求和计算器"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第一个输入框的提示文本</span></span><br><span class="line">    <span class="title">Text</span> &#123;</span><br><span class="line">        <span class="attribute">id:</span><span class="string"> textInput1</span></span><br><span class="line">        <span class="attribute">x</span>: <span class="number">0</span></span><br><span class="line">        <span class="attribute">font.pixelSize</span>: <span class="number">20</span></span><br><span class="line">        <span class="attribute">anchors.verticalCenter</span>: rectangleInput1.verticalCenter</span><br><span class="line">        <span class="attribute">text</span>: <span class="string">"input 1:"</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第一个输入框（通过矩形括起来显示其范围）</span></span><br><span class="line">    <span class="title">Rectangle</span> &#123;</span><br><span class="line">        <span class="attribute">id:</span><span class="string"> rectangleInput1</span></span><br><span class="line">        <span class="attribute">x</span>: <span class="number">100</span></span><br><span class="line">        <span class="attribute">y</span>: <span class="number">10</span></span><br><span class="line">        <span class="attribute">width</span>: <span class="number">96</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">30</span></span><br><span class="line">        <span class="attribute">border.color</span>: <span class="string">"gray"</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 第一个输入框</span></span><br><span class="line">        <span class="title">TextInput</span> &#123;</span><br><span class="line">            <span class="attribute">id:</span><span class="string"> input1</span></span><br><span class="line">            <span class="attribute">anchors.verticalCenter</span>: rectangleInput1.verticalCenter</span><br><span class="line">            <span class="attribute">focus</span>: <span class="literal">false</span></span><br><span class="line">            <span class="attribute">font.pixelSize</span>: <span class="number">20</span></span><br><span class="line">            <span class="attribute">leftPadding</span>: <span class="number">5</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// 通过鼠标点击来设置当前活动的输入框</span></span><br><span class="line">            <span class="title">MouseArea</span> &#123;</span><br><span class="line">                <span class="attribute">width</span>: <span class="number">96</span>;</span><br><span class="line">                <span class="attribute">height</span>: <span class="number">30</span></span><br><span class="line">                <span class="attribute">onClicked</span>: &#123;</span><br><span class="line">                    input1.focus = <span class="literal">true</span></span><br><span class="line">                    input2.focus = <span class="literal">false</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第二个输入框的提示文本</span></span><br><span class="line">    <span class="title">Text</span> &#123;</span><br><span class="line">        <span class="attribute">id:</span><span class="string"> textInput2</span></span><br><span class="line">        <span class="attribute">x</span>: <span class="number">0</span></span><br><span class="line">        <span class="attribute">font.pixelSize</span>: <span class="number">20</span></span><br><span class="line">        <span class="attribute">anchors.verticalCenter</span>: rectangleInput2.verticalCenter</span><br><span class="line">        <span class="attribute">text</span>: <span class="string">"input 2:"</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第二个输入框</span></span><br><span class="line">    <span class="title">Rectangle</span> &#123;</span><br><span class="line">        <span class="attribute">id:</span><span class="string"> rectangleInput2</span></span><br><span class="line">        <span class="attribute">x</span>: rectangleInput1.x</span><br><span class="line">        <span class="attribute">y</span>: rectangleInput1.y+rectangleInput1.height+<span class="number">20</span></span><br><span class="line">        <span class="attribute">width</span>: <span class="number">96</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">30</span></span><br><span class="line">        <span class="attribute">border.color</span>: <span class="string">"gray"</span></span><br><span class="line"></span><br><span class="line">        <span class="title">TextInput</span> &#123;</span><br><span class="line">            <span class="attribute">id:</span><span class="string"> input2</span></span><br><span class="line">            <span class="attribute">anchors.verticalCenter</span>: rectangleInput2.verticalCenter</span><br><span class="line">            <span class="attribute">focus</span>: <span class="literal">false</span></span><br><span class="line">            <span class="attribute">font.pixelSize</span>: <span class="number">20</span></span><br><span class="line">            <span class="attribute">leftPadding</span>: <span class="number">5</span></span><br><span class="line"></span><br><span class="line">            <span class="title">MouseArea</span> &#123;</span><br><span class="line">                <span class="attribute">width</span>: <span class="number">96</span>;</span><br><span class="line">                <span class="attribute">height</span>: <span class="number">30</span></span><br><span class="line">                <span class="attribute">onClicked</span>: &#123;</span><br><span class="line">                    input2.focus = <span class="literal">true</span></span><br><span class="line">                    input1.focus = <span class="literal">false</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 提交输入数据的按钮</span></span><br><span class="line">    <span class="title">Button</span> &#123;</span><br><span class="line">        <span class="attribute">id:</span><span class="string"> submitButton</span></span><br><span class="line">        <span class="attribute">x</span>: rectangleInput2.x</span><br><span class="line">        <span class="attribute">y</span>: rectangleInput2.y+rectangleInput2.height+<span class="number">20</span></span><br><span class="line">        <span class="attribute">width</span>: <span class="number">100</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">30</span></span><br><span class="line">        <span class="attribute">font.pixelSize</span>: <span class="number">15</span></span><br><span class="line">        <span class="attribute">text</span>: <span class="string">"求和"</span></span><br><span class="line"></span><br><span class="line">        <span class="attribute">onClicked</span>: &#123;</span><br><span class="line">            client.setOperands(input1.displayText, input2.displayText);</span><br><span class="line">            result.text = client.getSumedResult()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 求和结果的提示文字</span></span><br><span class="line">    <span class="title">Text</span> &#123;</span><br><span class="line">        <span class="attribute">id:</span><span class="string"> textResult</span></span><br><span class="line">        <span class="attribute">x</span>: <span class="number">0</span></span><br><span class="line">        <span class="attribute">font.pixelSize</span>: <span class="number">20</span></span><br><span class="line">        <span class="attribute">anchors.verticalCenter</span>: rectangleResult.verticalCenter</span><br><span class="line">        <span class="attribute">text</span>: <span class="string">"result:"</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 求和结果的展示区域</span></span><br><span class="line">    <span class="title">Rectangle</span> &#123;</span><br><span class="line">        <span class="attribute">id:</span><span class="string"> rectangleResult</span></span><br><span class="line">        <span class="attribute">x</span>: rectangleInput2.x</span><br><span class="line">        <span class="attribute">y</span>: submitButton.y+submitButton.height+<span class="number">20</span></span><br><span class="line">        <span class="attribute">width</span>: <span class="number">96</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">30</span></span><br><span class="line">        <span class="attribute">border.color</span>: <span class="string">"gray"</span></span><br><span class="line">        <span class="title">Text</span> &#123;</span><br><span class="line">            <span class="attribute">id:</span><span class="string"> result</span></span><br><span class="line">            <span class="attribute">anchors.verticalCenter</span>: rectangleResult.verticalCenter</span><br><span class="line">            <span class="attribute">font.pixelSize</span>: <span class="number">20</span></span><br><span class="line">            <span class="attribute">leftPadding</span>: <span class="number">5</span></span><br><span class="line">            <span class="attribute">text</span>: <span class="string">""</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="程序运行">程序运行</h2>
-<p>main.cpp文件内容如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QGuiApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QQmlApplicationEngine&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QQmlContext&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"client.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"server.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);</span><br><span class="line"></span><br><span class="line">    <span class="function">QGuiApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    QQmlApplicationEngine engine;</span><br><span class="line">    <span class="built_in">Client</span> client;</span><br><span class="line">    <span class="built_in">Server</span> server;</span><br><span class="line">    QObject::<span class="built_in">connect</span>(&amp;client, &amp;<span class="built_in">Client</span>::operandsChanged, &amp;server, &amp;<span class="built_in">Server</span>::getOperands);</span><br><span class="line">    QObject::<span class="built_in">connect</span>(&amp;server, &amp;<span class="built_in">Server</span>::resultChanged, &amp;client, &amp;<span class="built_in">Client</span>::<span class="built_in">getResult</span>);</span><br><span class="line"><span class="comment">//    client.setOperands(1,2);</span></span><br><span class="line">    engine.rootContext()-&gt;setContextProperty(<span class="string">"client"</span>, &amp;client);</span><br><span class="line">    engine.rootContext()-&gt;setContextProperty(<span class="string">"server"</span>, &amp;server);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">const</span> QUrl <span class="title">url</span><span class="params">(QStringLiteral(<span class="string">"qrc:/main.qml"</span>))</span></span>;</span><br><span class="line">    QObject::<span class="built_in">connect</span>(&amp;engine, &amp;QQmlApplicationEngine::objectCreated,</span><br><span class="line">                     &amp;app, [url](QObject *obj, <span class="keyword">const</span> QUrl &amp;objUrl) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!obj &amp;&amp; url == objUrl)</span><br><span class="line">            QCoreApplication::<span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;, Qt::QueuedConnection);</span><br><span class="line">    engine.load(url);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2063,7 +2229,7 @@ b\leftarrow b-\alpha\nabla b
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2074,7 +2240,7 @@ b\leftarrow b-\alpha\nabla b
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2085,7 +2251,7 @@ b\leftarrow b-\alpha\nabla b
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

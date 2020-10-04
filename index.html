@@ -268,6 +268,467 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BA%95%E5%B1%82%E7%9F%A5%E8%AF%86/Strata%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/10/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BA%95%E5%B1%82%E7%9F%A5%E8%AF%86/Strata%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" itemprop="url">Strata论文阅读</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-03T19:23:12+08:00">
+                2020-10-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="补充资料">补充资料</h2>
+<p><a href="https://wizardforcel.gitbooks.io/vbird-linux-basic-4e/content/59.html" target="_blank" rel="noopener">认识 Linux 文件系统</a></p>
+<p><a href="https://blog.csdn.net/qq_20101209/article/details/83719097" target="_blank" rel="noopener">中文翻译参考</a></p>
+<h3 id="non-volatile-memorynvm">Non-volatile Memory（NVM）</h3>
+<p><a href="https://zhuanlan.zhihu.com/p/34455548" target="_blank" rel="noopener">2018 存储技术热点与趋势总结 - smartx的文章 - 知乎</a></p>
+<p>NVM，或者 PM（persistent memory），SCM（storage class memory），实际上都是一个意思，指的都是非易失性内存。NVM 在学术界火了很多年了， 相关的研究在不断向前推进。</p>
+<p>一直以来，由于 2：8 定律的特性，计算机系统的存储一直是采用分层的结构，从上到下依次是 CPU Cache，DRAM，SSD，HDD。 其中，CPU Cache 和 DRAM 是易失性的（volatile），SSD 和 HDD 是非易失性的（non-volatile）。尽管 SSD 的速度远高于 HDD，但和 DDR 相比，还是有一定的差距。SSD 提供 10us 级别的响应时间，而 DRAM 只有 ns 级别，这中间有一万倍的差距。由于 DRAM 和 SSD 之间巨大的性能差距，使得应用程序需要非常仔细的设计 IO 相关的操作，避免 IO 成为系统的性能瓶颈。</p>
+<p>而 NVM 的出现弥补了这个差距。NVM 在保持非易失性的前提下，将响应时间降低到 10ns 级别，同时单位容量价格低于 DRAM。此外，NVM 是按字节访问（byte-addressable），而不像磁盘按照块（Block）访问。NVM 的出现打破了传统的存储层次，将对软件架构设计产生巨大的影响。</p>
+<h2 id="摘要">摘要</h2>
+<h3 id="问题">问题</h3>
+<p>目前硬件和应用的存储逐渐将巨大的压力放在操作系统的文件子系统上。</p>
+<p><u>两方面：</u></p>
+<p><strong><em>On the hardware side</em></strong>, the market for storage devices has diversified to a multi-layer storage topology spanning multiple orders of magnitude in cost and performance.</p>
+<p><strong><em>Above the file system</em></strong>,applications increasingly need to process <strong>small, random IO</strong> on <strong>vast data sets</strong> with <strong>low latency</strong>, <strong>high throughput</strong>, and simple <strong>crash consistency</strong>.</p>
+<p><u>问题：</u></p>
+<p>File systems designed for a single storage layer cannot support all of these demands together.</p>
+<h3 id="什么是strata以及其特点">什么是Strata以及其特点</h3>
+<p><u>多种媒介优势互补：</u></p>
+<p>We present <strong><em>Strata</em></strong>, a cross-media file system that leverages the strengths of one storage media to compensate for weaknesses of another.</p>
+<p><u>与单一存储设备相比的优势：</u></p>
+<p>In doing so, Strata provides performance, capacity, and a simple, synchronous IO model all at once, while having a simpler design than that of file systems constrained by a single storage device.</p>
+<p><u>核心：在用户态、内核以及存储层之间进行了一种新的职责划分，将对可扩展性、高性能以及可持久性的关心与存储层的管理进行了分离。</u></p>
+<p>At its heart, Strata uses a <strong><em>log-structured approach</em></strong> with <strong>a novel split of responsibilities</strong> among <strong>user mode, kernel, and storage layers</strong> that separates the concerns of scalable, high-performance persistence from storage layer management.</p>
+<h3 id="评估其性能改善">评估其性能改善</h3>
+<p>We quantify the performance benefits of <strong>Strata using a 3-layer storage hierarchy of emulated NVM, a flash-based SSD, and a high-density HDD.</strong></p>
+<p>Strata has <strong>20-30% better latency and throughput</strong>, across several unmodified applications, <strong>compared to file systems purpose-built for each layer</strong>, while <strong>providing synchronous and unified access to the entire storage hierarchy</strong>.</p>
+<p>Finally, Strata achieves up to <strong>2.8× better throughput</strong> than a <strong>block-based 2-layer cache provided by Linux’s logical volume manager</strong>.</p>
+<h2 id="简介">简介</h2>
+<p>outside the traditional file system comfort zone</p>
+<ul>
+<li>kernel bypass</li>
+<li>small scattered updates to enormous datasets</li>
+<li>programmer-friendly, efficient crash consistency</li>
+</ul>
+<p>storing updates to a user-level log in fast NVM, while asynchronously managing longer-term storage in the kernel.</p>
+<h2 id="背景">背景</h2>
+<h3 id="硬件存储趋势">硬件存储趋势</h3>
+<p><a href="https://mbb.eet-china.com/forum/topic/58591_1_1.html" target="_blank" rel="noopener">终于有人说清楚了什么是DRAM、什么是NAND Flash</a></p>
+<h2 id="设计">设计</h2>
+<div class="figure">
+<img src="/2020/10/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BA%95%E5%B1%82%E7%9F%A5%E8%AF%86/Strata%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/image-20201004182842699.png" alt="image-20201004182842699">
+<p class="caption">image-20201004182842699</p>
+</div>
+<p><a href="https://blog.csdn.net/qq_20101209/article/details/83719097" target="_blank" rel="noopener">参考1</a></p>
+<h3 id="meta-data-structures">Meta-data Structures</h3>
+<p>Strata keeps meta-data in superblocks, inodes, and per-layer bitmaps of free blocks.</p>
+<ul>
+<li><p>Superblock.</p></li>
+<li>Inodes and directories.
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/66170899" target="_blank" rel="noopener">怎样去理解Linux中的inode？ - 技术原理君的文章 - 知乎</a></li>
+</ul></li>
+<li><p>Free block bitmap.</p></li>
+<li><p>Multiple device instances.</p></li>
+</ul>
+<h3 id="library-file-system-libfs">Library File System (LibFS)</h3>
+<p>Strata的库文件系统（LibFS）提供了应用程序级别机制来执行文件IO。 其目标是为整个底层存储层次结构提供快速、崩溃一致和同步的读写IO，与现有POSIX应用程序完全兼容的统一API，并通过与LibFS重新链接将其置于应用程序之下。</p>
+<ul>
+<li>Fast and synchronous persistence 快速和同步持久化
+<ul>
+<li>现代NVM存储技术使Strata能够在不牺牲性能的情况下提供同步IO语义，同步语义可以加速NVM的整体IO性能。</li>
+<li>同步语义允许Strata提供零拷贝IO——LibFS直接在用户的DRAM缓冲区和NVM之间执行IO。</li>
+<li>LibFS将更新日志以操作日志方式组织。操作日志比数据日志相比减少了IO，因为操作日志只需要指示目录更改的记录，而数据日志需要多个块记录。</li>
+</ul></li>
+<li>Crash consistent logging 崩溃一致的日志记录</li>
+</ul>
+<h3 id="kernel-file-system-kernelfs">Kernel File System (KernelFS)</h3>
+<p><a href="https://www.sans.org/blog/understanding-ext4-part-3-extent-trees/" target="_blank" rel="noopener">extend tree</a></p>
+<ul>
+<li></li>
+</ul>
+<h3 id="sharing-leases">Sharing (leases)</h3>
+<h3 id="protection-and-performance-isolation">Protection and performance isolation</h3>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/30/%E9%87%91%E8%9E%8D/%E9%87%91%E8%9E%8D%E7%9F%A5%E8%AF%86/%E5%9F%BA%E9%87%91%E6%8A%95%E8%B5%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/30/%E9%87%91%E8%9E%8D/%E9%87%91%E8%9E%8D%E7%9F%A5%E8%AF%86/%E5%9F%BA%E9%87%91%E6%8A%95%E8%B5%84/" itemprop="url">基金投资</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-30T20:36:16+08:00">
+                2020-09-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>封闭基金</li>
+<li>开放式基金
+<ul>
+<li>股票型</li>
+<li>混合型</li>
+<li>债券型</li>
+<li>指数型
+<ul>
+<li>按跟踪标的分类
+<ul>
+<li>沪深指数</li>
+<li>行业主题</li>
+<li>大盘指数</li>
+<li>中小盘指数</li>
+<li>股票指数</li>
+<li>债券指数</li>
+</ul></li>
+<li>按跟踪方式
+<ul>
+<li>被动指数型</li>
+<li>增强指数型</li>
+</ul></li>
+</ul></li>
+<li>保本型</li>
+<li>QDII</li>
+<li>LOF</li>
+<li>FOF</li>
+</ul></li>
+<li>ETF基金</li>
+<li>LOF基金</li>
+<li>封闭式基金</li>
+<li>货币型基金</li>
+<li>开放式净值</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/30/%E9%87%91%E8%9E%8D/%E9%87%91%E8%9E%8D%E7%9F%A5%E8%AF%86/%E9%87%91%E8%9E%8D%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/30/%E9%87%91%E8%9E%8D/%E9%87%91%E8%9E%8D%E7%9F%A5%E8%AF%86/%E9%87%91%E8%9E%8D%E7%9F%A5%E8%AF%86/" itemprop="url">金融知识</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-30T10:33:51+08:00">
+                2020-09-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre class="mermaid">
+</pre>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/21/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%9C%A8docker%E4%B8%AD%E9%83%A8%E7%BD%B2mongodb/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -341,6 +802,8 @@
 <img src="/2020/09/21/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%9C%A8docker%E4%B8%AD%E9%83%A8%E7%BD%B2mongodb/image-20200922000342380.png" alt="image-20200922000342380">
 <p class="caption">image-20200922000342380</p>
 </div>
+<p>这时，我们就可以使用develop用户连接blog数据库了，如下;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mongo mongodb://develop:developpwd@localhost:27017/blog</span><br><span class="line"></span><br><span class="line">docker <span class="built_in">exec</span> -ti ryanliu_mongodb mongo mongodb://root:123456@localhost:27017</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1104,7 +1567,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/15/%E9%87%91%E8%9E%8D/%E9%87%8F%E5%8C%96%E6%8A%95%E8%B5%84/%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%BC%80%E5%A7%8B/%E8%82%A1%E7%A5%A8%E6%95%B0%E6%8D%AE/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/15/%E9%87%91%E8%9E%8D/%E9%87%8F%E5%8C%96%E6%8A%95%E8%B5%84/%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%BC%80%E5%A7%8B/%E9%87%8F%E5%8C%96%E6%95%B0%E6%8D%AE%E7%90%86%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ryan">
@@ -1123,7 +1586,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/08/15/%E9%87%91%E8%9E%8D/%E9%87%8F%E5%8C%96%E6%8A%95%E8%B5%84/%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%BC%80%E5%A7%8B/%E8%82%A1%E7%A5%A8%E6%95%B0%E6%8D%AE/" itemprop="url">股票数据</a></h1>
+                <a class="post-title-link" href="/2020/08/15/%E9%87%91%E8%9E%8D/%E9%87%8F%E5%8C%96%E6%8A%95%E8%B5%84/%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%BC%80%E5%A7%8B/%E9%87%8F%E5%8C%96%E6%95%B0%E6%8D%AE%E7%90%86%E8%A7%A3/" itemprop="url">量化数据理解</a></h1>
         
 
         <div class="post-meta">
@@ -1173,7 +1636,53 @@
       
         
           
-            
+            <h2 id="股票数据">股票数据</h2>
+<p>提供2005年至今沪深A股全面的行情、财务、基本面等数据</p>
+<h2 id="行业概念数据">行业概念数据</h2>
+<p>包含行业板块、概念板块数据</p>
+<h2 id="指数数据">指数数据</h2>
+<p>包含沪深市场多只指数数据</p>
+<h3 id="市盈率pe">市盈率（PE）</h3>
+<ul>
+<li>公司年度盈利÷公司发行股数=每股股票收益</li>
+<li>股票价格=每股股票收益×市盈率</li>
+<li>这个系数应该能表示大家<strong>估计的</strong>，未来这家公司还能每年赚10元的年份数，也就是市盈率，简称PE。市盈率PE一定程度上等同于估值。</li>
+</ul>
+<h3 id="指数">指数</h3>
+<p>指数呢，是很多只股票的集合，相当于一个养鸡场。指数的市盈率，也就等于综合计算的所有股票的价格，除以综合计算的每股收益。这相当于大家对未来这个养鸡场里所有鸡能够下多少蛋的一个<strong>估计值</strong>。</p>
+<p><strong>1.指数的价格=盈利×估值</strong></p>
+<p><strong>2.短期赚钱主要靠估值上升，主要受投资者情绪影响。</strong></p>
+<p><strong>3.长期赚钱要靠盈利增加+估值上升，主要受经济发展的影响。</strong></p>
+<p><strong>4.不同指数估值不同，不能用同一个PE区间衡量指数是不是低估。</strong></p>
+<h3 id="市净率pb">市净率（PB）</h3>
+<p>市净率＝股票的价格÷每股净资产＝大家对股价的估计值÷一个确定的值。</p>
+<h3 id="references">References</h3>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/28216055" target="_blank" rel="noopener">看数据说指数估值：什么是估值？什么是PE？为什么要用PE算估值？</a></li>
+<li></li>
+</ul>
+<h2 id="宏观经济数据">宏观经济数据</h2>
+<p>包含国内的重要宏观经济数据</p>
+<h2 id="期货数据">期货数据</h2>
+<p>涵盖中金所、上期所、郑商所和大商所的所有期货合约数据</p>
+<h2 id="期权数据">期权数据</h2>
+<p>提供股票期权和商品期权的合约资料和行情数据</p>
+<h2 id="场内基金数据">场内基金数据</h2>
+<p>包含ETF、LOF、分级基金、货币基金完整的行情、净值数据</p>
+<h2 id="场外基金数据">场外基金数据</h2>
+<p>提供场外基金单位净值、复权净值、投资组合等数据</p>
+<h2 id="技术分析指标">技术分析指标</h2>
+<p>技术分析指标因子库</p>
+<h2 id="债券数据">债券数据</h2>
+<p>提供债券基本信息、国债逆回购、可转债等债券数据</p>
+<h2 id="舆情数据">舆情数据</h2>
+<p>包含新闻联播等舆情数据</p>
+<h2 id="alpha101因子">Alpha101因子</h2>
+<p>WorldQuant LLC 发表论文中给出的 101 个 Alphas 因子</p>
+<h2 id="alpha191因子">Alpha191因子</h2>
+<p>短周期交易型阿尔法因子</p>
+<h2 id="聚宽因子库">聚宽因子库</h2>
+<p>包含数百个质量、情绪、风险、成长等六大类因子</p>
 
           
         
@@ -1340,7 +1849,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/%E9%87%91%E8%9E%8D/%E9%87%8F%E5%8C%96%E6%8A%95%E8%B5%84/%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%BC%80%E5%A7%8B/%E8%82%A1%E7%A5%A8%E6%95%B0%E6%8D%AE/%E8%82%A1%E7%A5%A8%E5%B8%82%E5%9C%BA/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/%E9%87%91%E8%9E%8D/%E9%87%8F%E5%8C%96%E6%8A%95%E8%B5%84/%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%BC%80%E5%A7%8B/%E9%87%8F%E5%8C%96%E6%95%B0%E6%8D%AE%E7%90%86%E8%A7%A3/%E8%82%A1%E7%A5%A8%E5%B8%82%E5%9C%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ryan">
@@ -1359,7 +1868,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/06/27/%E9%87%91%E8%9E%8D/%E9%87%8F%E5%8C%96%E6%8A%95%E8%B5%84/%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%BC%80%E5%A7%8B/%E8%82%A1%E7%A5%A8%E6%95%B0%E6%8D%AE/%E8%82%A1%E7%A5%A8%E5%B8%82%E5%9C%BA/" itemprop="url">股票市场</a></h1>
+                <a class="post-title-link" href="/2020/06/27/%E9%87%91%E8%9E%8D/%E9%87%8F%E5%8C%96%E6%8A%95%E8%B5%84/%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%BC%80%E5%A7%8B/%E9%87%8F%E5%8C%96%E6%95%B0%E6%8D%AE%E7%90%86%E8%A7%A3/%E8%82%A1%E7%A5%A8%E5%B8%82%E5%9C%BA/" itemprop="url">股票市场</a></h1>
         
 
         <div class="post-meta">
@@ -1445,443 +1954,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/%E9%87%91%E8%9E%8D/%E9%87%8F%E5%8C%96%E6%8A%95%E8%B5%84/%E9%87%8F%E5%8C%96%E5%9B%A0%E5%AD%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/27/%E9%87%91%E8%9E%8D/%E9%87%8F%E5%8C%96%E6%8A%95%E8%B5%84/%E9%87%8F%E5%8C%96%E5%9B%A0%E5%AD%90/" itemprop="url">量化因子</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-27T21:30:09+08:00">
-                2020-06-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%87%91%E8%9E%8D/" itemprop="url" rel="index">
-                    <span itemprop="name">金融</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%87%91%E8%9E%8D/%E9%87%8F%E5%8C%96%E6%8A%95%E8%B5%84/" itemprop="url" rel="index">
-                    <span itemprop="name">量化投资</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/%E7%94%B5%E5%95%86/%E6%B7%98%E5%AE%9D%E5%AE%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/27/%E7%94%B5%E5%95%86/%E6%B7%98%E5%AE%9D%E5%AE%A2/" itemprop="url">淘宝客</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-27T17:56:07+08:00">
-                2020-06-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%94%B5%E5%95%86/" itemprop="url" rel="index">
-                    <span itemprop="name">电商</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="淘宝客的几种形式">淘宝客的几种形式</h2>
-<h3 id="淘宝店铺方法">淘宝店铺方法</h3>
-<p><img src="/2020/06/27/%E7%94%B5%E5%95%86/%E6%B7%98%E5%AE%9D%E5%AE%A2/image-20200627183823167.png" alt="image-20200627183823167" style="zoom:67%;"></p>
-<p><img src="/2020/06/27/%E7%94%B5%E5%95%86/%E6%B7%98%E5%AE%9D%E5%AE%A2/image-20200627183829765.png" alt="image-20200627183829765" style="zoom: 67%;"></p>
-<h3 id="优惠券网站">优惠券网站</h3>
-<h3 id="优惠券app">优惠券APP</h3>
-<h3 id="微信群qq群">微信群&amp;QQ群</h3>
-<h3 id="电商直播">电商直播</h3>
-<h2 id="推广">推广</h2>
-<h3 id="流量转化">流量转化</h3>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/26/%E5%85%B6%E4%BB%96/%E4%BA%A7%E4%B8%9A%E5%B8%83%E5%B1%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/26/%E5%85%B6%E4%BB%96/%E4%BA%A7%E4%B8%9A%E5%B8%83%E5%B1%80/" itemprop="url">产业布局</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-26T18:22:39+08:00">
-                2020-06-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="产业整体布局">产业整体布局</h2>
-<p>主职业作为保障</p>
-<ul>
-<li>主业
-<ul>
-<li>算法工程师</li>
-<li>开发工程师？</li>
-<li>国企</li>
-<li>公务员</li>
-</ul></li>
-<li>副业
-<ul>
-<li>抖音：人工智能视频</li>
-<li>淘宝客</li>
-<li>量化交易</li>
-</ul></li>
-</ul>
-<p>钱是从“其他人”身上赚来的，应当更多去思考关于人的事情，而非仅思考技术。</p>
-<p>——互联网流量与变现</p>
-<p>如果副业能够取得较好结果，那么主业可以选择较轻松的职业。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1932,7 +2004,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1943,7 +2015,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1954,7 +2026,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
