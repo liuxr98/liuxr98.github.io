@@ -268,7 +268,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BA%95%E5%B1%82%E7%9F%A5%E8%AF%86/Strata%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/11/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/LeetCode/514-%E8%87%AA%E7%94%B1%E4%B9%8B%E8%B7%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ryan">
@@ -287,7 +287,268 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/10/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BA%95%E5%B1%82%E7%9F%A5%E8%AF%86/Strata%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" itemprop="url">Strata论文阅读</a></h1>
+                <a class="post-title-link" href="/2020/11/11/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/LeetCode/514-%E8%87%AA%E7%94%B1%E4%B9%8B%E8%B7%AF/" itemprop="url">514. 自由之路</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-11T11:29:44+08:00">
+                2020-11-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="初始的想法">初始的想法</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findRotateSteps</span><span class="params">(self, ring, key)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type ring: str</span></span><br><span class="line"><span class="string">        :type key: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        index = <span class="number">0</span></span><br><span class="line">        left_index = <span class="number">0</span></span><br><span class="line">        right_index = <span class="number">0</span></span><br><span class="line">        length = len(ring)</span><br><span class="line">        count = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> ch <span class="keyword">in</span> key:</span><br><span class="line">            <span class="keyword">if</span> ring[index]==ch:</span><br><span class="line">                count += <span class="number">1</span></span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                left_index = index</span><br><span class="line">                right_index = index</span><br><span class="line">                <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">                    count += <span class="number">1</span></span><br><span class="line">                    left_index = self.left(left_index, length)</span><br><span class="line">                    right_index = self.right(right_index, length)</span><br><span class="line">                    <span class="keyword">if</span> ring[left_index]==ch:</span><br><span class="line">                        count += <span class="number">1</span></span><br><span class="line">                        index = left_index</span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">                    <span class="keyword">elif</span> ring[right_index]==ch:</span><br><span class="line">                        count += <span class="number">1</span></span><br><span class="line">                        index = left_index</span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">return</span> count</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">left</span><span class="params">(self, index, length)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> index==<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> length<span class="number">-1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> index<span class="number">-1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">right</span><span class="params">(self, index, length)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> index==length<span class="number">-1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> index+<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/15/3.%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/%E6%A8%A1%E5%9E%8B%E4%BB%BF%E7%9C%9F%E7%A4%BA%E4%BE%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/10/15/3.%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/UML%E5%BB%BA%E6%A8%A1/%E6%A8%A1%E5%9E%8B%E4%BB%BF%E7%9C%9F%E7%A4%BA%E4%BE%8B/" itemprop="url">模型仿真示例</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-15T10:29:35+08:00">
+                2020-10-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li><a href="https://www.sparxsystems.com/enterprise_architect_user_guide/15.0/model_simulation/run_model_simulation.html" target="_blank" rel="noopener">Run Model Simulation</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/03/1.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/Strata%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/10/03/1.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/Strata%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" itemprop="url">Strata论文阅读</a></h1>
         
 
         <div class="post-meta">
@@ -367,7 +628,10 @@
 <h2 id="简介">简介</h2>
 <p>outside the traditional file system comfort zone</p>
 <ul>
-<li>kernel bypass</li>
+<li>kernel bypass
+<ul>
+<li><a href="https://www.cnblogs.com/CasperWu/p/4689872.html" target="_blank" rel="noopener">Kernel Bypass &amp; Offload 介绍</a></li>
+</ul></li>
 <li>small scattered updates to enormous datasets</li>
 <li>programmer-friendly, efficient crash consistency</li>
 </ul>
@@ -375,9 +639,11 @@
 <h2 id="背景">背景</h2>
 <h3 id="硬件存储趋势">硬件存储趋势</h3>
 <p><a href="https://mbb.eet-china.com/forum/topic/58591_1_1.html" target="_blank" rel="noopener">终于有人说清楚了什么是DRAM、什么是NAND Flash</a></p>
+<p><a href="%5Bhttps://www.hack520.com/993.html#:~:text=%E5%9C%A8%E6%89%80%E6%9C%89%E6%B5%8B%E8%AF%95%E8%BD%AF%E4%BB%B6%E4%B8%AD,%E8%83%BD%E6%9C%89%E8%BF%91%E4%BC%BC%E7%9A%84%E9%80%9F%E5%BA%A6%E3%80%82%5D(https://www.hack520.com/993.html#:~:text=在所有测试软件中,能有近似的速度。)">读懂 SSD – 什么是顺序读写、随机读写、4K读写、IOPS值？</a></p>
+<p><a href="https://www.zhihu.com/question/24964878/answer/139508652" target="_blank" rel="noopener">Linux Namespace 是什么，可以用来做什么？ - Pengcheng Zeng的回答 - 知乎</a></p>
 <h2 id="设计">设计</h2>
 <div class="figure">
-<img src="/2020/10/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BA%95%E5%B1%82%E7%9F%A5%E8%AF%86/Strata%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/image-20201004182842699.png" alt="image-20201004182842699">
+<img src="/2020/10/03/1.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/Strata%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/image-20201004182842699.png" alt="image-20201004182842699">
 <p class="caption">image-20201004182842699</p>
 </div>
 <p><a href="https://blog.csdn.net/qq_20101209/article/details/83719097" target="_blank" rel="noopener">参考1</a></p>
@@ -405,162 +671,43 @@
 </ul>
 <h3 id="kernel-file-system-kernelfs">Kernel File System (KernelFS)</h3>
 <p><a href="https://www.sans.org/blog/understanding-ext4-part-3-extent-trees/" target="_blank" rel="noopener">extend tree</a></p>
+<p>区段树应该是类似B+树的东西：<a href="https://zhuanlan.zhihu.com/p/149287061" target="_blank" rel="noopener">B+树看这一篇就够了（B+树查找、插入、删除全上） - 程序员景禹的文章 - 知乎</a></p>
+<p>Strata的内核级文件系统（KernelFS）负责管理系统中全局可见和的可驻留在存储结构的任何层中的共享数据。 为此，它会摘要应用程序日志并将其转换为perfile extent树。 摘要在后台异步发生，允许KernelFS批处理Strata事务并定期进行垃圾回收和优化物理布局。 LibFS向KernelFS提供最近最少使用（LRU）的信息，以在存储结构的各层之间通知其迁移策略。</p>
 <ul>
-<li></li>
+<li>Digest 摘录
+<ul>
+<li>为了减少摘要延迟，KernelFS采用许多优化操作：
+<ol style="list-style-type: decimal">
+<li>从日志中摘要大批操作</li>
+<li>合并相邻写入</li>
+<li>识别和消除操作</li>
+</ol></li>
+</ul></li>
+<li>Data access pattern interface 数据访问模式接口
+<ul>
+<li>为了了利用整个存储结构，KernelIFS会在不同层间迁移数据，Strata在Kernel FS中维持了两个LRU list，一个用于NVM-SSD之间的数据迁移，一个用于SSD-HDD之间数据迁移。</li>
+</ul></li>
+<li>Data migration 数据迁移
+<ul>
+<li>为了利用存储层中的容量，内核会在后台进行不同层间地迁移数据。为了并发操作并避免迁移阻塞带来地延迟，Strata会在层满前就进行数据迁移(在该原型中利用率为95%)。为了减少开销，写入到SSD是以erase为单元（百兆级别），写入到HDD是以木瓦磁盘方式（GB级别）。</li>
+</ul></li>
 </ul>
 <h3 id="sharing-leases">Sharing (leases)</h3>
+<p><a href="https://lrita.github.io/2018/10/29/lease-in-distributed-system/" target="_blank" rel="noopener">分布式系统中的 lease（租约）机制</a></p>
 <h3 id="protection-and-performance-isolation">Protection and performance isolation</h3>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/30/%E9%87%91%E8%9E%8D/%E9%87%91%E8%9E%8D%E7%9F%A5%E8%AF%86/%E5%9F%BA%E9%87%91%E6%8A%95%E8%B5%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/09/30/%E9%87%91%E8%9E%8D/%E9%87%91%E8%9E%8D%E7%9F%A5%E8%AF%86/%E5%9F%BA%E9%87%91%E6%8A%95%E8%B5%84/" itemprop="url">基金投资</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-30T20:36:16+08:00">
-                2020-09-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>封闭基金</li>
-<li>开放式基金
 <ul>
-<li>股票型</li>
-<li>混合型</li>
-<li>债券型</li>
-<li>指数型
+<li>Protection with kernel bypass. 内核旁路保护
 <ul>
-<li>按跟踪标的分类
+<li>Strata支持对POSIX文件的访问控制，由MMU和NVMe命名空间强制执行，
 <ul>
-<li>沪深指数</li>
-<li>行业主题</li>
-<li>大盘指数</li>
-<li>中小盘指数</li>
-<li>股票指数</li>
-<li>债券指数</li>
-</ul></li>
-<li>按跟踪方式
-<ul>
-<li>被动指数型</li>
-<li>增强指数型</li>
+<li>MMU为内核旁路LibFS提供保护</li>
+<li>对于SSD驻留数据，使用NVMe命名空间来保护对文件数据的访问</li>
 </ul></li>
 </ul></li>
-<li>保本型</li>
-<li>QDII</li>
-<li>LOF</li>
-<li>FOF</li>
+<li>Performance isolation 性能隔离
+<ul>
+<li>写入放大通过提高设备带宽利用率来提高IO的性能隔离。</li>
 </ul></li>
-<li>ETF基金</li>
-<li>LOF基金</li>
-<li>封闭式基金</li>
-<li>货币型基金</li>
-<li>开放式净值</li>
 </ul>
 
           
@@ -610,7 +757,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/30/%E9%87%91%E8%9E%8D/%E9%87%91%E8%9E%8D%E7%9F%A5%E8%AF%86/%E9%87%91%E8%9E%8D%E7%9F%A5%E8%AF%86/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/21/2.%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%9C%A8docker%E4%B8%AD%E9%83%A8%E7%BD%B2mongodb/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ryan">
@@ -629,126 +776,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/09/30/%E9%87%91%E8%9E%8D/%E9%87%91%E8%9E%8D%E7%9F%A5%E8%AF%86/%E9%87%91%E8%9E%8D%E7%9F%A5%E8%AF%86/" itemprop="url">金融知识</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-30T10:33:51+08:00">
-                2020-09-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre class="mermaid">
-</pre>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/21/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%9C%A8docker%E4%B8%AD%E9%83%A8%E7%BD%B2mongodb/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/09/21/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%9C%A8docker%E4%B8%AD%E9%83%A8%E7%BD%B2mongodb/" itemprop="url">在docker中部署mongodb</a></h1>
+                <a class="post-title-link" href="/2020/09/21/2.%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%9C%A8docker%E4%B8%AD%E9%83%A8%E7%BD%B2mongodb/" itemprop="url">在docker中部署mongodb</a></h1>
         
 
         <div class="post-meta">
@@ -799,7 +827,7 @@
         
           
             <div class="figure">
-<img src="/2020/09/21/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%9C%A8docker%E4%B8%AD%E9%83%A8%E7%BD%B2mongodb/image-20200922000342380.png" alt="image-20200922000342380">
+<img src="/2020/09/21/2.%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%9C%A8docker%E4%B8%AD%E9%83%A8%E7%BD%B2mongodb/image-20200922000342380.png" alt="image-20200922000342380">
 <p class="caption">image-20200922000342380</p>
 </div>
 <p>这时，我们就可以使用develop用户连接blog数据库了，如下;</p>
@@ -852,7 +880,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/20/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/pandas%E4%BD%BF%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/20/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/1.%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/pandas%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ryan">
@@ -871,7 +899,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/09/20/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/pandas%E4%BD%BF%E7%94%A8/" itemprop="url">pandas使用</a></h1>
+                <a class="post-title-link" href="/2020/09/20/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/1.%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/pandas%E4%BD%BF%E7%94%A8/" itemprop="url">pandas使用</a></h1>
         
 
         <div class="post-meta">
@@ -1204,7 +1232,7 @@
 <p><code>df5.dropna(how='any')  # 任何存在 NaN 的行都将被删除</code></p>
 <p><strong>46. DataFrame 按指定列对齐：</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">left = pd.DataFrame(&#123;<span class="string">'key'</span>: [<span class="string">'foo1'</span>, <span class="string">'foo2'</span>], <span class="string">'one'</span>: [<span class="number">1</span>, <span class="number">2</span>]&#125;)</span><br><span class="line">right = pd.DataFrame(&#123;<span class="string">'key'</span>: [<span class="string">'foo2'</span>, <span class="string">'foo3'</span>], <span class="string">'two'</span>: [<span class="number">4</span>, <span class="number">5</span>]&#125;)</span><br><span class="line"></span><br><span class="line">print(left)</span><br><span class="line">print(right)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按照 key 列对齐连接，只存在 foo2 相同，所以最后变成一行</span></span><br><span class="line">pd.merge(left, right, on=<span class="string">'key'</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/20/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/pandas%E4%BD%BF%E7%94%A8/image-20200920220259425.png" alt="image-20200920220259425" style="zoom:50%;"></p>
+<p><img src="/2020/09/20/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/1.%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/pandas%E4%BD%BF%E7%94%A8/image-20200920220259425.png" alt="image-20200920220259425" style="zoom:50%;"></p>
 
           
         
@@ -1253,7 +1281,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/14/%E7%88%AC%E8%99%AB/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/14/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%88%AC%E8%99%AB/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ryan">
@@ -1272,7 +1300,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/09/14/%E7%88%AC%E8%99%AB/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" itemprop="url">爬虫学习路线</a></h1>
+                <a class="post-title-link" href="/2020/09/14/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%88%AC%E8%99%AB/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" itemprop="url">爬虫学习路线</a></h1>
         
 
         <div class="post-meta">
@@ -1378,7 +1406,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/12/%E7%88%AC%E8%99%AB/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/12/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%88%AC%E8%99%AB/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ryan">
@@ -1397,7 +1425,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/09/12/%E7%88%AC%E8%99%AB/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/" itemprop="url">爬虫基础</a></h1>
+                <a class="post-title-link" href="/2020/09/12/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%88%AC%E8%99%AB/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/" itemprop="url">爬虫基础</a></h1>
         
 
         <div class="post-meta">
@@ -1567,7 +1595,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/15/%E9%87%91%E8%9E%8D/%E9%87%8F%E5%8C%96%E6%8A%95%E8%B5%84/%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%BC%80%E5%A7%8B/%E9%87%8F%E5%8C%96%E6%95%B0%E6%8D%AE%E7%90%86%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/22/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/2.%E6%A1%86%E6%9E%B6/PyTorch/PyTorch-Doc-Notes/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ryan">
@@ -1586,171 +1614,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/08/15/%E9%87%91%E8%9E%8D/%E9%87%8F%E5%8C%96%E6%8A%95%E8%B5%84/%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%BC%80%E5%A7%8B/%E9%87%8F%E5%8C%96%E6%95%B0%E6%8D%AE%E7%90%86%E8%A7%A3/" itemprop="url">量化数据理解</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-15T17:14:31+08:00">
-                2020-08-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="股票数据">股票数据</h2>
-<p>提供2005年至今沪深A股全面的行情、财务、基本面等数据</p>
-<h2 id="行业概念数据">行业概念数据</h2>
-<p>包含行业板块、概念板块数据</p>
-<h2 id="指数数据">指数数据</h2>
-<p>包含沪深市场多只指数数据</p>
-<h3 id="市盈率pe">市盈率（PE）</h3>
-<ul>
-<li>公司年度盈利÷公司发行股数=每股股票收益</li>
-<li>股票价格=每股股票收益×市盈率</li>
-<li>这个系数应该能表示大家<strong>估计的</strong>，未来这家公司还能每年赚10元的年份数，也就是市盈率，简称PE。市盈率PE一定程度上等同于估值。</li>
-</ul>
-<h3 id="指数">指数</h3>
-<p>指数呢，是很多只股票的集合，相当于一个养鸡场。指数的市盈率，也就等于综合计算的所有股票的价格，除以综合计算的每股收益。这相当于大家对未来这个养鸡场里所有鸡能够下多少蛋的一个<strong>估计值</strong>。</p>
-<p><strong>1.指数的价格=盈利×估值</strong></p>
-<p><strong>2.短期赚钱主要靠估值上升，主要受投资者情绪影响。</strong></p>
-<p><strong>3.长期赚钱要靠盈利增加+估值上升，主要受经济发展的影响。</strong></p>
-<p><strong>4.不同指数估值不同，不能用同一个PE区间衡量指数是不是低估。</strong></p>
-<h3 id="市净率pb">市净率（PB）</h3>
-<p>市净率＝股票的价格÷每股净资产＝大家对股价的估计值÷一个确定的值。</p>
-<h3 id="references">References</h3>
-<ul>
-<li><a href="https://zhuanlan.zhihu.com/p/28216055" target="_blank" rel="noopener">看数据说指数估值：什么是估值？什么是PE？为什么要用PE算估值？</a></li>
-<li></li>
-</ul>
-<h2 id="宏观经济数据">宏观经济数据</h2>
-<p>包含国内的重要宏观经济数据</p>
-<h2 id="期货数据">期货数据</h2>
-<p>涵盖中金所、上期所、郑商所和大商所的所有期货合约数据</p>
-<h2 id="期权数据">期权数据</h2>
-<p>提供股票期权和商品期权的合约资料和行情数据</p>
-<h2 id="场内基金数据">场内基金数据</h2>
-<p>包含ETF、LOF、分级基金、货币基金完整的行情、净值数据</p>
-<h2 id="场外基金数据">场外基金数据</h2>
-<p>提供场外基金单位净值、复权净值、投资组合等数据</p>
-<h2 id="技术分析指标">技术分析指标</h2>
-<p>技术分析指标因子库</p>
-<h2 id="债券数据">债券数据</h2>
-<p>提供债券基本信息、国债逆回购、可转债等债券数据</p>
-<h2 id="舆情数据">舆情数据</h2>
-<p>包含新闻联播等舆情数据</p>
-<h2 id="alpha101因子">Alpha101因子</h2>
-<p>WorldQuant LLC 发表论文中给出的 101 个 Alphas 因子</p>
-<h2 id="alpha191因子">Alpha191因子</h2>
-<p>短周期交易型阿尔法因子</p>
-<h2 id="聚宽因子库">聚宽因子库</h2>
-<p>包含数百个质量、情绪、风险、成长等六大类因子</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/22/%E7%AE%97%E6%B3%95/%E6%A1%86%E6%9E%B6/PyTorch/PyTorch-Doc-Notes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/07/22/%E7%AE%97%E6%B3%95/%E6%A1%86%E6%9E%B6/PyTorch/PyTorch-Doc-Notes/" itemprop="url">PyTorch_Doc_Notes</a></h1>
+                <a class="post-title-link" href="/2020/07/22/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/2.%E6%A1%86%E6%9E%B6/PyTorch/PyTorch-Doc-Notes/" itemprop="url">PyTorch_Doc_Notes</a></h1>
         
 
         <div class="post-meta">
@@ -1849,7 +1713,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/%E9%87%91%E8%9E%8D/%E9%87%8F%E5%8C%96%E6%8A%95%E8%B5%84/%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%BC%80%E5%A7%8B/%E9%87%8F%E5%8C%96%E6%95%B0%E6%8D%AE%E7%90%86%E8%A7%A3/%E8%82%A1%E7%A5%A8%E5%B8%82%E5%9C%BA/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QML/QtQMLHelloWorld/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ryan">
@@ -1868,7 +1732,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/06/27/%E9%87%91%E8%9E%8D/%E9%87%8F%E5%8C%96%E6%8A%95%E8%B5%84/%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%BC%80%E5%A7%8B/%E9%87%8F%E5%8C%96%E6%95%B0%E6%8D%AE%E7%90%86%E8%A7%A3/%E8%82%A1%E7%A5%A8%E5%B8%82%E5%9C%BA/" itemprop="url">股票市场</a></h1>
+                <a class="post-title-link" href="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QML/QtQMLHelloWorld/" itemprop="url">QtQMLHelloWorld</a></h1>
         
 
         <div class="post-meta">
@@ -1880,8 +1744,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-27T21:39:25+08:00">
-                2020-06-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-12T20:12:10+08:00">
+                2020-06-12
               </time>
             
 
@@ -1890,6 +1754,39 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Qt/" itemprop="url" rel="index">
+                    <span itemprop="name">Qt</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Qt/QML/" itemprop="url" rel="index">
+                    <span itemprop="name">QML</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1918,7 +1815,223 @@
       
         
           
-            <p>大盘股，中小盘股</p>
+            <h2 id="hello-world-qt-quickqml">Hello World: Qt Quick/QML</h2>
+<h3 id="项目结构">项目结构</h3>
+<p>新建一个Qt Quick的hello world项目（testclass为新建的类），项目结构如下：</p>
+<div class="figure">
+<img src="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QML/QtQMLHelloWorld/image-20200520220339166.png" alt="image-20200520220339166">
+<p class="caption">image-20200520220339166</p>
+</div>
+<p>在项目名称节点下面，分组管理着项目内的各种源文件，几个文件及分组分别为以下几项：</p>
+<ul>
+<li>helloworld.pro 是项目管理文件，包括一些对项目的设置项。</li>
+<li>Headers 分组，该节点下是项目内的所有头文件（.h）</li>
+<li>Sources 分组：该节点下是项目内的所有 C++源文件（.cpp）。</li>
+<li>Resources分组：该分组包含项目内的所有.qml文件，即UI的设计文件。</li>
+</ul>
+<h3 id="类设计">类设计</h3>
+<p>自定义的类头文件（TestClass）如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> TESTCLASS_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TESTCLASS_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QObject&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestClass</span> :</span> <span class="keyword">public</span> QObject</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * // The Q_OBJECT macro must appear in the private section of a class definition</span></span><br><span class="line"><span class="comment">     * that declares its own signals and slots or that uses other services provided</span></span><br><span class="line"><span class="comment">     * by Qt's meta-object system.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">TestClass</span><span class="params">(QObject *parent = <span class="literal">nullptr</span>)</span></span>;</span><br><span class="line">    <span class="function">Q_INVOKABLE <span class="keyword">void</span> <span class="title">setValue</span><span class="params">(<span class="keyword">int</span> nValue)</span></span>;</span><br><span class="line">    <span class="function">Q_INVOKABLE <span class="keyword">int</span> <span class="title">getValue</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * Q_INVOKABLE: Apply this macro to declarations of member functions to allow</span></span><br><span class="line"><span class="comment">     * them to be invoked via the meta-object system.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">signals:</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> slots:</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> nValue;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// TESTCLASS_H</span></span></span><br></pre></td></tr></table></figure>
+<p>TestClass的定义如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"testclass.h"</span></span></span><br><span class="line"></span><br><span class="line">TestClass::TestClass(QObject *parent) : QObject(parent)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">this</span>-&gt;nValue = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">TestClass::setValue</span><span class="params">(<span class="keyword">int</span> nValue)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>-&gt;nValue = nValue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">TestClass::getValue</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> nValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="主程序入口">主程序入口</h3>
+<p>main.cpp如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QGuiApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QQmlApplicationEngine&gt;</span></span></span><br><span class="line"><span class="comment">// register a class into meta-object system</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QQmlContext&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"testclass.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * QCoreApplication::setAttribute(Qt::ApplicationAttribute attribute, bool on = true)</span></span><br><span class="line"><span class="comment">     *  - Sets the attribute attribute if on is true; otherwise clears the attribute.</span></span><br><span class="line"><span class="comment">     * - Note: Some application attributes must be set before creating a QCoreApplication instance.</span></span><br><span class="line"><span class="comment">     *   Refer to the Qt::ApplicationAttribute documentation for more information.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">    <span class="function">QGuiApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line">    <span class="comment">// The QGuiApplication class manages the GUI application's control flow and main settings.</span></span><br><span class="line"></span><br><span class="line">    QQmlApplicationEngine engine;</span><br><span class="line">    <span class="comment">// QQmlApplicationEngine provides a convenient way to load an application from a single QML file.</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将自定义的类注册到元对象系统中</span></span><br><span class="line">    TestClass testClass;</span><br><span class="line">    testClass.setValue(<span class="number">666</span>);</span><br><span class="line">    engine.rootContext()-&gt;setContextProperty(<span class="string">"testClass"</span>, &amp;testClass);</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * void QQmlContext::setContextProperty(const QString &amp;name, const QVariant &amp;value);</span></span><br><span class="line"><span class="comment">     * void QQmlContext::setContextProperty(const QString &amp;name, QObject *value);</span></span><br><span class="line"><span class="comment">     * void QQmlContext::setContextProperties(const QVector&lt;QQmlContext::PropertyPair&gt; &amp;properties);</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">const</span> QUrl <span class="title">url</span><span class="params">(QStringLiteral(<span class="string">"qrc:/main.qml"</span>))</span></span>;</span><br><span class="line">    <span class="comment">// The QUrl class provides a convenient interface for working with URLs.</span></span><br><span class="line"></span><br><span class="line">    QObject::<span class="built_in">connect</span>(&amp;engine, &amp;QQmlApplicationEngine::objectCreated,</span><br><span class="line">                     &amp;app, [url](QObject *obj, <span class="keyword">const</span> QUrl &amp;objUrl) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!obj &amp;&amp; url == objUrl)</span><br><span class="line">            QCoreApplication::<span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;, Qt::QueuedConnection);</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * [static] QMetaObject::Connection QObject::connect(</span></span><br><span class="line"><span class="comment">     *      const QObject *sender,</span></span><br><span class="line"><span class="comment">     *      const char *signal,</span></span><br><span class="line"><span class="comment">     *      const QObject *receiver,</span></span><br><span class="line"><span class="comment">     *      const char *method,</span></span><br><span class="line"><span class="comment">     *      Qt::ConnectionType type = Qt::AutoConnection</span></span><br><span class="line"><span class="comment">     * )</span></span><br><span class="line"><span class="comment">     * Creates a connection of the given type from the signal in the sender object</span></span><br><span class="line"><span class="comment">     * to the method in the receiver object.</span></span><br><span class="line"><span class="comment">     * Returns a handle to the connection that can be used to disconnect it later.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">    engine.load(url);</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * [slot] void QQmlApplicationEngine::load(const QUrl &amp;url)</span></span><br><span class="line"><span class="comment">     * Loads the root QML file located at url.</span></span><br><span class="line"><span class="comment">     * The object tree defined by the file is created immediately for local file urls.</span></span><br><span class="line"><span class="comment">     * Remote urls are loaded asynchronously, listen to the objectCreated signal to</span></span><br><span class="line"><span class="comment">     * determine when the object tree is ready.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="报错">报错</h4>
+<ul>
+<li>Property <em>&lt;function name&gt;</em> of <em>&lt;object name&gt;&lt;address&gt;</em>is not a function
+<ul>
+<li>在qml文件中调用的函数声明时没有加前缀<code>Q_INVOKABLE</code></li>
+</ul></li>
+</ul>
+<h3 id="界面设计">界面设计</h3>
+<p>界面设计如下：</p>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> QtQuick <span class="number">2.12</span></span><br><span class="line"><span class="keyword">import</span> QtQuick.Window <span class="number">2.12</span></span><br><span class="line"><span class="keyword">import</span> QtQuick.Controls <span class="number">2.12</span></span><br><span class="line"></span><br><span class="line"><span class="title">Window</span> &#123;</span><br><span class="line">    <span class="attribute">visible</span>: <span class="literal">true</span></span><br><span class="line">    <span class="attribute">width</span>: <span class="number">640</span></span><br><span class="line">    <span class="attribute">height</span>: <span class="number">480</span></span><br><span class="line">    <span class="attribute">title</span>: qsTr(<span class="string">"Hello World"</span>)</span><br><span class="line">    <span class="title">Label</span> &#123;</span><br><span class="line">        <span class="attribute">x</span>: <span class="number">100</span></span><br><span class="line">        <span class="attribute">y</span>: <span class="number">100</span></span><br><span class="line">        <span class="attribute">text</span>: <span class="string">"Hello World."</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title">Button</span> &#123;</span><br><span class="line">        <span class="attribute">x</span>: <span class="number">200</span></span><br><span class="line">        <span class="attribute">y</span>: <span class="number">200</span></span><br><span class="line">        <span class="attribute">height</span>: <span class="number">40</span></span><br><span class="line">        <span class="attribute">width</span>: <span class="number">100</span></span><br><span class="line"></span><br><span class="line">        <span class="attribute">onClicked</span>: &#123;</span><br><span class="line">            text = testClass.getValue();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<div class="figure">
+<img src="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QML/QtQMLHelloWorld/image-20200520224620119.png" alt="image-20200520224620119">
+<p class="caption">image-20200520224620119</p>
+</div>
+<div class="figure">
+<img src="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QML/QtQMLHelloWorld/image-20200520224554493.png" alt="image-20200520224554493">
+<p class="caption">image-20200520224554493</p>
+</div>
+<p>References:</p>
+<ul>
+<li><a href="https://cloud.tencent.com/developer/article/1169582" target="_blank" rel="noopener">QtQuick 系列教程之 QML 与 C++ 交互</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QtWidget/QtWidgetHelloWorld/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QtWidget/QtWidgetHelloWorld/" itemprop="url">QtWidgetHelloWorld</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-12T20:11:53+08:00">
+                2020-06-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Qt/" itemprop="url" rel="index">
+                    <span itemprop="name">Qt</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Qt/Widget/" itemprop="url" rel="index">
+                    <span itemprop="name">Widget</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="hello-world-qt-widgets">Hello World: Qt Widgets</h2>
+<p>新建一个Qt Widgets的hello world项目，项目结构如下：</p>
+<div class="figure">
+<img src="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QtWidget/QtWidgetHelloWorld/image-20200516155841639.png" alt="image-20200516155841639">
+<p class="caption">image-20200516155841639</p>
+</div>
+<p>在项目名称节点下面，分组管理着项目内的各种源文件，几个文件及分组分别为以下几项：</p>
+<ul>
+<li>helloworld.pro 是项目管理文件，包括一些对项目的设置项。</li>
+<li>Headers 分组，该节点下是项目内的所有头文件（.h），图 5 中所示项目有一个头文件 mainwindow.h，是主窗口类的头文件。</li>
+<li>Sources 分组：该节点下是项目内的所有 C++源文件（.cpp），图 5 中所示项目有两个 C++ 源文件，mainwindow.cpp 是主窗口类的实现文件，与 mainwindow.h 文件对应。main.cpp 是主函数文件，也是应用程序的入口。</li>
+<li>Forms 分组：该节点下是项目内的所有界面文件（.ui）。图 5 中所示项目有一个界面文件mainwindow.ui，是主窗口的界面文件。界面文件是文本文件，使用 <strong>XML 语言</strong>描述界面的组成。</li>
+</ul>
+<p>在界面中添加一个button和一个label，功能为点击button时label显示hello world：</p>
+<div class="figure">
+<img src="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QtWidget/QtWidgetHelloWorld/image-20200516132341197.png" alt="image-20200516132341197">
+<p class="caption">image-20200516132341197</p>
+</div>
+<div class="figure">
+<img src="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QtWidget/QtWidgetHelloWorld/image-20200516132545408.png" alt="image-20200516132545408">
+<p class="caption">image-20200516132545408</p>
+</div>
 
           
         
@@ -2004,7 +2117,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2015,7 +2128,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2026,7 +2139,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
