@@ -268,6 +268,680 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/12/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%88%AC%E8%99%AB/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/12/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%88%AC%E8%99%AB/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/" itemprop="url">爬虫基础</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-12T21:19:19+08:00">
+                2020-09-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="requests">requests</h2>
+<h3 id="获取数据">获取数据</h3>
+<h4 id="requests.get">requests.get</h4>
+<p>编码问题、</p>
+<h4 id="section"></h4>
+<h3 id="发送数据">发送数据</h3>
+<h2 id="beautifulsoup">BeautifulSoup</h2>
+<ul>
+<li>获取标签中的属性值：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="对象">对象</h3>
+<p>Beautiful Soup将复杂HTML文档转换成一个复杂的树形结构,每个节点都是Python对象,所有对象可以归纳为4种: <code>Tag</code> , <code>NavigableString</code> , <code>BeautifulSoup</code> , <code>Comment</code>.</p>
+<h4 id="tag">Tag</h4>
+<h5 id="name">Name</h5>
+<h5 id="attributes">Attributes</h5>
+<ul>
+<li>属性操作（同python字典操作类似）
+<ul>
+<li>获取</li>
+<li>添加、删除、修改</li>
+</ul></li>
+<li>多值属性
+<ul>
+<li>最常见的多值的属性是 class (一个tag可以有多个CSS的class)，还有一些属性 <code>rel</code> , <code>rev</code> , <code>accept-charset</code> , <code>headers</code> , <code>accesskey</code>.</li>
+<li>在Beautiful Soup中多值属性的返回类型是list</li>
+</ul></li>
+</ul>
+<h5 id="navigablestring可以遍历的字符串">NavigableString（可以遍历的字符串）</h5>
+<p>字符串常被包含在tag内.Beautiful Soup用 <code>NavigableString</code> 类来包装tag中的字符串</p>
+<p><code>NavigableString</code> 对象支持 <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/index.zh.html#id15" target="_blank" rel="noopener">遍历文档树</a> 和 <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/index.zh.html#id24" target="_blank" rel="noopener">搜索文档树</a> 中定义的大部分属性, 并非全部.尤其是,一个字符串不能包含其它内容(tag能够包含字符串或是其它tag),字符串不支持 <code>.contents</code> 或 <code>.string</code> 属性或 <code>find()</code> 方法.</p>
+<h4 id="beautifulsoup-1">BeautifulSoup</h4>
+<p><code>BeautifulSoup</code> 对象表示的是一个文档的全部内容.大部分时候,可以把它当作 <code>Tag</code> 对象,它支持 <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/index.zh.html#id15" target="_blank" rel="noopener">遍历文档树</a> 和 <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/index.zh.html#id24" target="_blank" rel="noopener">搜索文档树</a> 中描述的大部分的方法.</p>
+<h4 id="comment注释及特殊字符串">Comment（注释及特殊字符串）</h4>
+<p><code>Comment</code> 对象是一个特殊类型的 <code>NavigableString</code> 对象，表示的是文档中的注释内容。</p>
+<p>Beautiful Soup中定义的其它类型都可能会出现在XML的文档中: <code>CData</code> , <code>ProcessingInstruction</code> , <code>Declaration</code> , <code>Doctype</code> .与 <code>Comment</code> 对象类似,这些类都是 <code>NavigableString</code> 的子类,只是添加了一些额外的方法的字符串独享.</p>
+<h3 id="遍历文档树">遍历文档树</h3>
+<ul>
+<li>find()</li>
+<li>find_all()</li>
+</ul>
+<h4 id="过滤器">过滤器</h4>
+<h5 id="字符串">字符串</h5>
+<h5 id="正则表达式">正则表达式</h5>
+<h5 id="列表">列表</h5>
+<h5 id="true">True</h5>
+<p>返回所有标签</p>
+<h4 id="方法">方法</h4>
+<p>如果没有合适过滤器,那么还可以定义一个方法,方法只接受一个元素参数 [<a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/index.zh.html#id85" target="_blank" rel="noopener">4]</a> ,如果这个方法返回 <code>True</code> 表示当前元素匹配并且被找到,如果不是则反回 <code>False</code></p>
+<blockquote>
+<p>下面方法校验了当前元素,如果包含 <code>class</code> 属性却不包含 <code>id</code> 属性,那么将返回 <code>True</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">html_doc = <span class="string">"""</span></span><br><span class="line"><span class="string">&lt;html&gt;&lt;head&gt;&lt;title&gt;The Dormouse's story&lt;/title&gt;&lt;/head&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;p class="title"&gt;&lt;b&gt;The Dormouse's story&lt;/b&gt;&lt;/p&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;p class="story"&gt;Once upon a time there were three little sisters; and their names were</span></span><br><span class="line"><span class="string">&lt;a href="http://example.com/elsie" class="sister" id="link1"&gt;Elsie&lt;/a&gt;,</span></span><br><span class="line"><span class="string">&lt;a href="http://example.com/lacie" class="sister" id="link2"&gt;Lacie&lt;/a&gt; and</span></span><br><span class="line"><span class="string">&lt;a href="http://example.com/tillie" class="sister" id="link3"&gt;Tillie&lt;/a&gt;;</span></span><br><span class="line"><span class="string">and they lived at the bottom of a well.&lt;/p&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;p class="story"&gt;...&lt;/p&gt;</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line">soup = BeautifulSoup(html_doc)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">has_class_but_no_id</span><span class="params">(tag)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> tag.has_attr(<span class="string">'class'</span>) <span class="keyword">and</span> <span class="keyword">not</span> tag.has_attr(<span class="string">'id'</span>)</span><br><span class="line"></span><br><span class="line">soup.find_all(has_class_but_no_id)</span><br><span class="line"><span class="comment"># [&lt;p class="title"&gt;&lt;b&gt;The Dormouse's story&lt;/b&gt;&lt;/p&gt;,</span></span><br><span class="line"><span class="comment">#  &lt;p class="story"&gt;Once upon a time there were...&lt;/p&gt;,</span></span><br><span class="line"><span class="comment">#  &lt;p class="story"&gt;...&lt;/p&gt;]</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="find_all">find_all</h4>
+<p><code>find_all(name, attrs, recursive, text, **kwargs)</code></p>
+<h5 id="name-1">name</h5>
+<p>搜索 <code>name</code> 参数的值可以使任一类型的 <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/index.zh.html#id25" target="_blank" rel="noopener">过滤器</a> ,字符窜,正则表达式,列表,方法或是 <code>True</code> .</p>
+<h5 id="keyword">keyword</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">soup.find_all(id=<span class="string">'link2'</span>) <span class="comment"># </span></span><br><span class="line">soup.find_all(id=<span class="literal">True</span>) <span class="comment"># 在文档树中查找所有包含 id 属性的tag,无论 id 的值是什么</span></span><br><span class="line">soup.find_all(href=re.compile(<span class="string">"elsie"</span>), id=<span class="string">'link1'</span>) <span class="comment"># 使用多个指定名字的参数可以同时过滤tag的多个属性</span></span><br><span class="line">data_soup.find_all(attrs=&#123;<span class="string">"data-foo"</span>: <span class="string">"value"</span>&#125;) <span class="comment"># 可以通过 find_all() 方法的 attrs 参数定义一个字典参数来搜索包含特殊属性的tag</span></span><br></pre></td></tr></table></figure>
+<h5 id="按css搜索">按CSS搜索</h5>
+<h5 id="text-参数">text 参数</h5>
+<p>通过 <code>text</code> 参数可以搜搜文档中的字符串内容.与 <code>name</code> 参数的可选值一样, <code>text</code> 参数接受 <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/index.zh.html#id27" target="_blank" rel="noopener">字符串</a> , <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/index.zh.html#id28" target="_blank" rel="noopener">正则表达式</a> , <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/index.zh.html#id29" target="_blank" rel="noopener">列表</a>, <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/index.zh.html#true" target="_blank" rel="noopener">True</a>.</p>
+<h5 id="limit-参数">limit 参数</h5>
+<h5 id="recursive-参数">recursive 参数</h5>
+<p>调用tag的 <code>find_all()</code> 方法时,Beautiful Soup会检索当前tag的所有子孙节点,如果只想搜索tag的直接子节点,可以使用参数 <code>recursive=False</code>.</p>
+<h5 id="像调用-find_all-一样调用tag">像调用 find_all() 一样调用tag</h5>
+<p><code>find_all()</code> 几乎是Beautiful Soup中最常用的搜索方法,所以我们定义了它的简写方法. <code>BeautifulSoup</code> 对象和 <code>tag</code> 对象可以被当作一个方法来使用,这个方法的执行结果与调用这个对象的 <code>find_all()</code> 方法相同,下面两行代码是等价的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">soup.find_all(&quot;a&quot;)</span><br><span class="line">soup(&quot;a&quot;)</span><br></pre></td></tr></table></figure>
+<p>这两行代码也是等价的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">soup.title.find_all(text&#x3D;True)</span><br><span class="line">soup.title(text&#x3D;True)</span><br></pre></td></tr></table></figure>
+<h4 id="find">find</h4>
+<p><code>find(name, attrs, recursive, text, **kwargs)</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/22/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/2.%E6%A1%86%E6%9E%B6/PyTorch/PyTorch-Doc-Notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/22/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/2.%E6%A1%86%E6%9E%B6/PyTorch/PyTorch-Doc-Notes/" itemprop="url">PyTorch_Doc_Notes</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-22T15:06:55+08:00">
+                2020-07-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QML/QtQMLHelloWorld/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QML/QtQMLHelloWorld/" itemprop="url">QtQMLHelloWorld</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-12T20:12:10+08:00">
+                2020-06-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Qt/" itemprop="url" rel="index">
+                    <span itemprop="name">Qt</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Qt/QML/" itemprop="url" rel="index">
+                    <span itemprop="name">QML</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="hello-world-qt-quickqml">Hello World: Qt Quick/QML</h2>
+<h3 id="项目结构">项目结构</h3>
+<p>新建一个Qt Quick的hello world项目（testclass为新建的类），项目结构如下：</p>
+<div class="figure">
+<img src="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QML/QtQMLHelloWorld/image-20200520220339166.png" alt="image-20200520220339166">
+<p class="caption">image-20200520220339166</p>
+</div>
+<p>在项目名称节点下面，分组管理着项目内的各种源文件，几个文件及分组分别为以下几项：</p>
+<ul>
+<li>helloworld.pro 是项目管理文件，包括一些对项目的设置项。</li>
+<li>Headers 分组，该节点下是项目内的所有头文件（.h）</li>
+<li>Sources 分组：该节点下是项目内的所有 C++源文件（.cpp）。</li>
+<li>Resources分组：该分组包含项目内的所有.qml文件，即UI的设计文件。</li>
+</ul>
+<h3 id="类设计">类设计</h3>
+<p>自定义的类头文件（TestClass）如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> TESTCLASS_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TESTCLASS_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QObject&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestClass</span> :</span> <span class="keyword">public</span> QObject</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * // The Q_OBJECT macro must appear in the private section of a class definition</span></span><br><span class="line"><span class="comment">     * that declares its own signals and slots or that uses other services provided</span></span><br><span class="line"><span class="comment">     * by Qt's meta-object system.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">TestClass</span><span class="params">(QObject *parent = <span class="literal">nullptr</span>)</span></span>;</span><br><span class="line">    <span class="function">Q_INVOKABLE <span class="keyword">void</span> <span class="title">setValue</span><span class="params">(<span class="keyword">int</span> nValue)</span></span>;</span><br><span class="line">    <span class="function">Q_INVOKABLE <span class="keyword">int</span> <span class="title">getValue</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * Q_INVOKABLE: Apply this macro to declarations of member functions to allow</span></span><br><span class="line"><span class="comment">     * them to be invoked via the meta-object system.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">signals:</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> slots:</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> nValue;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// TESTCLASS_H</span></span></span><br></pre></td></tr></table></figure>
+<p>TestClass的定义如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"testclass.h"</span></span></span><br><span class="line"></span><br><span class="line">TestClass::TestClass(QObject *parent) : QObject(parent)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">this</span>-&gt;nValue = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">TestClass::setValue</span><span class="params">(<span class="keyword">int</span> nValue)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>-&gt;nValue = nValue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">TestClass::getValue</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> nValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="主程序入口">主程序入口</h3>
+<p>main.cpp如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QGuiApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QQmlApplicationEngine&gt;</span></span></span><br><span class="line"><span class="comment">// register a class into meta-object system</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QQmlContext&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"testclass.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * QCoreApplication::setAttribute(Qt::ApplicationAttribute attribute, bool on = true)</span></span><br><span class="line"><span class="comment">     *  - Sets the attribute attribute if on is true; otherwise clears the attribute.</span></span><br><span class="line"><span class="comment">     * - Note: Some application attributes must be set before creating a QCoreApplication instance.</span></span><br><span class="line"><span class="comment">     *   Refer to the Qt::ApplicationAttribute documentation for more information.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">    <span class="function">QGuiApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line">    <span class="comment">// The QGuiApplication class manages the GUI application's control flow and main settings.</span></span><br><span class="line"></span><br><span class="line">    QQmlApplicationEngine engine;</span><br><span class="line">    <span class="comment">// QQmlApplicationEngine provides a convenient way to load an application from a single QML file.</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将自定义的类注册到元对象系统中</span></span><br><span class="line">    TestClass testClass;</span><br><span class="line">    testClass.setValue(<span class="number">666</span>);</span><br><span class="line">    engine.rootContext()-&gt;setContextProperty(<span class="string">"testClass"</span>, &amp;testClass);</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * void QQmlContext::setContextProperty(const QString &amp;name, const QVariant &amp;value);</span></span><br><span class="line"><span class="comment">     * void QQmlContext::setContextProperty(const QString &amp;name, QObject *value);</span></span><br><span class="line"><span class="comment">     * void QQmlContext::setContextProperties(const QVector&lt;QQmlContext::PropertyPair&gt; &amp;properties);</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">const</span> QUrl <span class="title">url</span><span class="params">(QStringLiteral(<span class="string">"qrc:/main.qml"</span>))</span></span>;</span><br><span class="line">    <span class="comment">// The QUrl class provides a convenient interface for working with URLs.</span></span><br><span class="line"></span><br><span class="line">    QObject::<span class="built_in">connect</span>(&amp;engine, &amp;QQmlApplicationEngine::objectCreated,</span><br><span class="line">                     &amp;app, [url](QObject *obj, <span class="keyword">const</span> QUrl &amp;objUrl) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!obj &amp;&amp; url == objUrl)</span><br><span class="line">            QCoreApplication::<span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;, Qt::QueuedConnection);</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * [static] QMetaObject::Connection QObject::connect(</span></span><br><span class="line"><span class="comment">     *      const QObject *sender,</span></span><br><span class="line"><span class="comment">     *      const char *signal,</span></span><br><span class="line"><span class="comment">     *      const QObject *receiver,</span></span><br><span class="line"><span class="comment">     *      const char *method,</span></span><br><span class="line"><span class="comment">     *      Qt::ConnectionType type = Qt::AutoConnection</span></span><br><span class="line"><span class="comment">     * )</span></span><br><span class="line"><span class="comment">     * Creates a connection of the given type from the signal in the sender object</span></span><br><span class="line"><span class="comment">     * to the method in the receiver object.</span></span><br><span class="line"><span class="comment">     * Returns a handle to the connection that can be used to disconnect it later.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">    engine.load(url);</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * [slot] void QQmlApplicationEngine::load(const QUrl &amp;url)</span></span><br><span class="line"><span class="comment">     * Loads the root QML file located at url.</span></span><br><span class="line"><span class="comment">     * The object tree defined by the file is created immediately for local file urls.</span></span><br><span class="line"><span class="comment">     * Remote urls are loaded asynchronously, listen to the objectCreated signal to</span></span><br><span class="line"><span class="comment">     * determine when the object tree is ready.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="报错">报错</h4>
+<ul>
+<li>Property <em>&lt;function name&gt;</em> of <em>&lt;object name&gt;&lt;address&gt;</em>is not a function
+<ul>
+<li>在qml文件中调用的函数声明时没有加前缀<code>Q_INVOKABLE</code></li>
+</ul></li>
+</ul>
+<h3 id="界面设计">界面设计</h3>
+<p>界面设计如下：</p>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> QtQuick <span class="number">2.12</span></span><br><span class="line"><span class="keyword">import</span> QtQuick.Window <span class="number">2.12</span></span><br><span class="line"><span class="keyword">import</span> QtQuick.Controls <span class="number">2.12</span></span><br><span class="line"></span><br><span class="line"><span class="title">Window</span> &#123;</span><br><span class="line">    <span class="attribute">visible</span>: <span class="literal">true</span></span><br><span class="line">    <span class="attribute">width</span>: <span class="number">640</span></span><br><span class="line">    <span class="attribute">height</span>: <span class="number">480</span></span><br><span class="line">    <span class="attribute">title</span>: qsTr(<span class="string">"Hello World"</span>)</span><br><span class="line">    <span class="title">Label</span> &#123;</span><br><span class="line">        <span class="attribute">x</span>: <span class="number">100</span></span><br><span class="line">        <span class="attribute">y</span>: <span class="number">100</span></span><br><span class="line">        <span class="attribute">text</span>: <span class="string">"Hello World."</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title">Button</span> &#123;</span><br><span class="line">        <span class="attribute">x</span>: <span class="number">200</span></span><br><span class="line">        <span class="attribute">y</span>: <span class="number">200</span></span><br><span class="line">        <span class="attribute">height</span>: <span class="number">40</span></span><br><span class="line">        <span class="attribute">width</span>: <span class="number">100</span></span><br><span class="line"></span><br><span class="line">        <span class="attribute">onClicked</span>: &#123;</span><br><span class="line">            text = testClass.getValue();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<div class="figure">
+<img src="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QML/QtQMLHelloWorld/image-20200520224620119.png" alt="image-20200520224620119">
+<p class="caption">image-20200520224620119</p>
+</div>
+<div class="figure">
+<img src="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QML/QtQMLHelloWorld/image-20200520224554493.png" alt="image-20200520224554493">
+<p class="caption">image-20200520224554493</p>
+</div>
+<p>References:</p>
+<ul>
+<li><a href="https://cloud.tencent.com/developer/article/1169582" target="_blank" rel="noopener">QtQuick 系列教程之 QML 与 C++ 交互</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QtWidget/QtWidgetHelloWorld/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QtWidget/QtWidgetHelloWorld/" itemprop="url">QtWidgetHelloWorld</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-12T20:11:53+08:00">
+                2020-06-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Qt/" itemprop="url" rel="index">
+                    <span itemprop="name">Qt</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Qt/Widget/" itemprop="url" rel="index">
+                    <span itemprop="name">Widget</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="hello-world-qt-widgets">Hello World: Qt Widgets</h2>
+<p>新建一个Qt Widgets的hello world项目，项目结构如下：</p>
+<div class="figure">
+<img src="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QtWidget/QtWidgetHelloWorld/image-20200516155841639.png" alt="image-20200516155841639">
+<p class="caption">image-20200516155841639</p>
+</div>
+<p>在项目名称节点下面，分组管理着项目内的各种源文件，几个文件及分组分别为以下几项：</p>
+<ul>
+<li>helloworld.pro 是项目管理文件，包括一些对项目的设置项。</li>
+<li>Headers 分组，该节点下是项目内的所有头文件（.h），图 5 中所示项目有一个头文件 mainwindow.h，是主窗口类的头文件。</li>
+<li>Sources 分组：该节点下是项目内的所有 C++源文件（.cpp），图 5 中所示项目有两个 C++ 源文件，mainwindow.cpp 是主窗口类的实现文件，与 mainwindow.h 文件对应。main.cpp 是主函数文件，也是应用程序的入口。</li>
+<li>Forms 分组：该节点下是项目内的所有界面文件（.ui）。图 5 中所示项目有一个界面文件mainwindow.ui，是主窗口的界面文件。界面文件是文本文件，使用 <strong>XML 语言</strong>描述界面的组成。</li>
+</ul>
+<p>在界面中添加一个button和一个label，功能为点击button时label显示hello world：</p>
+<div class="figure">
+<img src="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QtWidget/QtWidgetHelloWorld/image-20200516132341197.png" alt="image-20200516132341197">
+<p class="caption">image-20200516132341197</p>
+</div>
+<div class="figure">
+<img src="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QtWidget/QtWidgetHelloWorld/image-20200516132545408.png" alt="image-20200516132545408">
+<p class="caption">image-20200516132545408</p>
+</div>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/07/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/6.Kaggle/kaggle%E5%85%A5%E9%97%A8-Titanic/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1226,221 +1900,6 @@ f(\boldsymbol{x})=\text{sign}\left(\sum_{i=1}^N\alpha_i^*y_iK(\boldsymbol{x},x_i
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/" itemprop="url">博弈树搜索</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-01T17:53:01+08:00">
-                2020-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="双人零和游戏">双人零和游戏</h2>
-<h3 id="特点">特点</h3>
-<ol style="list-style-type: decimal">
-<li>Discrete（离散的）: Game states or decisions can be mapped on discretevalues.</li>
-<li>Finite（有限的）: There are only a finite number of states and possibledecisions that can be made.</li>
-<li>Zero-sum (零和的): Fully competitive</li>
-<li>Deterministic（确定性的）: no chance involved</li>
-<li>Perfect information（信息完全的）: all aspects of the state are fullyobservable</li>
-</ol>
-<h3 id="定义">定义</h3>
-<div class="figure">
-<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20190104213857963.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20190104214835667.png">
-
-</div>
-<h3 id="组成部分">组成部分</h3>
-<div class="figure">
-<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024163543298.png">
-
-</div>
-<hr>
-<h2 id="minmax博弈树搜索">MinMax博弈树搜索</h2>
-<h3 id="原理">原理</h3>
-<p>假设在博弈过程中,对抗者1总是选择使得博弈值最小的移动,那么作为对手的对抗者2则总会选择是的博弈值最大的移动,对抗者1称为min,对抗者2称为max.由于博弈双方是交替移动的,所以博弈树的结点及其父结点分属于两个对抗者中的一个,他们的种类（type）分属max和min.博弈树上的每个结点对应于一个深度（depth）,叶结点的深度为0.因此,在任意的结点node,对博弈双方均最优的博弈值为</p>
-<div class="figure">
-<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024204100457.png">
-
-</div>
-<p>Min-Max方法对博弈树进行深度优先搜索.相对于广度优先搜索,深度优先搜索需要非常少的存储空间,而且存储空间的需求不随树的大小而指数增长。</p>
-<h3 id="伪代码">伪代码</h3>
-<p>伪代码如下（以max角色的决策为例），使用DFS实现（可以节约空间，BFS占用空间太多了）</p>
-<div class="figure">
-<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024204414335.png">
-
-</div>
-<h3 id="一个例子a是maxb是min">一个例子（A是max，B是min）</h3>
-<div class="figure">
-<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024203520426.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024203529214.png">
-
-</div>
-<hr>
-<h2 id="alpha-beta剪枝"><span class="math inline">\(\alpha\)</span>-<span class="math inline">\(\beta\)</span>剪枝</h2>
-<p>很多时候，作出决策并不需要搜索整棵树</p>
-<div class="figure">
-<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024211735213.png">
-
-</div>
-<h3 id="alpha剪枝beta剪枝同理"><span class="math inline">\(\alpha\)</span>剪枝（<span class="math inline">\(\beta\)</span>剪枝同理）</h3>
-<p>当确定某些分支下属节点的取值不会传递到顶层时，那么对应分支就不需要往下探索了——剪枝。</p>
-<div class="figure">
-<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024223121311.png">
-
-</div>
-<p>以上图为例，在进行深度优先搜索的时候，要计算节点<span class="math inline">\(n\)</span>的效益值需要计算<span class="math inline">\(s_1,s_2,s_3,\cdots\)</span>的效益值，但是已经知道max节点中有效益值为5的节点了，节点<span class="math inline">\(P\)</span>的 <span class="math inline">\(\beta\)</span>值是节点<span class="math inline">\(n\)</span>这一层节点的 <span class="math inline">\(\alpha\)</span>值的最小值，而 <span class="math inline">\(\alpha_{s_3}=9&gt;5\)</span>，所以<span class="math inline">\(s_3\)</span>之后的节点都不用计算了，这就节省了计算量。</p>
-<p>更一般地：</p>
-<div class="figure">
-<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024222850354.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024223246279.png">
-
-</div>
-<h3 id="伪代码-1">伪代码</h3>
-<div class="figure">
-<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-2019011008362316.png">
-
-</div>
-<h3 id="例子">例子</h3>
-<div class="figure">
-<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-2019011008363580.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/minimax搜索.png">
-
-</div>
-<h3 id="效果">效果</h3>
-<div class="figure">
-<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181026143221860.png">
-
-</div>
-<hr>
-<h2 id="事先建树与实时搜索">事先建树与实时搜索</h2>
-<p>每一次构建博弈树，而不是刚开始就构建好博弈树</p>
-<div class="figure">
-<img src="/2020/06/01/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181026143706809.png">
-
-</div>
-<h2 id="negascout搜索算法">Negascout搜索算法</h2>
-<h2 id="mtd记忆增强测试驱动方法">MTD（记忆增强测试驱动）方法</h2>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1932,654 +2391,6 @@ f(\boldsymbol{x})=\text{sign}\left(\sum_{i=1}^N\alpha_i^*y_iK(\boldsymbol{x},x_i
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/" itemprop="url">决策树</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-01T17:50:15+08:00">
-                2020-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="决策树算法">决策树算法</h1>
-<h1 id="基本了解">基本了解</h1>
-<p>决策树的一个示例如下：</p>
-<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/markdown-img-paste-2018092014184172.png" style="zoom:0.5"></p>
-<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/markdown-img-paste-20180920141849555.png" style="zoom:0.5"></p>
-<p>能够看到，决策树的每一个条目仍然是由多个特征与类型组成，其中类型只在叶子结点，特征只在非叶子结点。叶子结点可包含特征与类型，非叶子结点只能包含特征。</p>
-<p>划分停止的条件（不包含剪枝）有以下几种情况：</p>
-<ol style="list-style-type: decimal">
-<li>特征列全部用完（采用多数投票决定叶子的类型）</li>
-<li>叶子节点中所有样本都是一个种类</li>
-</ol>
-<h1 id="信息论相关内容">信息论相关内容</h1>
-<h2 id="熵">熵</h2>
-<p>熵：用来衡量离散变量的不确定性，如抛硬币、掷骰子</p>
-<p>对于离散变量<span class="math inline">\(X\)</span>，其熵的计算公式为 <span class="math display">\[H(X)=-\displaystyle\sum\limits_{x\in X}p(x_i)\cdot log_2[p(x_i)]=\displaystyle\sum\limits_{x_i\in X}p(x_i)log_2\left[\dfrac{1}{p(x_i)}\right]=E\left(log_2\left[\dfrac{1}{p(X)}\right]\right)\]</span> 其中<span class="math inline">\(x_i\)</span>表示离散变量<span class="math inline">\(X\)</span>的取值。该公式用于计算一棵深度为1的树的熵。</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/a.svg">
-
-</div>
-<h2 id="条件熵">条件熵</h2>
-<p>如果对于下面这样子的决策树，其熵的计算就有些不同 <img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/b.svg"></p>
-<p>该决策树是原始决策树引进一个特征后构成的深度为2的树，整棵树的熵可以通过下列公式进行计算： <span class="math display">\[H(Y\mid X)=\displaystyle\sum\limits_{x\in X}p(x)H(Y\mid X=x)\]</span> 其中 <span class="math inline">\(H(Y\mid X=x)\)</span> 即是对应子树的熵。</p>
-<h2 id="联合熵与互信息信息增益">联合熵与互信息（信息增益）</h2>
-<p>联合熵： <span class="math display">\[H(X,Y)=H(Y)+H(X\mid Y)=H(X)+H(Y\mid X)\]</span></p>
-<p>互信息： <span class="math display">\[I(X,Y)=H(Y)-H(Y\mid X)=H(X)-H(X\mid Y)\]</span> 互信息衡量的是离散变量<span class="math inline">\(X,Y\)</span>之间的相关程度。</p>
-<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/markdown-img-paste-20180920150434709.png" style="zoom:0.5"></p>
-<h1 id="基于信息增益的id3模型">基于信息增益的ID3模型</h1>
-<p>遍历所有的特征<span class="math inline">\(X_i\)</span>，选出使得 <span class="math display">\[Gain(Y,X_i)=I(Y,X_i) = H(Y)-H(Y\mid X_i)\]</span> 最大的<span class="math inline">\(X_i\)</span>用来扩展决策树的深度。</p>
-<p>这种模型的缺陷在于倾向于构建一棵很矮很胖的树，每一次都会倾向于选择取值最多的特征。</p>
-<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/markdown-img-paste-20180920152432652.png" style="zoom:0.5"></p>
-<p>​ 比如上图中的例子，如果用ID3模型来构建决策树，那么必定得到如下的树：</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/c.svg">
-
-</div>
-<p>该决策树毫无意义。</p>
-<h1 id="基于信息增益率的c4.5模型">基于信息增益率的C4.5模型</h1>
-<p>​ 遍历所有的特征<span class="math inline">\(X_i\)</span>，选出使得 <span class="math display">\[
-GainRatio(Y,X_i) = \dfrac{H(Y)-H(Y\mid X_i)}{H(A)}=\dfrac{Gain(Y,X_i)}{H(A)}
-\]</span> 最大的<span class="math inline">\(X_i\)</span>用来扩展决策树的深度。</p>
-<p>​ 其中<span class="math inline">\(H(X_i)\)</span> 表示指标本身的熵，其计算方法与 <span class="math inline">\(H(Y)\)</span> 基本相同，区别是特征与类型的选取不同。计算 <span class="math inline">\(H(Y)\)</span> 时将<span class="math inline">\(Y\)</span>看做是类型，将<span class="math inline">\(X_i\)</span>看做特征；计算 <span class="math inline">\(H(X_i)\)</span> 时将<span class="math inline">\(X_i\)</span>看做是类型，将<span class="math inline">\(Y\)</span>看做特征。如下图所示：</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/d.svg">
-
-</div>
-<h1 id="基于gini指数的cart模型">基于Gini指数的CART模型</h1>
-<p>​ 基尼指数与熵的概念类似。如果一个数据集<span class="math inline">\(D\)</span>包含来自<span class="math inline">\(n\)</span>个类的样本，那么基尼指数，<span class="math inline">\(gini(D)\)</span>定义如下： <span class="math display">\[
-gini(D)=\displaystyle\sum\limits_{j=1}^{n}p_j(1-p_j)=1-\displaystyle\sum\limits_{j=1}^{n}p_j^2
-\]</span> 其中<span class="math inline">\(p_j\)</span>是类<span class="math inline">\(j\)</span>在数据集<span class="math inline">\(D\)</span>出现的频率。该公式用于计算深度为1的树的基尼指数：</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/a.svg">
-
-</div>
-<p>​ 如果要计算深度大于1的树的基尼指数，比如下图</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/b.svg">
-
-</div>
-<p>则 <span class="math display">\[
-gini{split}(D)=\displaystyle\sum\limits{x_i\in X}p(x_i)\cdot gini(D_i)
-\]</span> 在选取属性来分裂节点（加深树）时，选取使得<span class="math inline">\(gini_{split}(D)\)</span> 最小的属性进行分裂（对每个属性，需要遍历所有可能的分裂位置点）。</p>
-<h1 id="剪枝">剪枝</h1>
-<h1 id="随机森林">随机森林</h1>
-<h1 id="应用决策树做分类">应用决策树做分类</h1>
-<h1 id="应用决策树做回归">应用决策树做回归</h1>
-<h1 id="others">Others</h1>
-<p>每一个样本都是特征空间中的一个点，构建决策树的过程其实就是划分特征空间的过程。</p>
-<p>假设有<span class="math inline">\(n\)</span>个特征，每个特征取值可能个数为<span class="math inline">\(m_i\)</span>，一棵完全的决策树将特征空间划分为 <span class="math inline">\(\displaystyle\prod\limits_{i=1}^{n}m_i\)</span> 个区域（一棵不完全的/剪枝的决策树划分出来的区域数量则少一些），对于区域<span class="math inline">\(j\)</span>，统计落在区域<span class="math inline">\(j\)</span>中样本数量与种类，通过投票决定该区域的标签。</p>
-<p>划分区域的过程可以称为决策树的结构学习（决策树是否加深？加深的话选择哪个属性？），决定各区域标签的过程可以称为决策树的参数学习。</p>
-<p>通过这两个过程就可以得到决策树的模型，然后通过该模型就可以进行分类任务了。</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/markdown-img-paste-20190109184222663.png">
-
-</div>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/" itemprop="url">搜索算法基础</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-01T17:47:59+08:00">
-                2020-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">搜索算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="搜索算法">搜索算法</h2>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104201100759.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-2019010510263152.png">
-
-</div>
-<h2 id="搜索算法的性能">搜索算法的性能</h2>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190105102012872.png">
-
-</div>
-<h2 id="树搜索与图搜索">树搜索与图搜索</h2>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190105101116333.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104203645524.png">
-
-</div>
-<h2 id="环检测">环检测</h2>
-<h3 id="是什么">是什么</h3>
-<p>环检测将图搜索转换为树搜索？</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190105092832253.png">
-
-</div>
-<h3 id="环检测--单路经检测">环检测--单路经检测</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-2019010421172556.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104211856900.png">
-
-</div>
-<h3 id="环检测--多路路径检测">环检测--多路路径检测</h3>
-<p>其实就是我们正常使用BFS使用的visited数组</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104212003585.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-2019010421202306.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104212028934.png">
-
-</div>
-<h3 id="环检测一致代价搜索dijkstra算法">环检测，一致代价搜索，dijkstra算法</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104212336973.png">
-
-</div>
-<h3 id="环检测的空间复杂度">环检测的空间复杂度</h3>
-<p>指数级别。</p>
-<h2 id="各算法总结">各算法总结</h2>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/1.svg">
-
-</div>
-<h3 id="各算法是否使用环检测">各算法是否使用环检测</h3>
-<table>
-<thead>
-<tr class="header">
-<th>算法</th>
-<th>能否使用环检测</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>BFS</td>
-<td>√</td>
-</tr>
-<tr class="even">
-<td>UFS</td>
-<td>√</td>
-</tr>
-<tr class="odd">
-<td>BS</td>
-<td>√</td>
-</tr>
-<tr class="even">
-<td>DFS</td>
-<td>×</td>
-</tr>
-<tr class="odd">
-<td>IDS</td>
-<td>×</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(A^*\)</span></td>
-<td>√</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(IDA^*\)</span></td>
-<td>×</td>
-</tr>
-</tbody>
-</table>
-<h3 id="性能对比">性能对比</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190105094214297.png">
-
-</div>
-<p><span class="math inline">\(IDA^*\)</span> 和 <span class="math inline">\(IDS\)</span>的复杂度相近，<span class="math inline">\(A^*\)</span> 与 <span class="math inline">\(UCS\)</span>复杂度相近。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" itemprop="url">线性回归</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-01T17:37:42+08:00">
-                2020-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="线性回归模型">线性回归模型</h1>
-<p>​ 给定数据集如下： <span class="math display">\[
-T=\{(\boldsymbol{x}_1,y_1),(\boldsymbol{x}_2,y_2),\cdots,(\boldsymbol{x}_N,y_N)\}
-\]</span> 线性回归模型比较简单，即是一个线性组合的形式 <span class="math display">\[
-f(\boldsymbol{x})=\displaystyle\sum_{i=1}^{n}w_ix_i+b=\boldsymbol{w}\cdot\boldsymbol{x}+b
-\]</span></p>
-<h1 id="线性回归学习策略">线性回归学习策略</h1>
-<p>​ 其损失函数为 <span class="math display">\[
-E(\boldsymbol{w},b)=\displaystyle\sum_{i=1}^{N}(f(\boldsymbol{x}_i)-y_i)^2
-\]</span> 为了求导方便，在前面加上一个系数<span class="math inline">\(\dfrac{1}{2}\)</span>，即令 <span class="math display">\[
-E(\boldsymbol{w},b)=\dfrac{1}{2}\displaystyle\sum_{i=1}^{N}(f(\boldsymbol{x}_i)-y_i)^2
-\]</span> 显然，参数<span class="math inline">\(\boldsymbol{w},b\)</span>应该使得损失函数最小，即 <span class="math display">\[
-\begin{array}{rl}\boldsymbol{w}^*,b^*=&amp;\arg\min\limits_{\boldsymbol{w},b}\left\{E(\boldsymbol{w},b)\right\}\\=&amp; \arg\min\limits_{\boldsymbol{w},b}\left\{\dfrac{1}{2}\displaystyle\sum_{i=1}^{N}(f(\boldsymbol{x}_i)-y_i)^2\right\}\end{array}
-\]</span></p>
-<h1 id="线性回归算法">线性回归算法</h1>
-<p>​ 对于线性回归来说，通过对误差函数求偏导是可以得到一个方程组的，但是求解起来基本是不可能的，因此使用梯度下降方法。</p>
-<h2 id="梯度下降">梯度下降</h2>
-<p>​ 曲面上沿着梯度的方向是函数值变化（增大）最快的方向，而我们希望求函数值减小最快的方向，因此在更新参数时使用参数当前值减去步长和导数的乘积，公式如下： <span class="math display">\[
-\begin{array}{l}
-\boldsymbol{w}\leftarrow\boldsymbol{w}-\alpha\nabla\boldsymbol{w}\\
-b\leftarrow b-\alpha\nabla b
-\end{array}
-\]</span> ​ 梯度下降方法中，<span class="math inline">\(\nabla\boldsymbol{w},\nabla b\)</span>的求解公式如下： <span class="math display">\[
-\begin{array}{l}
-\nabla \boldsymbol{w} = \dfrac{\partial E(\boldsymbol{w},b)}{\partial \boldsymbol{w}} = \dfrac{\partial}{\partial \boldsymbol{w}}\left(\dfrac{1}{2}\sum_{i=1}^{N}(f(\boldsymbol{x_i}-y_i)^2)\right)\\
-\nabla b = \dfrac{\partial E(\boldsymbol{w},b)}{\partial b} = \dfrac{\partial}{\partial b}\left(\dfrac{1}{2}\sum_{i=1}^{N}(f(\boldsymbol{x_i}-y_i)^2)\right)
-\end{array}
-\]</span> ​ 参数<span class="math inline">\(\boldsymbol{w},b\)</span>的每一次更新使用所有的样本，计算得到的是一个标准梯度，更新一次的幅度较大。样本不大的情况，收敛速度可以接受；但是若样本太大，收敛会很慢。</p>
-<h2 id="批量梯度下降">批量梯度下降</h2>
-<p>​ 每次使用训练数据中的一个样本更新，因而随机梯度下降是会带来一定的问题，因为计算得到的并不是准确的一个梯度，容易陷入到局部最优解中。一直不会收敛，只是在最小值附近波动。</p>
-<h2 id="随机梯度下降">随机梯度下降</h2>
-<p>​ 批量的梯度下降就是一种折中的方法，他用了一些小样本来近似全部的样本。即：每次更新参数<span class="math inline">\(\boldsymbol{w},b\)</span>使用一批样本。</p>
-<h2 id="迭代过程中的步长设置">迭代过程中的步长设置</h2>
-<p>步长<span class="math inline">\(\eta\)</span>的选取也是一个值得注意的问题。事实上，在梯度下降过程中，步长<span class="math inline">\(\eta\)</span>可以根据损失函数<span class="math inline">\(C(\boldsymbol{\tilde{w}})\)</span>的变化进行更改：如果<span class="math inline">\(C(\boldsymbol{\tilde{w}}^{(k+1)})&lt;C(\boldsymbol{\tilde{w}}^{(k)})\)</span>，那么说明步长<span class="math inline">\(\eta\)</span>可以适当增大，因为这时正在向<span class="math inline">\(C(\boldsymbol{\tilde{w}})\)</span>的极小值点逼近，通过增大步长可以加快收敛速度；如果<span class="math inline">\(C(\boldsymbol{\tilde{w}}^{(k+1)})&gt;C(\boldsymbol{\tilde{w}}^{(k)})\)</span>，那么说明正在远离极小值点，应当缩小步长使之重新靠近极小值点。</p>
-<p>迭代终止条件可以有以下两种：①定义一个合理的阈值，当两次迭代之间的差值小于该阈值时，迭代结束。②设置一个大概的迭代步数，比如1000或500。</p>
-<p>梯度下降法最终的迭代肯定会收敛，只要达到相应迭代次数，多了也没关系。因为迭代次数多了后，在到达极值点时，函数对变量的导数已近乎为0，即使过了极值点，导数就变为正数了，之前的导数为负数。这个时候，变量x的值减去步长与导数的乘积反倒变小了。所以即使步数多了，结果也基本上就在极值点处左右徘徊，几乎等于极值点，因此没有问题。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2630,7 +2441,7 @@ b\leftarrow b-\alpha\nabla b
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
