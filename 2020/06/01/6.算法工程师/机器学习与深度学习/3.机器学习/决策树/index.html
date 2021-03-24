@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/b.svg">
 <meta property="og:image" content="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/markdown-img-paste-20190109184222663.png">
 <meta property="article:published_time" content="2020-06-01T09:50:15.000Z">
-<meta property="article:modified_time" content="2020-06-01T09:38:32.080Z">
+<meta property="article:modified_time" content="2020-06-01T09:38:34.000Z">
 <meta property="article:author" content="Ryan">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/markdown-img-paste-2018092014184172.png">
@@ -377,7 +377,7 @@
 <p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/markdown-img-paste-20180920141849555.png" style="zoom:0.5"></p>
 <p>能够看到，决策树的每一个条目仍然是由多个特征与类型组成，其中类型只在叶子结点，特征只在非叶子结点。叶子结点可包含特征与类型，非叶子结点只能包含特征。</p>
 <p>划分停止的条件（不包含剪枝）有以下几种情况：</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>特征列全部用完（采用多数投票决定叶子的类型）</li>
 <li>叶子节点中所有样本都是一个种类</li>
 </ol>
@@ -385,10 +385,7 @@
 <h2 id="熵">熵</h2>
 <p>熵：用来衡量离散变量的不确定性，如抛硬币、掷骰子</p>
 <p>对于离散变量<span class="math inline">\(X\)</span>，其熵的计算公式为 <span class="math display">\[H(X)=-\displaystyle\sum\limits_{x\in X}p(x_i)\cdot log_2[p(x_i)]=\displaystyle\sum\limits_{x_i\in X}p(x_i)log_2\left[\dfrac{1}{p(x_i)}\right]=E\left(log_2\left[\dfrac{1}{p(X)}\right]\right)\]</span> 其中<span class="math inline">\(x_i\)</span>表示离散变量<span class="math inline">\(X\)</span>的取值。该公式用于计算一棵深度为1的树的熵。</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/a.svg">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/a.svg"></p>
 <h2 id="条件熵">条件熵</h2>
 <p>如果对于下面这样子的决策树，其熵的计算就有些不同 <img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/b.svg"></p>
 <p>该决策树是原始决策树引进一个特征后构成的深度为2的树，整棵树的熵可以通过下列公式进行计算： <span class="math display">\[H(Y\mid X)=\displaystyle\sum\limits_{x\in X}p(x)H(Y\mid X=x)\]</span> 其中 <span class="math inline">\(H(Y\mid X=x)\)</span> 即是对应子树的熵。</p>
@@ -401,33 +398,21 @@
 <p>这种模型的缺陷在于倾向于构建一棵很矮很胖的树，每一次都会倾向于选择取值最多的特征。</p>
 <p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/markdown-img-paste-20180920152432652.png" style="zoom:0.5"></p>
 <p>​ 比如上图中的例子，如果用ID3模型来构建决策树，那么必定得到如下的树：</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/c.svg">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/c.svg"></p>
 <p>该决策树毫无意义。</p>
 <h1 id="基于信息增益率的c4.5模型">基于信息增益率的C4.5模型</h1>
 <p>​ 遍历所有的特征<span class="math inline">\(X_i\)</span>，选出使得 <span class="math display">\[
 GainRatio(Y,X_i) = \dfrac{H(Y)-H(Y\mid X_i)}{H(A)}=\dfrac{Gain(Y,X_i)}{H(A)}
 \]</span> 最大的<span class="math inline">\(X_i\)</span>用来扩展决策树的深度。</p>
 <p>​ 其中<span class="math inline">\(H(X_i)\)</span> 表示指标本身的熵，其计算方法与 <span class="math inline">\(H(Y)\)</span> 基本相同，区别是特征与类型的选取不同。计算 <span class="math inline">\(H(Y)\)</span> 时将<span class="math inline">\(Y\)</span>看做是类型，将<span class="math inline">\(X_i\)</span>看做特征；计算 <span class="math inline">\(H(X_i)\)</span> 时将<span class="math inline">\(X_i\)</span>看做是类型，将<span class="math inline">\(Y\)</span>看做特征。如下图所示：</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/d.svg">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/d.svg"></p>
 <h1 id="基于gini指数的cart模型">基于Gini指数的CART模型</h1>
 <p>​ 基尼指数与熵的概念类似。如果一个数据集<span class="math inline">\(D\)</span>包含来自<span class="math inline">\(n\)</span>个类的样本，那么基尼指数，<span class="math inline">\(gini(D)\)</span>定义如下： <span class="math display">\[
 gini(D)=\displaystyle\sum\limits_{j=1}^{n}p_j(1-p_j)=1-\displaystyle\sum\limits_{j=1}^{n}p_j^2
 \]</span> 其中<span class="math inline">\(p_j\)</span>是类<span class="math inline">\(j\)</span>在数据集<span class="math inline">\(D\)</span>出现的频率。该公式用于计算深度为1的树的基尼指数：</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/a.svg">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/a.svg"></p>
 <p>​ 如果要计算深度大于1的树的基尼指数，比如下图</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/b.svg">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/b.svg"></p>
 <p>则 <span class="math display">\[
 gini{split}(D)=\displaystyle\sum\limits{x_i\in X}p(x_i)\cdot gini(D_i)
 \]</span> 在选取属性来分裂节点（加深树）时，选取使得<span class="math inline">\(gini_{split}(D)\)</span> 最小的属性进行分裂（对每个属性，需要遍历所有可能的分裂位置点）。</p>
@@ -440,10 +425,7 @@ gini{split}(D)=\displaystyle\sum\limits{x_i\in X}p(x_i)\cdot gini(D_i)
 <p>假设有<span class="math inline">\(n\)</span>个特征，每个特征取值可能个数为<span class="math inline">\(m_i\)</span>，一棵完全的决策树将特征空间划分为 <span class="math inline">\(\displaystyle\prod\limits_{i=1}^{n}m_i\)</span> 个区域（一棵不完全的/剪枝的决策树划分出来的区域数量则少一些），对于区域<span class="math inline">\(j\)</span>，统计落在区域<span class="math inline">\(j\)</span>中样本数量与种类，通过投票决定该区域的标签。</p>
 <p>划分区域的过程可以称为决策树的结构学习（决策树是否加深？加深的话选择哪个属性？），决定各区域标签的过程可以称为决策树的参数学习。</p>
 <p>通过这两个过程就可以得到决策树的模型，然后通过该模型就可以进行分类任务了。</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/markdown-img-paste-20190109184222663.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%86%B3%E7%AD%96%E6%A0%91/markdown-img-paste-20190109184222663.png"></p>
 
       
     </div>
@@ -553,7 +535,7 @@ gini{split}(D)=\displaystyle\sum\limits{x_i\in X}p(x_i)\cdot gini(D_i)
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -638,7 +620,7 @@ gini{split}(D)=\displaystyle\sum\limits{x_i\in X}p(x_i)\cdot gini(D_i)
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

@@ -268,6 +268,881 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/03/1.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/papers/Strata%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/10/03/1.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/papers/Strata%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" itemprop="url">Strata论文阅读</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-03T19:23:12+08:00">
+                2020-10-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="补充资料">补充资料</h2>
+<p><a href="https://wizardforcel.gitbooks.io/vbird-linux-basic-4e/content/59.html" target="_blank" rel="noopener">认识 Linux 文件系统</a></p>
+<p><a href="https://blog.csdn.net/qq_20101209/article/details/83719097" target="_blank" rel="noopener">中文翻译参考</a></p>
+<h3 id="non-volatile-memorynvm">Non-volatile Memory（NVM）</h3>
+<p><a href="https://zhuanlan.zhihu.com/p/34455548" target="_blank" rel="noopener">2018 存储技术热点与趋势总结 - smartx的文章 - 知乎</a></p>
+<p>NVM，或者 PM（persistent memory），SCM（storage class memory），实际上都是一个意思，指的都是非易失性内存。NVM 在学术界火了很多年了， 相关的研究在不断向前推进。</p>
+<p>一直以来，由于 2：8 定律的特性，计算机系统的存储一直是采用分层的结构，从上到下依次是 CPU Cache，DRAM，SSD，HDD。 其中，CPU Cache 和 DRAM 是易失性的（volatile），SSD 和 HDD 是非易失性的（non-volatile）。尽管 SSD 的速度远高于 HDD，但和 DDR 相比，还是有一定的差距。SSD 提供 10us 级别的响应时间，而 DRAM 只有 ns 级别，这中间有一万倍的差距。由于 DRAM 和 SSD 之间巨大的性能差距，使得应用程序需要非常仔细的设计 IO 相关的操作，避免 IO 成为系统的性能瓶颈。</p>
+<p>而 NVM 的出现弥补了这个差距。NVM 在保持非易失性的前提下，将响应时间降低到 10ns 级别，同时单位容量价格低于 DRAM。此外，NVM 是按字节访问（byte-addressable），而不像磁盘按照块（Block）访问。NVM 的出现打破了传统的存储层次，将对软件架构设计产生巨大的影响。</p>
+<h2 id="摘要">摘要</h2>
+<h3 id="问题">问题</h3>
+<p>目前硬件和应用的存储逐渐将巨大的压力放在操作系统的文件子系统上。</p>
+<p><u>两方面：</u></p>
+<p><strong><em>On the hardware side</em></strong>, the market for storage devices has diversified to a multi-layer storage topology spanning multiple orders of magnitude in cost and performance.</p>
+<p><strong><em>Above the file system</em></strong>,applications increasingly need to process <strong>small, random IO</strong> on <strong>vast data sets</strong> with <strong>low latency</strong>, <strong>high throughput</strong>, and simple <strong>crash consistency</strong>.</p>
+<p><u>问题：</u></p>
+<p>File systems designed for a single storage layer cannot support all of these demands together.</p>
+<h3 id="什么是strata以及其特点">什么是Strata以及其特点</h3>
+<p><u>多种媒介优势互补：</u></p>
+<p>We present <strong><em>Strata</em></strong>, a cross-media file system that leverages the strengths of one storage media to compensate for weaknesses of another.</p>
+<p><u>与单一存储设备相比的优势：</u></p>
+<p>In doing so, Strata provides performance, capacity, and a simple, synchronous IO model all at once, while having a simpler design than that of file systems constrained by a single storage device.</p>
+<p><u>核心：在用户态、内核以及存储层之间进行了一种新的职责划分，将对可扩展性、高性能以及可持久性的关心与存储层的管理进行了分离。</u></p>
+<p>At its heart, Strata uses a <strong><em>log-structured approach</em></strong> with <strong>a novel split of responsibilities</strong> among <strong>user mode, kernel, and storage layers</strong> that separates the concerns of scalable, high-performance persistence from storage layer management.</p>
+<h3 id="评估其性能改善">评估其性能改善</h3>
+<p>We quantify the performance benefits of <strong>Strata using a 3-layer storage hierarchy of emulated NVM, a flash-based SSD, and a high-density HDD.</strong></p>
+<p>Strata has <strong>20-30% better latency and throughput</strong>, across several unmodified applications, <strong>compared to file systems purpose-built for each layer</strong>, while <strong>providing synchronous and unified access to the entire storage hierarchy</strong>.</p>
+<p>Finally, Strata achieves up to <strong>2.8× better throughput</strong> than a <strong>block-based 2-layer cache provided by Linux’s logical volume manager</strong>.</p>
+<h2 id="简介">简介</h2>
+<p>outside the traditional file system comfort zone</p>
+<ul>
+<li>kernel bypass
+<ul>
+<li><a href="https://www.cnblogs.com/CasperWu/p/4689872.html" target="_blank" rel="noopener">Kernel Bypass &amp; Offload 介绍</a></li>
+</ul></li>
+<li>small scattered updates to enormous datasets</li>
+<li>programmer-friendly, efficient crash consistency</li>
+</ul>
+<p>storing updates to a user-level log in fast NVM, while asynchronously managing longer-term storage in the kernel.</p>
+<h2 id="背景">背景</h2>
+<h3 id="硬件存储趋势">硬件存储趋势</h3>
+<p><a href="https://mbb.eet-china.com/forum/topic/58591_1_1.html" target="_blank" rel="noopener">终于有人说清楚了什么是DRAM、什么是NAND Flash</a></p>
+<p><a href="%5Bhttps://www.hack520.com/993.html#:~:text=%E5%9C%A8%E6%89%80%E6%9C%89%E6%B5%8B%E8%AF%95%E8%BD%AF%E4%BB%B6%E4%B8%AD,%E8%83%BD%E6%9C%89%E8%BF%91%E4%BC%BC%E7%9A%84%E9%80%9F%E5%BA%A6%E3%80%82%5D(https://www.hack520.com/993.html#:~:text=在所有测试软件中,能有近似的速度。)">读懂 SSD – 什么是顺序读写、随机读写、4K读写、IOPS值？</a></p>
+<p><a href="https://www.zhihu.com/question/24964878/answer/139508652" target="_blank" rel="noopener">Linux Namespace 是什么，可以用来做什么？ - Pengcheng Zeng的回答 - 知乎</a></p>
+<h2 id="设计">设计</h2>
+<figure>
+<img src="/2020/10/03/1.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/papers/Strata%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/image-20201004182842699.png" alt="image-20201004182842699"><figcaption aria-hidden="true">image-20201004182842699</figcaption>
+</figure>
+<p><a href="https://blog.csdn.net/qq_20101209/article/details/83719097" target="_blank" rel="noopener">参考1</a></p>
+<h3 id="meta-data-structures">Meta-data Structures</h3>
+<p>Strata keeps meta-data in superblocks, inodes, and per-layer bitmaps of free blocks.</p>
+<ul>
+<li><p>Superblock.</p></li>
+<li><p>Inodes and directories.</p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/66170899" target="_blank" rel="noopener">怎样去理解Linux中的inode？ - 技术原理君的文章 - 知乎</a></li>
+</ul></li>
+<li><p>Free block bitmap.</p></li>
+<li><p>Multiple device instances.</p></li>
+</ul>
+<h3 id="library-file-system-libfs">Library File System (LibFS)</h3>
+<p>Strata的库文件系统（LibFS）提供了应用程序级别机制来执行文件IO。 其目标是为整个底层存储层次结构提供快速、崩溃一致和同步的读写IO，与现有POSIX应用程序完全兼容的统一API，并通过与LibFS重新链接将其置于应用程序之下。</p>
+<ul>
+<li>Fast and synchronous persistence 快速和同步持久化
+<ul>
+<li>现代NVM存储技术使Strata能够在不牺牲性能的情况下提供同步IO语义，同步语义可以加速NVM的整体IO性能。</li>
+<li>同步语义允许Strata提供零拷贝IO——LibFS直接在用户的DRAM缓冲区和NVM之间执行IO。</li>
+<li>LibFS将更新日志以操作日志方式组织。操作日志比数据日志相比减少了IO，因为操作日志只需要指示目录更改的记录，而数据日志需要多个块记录。</li>
+</ul></li>
+<li>Crash consistent logging 崩溃一致的日志记录</li>
+</ul>
+<h3 id="kernel-file-system-kernelfs">Kernel File System (KernelFS)</h3>
+<p><a href="https://www.sans.org/blog/understanding-ext4-part-3-extent-trees/" target="_blank" rel="noopener">extend tree</a></p>
+<p>区段树应该是类似B+树的东西：<a href="https://zhuanlan.zhihu.com/p/149287061" target="_blank" rel="noopener">B+树看这一篇就够了（B+树查找、插入、删除全上） - 程序员景禹的文章 - 知乎</a></p>
+<p>Strata的内核级文件系统（KernelFS）负责管理系统中全局可见和的可驻留在存储结构的任何层中的共享数据。 为此，它会摘要应用程序日志并将其转换为perfile extent树。 摘要在后台异步发生，允许KernelFS批处理Strata事务并定期进行垃圾回收和优化物理布局。 LibFS向KernelFS提供最近最少使用（LRU）的信息，以在存储结构的各层之间通知其迁移策略。</p>
+<ul>
+<li>Digest 摘录
+<ul>
+<li>为了减少摘要延迟，KernelFS采用许多优化操作：
+<ol type="1">
+<li>从日志中摘要大批操作</li>
+<li>合并相邻写入</li>
+<li>识别和消除操作</li>
+</ol></li>
+</ul></li>
+<li>Data access pattern interface 数据访问模式接口
+<ul>
+<li>为了了利用整个存储结构，KernelIFS会在不同层间迁移数据，Strata在Kernel FS中维持了两个LRU list，一个用于NVM-SSD之间的数据迁移，一个用于SSD-HDD之间数据迁移。</li>
+</ul></li>
+<li>Data migration 数据迁移
+<ul>
+<li>为了利用存储层中的容量，内核会在后台进行不同层间地迁移数据。为了并发操作并避免迁移阻塞带来地延迟，Strata会在层满前就进行数据迁移(在该原型中利用率为95%)。为了减少开销，写入到SSD是以erase为单元（百兆级别），写入到HDD是以木瓦磁盘方式（GB级别）。</li>
+</ul></li>
+</ul>
+<h3 id="sharing-leases">Sharing (leases)</h3>
+<p><a href="https://lrita.github.io/2018/10/29/lease-in-distributed-system/" target="_blank" rel="noopener">分布式系统中的 lease（租约）机制</a></p>
+<h3 id="protection-and-performance-isolation">Protection and performance isolation</h3>
+<ul>
+<li>Protection with kernel bypass. 内核旁路保护
+<ul>
+<li>Strata支持对POSIX文件的访问控制，由MMU和NVMe命名空间强制执行，
+<ul>
+<li>MMU为内核旁路LibFS提供保护</li>
+<li>对于SSD驻留数据，使用NVMe命名空间来保护对文件数据的访问</li>
+</ul></li>
+</ul></li>
+<li>Performance isolation 性能隔离
+<ul>
+<li>写入放大通过提高设备带宽利用率来提高IO的性能隔离。</li>
+</ul></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/21/2.%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%9C%A8docker%E4%B8%AD%E9%83%A8%E7%BD%B2mongodb/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/21/2.%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%9C%A8docker%E4%B8%AD%E9%83%A8%E7%BD%B2mongodb/" itemprop="url">在docker中部署mongodb</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-21T23:59:14+08:00">
+                2020-09-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure>
+<img src="/2020/09/21/2.%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%9C%A8docker%E4%B8%AD%E9%83%A8%E7%BD%B2mongodb/image-20200922000342380.png" alt="image-20200922000342380"><figcaption aria-hidden="true">image-20200922000342380</figcaption>
+</figure>
+<p>这时，我们就可以使用develop用户连接blog数据库了，如下;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mongo mongodb://develop:developpwd@localhost:27017/blog</span><br><span class="line"></span><br><span class="line">docker <span class="built_in">exec</span> -ti ryanliu_mongodb mongo mongodb://root:123456@localhost:27017</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/20/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/1.%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/pandas%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/20/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/1.%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/pandas%E4%BD%BF%E7%94%A8/" itemprop="url">pandas使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-20T21:22:49+08:00">
+                2020-09-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>1. 导入 Pandas：</strong></p>
+<p><strong>2. 查看 Pandas 版本信息：</strong></p>
+<h3 id="创建-series-数据类型">创建 Series 数据类型</h3>
+<p><strong>3. 从列表创建 Series：</strong></p>
+<p><strong>4. 从 Ndarray 创建 Series：</strong></p>
+<p><strong>5. 从字典创建 Series：</strong></p>
+<h3 id="series-基本操作">Series 基本操作</h3>
+<p><strong>6. 修改 Series 索引：</strong></p>
+<p><strong>7. Series 纵向拼接：</strong></p>
+<p><strong>8. Series 按指定索引删除元素：</strong></p>
+<p><strong>9. Series 修改指定索引元素：</strong></p>
+<p><strong>10. Series 按指定索引查找元素：</strong></p>
+<p><strong>11. Series 切片操作：</strong></p>
+<h3 id="series-运算">Series 运算</h3>
+<p><strong>12. Series 加法运算：</strong></p>
+<p>Series 的加法运算是按照索引计算，如果索引不同则填充为 <code>NaN</code>（空值）。</p>
+<p><strong>13. Series 减法运算：</strong></p>
+<p>Series的减法运算是按照索引对应计算，如果索引不同则填充为 <code>NaN</code>（空值）。</p>
+<p><strong>14. Series 乘法运算：</strong></p>
+<p>Series 的乘法运算是按照索引对应计算，如果索引不同则填充为 <code>NaN</code>（空值）。</p>
+<p><strong>15. Series 除法运算：</strong></p>
+<p>Series 的除法运算是按照索引对应计算，如果索引不同则填充为 <code>NaN</code>（空值）。</p>
+<p><strong>16. Series 求中位数：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s4.median()</span><br></pre></td></tr></table></figure>
+<p><strong>17. Series 求和：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s4.sum()</span><br></pre></td></tr></table></figure>
+<p><strong>18. Series 求最大值：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s4.max()</span><br></pre></td></tr></table></figure>
+<p><strong>19. Series 求最小值：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s4.min()</span><br></pre></td></tr></table></figure>
+<h3 id="创建-dataframe-数据类型">创建 DataFrame 数据类型</h3>
+<p>与 Sereis 不同，DataFrame 可以存在多列数据。一般情况下，DataFrame 也更加常用。</p>
+<p><strong>20. 通过 NumPy 数组创建 DataFrame：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dates = pd.date_range(<span class="string">'today'</span>, periods=<span class="number">6</span>)  <span class="comment"># 定义时间序列作为 index</span></span><br><span class="line">num_arr = np.random.randn(<span class="number">6</span>, <span class="number">4</span>)  <span class="comment"># 传入 numpy 随机数组</span></span><br><span class="line">columns = [<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>, <span class="string">'D'</span>]  <span class="comment"># 将列表作为列名</span></span><br><span class="line">df1 = pd.DataFrame(num_arr, index=dates, columns=columns)</span><br><span class="line">df1</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;"></th>
+<th style="text-align: right;">A</th>
+<th style="text-align: right;">B</th>
+<th style="text-align: right;">C</th>
+<th style="text-align: right;">D</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2020-09-20 13:29:25.738247</td>
+<td style="text-align: right;">-0.171676</td>
+<td style="text-align: right;">0.537617</td>
+<td style="text-align: right;">2.092084</td>
+<td style="text-align: right;">-2.551330</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2020-09-21 13:29:25.738247</td>
+<td style="text-align: right;">0.808240</td>
+<td style="text-align: right;">0.282539</td>
+<td style="text-align: right;">-1.190820</td>
+<td style="text-align: right;">-1.156877</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2020-09-22 13:29:25.738247</td>
+<td style="text-align: right;">-0.072582</td>
+<td style="text-align: right;">-1.147928</td>
+<td style="text-align: right;">0.699244</td>
+<td style="text-align: right;">0.475107</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2020-09-23 13:29:25.738247</td>
+<td style="text-align: right;">0.406453</td>
+<td style="text-align: right;">-0.538187</td>
+<td style="text-align: right;">1.685149</td>
+<td style="text-align: right;">0.767229</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2020-09-24 13:29:25.738247</td>
+<td style="text-align: right;">0.173618</td>
+<td style="text-align: right;">0.548606</td>
+<td style="text-align: right;">-2.305003</td>
+<td style="text-align: right;">-0.347169</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2020-09-25 13:29:25.738247</td>
+<td style="text-align: right;">0.104997</td>
+<td style="text-align: right;">0.205435</td>
+<td style="text-align: right;">0.005563</td>
+<td style="text-align: right;">0.288006</td>
+</tr>
+</tbody>
+</table>
+<p><strong>21. 通过字典数组创建 DataFrame：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">data = &#123;<span class="string">'animal'</span>: [<span class="string">'cat'</span>, <span class="string">'cat'</span>, <span class="string">'snake'</span>, <span class="string">'dog'</span>, <span class="string">'dog'</span>, <span class="string">'cat'</span>, <span class="string">'snake'</span>, <span class="string">'cat'</span>, <span class="string">'dog'</span>, <span class="string">'dog'</span>],</span><br><span class="line">        <span class="string">'age'</span>: [<span class="number">2.5</span>, <span class="number">3</span>, <span class="number">0.5</span>, np.nan, <span class="number">5</span>, <span class="number">2</span>, <span class="number">4.5</span>, np.nan, <span class="number">7</span>, <span class="number">3</span>],</span><br><span class="line">        <span class="string">'visits'</span>: [<span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>],</span><br><span class="line">        <span class="string">'priority'</span>: [<span class="string">'yes'</span>, <span class="string">'yes'</span>, <span class="string">'no'</span>, <span class="string">'yes'</span>, <span class="string">'no'</span>, <span class="string">'no'</span>, <span class="string">'no'</span>, <span class="string">'yes'</span>, <span class="string">'no'</span>, <span class="string">'no'</span>]&#125;</span><br><span class="line"></span><br><span class="line">labels = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'e'</span>, <span class="string">'f'</span>, <span class="string">'g'</span>, <span class="string">'h'</span>, <span class="string">'i'</span>, <span class="string">'j'</span>]</span><br><span class="line">df2 = pd.DataFrame(data, index=labels)</span><br><span class="line">df2</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;"></th>
+<th style="text-align: right;">animal</th>
+<th style="text-align: right;">age</th>
+<th style="text-align: right;">visits</th>
+<th style="text-align: right;">priority</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">a</td>
+<td style="text-align: right;">cat</td>
+<td style="text-align: right;">2.5</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">b</td>
+<td style="text-align: right;">cat</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">c</td>
+<td style="text-align: right;">snake</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">no</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">d</td>
+<td style="text-align: right;">dog</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">e</td>
+<td style="text-align: right;">dog</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">no</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">f</td>
+<td style="text-align: right;">cat</td>
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">no</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">g</td>
+<td style="text-align: right;">snake</td>
+<td style="text-align: right;">4.5</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">no</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">h</td>
+<td style="text-align: right;">cat</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">i</td>
+<td style="text-align: right;">dog</td>
+<td style="text-align: right;">7.0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">no</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">j</td>
+<td style="text-align: right;">dog</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">no</td>
+</tr>
+</tbody>
+</table>
+<p><strong>22. 查看 DataFrame 的数据类型：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df2.dtypes</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">animal       object</span><br><span class="line">age         float64</span><br><span class="line">visits        int64</span><br><span class="line">priority     object</span><br><span class="line">dtype: object</span><br></pre></td></tr></table></figure>
+<h3 id="dataframe-基本操作">DataFrame 基本操作</h3>
+<p><strong>23. 预览 DataFrame 的前 5 行数据：</strong></p>
+<p><code>df.head()</code></p>
+<p><strong>24. 查看 DataFrame 的后 3 行数据：</strong></p>
+<p><code>df.tail(3)</code></p>
+<p><strong>25.查看 DataFrame 的索引：</strong></p>
+<p><code>df2.index</code></p>
+<p><strong>26. 查看 DataFrame 的列名：</strong></p>
+<p><code>df2.columns</code></p>
+<p><strong>27. 查看 DataFrame 的数值：</strong></p>
+<p><code>df2.values</code></p>
+<p><strong>28. 查看 DataFrame 的统计数据：</strong></p>
+<p><code>df2.describe()</code></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;"></th>
+<th style="text-align: right;">age</th>
+<th style="text-align: right;">visits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">count</td>
+<td style="text-align: right;">8.000000</td>
+<td style="text-align: right;">10.000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">mean</td>
+<td style="text-align: right;">3.437500</td>
+<td style="text-align: right;">1.900000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">std</td>
+<td style="text-align: right;">2.007797</td>
+<td style="text-align: right;">0.875595</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">min</td>
+<td style="text-align: right;">0.500000</td>
+<td style="text-align: right;">1.000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">25%</td>
+<td style="text-align: right;">2.375000</td>
+<td style="text-align: right;">1.000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">50%</td>
+<td style="text-align: right;">3.000000</td>
+<td style="text-align: right;">2.000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">75%</td>
+<td style="text-align: right;">4.625000</td>
+<td style="text-align: right;">2.750000</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">max</td>
+<td style="text-align: right;">7.000000</td>
+<td style="text-align: right;">3.000000</td>
+</tr>
+</tbody>
+</table>
+<p><strong>29. DataFrame 转置操作：</strong></p>
+<p><code>df2.T</code></p>
+<p><strong>30. 对 DataFrame 进行按列排序：</strong></p>
+<p><code>df2.sort_values(by='age')</code></p>
+<p><strong>31. 对 DataFrame 数据切片：</strong></p>
+<p><strong>32. 对 DataFrame 通过标签查询（单列）：</strong></p>
+<p><code>df2['age']  # df2.age</code></p>
+<p><code>df2.age.c</code></p>
+<p><strong>33. 对 DataFrame 通过标签查询（多列）：</strong></p>
+<p><code>df2[['age', 'animal']]  # 传入一个列名组成的列表</code></p>
+<p><strong>34. 对 DataFrame 通过位置查询：</strong></p>
+<ul>
+<li><p><code>df2.iloc[1:3]</code></p></li>
+<li><p><code>df2.iloc[1,2]</code></p></li>
+<li><p><code>df2.iloc[1:3,2:3]</code></p></li>
+</ul>
+<p><strong>35. DataFrame 副本拷贝：</strong></p>
+<p><code>df3 = df2.copy()</code></p>
+<p><strong>36. 判断 DataFrame 元素是否为空：</strong></p>
+<p><code>df3.isnull()</code></p>
+<p><strong>37. 添加列数据：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">num = pd.Series([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>], index=df3.index)</span><br><span class="line"></span><br><span class="line">df3[<span class="string">'No.'</span>] = num  <span class="comment"># 添加以 'No.' 为列名的新数据列</span></span><br><span class="line">df3</span><br></pre></td></tr></table></figure>
+<p><strong>38. 根据 DataFrame 的下标值进行更改：</strong></p>
+<p><code>df3.iat[1, 1] = 2</code></p>
+<p><strong>39. 根据 DataFrame 的标签对数据进行修改：</strong></p>
+<p><code>df3.loc['f', 'age'] = 1.5</code></p>
+<p><strong>40. DataFrame 求平均值操作：</strong></p>
+<p><code>df3.mean()</code></p>
+<p><strong>41. 对 DataFrame 中任意列做求和操作：</strong></p>
+<p><code>df3['visits'].sum()</code></p>
+<h3 id="字符串操作">字符串操作</h3>
+<p><strong>42. 将字符串转化为小写字母：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">string = pd.Series([<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>, <span class="string">'Aaba'</span>, <span class="string">'Baca'</span>,</span><br><span class="line">                    np.nan, <span class="string">'CABA'</span>, <span class="string">'dog'</span>, <span class="string">'cat'</span>])</span><br><span class="line">print(string)</span><br><span class="line">string.str.lower()</span><br></pre></td></tr></table></figure>
+<p><strong>43. 将字符串转化为大写字母：</strong></p>
+<p><code>string.str.upper()</code></p>
+<h3 id="dataframe-缺失值操作">DataFrame 缺失值操作</h3>
+<p><strong>44. 对缺失值进行填充：</strong></p>
+<p><code>df4.fillna(value=3)</code></p>
+<p><strong>45. 删除存在缺失值的行：</strong></p>
+<p><code>df5.dropna(how='any')  # 任何存在 NaN 的行都将被删除</code></p>
+<p><strong>46. DataFrame 按指定列对齐：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">left = pd.DataFrame(&#123;<span class="string">'key'</span>: [<span class="string">'foo1'</span>, <span class="string">'foo2'</span>], <span class="string">'one'</span>: [<span class="number">1</span>, <span class="number">2</span>]&#125;)</span><br><span class="line">right = pd.DataFrame(&#123;<span class="string">'key'</span>: [<span class="string">'foo2'</span>, <span class="string">'foo3'</span>], <span class="string">'two'</span>: [<span class="number">4</span>, <span class="number">5</span>]&#125;)</span><br><span class="line"></span><br><span class="line">print(left)</span><br><span class="line">print(right)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按照 key 列对齐连接，只存在 foo2 相同，所以最后变成一行</span></span><br><span class="line">pd.merge(left, right, on=<span class="string">'key'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/09/20/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/1.%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/pandas%E4%BD%BF%E7%94%A8/image-20200920220259425.png" alt="image-20200920220259425" style="zoom:50%;"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/14/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%88%AC%E8%99%AB/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/14/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%88%AC%E8%99%AB/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" itemprop="url">爬虫学习路线</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-14T22:51:14+08:00">
+                2020-09-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="爬虫入门">爬虫入门</h2>
+<ul>
+<li>HTTP协议</li>
+<li>HTTP库requests</li>
+<li>HTML文本解析库BeautifulSoup</li>
+<li>正则表达式</li>
+</ul>
+<h2 id="爬虫进阶scrapy">爬虫进阶——Scrapy</h2>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/12/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%88%AC%E8%99%AB/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -680,10 +1555,9 @@
             <h2 id="hello-world-qt-quickqml">Hello World: Qt Quick/QML</h2>
 <h3 id="项目结构">项目结构</h3>
 <p>新建一个Qt Quick的hello world项目（testclass为新建的类），项目结构如下：</p>
-<div class="figure">
-<img src="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QML/QtQMLHelloWorld/image-20200520220339166.png" alt="image-20200520220339166">
-<p class="caption">image-20200520220339166</p>
-</div>
+<figure>
+<img src="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QML/QtQMLHelloWorld/image-20200520220339166.png" alt="image-20200520220339166"><figcaption aria-hidden="true">image-20200520220339166</figcaption>
+</figure>
 <p>在项目名称节点下面，分组管理着项目内的各种源文件，几个文件及分组分别为以下几项：</p>
 <ul>
 <li>helloworld.pro 是项目管理文件，包括一些对项目的设置项。</li>
@@ -710,14 +1584,12 @@
 <p>界面设计如下：</p>
 <figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> QtQuick <span class="number">2.12</span></span><br><span class="line"><span class="keyword">import</span> QtQuick.Window <span class="number">2.12</span></span><br><span class="line"><span class="keyword">import</span> QtQuick.Controls <span class="number">2.12</span></span><br><span class="line"></span><br><span class="line"><span class="title">Window</span> &#123;</span><br><span class="line">    <span class="attribute">visible</span>: <span class="literal">true</span></span><br><span class="line">    <span class="attribute">width</span>: <span class="number">640</span></span><br><span class="line">    <span class="attribute">height</span>: <span class="number">480</span></span><br><span class="line">    <span class="attribute">title</span>: qsTr(<span class="string">"Hello World"</span>)</span><br><span class="line">    <span class="title">Label</span> &#123;</span><br><span class="line">        <span class="attribute">x</span>: <span class="number">100</span></span><br><span class="line">        <span class="attribute">y</span>: <span class="number">100</span></span><br><span class="line">        <span class="attribute">text</span>: <span class="string">"Hello World."</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title">Button</span> &#123;</span><br><span class="line">        <span class="attribute">x</span>: <span class="number">200</span></span><br><span class="line">        <span class="attribute">y</span>: <span class="number">200</span></span><br><span class="line">        <span class="attribute">height</span>: <span class="number">40</span></span><br><span class="line">        <span class="attribute">width</span>: <span class="number">100</span></span><br><span class="line"></span><br><span class="line">        <span class="attribute">onClicked</span>: &#123;</span><br><span class="line">            text = testClass.getValue();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>运行结果如下：</p>
-<div class="figure">
-<img src="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QML/QtQMLHelloWorld/image-20200520224620119.png" alt="image-20200520224620119">
-<p class="caption">image-20200520224620119</p>
-</div>
-<div class="figure">
-<img src="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QML/QtQMLHelloWorld/image-20200520224554493.png" alt="image-20200520224554493">
-<p class="caption">image-20200520224554493</p>
-</div>
+<figure>
+<img src="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QML/QtQMLHelloWorld/image-20200520224620119.png" alt="image-20200520224620119"><figcaption aria-hidden="true">image-20200520224620119</figcaption>
+</figure>
+<figure>
+<img src="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QML/QtQMLHelloWorld/image-20200520224554493.png" alt="image-20200520224554493"><figcaption aria-hidden="true">image-20200520224554493</figcaption>
+</figure>
 <p>References:</p>
 <ul>
 <li><a href="https://cloud.tencent.com/developer/article/1169582" target="_blank" rel="noopener">QtQuick 系列教程之 QML 与 C++ 交互</a></li>
@@ -874,10 +1746,9 @@
           
             <h2 id="hello-world-qt-widgets">Hello World: Qt Widgets</h2>
 <p>新建一个Qt Widgets的hello world项目，项目结构如下：</p>
-<div class="figure">
-<img src="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QtWidget/QtWidgetHelloWorld/image-20200516155841639.png" alt="image-20200516155841639">
-<p class="caption">image-20200516155841639</p>
-</div>
+<figure>
+<img src="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QtWidget/QtWidgetHelloWorld/image-20200516155841639.png" alt="image-20200516155841639"><figcaption aria-hidden="true">image-20200516155841639</figcaption>
+</figure>
 <p>在项目名称节点下面，分组管理着项目内的各种源文件，几个文件及分组分别为以下几项：</p>
 <ul>
 <li>helloworld.pro 是项目管理文件，包括一些对项目的设置项。</li>
@@ -886,14 +1757,12 @@
 <li>Forms 分组：该节点下是项目内的所有界面文件（.ui）。图 5 中所示项目有一个界面文件mainwindow.ui，是主窗口的界面文件。界面文件是文本文件，使用 <strong>XML 语言</strong>描述界面的组成。</li>
 </ul>
 <p>在界面中添加一个button和一个label，功能为点击button时label显示hello world：</p>
-<div class="figure">
-<img src="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QtWidget/QtWidgetHelloWorld/image-20200516132341197.png" alt="image-20200516132341197">
-<p class="caption">image-20200516132341197</p>
-</div>
-<div class="figure">
-<img src="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QtWidget/QtWidgetHelloWorld/image-20200516132545408.png" alt="image-20200516132545408">
-<p class="caption">image-20200516132545408</p>
-</div>
+<figure>
+<img src="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QtWidget/QtWidgetHelloWorld/image-20200516132341197.png" alt="image-20200516132341197"><figcaption aria-hidden="true">image-20200516132341197</figcaption>
+</figure>
+<figure>
+<img src="/2020/06/12/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/QtWidget/QtWidgetHelloWorld/image-20200516132545408.png" alt="image-20200516132545408"><figcaption aria-hidden="true">image-20200516132545408</figcaption>
+</figure>
 
           
         
@@ -1061,7 +1930,7 @@
 </ul>
 <h2 id="workflow-stages">Workflow stages</h2>
 <p>The competition solution workflow goes through seven stages described in the Data Science Solutions book.</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Question or problem definition.</li>
 <li>Acquire training and testing data.</li>
 <li>Wrangle, prepare, cleanse the data.</li>
@@ -1210,7 +2079,7 @@
         
           
             <p>支持向量机有以下三种：</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>线性可分支持向量机（硬间隔支持向量机）</li>
 <li>线性支持向量机（软间隔支持向量机）</li>
 <li>非线性支持向量机（核函数+软间隔）</li>
@@ -1294,7 +2163,7 @@ y_i(\boldsymbol{w}\cdot\boldsymbol{x_i}+b)\geqslant 1-\xi_i
 \]</span> 同时，对每个松弛变量<span class="math inline">\(\xi_i\)</span>支付一个代价<span class="math inline">\(\xi_i\)</span>。目标函数由原来的<span class="math inline">\(\dfrac{1}{2}\parallel\boldsymbol{w}\parallel^2\)</span>变为 <span class="math display">\[
 \dfrac{1}{2}\parallel\boldsymbol{w}\parallel^2+C\sum_{i=1}^N\xi_i
 \]</span> 这里<span class="math inline">\(C\)</span>成为惩罚参数，一般由应用问题决定。最小化该目标函数有两层含义：</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>使<span class="math inline">\(\dfrac{1}{2}\parallel\boldsymbol{w}\parallel^2\)</span>尽量小，即间隔尽量大</li>
 <li>使误分类点的个数尽量少</li>
 </ol>
@@ -1330,1032 +2199,6 @@ f(\boldsymbol{x})=\text{sign}\left(\sum_{i=1}^N\alpha_i^*y_iK(\boldsymbol{x},x_i
 <p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/1556813248646.png" alt="1556813248646" style="zoom:67%;"></p>
 <h1 id="序列最小最优化smo算法">序列最小最优化（SMO）算法</h1>
 <p>​ 用于高效地实现支持向量机的学习。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98/" itemprop="url">约束满足问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-01T17:53:09+08:00">
-                2020-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">搜索算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>回溯，向前检测FC，极小剩余值（启发式函数的）MRV（比FC更倾向于产生更小的树），GAC</p>
-<h2 id="基本了解">基本了解</h2>
-<h3 id="一般形式">一般形式</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98/markdown-img-paste-20190105112047363.png">
-
-</div>
-<h3 id="约束">约束</h3>
-<p>约束</p>
-<ul>
-<li>一元约束</li>
-<li>二元约束</li>
-<li>多元约束</li>
-</ul>
-<p>还可以用表格表示约束</p>
-<h3 id="约束图">约束图</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98/markdown-img-paste-20190105112412631.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98/markdown-img-paste-20190105112424881.png">
-
-</div>
-<h3 id="约束满足问题的优点">约束满足问题的优点</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98/markdown-img-paste-20190105112531764.png">
-
-</div>
-<hr>
-<h2 id="回溯法backtracking">回溯法(BackTracking)</h2>
-<h3 id="基本原理">基本原理</h3>
-<p>基于DFS，搜不下去的时候向上返回。</p>
-<h3 id="伪代码">伪代码</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98/markdown-img-paste-20190105113233149.png">
-
-</div>
-<h3 id="例子4皇后问题">例子（4皇后问题）</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98/markdown-img-paste-20190105113359943.png">
-
-</div>
-<hr>
-<h2 id="向前检查forwardchecking">向前检查(ForwardChecking)</h2>
-<h3 id="基本原理-1">基本原理</h3>
-<p>随着确定的变量个数增加，修改所有变量的定义域（缩小解空间）。</p>
-<p>增加了每个搜索的耗时，减少了搜索的次数，二者之间应该权衡。</p>
-<h3 id="伪代码-1">伪代码</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98/markdown-img-paste-20190105114252454.png">
-
-</div>
-<h3 id="例子4皇后问题-1">例子（4皇后问题）</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98/markdown-img-paste-20190105113930861.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98/markdown-img-paste-20190105113940544.png">
-
-</div>
-<h3 id="加入启发式方法mrv">加入启发式方法——MRV</h3>
-<p>即每次向下扩展搜索的时候，选择解空间最小的分支。</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98/markdown-img-paste-2019010511505255.png">
-
-</div>
-<h3 id="算法性能">算法性能</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98/markdown-img-paste-20190105124557790.png">
-
-</div>
-<hr>
-<h2 id="gac算法generalized-arc-consistency">GAC算法(Generalized Arc Consistency)</h2>
-<h3 id="基本原理-2">基本原理</h3>
-<p>所谓GAC就是在填充一个变量的时候，<font color="red">保证和这个变量相关的所有限制的所有变量都是一致的</font>。什么是一致呢？ 就是对一个变量的论域内的所有可取的值，其他相关变量可以有一种取值满足限制条件。如果我们在搜索的全过程都能满足GAC的一致性，那么每一步所选的变量，最后就可以是一个有效的解。</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98/markdown-img-paste-20190105121201876.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98/markdown-img-paste-20190105121609354.png">
-
-</div>
-<h3 id="伪代码-2">伪代码</h3>
-<p>每次选择一个变量，把目标值以外的其他值全部从论域中删除，然后进行GAC ，达到一致状态，然后继续选取变量，继续GAC。</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98/markdown-img-paste-20190105122203108.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98/markdown-img-paste-20190105123136704.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98/markdown-img-paste-20190105124152574.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98/markdown-img-paste-20190105120229810.png">
-
-</div>
-<h3 id="例子">例子</h3>
-<p>和FC很像，但不一样，通过下例感受：</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98/markdown-img-paste-20190105121722204.png">
-
-</div>
-<h3 id="例子-1">例子</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98/markdown-img-paste-20190105122739707.png">
-
-</div>
-<h3 id="例子4皇后问题-2">例子（4皇后问题）</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98/markdown-img-paste-20190105115440810.png">
-
-</div>
-<h3 id="算法性能-1">算法性能</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98/markdown-img-paste-20190105124503998.png">
-
-</div>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/" itemprop="url">博弈树搜索</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-01T17:53:01+08:00">
-                2020-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">搜索算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="双人零和游戏">双人零和游戏</h2>
-<h3 id="特点">特点</h3>
-<ol style="list-style-type: decimal">
-<li>Discrete（离散的）: Game states or decisions can be mapped on discretevalues.</li>
-<li>Finite（有限的）: There are only a finite number of states and possibledecisions that can be made.</li>
-<li>Zero-sum (零和的): Fully competitive</li>
-<li>Deterministic（确定性的）: no chance involved</li>
-<li>Perfect information（信息完全的）: all aspects of the state are fullyobservable</li>
-</ol>
-<h3 id="定义">定义</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20190104213857963.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20190104214835667.png">
-
-</div>
-<h3 id="组成部分">组成部分</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024163543298.png">
-
-</div>
-<hr>
-<h2 id="minmax博弈树搜索">MinMax博弈树搜索</h2>
-<h3 id="原理">原理</h3>
-<p>假设在博弈过程中,对抗者1总是选择使得博弈值最小的移动,那么作为对手的对抗者2则总会选择是的博弈值最大的移动,对抗者1称为min,对抗者2称为max.由于博弈双方是交替移动的,所以博弈树的结点及其父结点分属于两个对抗者中的一个,他们的种类（type）分属max和min.博弈树上的每个结点对应于一个深度（depth）,叶结点的深度为0.因此,在任意的结点node,对博弈双方均最优的博弈值为</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024204100457.png">
-
-</div>
-<p>Min-Max方法对博弈树进行深度优先搜索.相对于广度优先搜索,深度优先搜索需要非常少的存储空间,而且存储空间的需求不随树的大小而指数增长。</p>
-<h3 id="伪代码">伪代码</h3>
-<p>伪代码如下（以max角色的决策为例），使用DFS实现（可以节约空间，BFS占用空间太多了）</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024204414335.png">
-
-</div>
-<h3 id="一个例子a是maxb是min">一个例子（A是max，B是min）</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024203520426.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024203529214.png">
-
-</div>
-<hr>
-<h2 id="alpha-beta剪枝"><span class="math inline">\(\alpha\)</span>-<span class="math inline">\(\beta\)</span>剪枝</h2>
-<p>很多时候，作出决策并不需要搜索整棵树</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024211735213.png">
-
-</div>
-<h3 id="alpha剪枝beta剪枝同理"><span class="math inline">\(\alpha\)</span>剪枝（<span class="math inline">\(\beta\)</span>剪枝同理）</h3>
-<p>当确定某些分支下属节点的取值不会传递到顶层时，那么对应分支就不需要往下探索了——剪枝。</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024223121311.png">
-
-</div>
-<p>以上图为例，在进行深度优先搜索的时候，要计算节点<span class="math inline">\(n\)</span>的效益值需要计算<span class="math inline">\(s_1,s_2,s_3,\cdots\)</span>的效益值，但是已经知道max节点中有效益值为5的节点了，节点<span class="math inline">\(P\)</span>的 <span class="math inline">\(\beta\)</span>值是节点<span class="math inline">\(n\)</span>这一层节点的 <span class="math inline">\(\alpha\)</span>值的最小值，而 <span class="math inline">\(\alpha_{s_3}=9&gt;5\)</span>，所以<span class="math inline">\(s_3\)</span>之后的节点都不用计算了，这就节省了计算量。</p>
-<p>更一般地：</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024222850354.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181024223246279.png">
-
-</div>
-<h3 id="伪代码-1">伪代码</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-2019011008362316.png">
-
-</div>
-<h3 id="例子">例子</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-2019011008363580.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/minimax搜索.png">
-
-</div>
-<h3 id="效果">效果</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181026143221860.png">
-
-</div>
-<hr>
-<h2 id="事先建树与实时搜索">事先建树与实时搜索</h2>
-<p>每一次构建博弈树，而不是刚开始就构建好博弈树</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%8D%9A%E5%BC%88%E6%A0%91%E6%90%9C%E7%B4%A2/markdown-img-paste-20181026143706809.png">
-
-</div>
-<h2 id="negascout搜索算法">Negascout搜索算法</h2>
-<h2 id="mtd记忆增强测试驱动方法">MTD（记忆增强测试驱动）方法</h2>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/" itemprop="url">启发式搜索</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-01T17:52:43+08:00">
-                2020-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">搜索算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="启发式函数">启发式函数</h2>
-<p><span class="math display">\[h(n)\]</span> 通过启发式函数可以对状态进行评估： <span class="math display">\[f(n)=g(n)+h(n)\]</span></p>
-<h3 id="符号注解">符号注解</h3>
-<table>
-<thead>
-<tr class="header">
-<th>符号</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><span class="math inline">\(n\)</span></td>
-<td>节点</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(h(n)\)</span></td>
-<td>从节点<span class="math inline">\(n\)</span>到目标节点的估计代价</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(h^*(n)\)</span></td>
-<td>从节点<span class="math inline">\(n\)</span>到目标节点的实际最优代价(<span class="math inline">\(\infty\)</span>表示不可达)</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(g(n)\)</span></td>
-<td>从起点到节点<span class="math inline">\(n\)</span>的实际代价</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(f(n)\)</span></td>
-<td>从起点到终点的估计代价</td>
-</tr>
-</tbody>
-</table>
-<p>容易看出，对于 <span class="math inline">\(\forall i,g(i)=0\)</span>，如果目标节点<span class="math inline">\(t\)</span>是不可达的，那么<span class="math inline">\(h(t)=\infty\)</span>.</p>
-<h3 id="可采纳性">可采纳性</h3>
-<p>如果 <span class="math inline">\(\forall n,h(n)\leqslant h^*(n)\)</span>，那么称该启发式函数为可采纳的(admissible)。</p>
-<p>可采纳性保证找到的解是最优解。</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011411407.png">
-
-</div>
-<h3 id="单调性一致性">单调性/一致性</h3>
-<p>如果 <span class="math inline">\(\forall n_1,n_2, h(n_1)\leqslant c(n_1\rightarrow n_2)+h(n_2)\)</span>，那么称该启发式函数为单调的。</p>
-<p>容易证明，单调性蕴含着可采纳性。</p>
-<p>满足单调性能够使得搜索速度大大加快。</p>
-<hr>
-<h2 id="a"><span class="math inline">\(A^*\)</span></h2>
-<h3 id="基本原理">基本原理</h3>
-<p>BFS的进化版本，也是uniform-cost的进化，三者之间的关系如下：</p>
-<p><span class="math display">\[A^*\stackrel{h(n)=0}{\longrightarrow}UCS\stackrel{c(n_1)=c(n_2)}{\longrightarrow}BFS\]</span></p>
-<h3 id="一个例子">一个例子</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011223339.png">
-
-</div>
-<h3 id="性能分析">性能分析</h3>
-<h4 id="最优性">最优性</h4>
-<p>如果启发式函数具有可采纳性，那么<span class="math inline">\(A^{*}\)</span> 算法的树搜索版本（图中不存在环）是最优的；</p>
-<p>如果启发式函数具有一致性，那么<span class="math inline">\(A^{*}\)</span> 算法的树搜索和图搜索版本（图中可以存在环）都是最优的。</p>
-<p>另外，在这类最优算法中——从根结点开始扩展搜索解路径的算法，<span class="math inline">\(A^{*}\)</span> 算法对于任何给定的一致的启发式函数都是效率最优的。</p>
-<h4 id="完备性">完备性</h4>
-<p><span class="math inline">\(A^{*}\)</span> 算法是完备的。</p>
-<h4 id="时间空间复杂度">时间/空间复杂度</h4>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011240461.png">
-
-</div>
-<p>时间空间复杂度都是指数级别的。</p>
-<h3 id="环检测">环检测</h3>
-<p>联系BFS中的“完全展开”、“路径中无环”以及“树”。</p>
-<p>使用可采纳但不一致的启发式函数的<span class="math inline">\(A^*\)</span> 图搜索不能够保证结果是最优的。</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-2019010501174264.png">
-
-</div>
-<h3 id="一些性质">一些性质</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011533417.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011542756.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011621244.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011628283.png">
-
-</div>
-<hr>
-<h2 id="ida"><span class="math inline">\(IDA^*\)</span></h2>
-<p>迭代加深搜索的进化版本</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105020822769.png">
-
-</div>
-<h2 id="问题">问题</h2>
-<p>cycle check是不走环路还是走环路？</p>
-<h2 id="构建启发式函数">构建启发式函数</h2>
-<ol style="list-style-type: decimal">
-<li>放松问题的某些条件</li>
-</ol>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105021151787.png">
-
-</div>
-<h2 id="问题-1">问题</h2>
-<h3 id="puzzle">8-puzzle</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105021248160.png">
-
-</div>
-<h3 id="滑动积木块">滑动积木块</h3>
-<h3 id="mc问题">MC问题</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105021435444.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-2019010502144107.png">
-
-</div>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/" itemprop="url">无信息搜索</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-01T17:52:26+08:00">
-                2020-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">搜索算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>BFS -&gt; {一致代价、双向搜索} DFS -&gt; {迭代加深}</p>
-<h2 id="bfs">BFS</h2>
-<h3 id="基本原理">基本原理</h3>
-<h3 id="伪代码">伪代码</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105102442568.png">
-
-</div>
-<h3 id="算法性能">算法性能</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190104204507862.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190104204557494.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-2019010420452653.png">
-
-</div>
-<h2 id="一致代价搜索">一致代价搜索</h2>
-<h3 id="基本原理-1">基本原理</h3>
-<p>一致代价搜索选择节点的过程与dijkstra算法的过程完全一样。</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-2019010421160180.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190104211353991.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105104345664.png">
-
-</div>
-<h3 id="伪代码-1">伪代码</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105104640715.png">
-
-</div>
-<h3 id="算法性能-1">算法性能</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-2019010510091063.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190104211457806.png">
-
-</div>
-<h2 id="双向搜索">双向搜索</h2>
-<h3 id="基本原理-2">基本原理</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105110942512.png">
-
-</div>
-<h3 id="伪代码-2">伪代码</h3>
-<h3 id="算法性能-2">算法性能</h3>
-<h2 id="dfs">DFS</h2>
-<h3 id="基本原理-3">基本原理</h3>
-<h3 id="伪代码深度受限的dfs">伪代码（深度受限的DFS）</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105110859396.png">
-
-</div>
-<h3 id="算法性能-3">算法性能</h3>
-<h2 id="迭代加深">迭代加深</h2>
-<h3 id="基本原理-4">基本原理</h3>
-<h3 id="伪代码-3">伪代码</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105110923861.png">
-
-</div>
-<h3 id="算法性能-4">算法性能</h3>
-<h2 id="各算法对比">各算法对比</h2>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105094214297.png">
-
-</div>
 
           
         
@@ -2441,7 +2284,7 @@ f(\boldsymbol{x})=\text{sign}\left(\sum_{i=1}^N\alpha_i^*y_iK(\boldsymbol{x},x_i
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2510,7 +2353,7 @@ f(\boldsymbol{x})=\text{sign}\left(\sum_{i=1}^N\alpha_i^*y_iK(\boldsymbol{x},x_i
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

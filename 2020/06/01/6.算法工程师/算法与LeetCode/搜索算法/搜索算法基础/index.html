@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="搜索算法         搜索算法的性能     树搜索与图搜索         环检测 是什么 环检测将图搜索转换为树搜索？     环检测--单路经检测         环检测--多路路径检测 其实就是我们正常使用BFS使用的visited数组             环检测，一致代价搜索">
+<meta name="description" content="搜索算法   搜索算法的性能  树搜索与图搜索   环检测 是什么 环检测将图搜索转换为树搜索？  环检测--单路经检测   环检测--多路路径检测 其实就是我们正常使用BFS使用的visited数组    环检测，一致代价搜索，dijkstra算法  环检测的空间复杂度 指数级别。 各算法总结  各算法是否使用环检测    算法 能否">
 <meta property="og:type" content="article">
 <meta property="og:title" content="搜索算法基础">
 <meta property="og:url" content="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="RBlog">
-<meta property="og:description" content="搜索算法         搜索算法的性能     树搜索与图搜索         环检测 是什么 环检测将图搜索转换为树搜索？     环检测--单路经检测         环检测--多路路径检测 其实就是我们正常使用BFS使用的visited数组             环检测，一致代价搜索">
+<meta property="og:description" content="搜索算法   搜索算法的性能  树搜索与图搜索   环检测 是什么 环检测将图搜索转换为树搜索？  环检测--单路经检测   环检测--多路路径检测 其实就是我们正常使用BFS使用的visited数组    环检测，一致代价搜索，dijkstra算法  环检测的空间复杂度 指数级别。 各算法总结  各算法是否使用环检测    算法 能否">
 <meta property="og:image" content="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104201100759.png">
 <meta property="og:image" content="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-2019010510263152.png">
 <meta property="og:image" content="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190105102012872.png">
@@ -100,7 +100,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/1.svg">
 <meta property="og:image" content="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190105094214297.png">
 <meta property="article:published_time" content="2020-06-01T09:47:59.000Z">
-<meta property="article:modified_time" content="2020-06-01T10:03:40.222Z">
+<meta property="article:modified_time" content="2020-06-01T10:03:42.000Z">
 <meta property="article:author" content="Ryan">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104201100759.png">
@@ -385,70 +385,31 @@
 
       
         <h2 id="搜索算法">搜索算法</h2>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104201100759.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-2019010510263152.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104201100759.png"></p>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-2019010510263152.png"></p>
 <h2 id="搜索算法的性能">搜索算法的性能</h2>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190105102012872.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190105102012872.png"></p>
 <h2 id="树搜索与图搜索">树搜索与图搜索</h2>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190105101116333.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104203645524.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190105101116333.png"></p>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104203645524.png"></p>
 <h2 id="环检测">环检测</h2>
 <h3 id="是什么">是什么</h3>
 <p>环检测将图搜索转换为树搜索？</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190105092832253.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190105092832253.png"></p>
 <h3 id="环检测--单路经检测">环检测--单路经检测</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-2019010421172556.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104211856900.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-2019010421172556.png"></p>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104211856900.png"></p>
 <h3 id="环检测--多路路径检测">环检测--多路路径检测</h3>
 <p>其实就是我们正常使用BFS使用的visited数组</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104212003585.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-2019010421202306.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104212028934.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104212003585.png"></p>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-2019010421202306.png"></p>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104212028934.png"></p>
 <h3 id="环检测一致代价搜索dijkstra算法">环检测，一致代价搜索，dijkstra算法</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104212336973.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190104212336973.png"></p>
 <h3 id="环检测的空间复杂度">环检测的空间复杂度</h3>
 <p>指数级别。</p>
 <h2 id="各算法总结">各算法总结</h2>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/1.svg">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/1.svg"></p>
 <h3 id="各算法是否使用环检测">各算法是否使用环检测</h3>
 <table>
 <thead>
@@ -489,10 +450,7 @@
 </tbody>
 </table>
 <h3 id="性能对比">性能对比</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190105094214297.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/markdown-img-paste-20190105094214297.png"></p>
 <p><span class="math inline">\(IDA^*\)</span> 和 <span class="math inline">\(IDS\)</span>的复杂度相近，<span class="math inline">\(A^*\)</span> 与 <span class="math inline">\(UCS\)</span>复杂度相近。</p>
 
       
@@ -603,7 +561,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -688,7 +646,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

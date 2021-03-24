@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="最终效果   demo  加载地图 1234567891011Map &amp;#123;	id: map    &#x2F;&#x2F; set the basemap    Basemap &amp;#123;    	RasterLayer &amp;#123;        	Raster &amp;#123;            	path: &quot;file:&#x2F;&#x2F;&#x2F;G:&#x2F;Qt&#x2F;map&#x2F;map_file&#x2F;地图_墨卡托坐标系.tif">
+<meta name="description" content="最终效果  demo  加载地图 1234567891011Map &amp;#123;	id: map    &#x2F;&#x2F; set the basemap    Basemap &amp;#123;    	RasterLayer &amp;#123;        	Raster &amp;#123;            	path: &quot;file:&#x2F;&#x2F;&#x2F;G:&#x2F;Qt&#x2F;map&#x2F;map_file&#x2F;地图_墨卡托坐标系.tif&quot;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于ArcGIS的地图小程序">
 <meta property="og:url" content="http://yoursite.com/2020/05/27/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/ArcGIS/%E5%9F%BA%E4%BA%8EArcGIS%E7%9A%84%E5%9C%B0%E5%9B%BE%E5%B0%8F%E7%A8%8B%E5%BA%8F/index.html">
 <meta property="og:site_name" content="RBlog">
-<meta property="og:description" content="最终效果   demo  加载地图 1234567891011Map &amp;#123;	id: map    &#x2F;&#x2F; set the basemap    Basemap &amp;#123;    	RasterLayer &amp;#123;        	Raster &amp;#123;            	path: &quot;file:&#x2F;&#x2F;&#x2F;G:&#x2F;Qt&#x2F;map&#x2F;map_file&#x2F;地图_墨卡托坐标系.tif">
+<meta property="og:description" content="最终效果  demo  加载地图 1234567891011Map &amp;#123;	id: map    &#x2F;&#x2F; set the basemap    Basemap &amp;#123;    	RasterLayer &amp;#123;        	Raster &amp;#123;            	path: &quot;file:&#x2F;&#x2F;&#x2F;G:&#x2F;Qt&#x2F;map&#x2F;map_file&#x2F;地图_墨卡托坐标系.tif&quot;">
 <meta property="og:image" content="http://yoursite.com/2020/05/27/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/ArcGIS/%E5%9F%BA%E4%BA%8EArcGIS%E7%9A%84%E5%9C%B0%E5%9B%BE%E5%B0%8F%E7%A8%8B%E5%BA%8F/demo.gif">
 <meta property="article:published_time" content="2020-05-27T15:20:21.000Z">
-<meta property="article:modified_time" content="2020-05-29T09:12:50.051Z">
+<meta property="article:modified_time" content="2020-05-29T09:12:52.000Z">
 <meta property="article:author" content="Ryan">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/2020/05/27/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/ArcGIS/%E5%9F%BA%E4%BA%8EArcGIS%E7%9A%84%E5%9C%B0%E5%9B%BE%E5%B0%8F%E7%A8%8B%E5%BA%8F/demo.gif">
@@ -383,10 +383,9 @@
 
       
         <h2 id="最终效果">最终效果</h2>
-<div class="figure">
-<img src="/2020/05/27/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/ArcGIS/%E5%9F%BA%E4%BA%8EArcGIS%E7%9A%84%E5%9C%B0%E5%9B%BE%E5%B0%8F%E7%A8%8B%E5%BA%8F/demo.gif" alt="demo">
-<p class="caption">demo</p>
-</div>
+<figure>
+<img src="/2020/05/27/5.%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/Qt/ArcGIS/%E5%9F%BA%E4%BA%8EArcGIS%E7%9A%84%E5%9C%B0%E5%9B%BE%E5%B0%8F%E7%A8%8B%E5%BA%8F/demo.gif" alt="demo"><figcaption aria-hidden="true">demo</figcaption>
+</figure>
 <h2 id="加载地图">加载地图</h2>
 <figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">Map</span> &#123;</span><br><span class="line">	<span class="attribute">id:</span><span class="string"> map</span></span><br><span class="line">    <span class="comment">// set the basemap</span></span><br><span class="line">    <span class="title">Basemap</span> &#123;</span><br><span class="line">    	<span class="title">RasterLayer</span> &#123;</span><br><span class="line">        	<span class="title">Raster</span> &#123;</span><br><span class="line">            	<span class="attribute">path</span>: <span class="string">"file:///G:/Qt/map/map_file/地图_墨卡托坐标系.tif"</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="map">Map</h3>
@@ -615,7 +614,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -700,7 +699,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

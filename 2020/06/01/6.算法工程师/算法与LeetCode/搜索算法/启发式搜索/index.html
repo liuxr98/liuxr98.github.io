@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105021435444.png">
 <meta property="og:image" content="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-2019010502144107.png">
 <meta property="article:published_time" content="2020-06-01T09:52:43.000Z">
-<meta property="article:modified_time" content="2020-06-01T10:15:41.907Z">
+<meta property="article:modified_time" content="2020-06-01T10:15:42.000Z">
 <meta property="article:author" content="Ryan">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011411407.png">
@@ -420,10 +420,7 @@
 <h3 id="可采纳性">可采纳性</h3>
 <p>如果 <span class="math inline">\(\forall n,h(n)\leqslant h^*(n)\)</span>，那么称该启发式函数为可采纳的(admissible)。</p>
 <p>可采纳性保证找到的解是最优解。</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011411407.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011411407.png"></p>
 <h3 id="单调性一致性">单调性/一致性</h3>
 <p>如果 <span class="math inline">\(\forall n_1,n_2, h(n_1)\leqslant c(n_1\rightarrow n_2)+h(n_2)\)</span>，那么称该启发式函数为单调的。</p>
 <p>容易证明，单调性蕴含着可采纳性。</p>
@@ -434,10 +431,7 @@
 <p>BFS的进化版本，也是uniform-cost的进化，三者之间的关系如下：</p>
 <p><span class="math display">\[A^*\stackrel{h(n)=0}{\longrightarrow}UCS\stackrel{c(n_1)=c(n_2)}{\longrightarrow}BFS\]</span></p>
 <h3 id="一个例子">一个例子</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011223339.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011223339.png"></p>
 <h3 id="性能分析">性能分析</h3>
 <h4 id="最优性">最优性</h4>
 <p>如果启发式函数具有可采纳性，那么<span class="math inline">\(A^{*}\)</span> 算法的树搜索版本（图中不存在环）是最优的；</p>
@@ -446,68 +440,35 @@
 <h4 id="完备性">完备性</h4>
 <p><span class="math inline">\(A^{*}\)</span> 算法是完备的。</p>
 <h4 id="时间空间复杂度">时间/空间复杂度</h4>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011240461.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011240461.png"></p>
 <p>时间空间复杂度都是指数级别的。</p>
 <h3 id="环检测">环检测</h3>
 <p>联系BFS中的“完全展开”、“路径中无环”以及“树”。</p>
 <p>使用可采纳但不一致的启发式函数的<span class="math inline">\(A^*\)</span> 图搜索不能够保证结果是最优的。</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-2019010501174264.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-2019010501174264.png"></p>
 <h3 id="一些性质">一些性质</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011533417.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011542756.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011621244.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011628283.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011533417.png"></p>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011542756.png"></p>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011621244.png"></p>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105011628283.png"></p>
 <hr>
 <h2 id="ida"><span class="math inline">\(IDA^*\)</span></h2>
 <p>迭代加深搜索的进化版本</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105020822769.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105020822769.png"></p>
 <h2 id="问题">问题</h2>
 <p>cycle check是不走环路还是走环路？</p>
 <h2 id="构建启发式函数">构建启发式函数</h2>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>放松问题的某些条件</li>
 </ol>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105021151787.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105021151787.png"></p>
 <h2 id="问题-1">问题</h2>
 <h3 id="puzzle">8-puzzle</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105021248160.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105021248160.png"></p>
 <h3 id="滑动积木块">滑动积木块</h3>
 <h3 id="mc问题">MC问题</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105021435444.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-2019010502144107.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105021435444.png"></p>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/markdown-img-paste-2019010502144107.png"></p>
 
       
     </div>
@@ -617,7 +578,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -702,7 +663,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="BFS -&gt; {一致代价、双向搜索} DFS -&gt; {迭代加深} BFS 基本原理 伪代码     算法性能             一致代价搜索 基本原理 一致代价搜索选择节点的过程与dijkstra算法的过程完全一样。             伪代码     算法性能">
+<meta name="description" content="BFS -&gt; {一致代价、双向搜索} DFS -&gt; {迭代加深} BFS 基本原理 伪代码  算法性能    一致代价搜索 基本原理 一致代价搜索选择节点的过程与dijkstra算法的过程完全一样。    伪代码  算法性能   双向搜索 基本原理  伪代码 算法性能 DFS 基本原理 伪代码（深度受限的DFS）  算法性能">
 <meta property="og:type" content="article">
 <meta property="og:title" content="无信息搜索">
 <meta property="og:url" content="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/index.html">
 <meta property="og:site_name" content="RBlog">
-<meta property="og:description" content="BFS -&gt; {一致代价、双向搜索} DFS -&gt; {迭代加深} BFS 基本原理 伪代码     算法性能             一致代价搜索 基本原理 一致代价搜索选择节点的过程与dijkstra算法的过程完全一样。             伪代码     算法性能">
+<meta property="og:description" content="BFS -&gt; {一致代价、双向搜索} DFS -&gt; {迭代加深} BFS 基本原理 伪代码  算法性能    一致代价搜索 基本原理 一致代价搜索选择节点的过程与dijkstra算法的过程完全一样。    伪代码  算法性能   双向搜索 基本原理  伪代码 算法性能 DFS 基本原理 伪代码（深度受限的DFS）  算法性能">
 <meta property="og:image" content="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105102442568.png">
 <meta property="og:image" content="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190104204507862.png">
 <meta property="og:image" content="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190104204557494.png">
@@ -100,7 +100,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105110923861.png">
 <meta property="og:image" content="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105094214297.png">
 <meta property="article:published_time" content="2020-06-01T09:52:26.000Z">
-<meta property="article:modified_time" content="2020-06-01T10:03:31.329Z">
+<meta property="article:modified_time" content="2020-06-01T10:03:32.000Z">
 <meta property="article:author" content="Ryan">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105102442568.png">
@@ -388,81 +388,39 @@
 <h2 id="bfs">BFS</h2>
 <h3 id="基本原理">基本原理</h3>
 <h3 id="伪代码">伪代码</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105102442568.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105102442568.png"></p>
 <h3 id="算法性能">算法性能</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190104204507862.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190104204557494.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-2019010420452653.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190104204507862.png"></p>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190104204557494.png"></p>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-2019010420452653.png"></p>
 <h2 id="一致代价搜索">一致代价搜索</h2>
 <h3 id="基本原理-1">基本原理</h3>
 <p>一致代价搜索选择节点的过程与dijkstra算法的过程完全一样。</p>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-2019010421160180.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190104211353991.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105104345664.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-2019010421160180.png"></p>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190104211353991.png"></p>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105104345664.png"></p>
 <h3 id="伪代码-1">伪代码</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105104640715.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105104640715.png"></p>
 <h3 id="算法性能-1">算法性能</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-2019010510091063.png">
-
-</div>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190104211457806.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-2019010510091063.png"></p>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190104211457806.png"></p>
 <h2 id="双向搜索">双向搜索</h2>
 <h3 id="基本原理-2">基本原理</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105110942512.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105110942512.png"></p>
 <h3 id="伪代码-2">伪代码</h3>
 <h3 id="算法性能-2">算法性能</h3>
 <h2 id="dfs">DFS</h2>
 <h3 id="基本原理-3">基本原理</h3>
 <h3 id="伪代码深度受限的dfs">伪代码（深度受限的DFS）</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105110859396.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105110859396.png"></p>
 <h3 id="算法性能-3">算法性能</h3>
 <h2 id="迭代加深">迭代加深</h2>
 <h3 id="基本原理-4">基本原理</h3>
 <h3 id="伪代码-3">伪代码</h3>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105110923861.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105110923861.png"></p>
 <h3 id="算法性能-4">算法性能</h3>
 <h2 id="各算法对比">各算法对比</h2>
-<div class="figure">
-<img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105094214297.png">
-
-</div>
+<p><img src="/2020/06/01/6.%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AE%97%E6%B3%95%E4%B8%8ELeetCode/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/markdown-img-paste-20190105094214297.png"></p>
 
       
     </div>
@@ -572,7 +530,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -657,7 +615,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
