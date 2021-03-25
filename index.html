@@ -2053,7 +2053,7 @@
 <h2 id="性能比较">7.1、性能比较</h2>
 <p>通过比较时间下界来比较CS结构与P2P结构的性能，并假定因特网核心具有足够的带宽（这意味着所有瓶颈都在网络接入链路）。</p>
 <p>符号说明 符号|含义 :-|:- <span class="math inline">\(F\)</span>|分发的文件副本长度（bit数） <span class="math inline">\(N\)</span>|需要获得该文件的主机数 <span class="math inline">\(u_s\)</span>|upload server，服务器上载速率 <span class="math inline">\(d_s\)</span>|download server，服务器下载速率 <span class="math inline">\(d_1~d_N\)</span>|download i，主机i的下载速率 <span class="math inline">\(d_{min}\)</span>|N台主机的下载速率的最小值，即<span class="math inline">\(d_{min} = min\{d_1,d_2,\cdots,d_N\}\)</span></p>
-<h3 id="cs结构分发n个文件副本所需时间d_cs">7.1.1、CS结构分发N个文件副本所需时间<span class="math inline">\(D_{cs}\)</span></h3>
+<h3 id="cs结构分发n个文件副本所需时间d_cs">7.1.1、CS结构分发N个文件副本所需时间\(D_{cs}\)</h3>
 <ol type="1">
 <li><b>上载方：</b>服务器上传N个副本所需时间至少为<span class="math inline">\(\dfrac{NF}{u_s}\)</span>。</li>
 <li><b>下载方：</b>所有下载方将副本下载完成所用时间至少为<span class="math inline">\(\dfrac{F}{d_{min}}\)</span></li>
