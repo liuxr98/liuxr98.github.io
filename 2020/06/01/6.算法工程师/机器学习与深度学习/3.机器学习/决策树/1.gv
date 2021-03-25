@@ -1,7 +1,0 @@
-digraph a{
-    rankdir = TB
-    node[fontname="fangsong",shape=rectangle]
-    "root" 
-    node[shape=ellipse]
-    "root"-> {"type 1","type 2","...","type n"}
-}
