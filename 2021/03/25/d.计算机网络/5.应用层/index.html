@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="1、应用体系结构 1.1、Client-Server结构  集群技术的应用  1.2、Peer-to-Peer结构 应用举例： - 文件共享（BitTorrent） - 对等方协助下载器（迅雷） - 因特网电话（Skype） - IPTV（迅雷看看、PPstream） P2P面临的主要挑战： - ISP友好 - 安全性 - 激励 2、应用层原理 2.1、进程通信 IP地址+端口">
+<meta name="description" content="1、应用体系结构1.1、Client-Server结构 集群技术的应用  1.2、Peer-to-Peer结构应用举例：  文件共享（BitTorrent） 对等方协助下载器（迅雷） 因特网电话（Skype） IPTV（迅雷看看、PPstream）  P2P面临的主要挑战：  ISP友好 安全性 激励  2、应用层原理2.1、进程通信IP地址+端口 2.2、运输服务2.2.1、四项服务 可靠数据传">
 <meta property="og:type" content="article">
 <meta property="og:title" content="应用层">
 <meta property="og:url" content="http://yoursite.com/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/index.html">
 <meta property="og:site_name" content="RBlog">
-<meta property="og:description" content="1、应用体系结构 1.1、Client-Server结构  集群技术的应用  1.2、Peer-to-Peer结构 应用举例： - 文件共享（BitTorrent） - 对等方协助下载器（迅雷） - 因特网电话（Skype） - IPTV（迅雷看看、PPstream） P2P面临的主要挑战： - ISP友好 - 安全性 - 激励 2、应用层原理 2.1、进程通信 IP地址+端口">
+<meta property="og:description" content="1、应用体系结构1.1、Client-Server结构 集群技术的应用  1.2、Peer-to-Peer结构应用举例：  文件共享（BitTorrent） 对等方协助下载器（迅雷） 因特网电话（Skype） IPTV（迅雷看看、PPstream）  P2P面临的主要挑战：  ISP友好 安全性 激励  2、应用层原理2.1、进程通信IP地址+端口 2.2、运输服务2.2.1、四项服务 可靠数据传">
 <meta property="og:image" content="http://yoursite.com/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png">
 <meta property="og:image" content="http://yoursite.com/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.png">
 <meta property="og:image" content="http://yoursite.com/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/%E9%9D%9E%E6%8C%81%E7%BB%AD%E8%BF%9E%E6%8E%A5.png">
@@ -111,8 +111,8 @@
 <meta property="og:image" content="http://yoursite.com/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/%E7%8E%AF%E5%BD%A2DHT.png">
 <meta property="og:image" content="http://yoursite.com/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/%E6%9C%89%E6%8D%B7%E5%BE%84%E7%9A%84%E7%8E%AF%E5%BD%A2DHT.png">
 <meta property="og:image" content="http://yoursite.com/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/%E5%AF%B9%E7%AD%89%E6%96%B9%E6%89%B0%E5%8A%A8.png">
-<meta property="article:published_time" content="2021-03-25T12:26:17.000Z">
-<meta property="article:modified_time" content="2021-03-25T14:14:11.785Z">
+<meta property="article:published_time" content="2021-03-25T12:26:57.000Z">
+<meta property="article:modified_time" content="2021-03-25T14:32:00.685Z">
 <meta property="article:author" content="Ryan">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png">
@@ -327,7 +327,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-25T20:26:17+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-25T20:26:57+08:00">
                 2021-03-25
               </time>
             
@@ -363,83 +363,114 @@
       
 
       
-        <h1 id="应用体系结构">1、应用体系结构</h1>
-<h2 id="client-server结构">1.1、Client-Server结构</h2>
-<ul>
+        <h1 id="1、应用体系结构"><a href="#1、应用体系结构" class="headerlink" title="1、应用体系结构"></a>1、应用体系结构</h1><h2 id="1-1、Client-Server结构"><a href="#1-1、Client-Server结构" class="headerlink" title="1.1、Client-Server结构"></a>1.1、Client-Server结构</h2><ul>
 <li>集群技术的应用</li>
 </ul>
-<h2 id="peer-to-peer结构">1.2、Peer-to-Peer结构</h2>
-<p>应用举例： - 文件共享（BitTorrent） - 对等方协助下载器（迅雷） - 因特网电话（Skype） - IPTV（迅雷看看、PPstream）</p>
-<p>P2P面临的主要挑战： - ISP友好 - 安全性 - 激励</p>
-<h1 id="应用层原理">2、应用层原理</h1>
-<h2 id="进程通信">2.1、进程通信</h2>
-<p>IP地址+端口</p>
-<h2 id="运输服务">2.2、运输服务</h2>
-<h3 id="四项服务">2.2.1、四项服务</h3>
+<h2 id="1-2、Peer-to-Peer结构"><a href="#1-2、Peer-to-Peer结构" class="headerlink" title="1.2、Peer-to-Peer结构"></a>1.2、Peer-to-Peer结构</h2><p>应用举例：</p>
 <ul>
+<li>文件共享（BitTorrent）</li>
+<li>对等方协助下载器（迅雷）</li>
+<li>因特网电话（Skype）</li>
+<li>IPTV（迅雷看看、PPstream）</li>
+</ul>
+<p>P2P面临的主要挑战：</p>
+<ul>
+<li>ISP友好</li>
+<li>安全性</li>
+<li>激励</li>
+</ul>
+<h1 id="2、应用层原理"><a href="#2、应用层原理" class="headerlink" title="2、应用层原理"></a>2、应用层原理</h1><h2 id="2-1、进程通信"><a href="#2-1、进程通信" class="headerlink" title="2.1、进程通信"></a>2.1、进程通信</h2><p>IP地址+端口</p>
+<h2 id="2-2、运输服务"><a href="#2-2、运输服务" class="headerlink" title="2.2、运输服务"></a>2.2、运输服务</h2><h3 id="2-2-1、四项服务"><a href="#2-2-1、四项服务" class="headerlink" title="2.2.1、四项服务"></a>2.2.1、四项服务</h3><ul>
 <li>可靠数据传输</li>
 <li><font color="blue">吞吐量</font></li>
 <li><font color="blue">定时</font></li>
 <li>安全性</li>
 </ul>
-<h3 id="因特网提供的运输服务">2.2.2、因特网提供的运输服务</h3>
-<ul>
-<li>TCP
-<ul>
+<h3 id="2-2-2、因特网提供的运输服务"><a href="#2-2-2、因特网提供的运输服务" class="headerlink" title="2.2.2、因特网提供的运输服务"></a>2.2.2、因特网提供的运输服务</h3><ul>
+<li>TCP<ul>
 <li>可靠数据传输</li>
 <li>安全（SSL）</li>
-</ul></li>
-<li>UDP
-<ul>
-<li>哪一项也不能保证</li>
-</ul></li>
 </ul>
-<h2 id="应用层协议通信规范">2.3、应用层协议（通信规范）</h2>
-<p>应用层协议定义了运行在不同端系统上的应用程序进程如何相互传递报文。</p>
-<p>应用层协议定义了如下内容： - 交换的报文类型 - 各种报文类型的语法 - 字段的语义 - 一个进程何时以及如何发送报文、对报文进行响应的规则</p>
+</li>
+<li>UDP<ul>
+<li>哪一项也不能保证</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-3、应用层协议（通信规范）"><a href="#2-3、应用层协议（通信规范）" class="headerlink" title="2.3、应用层协议（通信规范）"></a>2.3、应用层协议（通信规范）</h2><p>应用层协议定义了运行在不同端系统上的应用程序进程如何相互传递报文。</p>
+<p>应用层协议定义了如下内容：</p>
+<ul>
+<li>交换的报文类型</li>
+<li>各种报文类型的语法</li>
+<li>字段的语义</li>
+<li>一个进程何时以及如何发送报文、对报文进行响应的规则</li>
+</ul>
 <p>应用层协议是网络应用的一部分，要能够正确区分二者。</p>
-<h2 id="重要的应用层协议">2.4、重要的应用层协议</h2>
+<h2 id="2-4、重要的应用层协议"><a href="#2-4、重要的应用层协议" class="headerlink" title="2.4、重要的应用层协议"></a>2.4、重要的应用层协议</h2><div class="table-container">
 <table>
 <thead>
-<tr class="header">
-<th style="text-align: left;">应用</th>
-<th style="text-align: left;">协议</th>
+<tr>
+<th style="text-align:left">应用</th>
+<th style="text-align:left">协议</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: left;">Web</td>
-<td style="text-align: left;">HTTP</td>
+<tr>
+<td style="text-align:left">Web</td>
+<td style="text-align:left">HTTP</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">文件传输</td>
-<td style="text-align: left;">FTP</td>
+<tr>
+<td style="text-align:left">文件传输</td>
+<td style="text-align:left">FTP</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">电子邮件</td>
-<td style="text-align: left;">SMTP、POP3、IMAP</td>
+<tr>
+<td style="text-align:left">电子邮件</td>
+<td style="text-align:left">SMTP、POP3、IMAP</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">域名解析</td>
-<td style="text-align: left;">DNS</td>
+<tr>
+<td style="text-align:left">域名解析</td>
+<td style="text-align:left">DNS</td>
 </tr>
 </tbody>
 </table>
-<h1 id="cs-webhttp">3、CS-Web：HTTP</h1>
-<h2 id="web基础">3.1、Web基础</h2>
-<p>Web（World Wide Web）即全球广域网，也称为万维网，它是一种基于超文本和HTTP的、全球性的、动态交互的、跨平台的分布式图形信息系统。</p>
-<p>从个人理解角度而言，我将web与PC作了一下对比，发现了如下异同之处： - 资源管理器 vs 统一资源定位符（URL） - 本机安装的软件 vs web上的软件（SaaS） - 本机操作系统 vs 分布式系统</p>
-<p>web基本组成： - web客户端：典型例子是浏览器 - web服务器 - web页面 - HTML基本文件 - 对象</p>
-<h2 id="http协议">3.2、HTTP协议</h2>
-<p>HTTP（HyperText Transfer Protocol），超文本传输协议，是Web的核心，是一种建立在TCP传输之上的应用层协议。 ### 3.2.1、HTTP协议的特点 - 简单快速 - 客户向服务器请求服务时，只需传送请求方法和路径。请求方法常用的有GET、HEAD、POST。每种方法规定了客户与服务器联系的类型不同。 - 由于HTTP协议简单，使得HTTP服务器的程序规模小，因而通信速度很快。 - 灵活：HTTP允许传输任意类型的数据对象。正在传输的类型由Content-Type加以标记。 - 默认为非持续连接：一次连接传输一个对象 - 支持持续连接 - 是一种无状态协议 - 默认端口号为80</p>
-<h3 id="非持续连接与持续连接">3.2.2、非持续连接与持续连接</h3>
-<p><b>TCP相关内容</b></p>
-<p>TCP的三次握手建立连接与四次挥手断开连接过程如下： <img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/三次握手.png"><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/四次挥手.png"></p>
-<ol type="1">
+</div>
+<h1 id="3、CS-Web：HTTP"><a href="#3、CS-Web：HTTP" class="headerlink" title="3、CS-Web：HTTP"></a>3、CS-Web：HTTP</h1><h2 id="3-1、Web基础"><a href="#3-1、Web基础" class="headerlink" title="3.1、Web基础"></a>3.1、Web基础</h2><p>Web（World Wide Web）即全球广域网，也称为万维网，它是一种基于超文本和HTTP的、全球性的、动态交互的、跨平台的分布式图形信息系统。</p>
+<p>从个人理解角度而言，我将web与PC作了一下对比，发现了如下异同之处：</p>
+<ul>
+<li>资源管理器 vs 统一资源定位符（URL）</li>
+<li>本机安装的软件 vs web上的软件（SaaS）</li>
+<li>本机操作系统 vs 分布式系统</li>
+</ul>
+<p>web基本组成：</p>
+<ul>
+<li>web客户端：典型例子是浏览器</li>
+<li>web服务器</li>
+<li>web页面<ul>
+<li>HTML基本文件</li>
+<li>对象</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-2、HTTP协议"><a href="#3-2、HTTP协议" class="headerlink" title="3.2、HTTP协议"></a>3.2、HTTP协议</h2><p>HTTP（HyperText Transfer Protocol），超文本传输协议，是Web的核心，是一种建立在TCP传输之上的应用层协议。</p>
+<h3 id="3-2-1、HTTP协议的特点"><a href="#3-2-1、HTTP协议的特点" class="headerlink" title="3.2.1、HTTP协议的特点"></a>3.2.1、HTTP协议的特点</h3><ul>
+<li>简单快速<ul>
+<li>客户向服务器请求服务时，只需传送请求方法和路径。请求方法常用的有GET、HEAD、POST。每种方法规定了客户与服务器联系的类型不同。</li>
+<li>由于HTTP协议简单，使得HTTP服务器的程序规模小，因而通信速度很快。</li>
+</ul>
+</li>
+<li>灵活：HTTP允许传输任意类型的数据对象。正在传输的类型由Content-Type加以标记。</li>
+<li>默认为非持续连接：一次连接传输一个对象</li>
+<li>支持持续连接</li>
+<li>是一种无状态协议</li>
+<li>默认端口号为80</li>
+</ul>
+<h3 id="3-2-2、非持续连接与持续连接"><a href="#3-2-2、非持续连接与持续连接" class="headerlink" title="3.2.2、非持续连接与持续连接"></a>3.2.2、非持续连接与持续连接</h3><p><b>TCP相关内容</b></p>
+<p>TCP的三次握手建立连接与四次挥手断开连接过程如下：<br><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/三次握手.png" alt><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/四次挥手.png" alt></p>
+<ol>
 <li><b>非持续连接</b></li>
 </ol>
-每一个对象经受两倍RTT的交付时延，传输N的对象所用时间为<span class="math inline">\(2N*RTT+\sum\limits_{i=1}^{N}{t_i}\)</span>，其中<span class="math inline">\(t_i\)</span>是传输第<span class="math inline">\(i\)</span>个文件所用的时间。
-<pre class="mermaid">sequenceDiagram
+<p>每一个对象经受两倍RTT的交付时延，传输N的对象所用时间为$2N*RTT+\sum\limits_{i=1}^{N}{t_i}$，其中$t_i$是传输第$i$个文件所用的时间。</p>
+<p><pre class="mermaid">sequenceDiagram
     participant client
     participant server
     loop SCSO
@@ -449,314 +480,341 @@
         server->>-client:server封装对象并发送
         client->>client:client的TCP确认完整接收响应报文，然后关闭连接
         server->>server:server的TCP确认成功发送响应报文，然后关闭连接
-    end</pre>
-<p><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/非持续连接.png"></p>
-<ol start="2" type="1">
-<li><p><b>持续连接</b></p>
-<pre class="mermaid">sequenceDiagram
- participant client
- participant server
- client->>+server:在80端口发起一个到server的TCP连接（step1）
- server->>-client:server作出回应（step2）
- loop SCMO
-     client->>+server:发送请求报文，该报文包含URL（只有循环的第一次有TCP的client确认）
-     server->>-client:server封装对象并发送
- end
- client->>client:client的TCP确认完整接收全部响应报文，然后关闭连接
- server->>server:server的TCP确认成功发送全部响应报文，然后关闭连接</pre>
-<p><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/持续连接.png"></p></li>
-<li><p><b>带流水的持续连接</b> <img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/带流水的持续连接.png"></p></li>
+    end</pre><br><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/非持续连接.png" alt></p>
+<ol>
+<li><p><b>持续连接</b><br><pre class="mermaid">sequenceDiagram<br> participant client<br> participant server<br> client-&gt;&gt;+server:在80端口发起一个到server的TCP连接（step1）<br> server-&gt;&gt;-client:server作出回应（step2）<br> loop SCMO</pre></p>
+<pre><code> client-&gt;&gt;+server:发送请求报文，该报文包含URL（只有循环的第一次有TCP的client确认）
+ server-&gt;&gt;-client:server封装对象并发送
+</code></pre><p> end<br> client-&gt;&gt;client:client的TCP确认完整接收全部响应报文，然后关闭连接<br> server-&gt;&gt;server:server的TCP确认成功发送全部响应报文，然后关闭连接&lt;/pre&gt;<br><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/持续连接.png" alt></p>
+</li>
+<li><p><b>带流水的持续连接</b><br><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/带流水的持续连接.png" alt></p>
+</li>
 </ol>
-<h3 id="http请求报文">3.2.3、HTTP请求报文</h3>
-<p><b>基本格式</b> <img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/请求报文格式.png"></p>
-<p>方法有如下几种： - GET：向服务器请求一个对象 - POST：用户请求一个web页面，例如用搜索引擎搜索 - HEAD：asks server to leave requested object out of response - PUT：向web服务器上传对象 - DELETE：删除web服务器上的对象</p>
-<p>首部行基本内容： - Host：目的主机地址 - Connection：连接类型（close/keep-alive） - User-agent：用户代理，即向服务器发送请求的浏览器类型（如Chrome） - Accept-language：表示用户想得到的对象的语言版本</p>
-<p><b>请求报文举例（GET）</b> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F;index.html HTTP&#x2F;1.1\r\n    # 1.请求行</span><br><span class="line">Host: www.baidu.com\r\n         # 2.首部行</span><br><span class="line">Connection: close\r\n           # 2.首部行</span><br><span class="line">User-agent: chrome\r\n          # 2.首部行</span><br><span class="line">Accept-language: fr\r\n         # 2.首部行</span><br><span class="line">\r\n                            # 3.空行</span><br><span class="line">......data......                # 4.实体主体</span><br></pre></td></tr></table></figure></p>
-<h3 id="http响应报文">3.2.4、HTTP响应报文</h3>
-<p><b>基本格式</b> <img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/响应报文格式.png"></p>
-<p>状态码有如下几种： - 200：OK - 301：Moved Permanently - 400: Bad Request - 404：Not Found - 505：HTTP Version Not Supported</p>
-<p>首部行有如下几种： - Connection：指示发送完报文后是否关闭连接 - Date：服务器产生并发送该响应报文的日期和时间 - Server：产生报文的服务器类型 - Last-Modified：最后修改日期，对于网络缓存服务器上的对象比较重要 - Content-Length：被发送对象的字节数 - Content-Type：表示发送的文件类型</p>
-<p><b>响应报文举例（OK）</b> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">HTTP&#x2F;1.1 200 OK\r\n</span><br><span class="line">Connection: close\r\n</span><br><span class="line">Date: Tue, 09 Aug 2011 15:44:04 GMT\r\n</span><br><span class="line">Server: Apache&#x2F;2.2.2(CentOS)\r\n</span><br><span class="line">Last-Modified: Tue, 09 Aug 2011 15:11:03 GMT</span><br><span class="line">Content-Length: 6821</span><br><span class="line">Content-Type: text&#x2F;html</span><br><span class="line">(data data data data data ...)</span><br></pre></td></tr></table></figure></p>
-<h3 id="使用telnet实践http协议">3.2.5、使用telnet实践HTTP协议</h3>
-<p>操作顺序： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">win+r: cmd</span><br><span class="line">telnet www.baidu.com 80</span><br><span class="line">ctrl+]</span><br><span class="line">回车</span><br><span class="line">GET &#x2F; HTTP&#x2F;1.1</span><br><span class="line">连续两次回车</span><br></pre></td></tr></table></figure> 获得如下响应报文： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HTTP&#x2F;1.1 302 Found</span><br><span class="line">Location: https:&#x2F;&#x2F;www.baidu.com&#x2F;error.html</span><br><span class="line">Server: bfe</span><br><span class="line">Date: Sat, 09 Jun 2018 03:04:12 GMT</span><br><span class="line">Content-Length: 0</span><br><span class="line">Content-Type: text&#x2F;plain; charset&#x3D;utf-8</span><br></pre></td></tr></table></figure></p>
-<h2 id="web优化cookie">3.3、Web优化：cookie</h2>
-<p>由于HTTP是无状态协议，所以用户每一次访问站点都是全新的状态，这带来许多不便之处，例如购物车的维护。还有某些需要用户密码进行登录的网站，通过cookie可以免去每次都要进行的登陆操作。</p>
+<h3 id="3-2-3、HTTP请求报文"><a href="#3-2-3、HTTP请求报文" class="headerlink" title="3.2.3、HTTP请求报文"></a>3.2.3、HTTP请求报文</h3><p><b>基本格式</b><br><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/请求报文格式.png" alt></p>
+<p>方法有如下几种：</p>
+<ul>
+<li>GET：向服务器请求一个对象</li>
+<li>POST：用户请求一个web页面，例如用搜索引擎搜索</li>
+<li>HEAD：asks server to leave requested object out of response</li>
+<li>PUT：向web服务器上传对象</li>
+<li>DELETE：删除web服务器上的对象</li>
+</ul>
+<p>首部行基本内容：</p>
+<ul>
+<li>Host：目的主机地址</li>
+<li>Connection：连接类型（close/keep-alive）</li>
+<li>User-agent：用户代理，即向服务器发送请求的浏览器类型（如Chrome）</li>
+<li>Accept-language：表示用户想得到的对象的语言版本</li>
+</ul>
+<p><b>请求报文举例（GET）</b><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F;index.html HTTP&#x2F;1.1\r\n    # 1.请求行</span><br><span class="line">Host: www.baidu.com\r\n         # 2.首部行</span><br><span class="line">Connection: close\r\n           # 2.首部行</span><br><span class="line">User-agent: chrome\r\n          # 2.首部行</span><br><span class="line">Accept-language: fr\r\n         # 2.首部行</span><br><span class="line">\r\n                            # 3.空行</span><br><span class="line">......data......                # 4.实体主体</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-2-4、HTTP响应报文"><a href="#3-2-4、HTTP响应报文" class="headerlink" title="3.2.4、HTTP响应报文"></a>3.2.4、HTTP响应报文</h3><p><b>基本格式</b><br><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/响应报文格式.png" alt></p>
+<p>状态码有如下几种：</p>
+<ul>
+<li>200：OK</li>
+<li>301：Moved Permanently</li>
+<li>400: Bad Request</li>
+<li>404：Not Found</li>
+<li>505：HTTP Version Not Supported</li>
+</ul>
+<p>首部行有如下几种：</p>
+<ul>
+<li>Connection：指示发送完报文后是否关闭连接</li>
+<li>Date：服务器产生并发送该响应报文的日期和时间</li>
+<li>Server：产生报文的服务器类型</li>
+<li>Last-Modified：最后修改日期，对于网络缓存服务器上的对象比较重要</li>
+<li>Content-Length：被发送对象的字节数</li>
+<li>Content-Type：表示发送的文件类型</li>
+</ul>
+<p><b>响应报文举例（OK）</b><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">HTTP&#x2F;1.1 200 OK\r\n</span><br><span class="line">Connection: close\r\n</span><br><span class="line">Date: Tue, 09 Aug 2011 15:44:04 GMT\r\n</span><br><span class="line">Server: Apache&#x2F;2.2.2(CentOS)\r\n</span><br><span class="line">Last-Modified: Tue, 09 Aug 2011 15:11:03 GMT</span><br><span class="line">Content-Length: 6821</span><br><span class="line">Content-Type: text&#x2F;html</span><br><span class="line">(data data data data data ...)</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-2-5、使用telnet实践HTTP协议"><a href="#3-2-5、使用telnet实践HTTP协议" class="headerlink" title="3.2.5、使用telnet实践HTTP协议"></a>3.2.5、使用telnet实践HTTP协议</h3><p>操作顺序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">win+r: cmd</span><br><span class="line">telnet www.baidu.com 80</span><br><span class="line">ctrl+]</span><br><span class="line">回车</span><br><span class="line">GET &#x2F; HTTP&#x2F;1.1</span><br><span class="line">连续两次回车</span><br></pre></td></tr></table></figure><br>获得如下响应报文：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HTTP&#x2F;1.1 302 Found</span><br><span class="line">Location: https:&#x2F;&#x2F;www.baidu.com&#x2F;error.html</span><br><span class="line">Server: bfe</span><br><span class="line">Date: Sat, 09 Jun 2018 03:04:12 GMT</span><br><span class="line">Content-Length: 0</span><br><span class="line">Content-Type: text&#x2F;plain; charset&#x3D;utf-8</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-3、Web优化：cookie"><a href="#3-3、Web优化：cookie" class="headerlink" title="3.3、Web优化：cookie"></a>3.3、Web优化：cookie</h2><p>由于HTTP是无状态协议，所以用户每一次访问站点都是全新的状态，这带来许多不便之处，例如购物车的维护。还有某些需要用户密码进行登录的网站，通过cookie可以免去每次都要进行的登陆操作。</p>
 <p>不过cookie的使用也存在争议，因为他们被认为是对用户隐私的一种侵害。web站点通过cookie可以知道许多关于用户的信息，并可能将这些消息卖给第三方。</p>
-<p>带有cookie的网站其HTTP协议访问过程如下： <img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/cookie访问.png"></p>
-<h2 id="web优化web-cacheproxy-serer">3.4、Web优化：web cache/proxy serer</h2>
-<h3 id="原理">3.4.1、原理</h3>
-<p>web缓存器又叫代理服务器，其既是客户又是服务器。 <img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/web缓存器.png"></p>
-<p>web缓存器可以与计算机组成中的cache做一下类比，二者原理是相似的： cache|web缓存 :-|:- cache命中|web缓存命中，HTTP请求的对象由代理服务器分发 cache缺失|web缓存缺失，HTTP请求的对象首先由代理服务器向初始服务器请求，然后再分发给客户 cache失效|条件GET发现目标已失效，代理服务器向初始服务器请求目标对象</p>
-<h3 id="使用代理服务器的优点">3.4.2、使用代理服务器的优点</h3>
-<ol type="1">
-<li>可以大大减少对客户请求的响应时间（特别是当客户与初始服务器之间的瓶颈带宽远低于客户与代理服务器之间的瓶颈带宽时）。<img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/代理瓶颈.png"></li>
+<p>带有cookie的网站其HTTP协议访问过程如下：<br><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/cookie访问.png" alt></p>
+<h2 id="3-4、Web优化：web-cache-proxy-serer"><a href="#3-4、Web优化：web-cache-proxy-serer" class="headerlink" title="3.4、Web优化：web cache/proxy serer"></a>3.4、Web优化：web cache/proxy serer</h2><h3 id="3-4-1、原理"><a href="#3-4-1、原理" class="headerlink" title="3.4.1、原理"></a>3.4.1、原理</h3><p>web缓存器又叫代理服务器，其既是客户又是服务器。<br><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/web缓存器.png" alt></p>
+<p>web缓存器可以与计算机组成中的cache做一下类比，二者原理是相似的：<br>cache|web缓存<br>:-|:-<br>cache命中|web缓存命中，HTTP请求的对象由代理服务器分发<br>cache缺失|web缓存缺失，HTTP请求的对象首先由代理服务器向初始服务器请求，然后再分发给客户<br>cache失效|条件GET发现目标已失效，代理服务器向初始服务器请求目标对象</p>
+<h3 id="3-4-2、使用代理服务器的优点"><a href="#3-4-2、使用代理服务器的优点" class="headerlink" title="3.4.2、使用代理服务器的优点"></a>3.4.2、使用代理服务器的优点</h3><ol>
+<li>可以大大减少对客户请求的响应时间（特别是当客户与初始服务器之间的瓶颈带宽远低于客户与代理服务器之间的瓶颈带宽时）。<img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/代理瓶颈.png" alt></li>
 <li>能够大大减少一个机构的接入链路到因特网的通信量，通过减少通信量降低带宽需求，从而降低了费用。</li>
 <li>web缓存器能够从整体上大大减低因特网上的web流量，从而改善了所有应用的性能。</li>
 </ol>
-<h3 id="条件get方法">3.4.3、条件GET方法</h3>
-<p>代理服务器定期向初始服务器发送条件GET请求报文，请求报文示例如下： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F;index.html HTTP&#x2F;1.1\r\n</span><br><span class="line">Host: www.baidu.com\r\n</span><br><span class="line">If-Modified-Since: Wed, 7 Sep 2011 09:23:24\r\n</span><br><span class="line">\r\n</span><br></pre></td></tr></table></figure> 对应的响应报文示例如下： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP&#x2F;1.1 304 Not Modified\r\n</span><br><span class="line">Date: Sat, 15 Oct 2011 15:39:29\r\n</span><br><span class="line">Server: Apache&#x2F;1.3.0 (Unix)\r\n</span><br><span class="line">\r\n</span><br><span class="line">(empty entity body)</span><br></pre></td></tr></table></figure> # 4、CS-文件传输：FTP ## 4.1、连接 FTP使用两个并行的TCP连接来传输文件，一个是控制连接，一个是数据连接。其中控制连接是持续连接，数据连接是非持续连接。FTP是一个有状态的协议。 <img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/ftp连接.png"></p>
+<h3 id="3-4-3、条件GET方法"><a href="#3-4-3、条件GET方法" class="headerlink" title="3.4.3、条件GET方法"></a>3.4.3、条件GET方法</h3><p>代理服务器定期向初始服务器发送条件GET请求报文，请求报文示例如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F;index.html HTTP&#x2F;1.1\r\n</span><br><span class="line">Host: www.baidu.com\r\n</span><br><span class="line">If-Modified-Since: Wed, 7 Sep 2011 09:23:24\r\n</span><br><span class="line">\r\n</span><br></pre></td></tr></table></figure><br>对应的响应报文示例如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP&#x2F;1.1 304 Not Modified\r\n</span><br><span class="line">Date: Sat, 15 Oct 2011 15:39:29\r\n</span><br><span class="line">Server: Apache&#x2F;1.3.0 (Unix)\r\n</span><br><span class="line">\r\n</span><br><span class="line">(empty entity body)</span><br></pre></td></tr></table></figure></p>
+<h1 id="4、CS-文件传输：FTP"><a href="#4、CS-文件传输：FTP" class="headerlink" title="4、CS-文件传输：FTP"></a>4、CS-文件传输：FTP</h1><h2 id="4-1、连接"><a href="#4-1、连接" class="headerlink" title="4.1、连接"></a>4.1、连接</h2><p>FTP使用两个并行的TCP连接来传输文件，一个是控制连接，一个是数据连接。其中控制连接是持续连接，数据连接是非持续连接。FTP是一个有状态的协议。<br><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/ftp连接.png" alt></p>
 <p>由于FTP使用独立的控制连接来传输控制信息（而HTTP的控制信息与数据是放在一起的），所以称FTP是带外（out-of-band）发送控制信息的，称HTTP是带内（in-band）发送控制信息的。</p>
-<h2 id="命令与回答">4.2、命令与回答</h2>
-<ul>
-<li>命令
-<ul>
+<h2 id="4-2、命令与回答"><a href="#4-2、命令与回答" class="headerlink" title="4.2、命令与回答"></a>4.2、命令与回答</h2><ul>
+<li>命令<ul>
 <li>USER：向服务器发送用户标识</li>
 <li>PASS：用于向服务器发送口令（密码）</li>
 <li>LIST：请求获得远程主机当前目录下的的文件列表（建立新的数据连接发送）</li>
 <li>RETR filename：检索（即get）远程主机当前目录下的目标文件</li>
 <li>STOR：在远程主机当前目录下存放（即put）文件</li>
-</ul></li>
-<li>回答
-<ul>
+</ul>
+</li>
+<li>回答<ul>
 <li>331：Username OK, Password required（用户名OK，需要口令）</li>
 <li>125：Data connection already open; transfer starting（数据连接已打开，开始传送）</li>
-<li>425：Cant't open data connection（无法打开数据连接）</li>
+<li>425：Cant’t open data connection（无法打开数据连接）</li>
 <li>452：Error writing file（写文件差错）</li>
-</ul></li>
 </ul>
-<h1 id="cs-电子邮件smtppop3imap">5、CS-电子邮件：SMTP、POP3、IMAP</h1>
-<h2 id="电子邮件基础">5.1、电子邮件基础</h2>
-<h3 id="地址userdomain_name">5.1.1、地址（USER@domain_name）</h3>
-<ul>
+</li>
+</ul>
+<h1 id="5、CS-电子邮件：SMTP、POP3、IMAP"><a href="#5、CS-电子邮件：SMTP、POP3、IMAP" class="headerlink" title="5、CS-电子邮件：SMTP、POP3、IMAP"></a>5、CS-电子邮件：SMTP、POP3、IMAP</h1><h2 id="5-1、电子邮件基础"><a href="#5-1、电子邮件基础" class="headerlink" title="5.1、电子邮件基础"></a>5.1、电子邮件基础</h2><h3 id="5-1-1、地址（USER-domain-name）"><a href="#5-1-1、地址（USER-domain-name）" class="headerlink" title="5.1.1、地址（USER@domain_name）"></a>5.1.1、地址（USER@domain_name）</h3><ul>
 <li>第一部分“USER”代表用户信箱的账号，对于同一个邮件接收服务器来说，这个账号必须是唯一的；</li>
 <li>第二部分“@”是分隔符；</li>
-<li>第三部分是用户信箱的邮件接收服务器域名，用以标志其所在的位置（通过DNS可获取其IP地址）。 ### 5.1.2、总体结构 电子邮箱系统主要有以下三个组件：</li>
-<li>用户代理
-<ul>
+<li>第三部分是用户信箱的邮件接收服务器域名，用以标志其所在的位置（通过DNS可获取其IP地址）。<h3 id="5-1-2、总体结构"><a href="#5-1-2、总体结构" class="headerlink" title="5.1.2、总体结构"></a>5.1.2、总体结构</h3>电子邮箱系统主要有以下三个组件：</li>
+<li>用户代理<ul>
 <li>用户代理 UA 就是用户与电子邮件系统的接口，是电子邮件客户端软件，例如outlook。</li>
 <li>用户代理的功能：撰写、显示、处理和通信。</li>
 <li>允许用户阅读、回复、转发、保存和撰写报文</li>
-</ul></li>
-<li>邮件服务器
-<ul>
+</ul>
+</li>
+<li>邮件服务器<ul>
 <li>邮件服务器的功能是发送和接收邮件，同时还要向发信人报告邮件传送的情况（已交付、被拒绝、丢失等）。</li>
 <li>邮件服务器按照客户服务器方式工作。邮件服务器需要使用发送和读取两个不同的协议。</li>
-<li>种类
-<ul>
+<li>种类<ul>
 <li>SMTP服务器</li>
 <li>POP3/IMAP服务器</li>
-</ul></li>
-</ul></li>
-<li>邮件传输协议
-<ul>
-<li>发送邮件的协议：SMTP</li>
-<li>读取邮件的协议：POP3和IMAP <img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/电子邮件系统结构.png"></li>
-</ul></li>
 </ul>
-<h3 id="发送与接收电子邮件基本流程">5.1.3、发送与接收电子邮件基本流程</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">digraph pro&#123;</span><br><span class="line">    node[shape&#x3D;rect]</span><br><span class="line">    a[label&#x3D;&quot;发件人调用PC中的用户代理撰写和编辑要发送的邮件。&quot;]</span><br><span class="line">    b[label&#x3D;&quot;发件人的用户代理把邮件用SMTP协议发给发送方邮件服务器&quot;]</span><br><span class="line">    c[label&#x3D;&quot;SMTP 服务器把邮件临时存放在邮件缓存队列中，等待发送&quot;]</span><br><span class="line">    d[label&#x3D;&quot;发送方邮件服务器的SMTP客户与接收方邮件服务器的SMTP\n服务器建立TCP连接，然后就把邮件缓存队列中的邮件依次发送出去。&quot;]</span><br><span class="line">    e[label&#x3D;&quot;运行在接收方邮件服务器中的SMTP服务器进程收到邮件后，\n把邮件放入收件人的用户邮箱中，等待收件人进行读取&quot;]</span><br><span class="line">    f[label&#x3D;&quot;收件人在打算收信时，就运行PC机中的用户代理，使用POP3\n（或IMAP）协议读取发送给自己的邮件&quot;]</span><br><span class="line">    a -&gt; b</span><br><span class="line">    b -&gt; c</span><br><span class="line">    c -&gt; d</span><br><span class="line">    d -&gt; e</span><br><span class="line">    e -&gt; f</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="简单邮件传输协议smtp">5.2、简单邮件传输协议（SMTP）</h2>
-<h3 id="基本了解">5.2.1、基本了解</h3>
-<p>特点： - 采用持续连接的TCP，端口号为25 - 传输的信息必须是7位ASCII编码 - 连接在发送主机的SMTP客户和接收主机的SMTP服务器之间直接建立 - SMTP 规定了 14 条命令和 21 种应答信息。每条命令用 4 个字母组成，而每一种应答信息一般只有一行信息，由一个 3 位数字的代码开始，后面附上（也可不附上）很简单的文字说明。 - HTTP把每个对象封装到一个HTTP响应报文中；而SMTP将所有报文对象放在一个报文中。</p>
-<p>三个阶段： - 连接建立：连接是在发送主机的 SMTP 客户和接收主机的 SMTP 服务器之间建立的。SMTP不使用中间的邮件服务器。 - 邮件传送 - 连接释放：邮件发送完毕后，SMTP应释放TCP连接.</p>
-<h3 id="命令">5.2.2、命令</h3>
+</li>
+</ul>
+</li>
+<li>邮件传输协议<ul>
+<li>发送邮件的协议：SMTP</li>
+<li>读取邮件的协议：POP3和IMAP<br><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/电子邮件系统结构.png" alt></li>
+</ul>
+</li>
+</ul>
+<h3 id="5-1-3、发送与接收电子邮件基本流程"><a href="#5-1-3、发送与接收电子邮件基本流程" class="headerlink" title="5.1.3、发送与接收电子邮件基本流程"></a>5.1.3、发送与接收电子邮件基本流程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">digraph pro&#123;</span><br><span class="line">    node[shape&#x3D;rect]</span><br><span class="line">    a[label&#x3D;&quot;发件人调用PC中的用户代理撰写和编辑要发送的邮件。&quot;]</span><br><span class="line">    b[label&#x3D;&quot;发件人的用户代理把邮件用SMTP协议发给发送方邮件服务器&quot;]</span><br><span class="line">    c[label&#x3D;&quot;SMTP 服务器把邮件临时存放在邮件缓存队列中，等待发送&quot;]</span><br><span class="line">    d[label&#x3D;&quot;发送方邮件服务器的SMTP客户与接收方邮件服务器的SMTP\n服务器建立TCP连接，然后就把邮件缓存队列中的邮件依次发送出去。&quot;]</span><br><span class="line">    e[label&#x3D;&quot;运行在接收方邮件服务器中的SMTP服务器进程收到邮件后，\n把邮件放入收件人的用户邮箱中，等待收件人进行读取&quot;]</span><br><span class="line">    f[label&#x3D;&quot;收件人在打算收信时，就运行PC机中的用户代理，使用POP3\n（或IMAP）协议读取发送给自己的邮件&quot;]</span><br><span class="line">    a -&gt; b</span><br><span class="line">    b -&gt; c</span><br><span class="line">    c -&gt; d</span><br><span class="line">    d -&gt; e</span><br><span class="line">    e -&gt; f</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="5-2、简单邮件传输协议（SMTP）"><a href="#5-2、简单邮件传输协议（SMTP）" class="headerlink" title="5.2、简单邮件传输协议（SMTP）"></a>5.2、简单邮件传输协议（SMTP）</h2><h3 id="5-2-1、基本了解"><a href="#5-2-1、基本了解" class="headerlink" title="5.2.1、基本了解"></a>5.2.1、基本了解</h3><p>特点：</p>
 <ul>
+<li>采用持续连接的TCP，端口号为25</li>
+<li>传输的信息必须是7位ASCII编码</li>
+<li>连接在发送主机的SMTP客户和接收主机的SMTP服务器之间直接建立</li>
+<li>SMTP 规定了 14 条命令和 21 种应答信息。每条命令用 4 个字母组成，而每一种应答信息一般只有一行信息，由一个 3 位数字的代码开始，后面附上（也可不附上）很简单的文字说明。</li>
+<li>HTTP把每个对象封装到一个HTTP响应报文中；而SMTP将所有报文对象放在一个报文中。</li>
+</ul>
+<p>三个阶段：</p>
+<ul>
+<li>连接建立：连接是在发送主机的 SMTP 客户和接收主机的 SMTP 服务器之间建立的。SMTP不使用中间的邮件服务器。</li>
+<li>邮件传送</li>
+<li>连接释放：邮件发送完毕后，SMTP应释放TCP连接.</li>
+</ul>
+<h3 id="5-2-2、命令"><a href="#5-2-2、命令" class="headerlink" title="5.2.2、命令"></a>5.2.2、命令</h3><ul>
 <li>HELO</li>
 <li>MAIL FROM</li>
 <li>RCPT TO</li>
 <li>DATA</li>
 <li>.</li>
-<li>QUIT ### 5.2.3、响应</li>
+<li>QUIT<h3 id="5-2-3、响应"><a href="#5-2-3、响应" class="headerlink" title="5.2.3、响应"></a>5.2.3、响应</h3></li>
 <li>220</li>
 <li>250</li>
 <li>354</li>
-<li>221 ### 5.2.4、邮件报文格式 典型的报文首部： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">From: alice@crepes.fr</span><br><span class="line">To: bob@hamburger.edu</span><br><span class="line">Subject: Searching for the meaning of life.</span><br></pre></td></tr></table></figure> ### 5.2.5、MIME：通用因特网邮件扩充 SMTP有以下缺点：</li>
+<li>221<h3 id="5-2-4、邮件报文格式"><a href="#5-2-4、邮件报文格式" class="headerlink" title="5.2.4、邮件报文格式"></a>5.2.4、邮件报文格式</h3>典型的报文首部：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">From: alice@crepes.fr</span><br><span class="line">To: bob@hamburger.edu</span><br><span class="line">Subject: Searching for the meaning of life.</span><br></pre></td></tr></table></figure>
+<h3 id="5-2-5、MIME：通用因特网邮件扩充"><a href="#5-2-5、MIME：通用因特网邮件扩充" class="headerlink" title="5.2.5、MIME：通用因特网邮件扩充"></a>5.2.5、MIME：通用因特网邮件扩充</h3>SMTP有以下缺点：</li>
 <li>SMTP 不能传送可执行文件或其他的二进制对象。</li>
 <li>SMTP 限于传送 7 位的 ASCII 码。许多其他非英语国家的文字（如中文、俄文，甚至带重音符号的法文或德文）就无法传送。</li>
 <li>SMTP 服务器会拒绝超过一定长度的邮件。</li>
 <li>某些 SMTP 的实现并没有完全按照[RFC 821]的 SMTP 标准。</li>
 </ul>
-<p>MIME 并没有改动 SMTP 或取代它。MIME 的意图是继续使用目前的[RFC 822]格式，但增加了邮件主体的结构，并定义了传送非 ASCII 码的编码规则。 <img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/MIME.png"></p>
-<h3 id="使用telnet实验smtp协议">5.2.6、使用telnet实验SMTP协议</h3>
-<p><a href="https://blog.csdn.net/zhangyulin54321/article/details/7599403)https://blog.csdn.net/zhangyulin54321/article/details/7599403" target="_blank" rel="noopener">??</a></p>
-<h2 id="邮件访问协议">5.3、邮件访问协议</h2>
-<h3 id="pop3">5.3.1、POP3</h3>
-<h3 id="imap">5.3.2、IMAP</h3>
-<p>IMAP是一个联机协议。当用户PC机上的IMAP客户程序打开IMAP服务器的邮箱时，用户就可看到邮件的首部。若用户需要打开某个邮件，则该邮件才传到用户的计算机上。</p>
-<p>优缺点： - IMAP最大的好处就是用户可以在不同的地方使用不同的计算机随时上网阅读和处理自己的邮件。 - IMAP 还允许收件人只读取邮件中的某一个部分。例如，收到了一个带有视像附件（此文件可能很大）的邮件。为了节省时间，可以先下载邮件的正文部分，待以后有时间再读取或下载这个很长的附件。 - IMAP 的缺点是如果用户没有将邮件复制到自己的 PC 上，则邮件一直是存放在 IMAP 服务器上。因此用户需要经常与 IMAP 服务器建立连接。</p>
-<h3 id="基于web的电子邮件">5.3.3、基于Web的电子邮件</h3>
-<p>使用SMTP+HTTP而不是SMTP+POP3/IMAP。 <img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/基于因特网的电子邮件.png"></p>
-<h1 id="cs-域名解析dnsdomain-name-server">6、CS-域名解析：DNS（Domain Name Server）</h1>
-<h2 id="域名">6.1、域名</h2>
-<h3 id="为什么要有域名">6.1.1、为什么要有域名</h3>
+<p>MIME 并没有改动 SMTP 或取代它。MIME 的意图是继续使用目前的[RFC 822]格式，但增加了邮件主体的结构，并定义了传送非 ASCII 码的编码规则。<br><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/MIME.png" alt></p>
+<h3 id="5-2-6、使用telnet实验SMTP协议"><a href="#5-2-6、使用telnet实验SMTP协议" class="headerlink" title="5.2.6、使用telnet实验SMTP协议"></a>5.2.6、使用telnet实验SMTP协议</h3><p><a href="https://blog.csdn.net/zhangyulin54321/article/details/7599403)https://blog.csdn.net/zhangyulin54321/article/details/7599403" target="_blank" rel="noopener">??</a></p>
+<h2 id="5-3、邮件访问协议"><a href="#5-3、邮件访问协议" class="headerlink" title="5.3、邮件访问协议"></a>5.3、邮件访问协议</h2><h3 id="5-3-1、POP3"><a href="#5-3-1、POP3" class="headerlink" title="5.3.1、POP3"></a>5.3.1、POP3</h3><h3 id="5-3-2、IMAP"><a href="#5-3-2、IMAP" class="headerlink" title="5.3.2、IMAP"></a>5.3.2、IMAP</h3><p>IMAP是一个联机协议。当用户PC机上的IMAP客户程序打开IMAP服务器的邮箱时，用户就可看到邮件的首部。若用户需要打开某个邮件，则该邮件才传到用户的计算机上。</p>
+<p>优缺点：</p>
 <ul>
+<li>IMAP最大的好处就是用户可以在不同的地方使用不同的计算机随时上网阅读和处理自己的邮件。</li>
+<li>IMAP 还允许收件人只读取邮件中的某一个部分。例如，收到了一个带有视像附件（此文件可能很大）的邮件。为了节省时间，可以先下载邮件的正文部分，待以后有时间再读取或下载这个很长的附件。</li>
+<li>IMAP 的缺点是如果用户没有将邮件复制到自己的 PC 上，则邮件一直是存放在 IMAP 服务器上。因此用户需要经常与 IMAP 服务器建立连接。</li>
+</ul>
+<h3 id="5-3-3、基于Web的电子邮件"><a href="#5-3-3、基于Web的电子邮件" class="headerlink" title="5.3.3、基于Web的电子邮件"></a>5.3.3、基于Web的电子邮件</h3><p>使用SMTP+HTTP而不是SMTP+POP3/IMAP。<br><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/基于因特网的电子邮件.png" alt></p>
+<h1 id="6、CS-域名解析：DNS（Domain-Name-Server）"><a href="#6、CS-域名解析：DNS（Domain-Name-Server）" class="headerlink" title="6、CS-域名解析：DNS（Domain Name Server）"></a>6、CS-域名解析：DNS（Domain Name Server）</h1><h2 id="6-1、域名"><a href="#6-1、域名" class="headerlink" title="6.1、域名"></a>6.1、域名</h2><h3 id="6-1-1、为什么要有域名"><a href="#6-1-1、为什么要有域名" class="headerlink" title="6.1.1、为什么要有域名"></a>6.1.1、为什么要有域名</h3><ul>
 <li>域名只是个逻辑概念，并不代表计算机所在的物理地点。</li>
 <li>变长的域名和使用有助记忆的字符串，是为了便于人来使用。而 IP 地址是定长的 32 位二进制数字则非常便于机器进行处理。</li>
 </ul>
-<h3 id="因特网的域名结构">6.1.2、因特网的域名结构</h3>
-<ul>
+<h3 id="6-1-2、因特网的域名结构"><a href="#6-1-2、因特网的域名结构" class="headerlink" title="6.1.2、因特网的域名结构"></a>6.1.2、因特网的域名结构</h3><ul>
 <li>因特网采用了层次树状结构的命名方法。</li>
 <li>任何一个连接在因特网上的主机或路由器，都有一个唯一的层次结构的名字，即域名。</li>
-<li>域名的结构由标号序列组成，各标号之间用点隔开： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">digraph a&#123;</span><br><span class="line">    node[shape&#x3D;rect,style&#x3D;filled,fillcolor&#x3D;lemonchiffon]</span><br><span class="line">    a[label&#x3D;&quot;… .三级域名.二级域名.顶级域名&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 顶级域名有：</li>
+<li>域名的结构由标号序列组成，各标号之间用点隔开：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">digraph a&#123;</span><br><span class="line">    node[shape&#x3D;rect,style&#x3D;filled,fillcolor&#x3D;lemonchiffon]</span><br><span class="line">    a[label&#x3D;&quot;… .三级域名.二级域名.顶级域名&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+顶级域名有：</li>
 <li>国家顶级域名</li>
 <li>通用顶级域名</li>
 <li>基础结构域名：arpa</li>
 </ul>
-<p><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/域名结构.png"></p>
-<h2 id="域名服务器">6.2、域名服务器</h2>
-<h3 id="服务器种类">6.2.1、服务器种类</h3>
-<p><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/域名区与域.png"> <img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/服务器层级.png"></p>
+<p><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/域名结构.png" alt></p>
+<h2 id="6-2、域名服务器"><a href="#6-2、域名服务器" class="headerlink" title="6.2、域名服务器"></a>6.2、域名服务器</h2><h3 id="6-2-1、服务器种类"><a href="#6-2-1、服务器种类" class="headerlink" title="6.2.1、服务器种类"></a>6.2.1、服务器种类</h3><p><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/域名区与域.png" alt><br><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/服务器层级.png" alt></p>
 <ul>
-<li>根域名服务器
-<ul>
+<li>根域名服务器<ul>
 <li>根域名服务器是最重要的域名服务器。所有的根域名服务器都知道所有的顶级域名服务器的域名和 IP 地址。</li>
 <li>不管是哪一个本地域名服务器，若要对因特网上任何一个域名进行解析，只要自己无法解析，就首先求助于根域名服务器。</li>
 <li>在因特网上共有13个不同IP地址的根域名服务器（是13套装置而不是13台机器，例如根域名服务器f有49台机器分布在世界各地），它们的名字是用一个英文字母命名，从a 一直到 m（前13 个字母）。</li>
-</ul></li>
-<li>顶级域名服务器
-<ul>
+</ul>
+</li>
+<li>顶级域名服务器<ul>
 <li>这些域名服务器负责管理在该顶级域名服务器注册的所有二级域名。</li>
 <li>当收到 DNS 查询请求时，就给出相应的回答（可能是最后的结果，也可能是下一步应当找的域名服务器的 IP 地址）。</li>
-</ul></li>
-<li>权限域名服务器
-<ul>
+</ul>
+</li>
+<li>权限域名服务器<ul>
 <li>负责一个区的域名服务器。</li>
 <li>当一个权限域名服务器还不能给出最后的查询回答时，就会告诉发出查询请求的 DNS 客户，下一步应当找哪一个权限域名服务器。</li>
-</ul></li>
-<li>本地域名服务器
-<ul>
+</ul>
+</li>
+<li>本地域名服务器<ul>
 <li>当一个主机发出 DNS 查询请求时，这个查询请求报文就发送给本地域名服务器。</li>
 <li>每一个因特网服务提供者 ISP，或一个大学，甚至一个大学里的系，都可以拥有一个本地域名服务器，</li>
 <li>这种域名服务器有时也称为默认域名服务器。</li>
-</ul></li>
-<li>辅助域名服务器
-<ul>
+</ul>
+</li>
+<li>辅助域名服务器<ul>
 <li>DNS 域名服务器都把数据复制到几个域名服务器来保存，其中的一个是主域名服务器，其他的是辅助域名服务器。</li>
 <li>当主域名服务器出故障时，辅助域名服务器可以保证 DNS 的查询工作不会中断。</li>
 <li>主域名服务器定期把数据复制到辅助域名服务器中，而更改数据只能在主域名服务器中进行。这样就保证了数据的一致性。</li>
-</ul></li>
 </ul>
-<h3 id="提供的服务">6.2.2、提供的服务</h3>
-<ul>
+</li>
+</ul>
+<h3 id="6-2-2、提供的服务"><a href="#6-2-2、提供的服务" class="headerlink" title="6.2.2、提供的服务"></a>6.2.2、提供的服务</h3><ul>
 <li>主机名到IP地址的转换</li>
 <li>主机别名</li>
 <li>邮件服务器别名</li>
 <li>负载均衡：有点像集群</li>
 </ul>
-<h2 id="域名查询过程">6.3、域名查询过程</h2>
-<h3 id="迭代查询">6.3.1、迭代查询</h3>
-<p><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/DNS迭代查询.png"></p>
-<h3 id="递归查询比较少用">6.3.2、递归查询（比较少用）</h3>
-<p><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/DNS递归查询.png"></p>
-<h3 id="dns优化dns缓存">6.3.3、DNS优化：DNS缓存</h3>
-<ul>
+<h2 id="6-3、域名查询过程"><a href="#6-3、域名查询过程" class="headerlink" title="6.3、域名查询过程"></a>6.3、域名查询过程</h2><h3 id="6-3-1、迭代查询"><a href="#6-3-1、迭代查询" class="headerlink" title="6.3.1、迭代查询"></a>6.3.1、迭代查询</h3><p><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/DNS迭代查询.png" alt></p>
+<h3 id="6-3-2、递归查询（比较少用）"><a href="#6-3-2、递归查询（比较少用）" class="headerlink" title="6.3.2、递归查询（比较少用）"></a>6.3.2、递归查询（比较少用）</h3><p><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/DNS递归查询.png" alt></p>
+<h3 id="6-3-3、DNS优化：DNS缓存"><a href="#6-3-3、DNS优化：DNS缓存" class="headerlink" title="6.3.3、DNS优化：DNS缓存"></a>6.3.3、DNS优化：DNS缓存</h3><ul>
 <li>每个域名服务器都维护一个高速缓存，存放最近用过的名字以及从何处获得名字映射信息的记录。可大大减轻根域名服务器的负荷，使因特网上的 DNS 查询请求和回答报文的数量大为减少。</li>
 <li>为保持高速缓存中的内容正确，域名服务器应为每项内容设置计时器，并处理超过合理时间的项（例如，每个项目只存放两天）。</li>
 <li>当权限域名服务器回答一个查询请求时，在响应中都指明绑定有效存在的时间值。增加此时间值可减少网络开销，而减少此时间值可提高域名转换的准确性。</li>
 </ul>
-<h2 id="dns协议">6.4、DNS协议</h2>
-<h3 id="资源记录rr">6.4.1、资源记录（RR）</h3>
-<p>共同实现DNS分布式数据库的所有DNS服务器存储了资源记录（Resource Record），RR提供了主机名到IP地址的映射。每个DNS回答报文包含了一条或多条资源记录。</p>
-<p>资源记录是一个包含了下列4个字段的4元组：（Name，Value，Type，TTL） - Type=A - Name表示主机名，Value表示该主机名对应的IP地址 - 例如：<code>（relay1.bar.foo.com，145.37.93.126，A，the value of TTL）</code> - Type=NS - Name表示一个域，Value表示一个知道如何获得该域中主机IP地址的权威DNS服务器的主机名 - 例如：<code>（foo.com，dns.foo.com，NS，the value of TTL）</code> - Type=CNAME - Name表示主机别名，Value表示其对应的规范主机名 - 例如：<code>（foo.com，relay1.bar.foo.com，CNAME，the value of TTL）</code> - Type=MX - Name表示邮件服务器别名，Value表示其对应的规范主机名 - 例如：<code>（foo.com，mail.bar.foo.com，MX，the value of TTL）</code></p>
-<h3 id="dns报文">6.4.2、DNS报文</h3>
-<p><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/DNS报文格式.png"></p>
-<h3 id="在dns数据库中插入记录">6.4.3、在DNS数据库中插入记录</h3>
-<blockquote>
+<h2 id="6-4、DNS协议"><a href="#6-4、DNS协议" class="headerlink" title="6.4、DNS协议"></a>6.4、DNS协议</h2><h3 id="6-4-1、资源记录（RR）"><a href="#6-4-1、资源记录（RR）" class="headerlink" title="6.4.1、资源记录（RR）"></a>6.4.1、资源记录（RR）</h3><p>共同实现DNS分布式数据库的所有DNS服务器存储了资源记录（Resource Record），RR提供了主机名到IP地址的映射。每个DNS回答报文包含了一条或多条资源记录。</p>
+<p>资源记录是一个包含了下列4个字段的4元组：（Name，Value，Type，TTL）</p>
+<ul>
+<li>Type=A<ul>
+<li>Name表示主机名，Value表示该主机名对应的IP地址</li>
+<li>例如：<code>（relay1.bar.foo.com，145.37.93.126，A，the value of TTL）</code></li>
+</ul>
+</li>
+<li>Type=NS<ul>
+<li>Name表示一个域，Value表示一个知道如何获得该域中主机IP地址的权威DNS服务器的主机名</li>
+<li>例如：<code>（foo.com，dns.foo.com，NS，the value of TTL）</code></li>
+</ul>
+</li>
+<li>Type=CNAME<ul>
+<li>Name表示主机别名，Value表示其对应的规范主机名</li>
+<li>例如：<code>（foo.com，relay1.bar.foo.com，CNAME，the value of TTL）</code></li>
+</ul>
+</li>
+<li>Type=MX<ul>
+<li>Name表示邮件服务器别名，Value表示其对应的规范主机名</li>
+<li>例如：<code>（foo.com，mail.bar.foo.com，MX，the value of TTL）</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="6-4-2、DNS报文"><a href="#6-4-2、DNS报文" class="headerlink" title="6.4.2、DNS报文"></a>6.4.2、DNS报文</h3><p><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/DNS报文格式.png" alt></p>
+<h3 id="6-4-3、在DNS数据库中插入记录"><a href="#6-4-3、在DNS数据库中插入记录" class="headerlink" title="6.4.3、在DNS数据库中插入记录"></a>6.4.3、在DNS数据库中插入记录</h3><blockquote>
 <p>注册登记机构：是一个商业实体，它验证域名的唯一性，将该域名输入DNS数据库，对提供的服务收取少量费用。</p>
-</blockquote>
-<blockquote>
 <p>因特网名字和地址分配机构（ICANN）：向各种注册登记机构授权。</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">digraph ex&#123;</span><br><span class="line">    splines &#x3D; line</span><br><span class="line">    rankdir &#x3D; TB</span><br><span class="line">    node[shape&#x3D;rect]</span><br><span class="line">    domin[label&#x3D;&quot;networkutopia.com&quot;]</span><br><span class="line">    domin -&gt; dnsserver[label&#x3D;&quot;插入RR条目（Web&amp;邮件服务器）\n(www.networkutopia.com, 212.212.212.5, A, TTL)\n(mail.networkutopia.com, 212.212.212.6, MX, TTL)&quot;]</span><br><span class="line"></span><br><span class="line">    dnsserver[label&#x3D;&quot;基本DNS服务器\ndns1.networkutopia.com\n212.212.212.1&quot;]</span><br><span class="line">    auxidnsserver[label&#x3D;&quot;辅助DNS服务器\ndns2.networkutopia.com\n212.212.212.2&quot;]</span><br><span class="line"></span><br><span class="line">    register[label&#x3D;&quot;这册登记机构&quot;]</span><br><span class="line"></span><br><span class="line">    &#123; dnsserver, auxidnsserver &#125; -&gt; register</span><br><span class="line">    register -&gt; DNS系统[label&#x3D;&quot;插入RR条目（查找路径&amp;查找结果）\n(networkutopia.com, dns1.networkutopia.com, NS, TTL)\n(dns1.networkutopia.com, 212.212.212.1, A, TTL)&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="dns安全性">6.5、DNS安全性</h2>
-<h3 id="针对dns服务的ddos攻击">6.5.1、针对DNS服务的DDoS攻击</h3>
-<h3 id="利用dns向目标主机发起ddos攻击">6.5.2、利用DNS向目标主机发起DDoS攻击</h3>
-<h1 id="p2p-文件分发">7、P2P-文件分发</h1>
-<h2 id="性能比较">7.1、性能比较</h2>
-<p>通过比较时间下界来比较CS结构与P2P结构的性能，并假定因特网核心具有足够的带宽（这意味着所有瓶颈都在网络接入链路）。</p>
-<p>符号说明 符号|含义 :-|:- <span class="math inline">\(F\)</span>|分发的文件副本长度（bit数） <span class="math inline">\(N\)</span>|需要获得该文件的主机数 <span class="math inline">\(u_s\)</span>|upload server，服务器上载速率 <span class="math inline">\(d_s\)</span>|download server，服务器下载速率 <span class="math inline">\(d_1~d_N\)</span>|download i，主机i的下载速率 <span class="math inline">\(d_{min}\)</span>|N台主机的下载速率的最小值，即<span class="math inline">\(d_{min} = min\{d_1,d_2,\cdots,d_N\}\)</span></p>
-<h3 id="cs结构分发n个文件副本所需时间d_cs">7.1.1、CS结构分发N个文件副本所需时间\(D_{cs}\)</h3>
-<ol type="1">
-<li><b>上载方：</b>服务器上传N个副本所需时间至少为<span class="math inline">\(\dfrac{NF}{u_s}\)</span>。</li>
-<li><b>下载方：</b>所有下载方将副本下载完成所用时间至少为<span class="math inline">\(\dfrac{F}{d_{min}}\)</span></li>
+<h2 id="6-5、DNS安全性"><a href="#6-5、DNS安全性" class="headerlink" title="6.5、DNS安全性"></a>6.5、DNS安全性</h2><h3 id="6-5-1、针对DNS服务的DDoS攻击"><a href="#6-5-1、针对DNS服务的DDoS攻击" class="headerlink" title="6.5.1、针对DNS服务的DDoS攻击"></a>6.5.1、针对DNS服务的DDoS攻击</h3><h3 id="6-5-2、利用DNS向目标主机发起DDoS攻击"><a href="#6-5-2、利用DNS向目标主机发起DDoS攻击" class="headerlink" title="6.5.2、利用DNS向目标主机发起DDoS攻击"></a>6.5.2、利用DNS向目标主机发起DDoS攻击</h3><h1 id="7、P2P-文件分发"><a href="#7、P2P-文件分发" class="headerlink" title="7、P2P-文件分发"></a>7、P2P-文件分发</h1><h2 id="7-1、性能比较"><a href="#7-1、性能比较" class="headerlink" title="7.1、性能比较"></a>7.1、性能比较</h2><p>通过比较时间下界来比较CS结构与P2P结构的性能，并假定因特网核心具有足够的带宽（这意味着所有瓶颈都在网络接入链路）。</p>
+<p>符号说明<br>符号|含义<br>:-|:-<br>$F$|分发的文件副本长度（bit数）<br>$N$|需要获得该文件的主机数<br>$u<em>s$|upload server，服务器上载速率<br>$d_s$|download server，服务器下载速率<br>$d_1~d_N$|download i，主机i的下载速率<br>$d</em>{min}$|N台主机的下载速率的最小值，即$d_{min} = min{d_1,d_2,\cdots,d_N}$</p>
+<h3 id="7-1-1、CS结构分发N个文件副本所需时间-D-cs"><a href="#7-1-1、CS结构分发N个文件副本所需时间-D-cs" class="headerlink" title="7.1.1、CS结构分发N个文件副本所需时间$D_{cs}$"></a>7.1.1、CS结构分发N个文件副本所需时间$D_{cs}$</h3><ol>
+<li><b>上载方：</b>服务器上传N个副本所需时间至少为$\dfrac{NF}{u_s}$。</li>
+<li><b>下载方：</b>所有下载方将副本下载完成所用时间至少为$\dfrac{F}{d_{min}}$</li>
 </ol>
 <p>由上述两点限制，可知CS结构分发N个文件副本所需时间</p>
-<h3 id="p2p结构分发n个文件副本所需时间d_p2p">7.1.2、P2P结构分发N个文件副本所需时间<span class="math inline">\(D_{p2p}\)</span></h3>
-<p>P2P结构性能的分析比较复杂，实际得到的时间下界实际上是经过多次放缩的结果。 1. <b>服务器上载</b>：服务器至少需要经其接入链路发送该文件的每个比特一次，故其时间下界为<span class="math inline">\(\dfrac{F}{u_s}\)</span>。 2. <b>总体上载</b>：<span class="math inline">\(\dfrac{NF}{u_s+\sum\limits_{i=1}^{N}{u_i}}\)</span> 3. <b>总体下载</b>：<span class="math inline">\(\dfrac{F}{d_{min}}\)</span></p>
+<h3 id="7-1-2、P2P结构分发N个文件副本所需时间-D-p2p"><a href="#7-1-2、P2P结构分发N个文件副本所需时间-D-p2p" class="headerlink" title="7.1.2、P2P结构分发N个文件副本所需时间$D_{p2p}$"></a>7.1.2、P2P结构分发N个文件副本所需时间$D_{p2p}$</h3><p>P2P结构性能的分析比较复杂，实际得到的时间下界实际上是经过多次放缩的结果。</p>
+<ol>
+<li><b>服务器上载</b>：服务器至少需要经其接入链路发送该文件的每个比特一次，故其时间下界为$\dfrac{F}{u_s}$。</li>
+<li><b>总体上载</b>：$\dfrac{NF}{u<em>s+\sum\limits</em>{i=1}^{N}{u_i}}$</li>
+<li><b>总体下载</b>：$\dfrac{F}{d_{min}}$</li>
+</ol>
 <p>由上述三点限制，可知P2P结构分发N个文件副本所需时间</p>
-<h3 id="实际性能比较">7.1.3、实际性能比较</h3>
-<p><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/CS与P2P比较.png"></p>
-<h2 id="bittorrent比特洪流使用tcp连接">7.2、BitTorrent（比特洪流，使用TCP连接）</h2>
-<h3 id="基本概念">7.2.1、基本概念</h3>
-<ul>
-<li>追踪器（tracker）
-<ul>
+<h3 id="7-1-3、实际性能比较"><a href="#7-1-3、实际性能比较" class="headerlink" title="7.1.3、实际性能比较"></a>7.1.3、实际性能比较</h3><p><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/CS与P2P比较.png" alt></p>
+<h2 id="7-2、BitTorrent（比特洪流，使用TCP连接）"><a href="#7-2、BitTorrent（比特洪流，使用TCP连接）" class="headerlink" title="7.2、BitTorrent（比特洪流，使用TCP连接）"></a>7.2、BitTorrent（比特洪流，使用TCP连接）</h2><h3 id="7-2-1、基本概念"><a href="#7-2-1、基本概念" class="headerlink" title="7.2.1、基本概念"></a>7.2.1、基本概念</h3><ul>
+<li>追踪器（tracker）<ul>
 <li>每个洪流具有一个追踪器</li>
 <li>当一个对等方加入洪流时，它向追踪器注册自己，并周期性的通知追踪器它仍在洪流中。</li>
-</ul></li>
-<li>临近对等方
-<ul>
+</ul>
+</li>
+<li>临近对等方<ul>
 <li>最开始时由追踪器随机地从洪流中选取一个对等方子集作为新加入的peer（记为Jack）的临近对等方集。</li>
 <li>随着时间流逝，Jack的临近对等方中可能有些会离开，其他对等方也有可能与Jack建立TCP连接而加入Jack的临近对等方集。</li>
-</ul></li>
-<li>块子集
-<ul>
-<li>在任何给定的时间，每个对等方将具有来自该洪流中要下载的文件F的块子集，并且不同的对等方具有不同的块子集。</li>
-</ul></li>
-<li>块列表
-<ul>
-<li>Jack周期性地询问每个临近对等方它们的块列表，如果Jack有M个对等方，那么Jack将获得M个块列表。通过块列表，Jack将对当前他还没有的块发出请求。</li>
-</ul></li>
 </ul>
-<h3 id="请求与响应">7.2.2、请求与响应</h3>
-<ul>
-<li>发出请求：最稀缺优先
-<ul>
+</li>
+<li>块子集<ul>
+<li>在任何给定的时间，每个对等方将具有来自该洪流中要下载的文件F的块子集，并且不同的对等方具有不同的块子集。</li>
+</ul>
+</li>
+<li>块列表<ul>
+<li>Jack周期性地询问每个临近对等方它们的块列表，如果Jack有M个对等方，那么Jack将获得M个块列表。通过块列表，Jack将对当前他还没有的块发出请求。</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-2-2、请求与响应"><a href="#7-2-2、请求与响应" class="headerlink" title="7.2.2、请求与响应"></a>7.2.2、请求与响应</h3><ul>
+<li>发出请求：最稀缺优先<ul>
 <li>Jack在请求块时，优先选择在他的邻居中副本数量最少的块。</li>
 <li>目标是均衡各个块在洪流中的副本数量。</li>
-</ul></li>
-<li>响应请求：一报还一报
-<ul>
+</ul>
+</li>
+<li>响应请求：一报还一报<ul>
 <li>对每个邻居持续地测量接收到比特的速率。</li>
 <li>选取4个向自己传送数据速率最快的对等方（每隔10s重新计算速度并重新确定这四个对等方），这四者称为<font color="red">“疏通（unchoked）对等方”</font>。</li>
 <li>每过30s，随机选择一个邻居Bob向其发送数据块，该邻居称为<font color="red">“试探对等方”</font>，如果Bob向Jack发送的数据足够快，那么Bob将会升级为疏通对等方，否则30s后Jack就不会向他发送数据了。</li>
 <li>其余对等方称为<font color="red">“阻塞对等方”</font>，Jack将不会向他们发送数据。</li>
-</ul></li>
 </ul>
-<h2 id="p2p文件分发的意义">7.3、P2P文件分发的意义</h2>
-<p>个人认为P2P有多方面的意义： - 对服务器：解放了服务器的带宽占用，使得服务器能够同时处理多个大体积文件的下载请求，而无须占用大量带宽。 - 对下载方：增加了下载速度。</p>
-<h2 id="问题与思考">7.4、问题与思考</h2>
-<ul>
-<li><font color="red">P2P一定要有服务器发送第一个副本吗？可以没有服务器吗？</font></li>
+</li>
 </ul>
-<h1 id="p2p-数据库分布式散列表dht">8、P2P-数据库：分布式散列表DHT</h1>
-<h2 id="基本了解-1">8.1、基本了解</h2>
-<p>分布式散列表: - 表项为(key,value) = (resource_name,IP_address)。 - 整个表按照key值分割成几部分放置在不同的对等方上。</p>
-<p>对等方编号与key值映射： - 为每个对等方分配一个 <span class="math inline">\([0,2^n-1]\)</span> 范围内的整数作标识符，n取某些固定的值。 - 未必一定要有<span class="math inline">\(2^n\)</span>个对等方，对等方的编号可以是不连续的。 - 利用散列函数将key映射为一个 <span class="math inline">\([0,2^n-1]\)</span> 范围内的整数。 - 分布式散列表的中心问题是定义为对等方分配键的规则（即根据key值决定选择哪一个对等方来存储key-value键值对）。</p>
-<h2 id="添加新的键值对">8.2、添加新的键值对</h2>
-<p><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/分布式散列表插入.png"></p>
-<h3 id="id到ip的转换">8.2.1、ID到IP的转换</h3>
+<h2 id="7-3、P2P文件分发的意义"><a href="#7-3、P2P文件分发的意义" class="headerlink" title="7.3、P2P文件分发的意义"></a>7.3、P2P文件分发的意义</h2><p>个人认为P2P有多方面的意义：</p>
 <ul>
-<li>方法一：网状DHT。
+<li>对服务器：解放了服务器的带宽占用，使得服务器能够同时处理多个大体积文件的下载请求，而无须占用大量带宽。</li>
+<li>对下载方：增加了下载速度。</li>
+</ul>
+<h2 id="7-4、问题与思考"><a href="#7-4、问题与思考" class="headerlink" title="7.4、问题与思考"></a>7.4、问题与思考</h2><ul>
+<li><font color="red">P2P一定要有服务器发送第一个副本吗？可以没有服务器吗？</font>
+
+</li>
+</ul>
+<h1 id="8、P2P-数据库：分布式散列表DHT"><a href="#8、P2P-数据库：分布式散列表DHT" class="headerlink" title="8、P2P-数据库：分布式散列表DHT"></a>8、P2P-数据库：分布式散列表DHT</h1><h2 id="8-1、基本了解"><a href="#8-1、基本了解" class="headerlink" title="8.1、基本了解"></a>8.1、基本了解</h2><p>分布式散列表:</p>
 <ul>
+<li>表项为(key,value) = (resource_name,IP_address)。</li>
+<li>整个表按照key值分割成几部分放置在不同的对等方上。</li>
+</ul>
+<p>对等方编号与key值映射：</p>
+<ul>
+<li>为每个对等方分配一个 $[0,2^n-1]$ 范围内的整数作标识符，n取某些固定的值。<ul>
+<li>未必一定要有$2^n$个对等方，对等方的编号可以是不连续的。</li>
+</ul>
+</li>
+<li>利用散列函数将key映射为一个 $[0,2^n-1]$ 范围内的整数。</li>
+<li>分布式散列表的中心问题是定义为对等方分配键的规则（即根据key值决定选择哪一个对等方来存储key-value键值对）。</li>
+</ul>
+<h2 id="8-2、添加新的键值对"><a href="#8-2、添加新的键值对" class="headerlink" title="8.2、添加新的键值对"></a>8.2、添加新的键值对</h2><p><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/分布式散列表插入.png" alt></p>
+<h3 id="8-2-1、ID到IP的转换"><a href="#8-2-1、ID到IP的转换" class="headerlink" title="8.2.1、ID到IP的转换"></a>8.2.1、ID到IP的转换</h3><ul>
+<li>方法一：网状DHT。<ul>
 <li>要求每一个对等方都有一个包含所有(ID,IP)的表，每个对等方在本地能够直接根据ID获取对应的IP。</li>
-<li><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/网状DHT.png"></li>
+<li><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/网状DHT.png" alt></li>
 <li>占用资源多，对于大型系统完全不现实。</li>
-</ul></li>
-<li>方法二：环形DHT（环形覆盖网络）
-<ul>
-<li>每一个对等方知道其前任与后继的(ID,IP)对应关系。</li>
-<li><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/环形DHT.png"></li>
-<li>通过环形发送查询报文获取目的IP，平均每次查找要发送<span class="math inline">\(N/2\)</span>条报文（<span class="math inline">\(N\)</span>表示环形DHT中节点数量）。</li>
-</ul></li>
-<li>方法三：折中方案：有捷径的环形DHT
-<ul>
-<li>每个对等方关联多个其他对等方，即适当增加本地资源占用、减少发送报文数量。</li>
-<li><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/有捷径的环形DHT.png"></li>
-<li>重要的问题：<font color="red">“一个对等方应该有多少条捷径？那些对等方应该成为这些捷径邻居？”</font></li>
-<li>研究表明DHT能够被设计为每个对等方的邻居数量以及每个请求平均发送的报文数量均为<span class="math inline">\(O(logN)\)</span>，其中<span class="math inline">\(N\)</span>为对等方的数量。这种设计给出了使用网状和环形覆盖网络拓扑的两种极端解决方案之间的一种满意折中方案。</li>
-</ul></li>
 </ul>
-<h3 id="对等方扰动以环形覆盖网络为例">8.2.2、对等方扰动（以环形覆盖网络为例）</h3>
-<p><b>1. 对等方退出：</b></p>
-<p>让每个对等方能够联系其第一个和第二个后继（即知道他们的IP地址），每个对等方将会周期性地验证其两个后继是存活的（发送ping报文）。当某一对等方退出时，拓扑结构将对应发生改变。 <img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/对等方扰动.png"></p>
+</li>
+<li>方法二：环形DHT（环形覆盖网络）<ul>
+<li>每一个对等方知道其前任与后继的(ID,IP)对应关系。</li>
+<li><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/环形DHT.png" alt></li>
+<li>通过环形发送查询报文获取目的IP，平均每次查找要发送$N/2$条报文（$N$表示环形DHT中节点数量）。</li>
+</ul>
+</li>
+<li>方法三：折中方案：有捷径的环形DHT<ul>
+<li>每个对等方关联多个其他对等方，即适当增加本地资源占用、减少发送报文数量。</li>
+<li><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/有捷径的环形DHT.png" alt></li>
+<li>重要的问题：<font color="red">“一个对等方应该有多少条捷径？那些对等方应该成为这些捷径邻居？”</font></li>
+<li>研究表明DHT能够被设计为每个对等方的邻居数量以及每个请求平均发送的报文数量均为$O(logN)$，其中$N$为对等方的数量。这种设计给出了使用网状和环形覆盖网络拓扑的两种极端解决方案之间的一种满意折中方案。</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-2-2、对等方扰动（以环形覆盖网络为例）"><a href="#8-2-2、对等方扰动（以环形覆盖网络为例）" class="headerlink" title="8.2.2、对等方扰动（以环形覆盖网络为例）"></a>8.2.2、对等方扰动（以环形覆盖网络为例）</h3><p><b>1. 对等方退出：</b></p>
+<p>让每个对等方能够联系其第一个和第二个后继（即知道他们的IP地址），每个对等方将会周期性地验证其两个后继是存活的（发送ping报文）。当某一对等方退出时，拓扑结构将对应发生改变。<br><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/对等方扰动.png" alt></p>
 <p>问题：<font color="red">如果两个后继同时推出呢？环形覆盖网络就发生了中断，这时候要怎么办？</font></p>
 <p><b>2. 对等方加入：</b></p>
 <p>假设新的对等方13要加入这个环形覆盖网，<font color="red">在加入时13仅知道对等方1的存在（即其IP地址）</font>，这时13将向1发送一个报文查询其前任与后继。1将该报文继续往后传递。当传到12时，12意识到自己是13的前任以及12的当前后继15为13的后继，这时候12将向13发送报文告知其前任与后继，这时候12、13、15都将作出对应修改。</p>
-<h1 id="tcpudp套接字编程">9、TCP/UDP套接字编程</h1>
-<p>这一部分内容属于“自己创造应用层协议”，是对前面所学知识的另一种简单实践。 ## 9.1、UDP套接字编程</p>
-<h2 id="tcp套接字编程">9.2、TCP套接字编程</h2>
-
+<h1 id="9、TCP-UDP套接字编程"><a href="#9、TCP-UDP套接字编程" class="headerlink" title="9、TCP/UDP套接字编程"></a>9、TCP/UDP套接字编程</h1><p>这一部分内容属于“自己创造应用层协议”，是对前面所学知识的另一种简单实践。</p>
+<h2 id="9-1、UDP套接字编程"><a href="#9-1、UDP套接字编程" class="headerlink" title="9.1、UDP套接字编程"></a>9.1、UDP套接字编程</h2><h2 id="9-2、TCP套接字编程"><a href="#9-2、TCP套接字编程" class="headerlink" title="9.2、TCP套接字编程"></a>9.2、TCP套接字编程</h2>
       
     </div>
     
@@ -780,8 +838,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/2.%E9%93%BE%E8%B7%AF%E5%B1%82/" rel="next" title="链路层">
-                <i class="fa fa-chevron-left"></i> 链路层
+              <a href="/2021/03/25/test/" rel="next" title="test">
+                <i class="fa fa-chevron-left"></i> test
               </a>
             
           </div>
@@ -789,10 +847,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/3.%E7%BD%91%E7%BB%9C%E5%B1%82/" rel="prev" title="网络层">
-                网络层 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -912,7 +966,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#应用体系结构"><span class="nav-number">1.</span> <span class="nav-text">1、应用体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#client-server结构"><span class="nav-number">1.1.</span> <span class="nav-text">1.1、Client-Server结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#peer-to-peer结构"><span class="nav-number">1.2.</span> <span class="nav-text">1.2、Peer-to-Peer结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#应用层原理"><span class="nav-number">2.</span> <span class="nav-text">2、应用层原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程通信"><span class="nav-number">2.1.</span> <span class="nav-text">2.1、进程通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运输服务"><span class="nav-number">2.2.</span> <span class="nav-text">2.2、运输服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#四项服务"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1、四项服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#因特网提供的运输服务"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2.2、因特网提供的运输服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用层协议通信规范"><span class="nav-number">2.3.</span> <span class="nav-text">2.3、应用层协议（通信规范）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重要的应用层协议"><span class="nav-number">2.4.</span> <span class="nav-text">2.4、重要的应用层协议</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cs-webhttp"><span class="nav-number">3.</span> <span class="nav-text">3、CS-Web：HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#web基础"><span class="nav-number">3.1.</span> <span class="nav-text">3.1、Web基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#http协议"><span class="nav-number">3.2.</span> <span class="nav-text">3.2、HTTP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#非持续连接与持续连接"><span class="nav-number">3.2.1.</span> <span class="nav-text">3.2.2、非持续连接与持续连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http请求报文"><span class="nav-number">3.2.2.</span> <span class="nav-text">3.2.3、HTTP请求报文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http响应报文"><span class="nav-number">3.2.3.</span> <span class="nav-text">3.2.4、HTTP响应报文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用telnet实践http协议"><span class="nav-number">3.2.4.</span> <span class="nav-text">3.2.5、使用telnet实践HTTP协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web优化cookie"><span class="nav-number">3.3.</span> <span class="nav-text">3.3、Web优化：cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web优化web-cacheproxy-serer"><span class="nav-number">3.4.</span> <span class="nav-text">3.4、Web优化：web cache&#x2F;proxy serer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原理"><span class="nav-number">3.4.1.</span> <span class="nav-text">3.4.1、原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用代理服务器的优点"><span class="nav-number">3.4.2.</span> <span class="nav-text">3.4.2、使用代理服务器的优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件get方法"><span class="nav-number">3.4.3.</span> <span class="nav-text">3.4.3、条件GET方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令与回答"><span class="nav-number">3.5.</span> <span class="nav-text">4.2、命令与回答</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cs-电子邮件smtppop3imap"><span class="nav-number">4.</span> <span class="nav-text">5、CS-电子邮件：SMTP、POP3、IMAP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#电子邮件基础"><span class="nav-number">4.1.</span> <span class="nav-text">5.1、电子邮件基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#地址userdomain_name"><span class="nav-number">4.1.1.</span> <span class="nav-text">5.1.1、地址（USER@domain_name）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发送与接收电子邮件基本流程"><span class="nav-number">4.1.2.</span> <span class="nav-text">5.1.3、发送与接收电子邮件基本流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单邮件传输协议smtp"><span class="nav-number">4.2.</span> <span class="nav-text">5.2、简单邮件传输协议（SMTP）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本了解"><span class="nav-number">4.2.1.</span> <span class="nav-text">5.2.1、基本了解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令"><span class="nav-number">4.2.2.</span> <span class="nav-text">5.2.2、命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用telnet实验smtp协议"><span class="nav-number">4.2.3.</span> <span class="nav-text">5.2.6、使用telnet实验SMTP协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#邮件访问协议"><span class="nav-number">4.3.</span> <span class="nav-text">5.3、邮件访问协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pop3"><span class="nav-number">4.3.1.</span> <span class="nav-text">5.3.1、POP3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#imap"><span class="nav-number">4.3.2.</span> <span class="nav-text">5.3.2、IMAP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于web的电子邮件"><span class="nav-number">4.3.3.</span> <span class="nav-text">5.3.3、基于Web的电子邮件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cs-域名解析dnsdomain-name-server"><span class="nav-number">5.</span> <span class="nav-text">6、CS-域名解析：DNS（Domain Name Server）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#域名"><span class="nav-number">5.1.</span> <span class="nav-text">6.1、域名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要有域名"><span class="nav-number">5.1.1.</span> <span class="nav-text">6.1.1、为什么要有域名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#因特网的域名结构"><span class="nav-number">5.1.2.</span> <span class="nav-text">6.1.2、因特网的域名结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#域名服务器"><span class="nav-number">5.2.</span> <span class="nav-text">6.2、域名服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器种类"><span class="nav-number">5.2.1.</span> <span class="nav-text">6.2.1、服务器种类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提供的服务"><span class="nav-number">5.2.2.</span> <span class="nav-text">6.2.2、提供的服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#域名查询过程"><span class="nav-number">5.3.</span> <span class="nav-text">6.3、域名查询过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#迭代查询"><span class="nav-number">5.3.1.</span> <span class="nav-text">6.3.1、迭代查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归查询比较少用"><span class="nav-number">5.3.2.</span> <span class="nav-text">6.3.2、递归查询（比较少用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dns优化dns缓存"><span class="nav-number">5.3.3.</span> <span class="nav-text">6.3.3、DNS优化：DNS缓存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dns协议"><span class="nav-number">5.4.</span> <span class="nav-text">6.4、DNS协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#资源记录rr"><span class="nav-number">5.4.1.</span> <span class="nav-text">6.4.1、资源记录（RR）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dns报文"><span class="nav-number">5.4.2.</span> <span class="nav-text">6.4.2、DNS报文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在dns数据库中插入记录"><span class="nav-number">5.4.3.</span> <span class="nav-text">6.4.3、在DNS数据库中插入记录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dns安全性"><span class="nav-number">5.5.</span> <span class="nav-text">6.5、DNS安全性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#针对dns服务的ddos攻击"><span class="nav-number">5.5.1.</span> <span class="nav-text">6.5.1、针对DNS服务的DDoS攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用dns向目标主机发起ddos攻击"><span class="nav-number">5.5.2.</span> <span class="nav-text">6.5.2、利用DNS向目标主机发起DDoS攻击</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#p2p-文件分发"><span class="nav-number">6.</span> <span class="nav-text">7、P2P-文件分发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#性能比较"><span class="nav-number">6.1.</span> <span class="nav-text">7.1、性能比较</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cs结构分发n个文件副本所需时间d_cs"><span class="nav-number">6.1.1.</span> <span class="nav-text">7.1.1、CS结构分发N个文件副本所需时间\(D_{cs}\)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#p2p结构分发n个文件副本所需时间d_p2p"><span class="nav-number">6.1.2.</span> <span class="nav-text">7.1.2、P2P结构分发N个文件副本所需时间\(D_{p2p}\)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实际性能比较"><span class="nav-number">6.1.3.</span> <span class="nav-text">7.1.3、实际性能比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bittorrent比特洪流使用tcp连接"><span class="nav-number">6.2.</span> <span class="nav-text">7.2、BitTorrent（比特洪流，使用TCP连接）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-number">6.2.1.</span> <span class="nav-text">7.2.1、基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求与响应"><span class="nav-number">6.2.2.</span> <span class="nav-text">7.2.2、请求与响应</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#p2p文件分发的意义"><span class="nav-number">6.3.</span> <span class="nav-text">7.3、P2P文件分发的意义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题与思考"><span class="nav-number">6.4.</span> <span class="nav-text">7.4、问题与思考</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#p2p-数据库分布式散列表dht"><span class="nav-number">7.</span> <span class="nav-text">8、P2P-数据库：分布式散列表DHT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本了解-1"><span class="nav-number">7.1.</span> <span class="nav-text">8.1、基本了解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加新的键值对"><span class="nav-number">7.2.</span> <span class="nav-text">8.2、添加新的键值对</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#id到ip的转换"><span class="nav-number">7.2.1.</span> <span class="nav-text">8.2.1、ID到IP的转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对等方扰动以环形覆盖网络为例"><span class="nav-number">7.2.2.</span> <span class="nav-text">8.2.2、对等方扰动（以环形覆盖网络为例）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tcpudp套接字编程"><span class="nav-number">8.</span> <span class="nav-text">9、TCP&#x2F;UDP套接字编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tcp套接字编程"><span class="nav-number">8.1.</span> <span class="nav-text">9.2、TCP套接字编程</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、应用体系结构"><span class="nav-number">1.</span> <span class="nav-text">1、应用体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1、Client-Server结构"><span class="nav-number">1.1.</span> <span class="nav-text">1.1、Client-Server结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2、Peer-to-Peer结构"><span class="nav-number">1.2.</span> <span class="nav-text">1.2、Peer-to-Peer结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、应用层原理"><span class="nav-number">2.</span> <span class="nav-text">2、应用层原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1、进程通信"><span class="nav-number">2.1.</span> <span class="nav-text">2.1、进程通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2、运输服务"><span class="nav-number">2.2.</span> <span class="nav-text">2.2、运输服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1、四项服务"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1、四项服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2、因特网提供的运输服务"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2.2、因特网提供的运输服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3、应用层协议（通信规范）"><span class="nav-number">2.3.</span> <span class="nav-text">2.3、应用层协议（通信规范）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4、重要的应用层协议"><span class="nav-number">2.4.</span> <span class="nav-text">2.4、重要的应用层协议</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、CS-Web：HTTP"><span class="nav-number">3.</span> <span class="nav-text">3、CS-Web：HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1、Web基础"><span class="nav-number">3.1.</span> <span class="nav-text">3.1、Web基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2、HTTP协议"><span class="nav-number">3.2.</span> <span class="nav-text">3.2、HTTP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1、HTTP协议的特点"><span class="nav-number">3.2.1.</span> <span class="nav-text">3.2.1、HTTP协议的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2、非持续连接与持续连接"><span class="nav-number">3.2.2.</span> <span class="nav-text">3.2.2、非持续连接与持续连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3、HTTP请求报文"><span class="nav-number">3.2.3.</span> <span class="nav-text">3.2.3、HTTP请求报文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-4、HTTP响应报文"><span class="nav-number">3.2.4.</span> <span class="nav-text">3.2.4、HTTP响应报文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-5、使用telnet实践HTTP协议"><span class="nav-number">3.2.5.</span> <span class="nav-text">3.2.5、使用telnet实践HTTP协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3、Web优化：cookie"><span class="nav-number">3.3.</span> <span class="nav-text">3.3、Web优化：cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4、Web优化：web-cache-proxy-serer"><span class="nav-number">3.4.</span> <span class="nav-text">3.4、Web优化：web cache&#x2F;proxy serer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-1、原理"><span class="nav-number">3.4.1.</span> <span class="nav-text">3.4.1、原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-2、使用代理服务器的优点"><span class="nav-number">3.4.2.</span> <span class="nav-text">3.4.2、使用代理服务器的优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-3、条件GET方法"><span class="nav-number">3.4.3.</span> <span class="nav-text">3.4.3、条件GET方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4、CS-文件传输：FTP"><span class="nav-number">4.</span> <span class="nav-text">4、CS-文件传输：FTP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1、连接"><span class="nav-number">4.1.</span> <span class="nav-text">4.1、连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2、命令与回答"><span class="nav-number">4.2.</span> <span class="nav-text">4.2、命令与回答</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5、CS-电子邮件：SMTP、POP3、IMAP"><span class="nav-number">5.</span> <span class="nav-text">5、CS-电子邮件：SMTP、POP3、IMAP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1、电子邮件基础"><span class="nav-number">5.1.</span> <span class="nav-text">5.1、电子邮件基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-1、地址（USER-domain-name）"><span class="nav-number">5.1.1.</span> <span class="nav-text">5.1.1、地址（USER@domain_name）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-2、总体结构"><span class="nav-number">5.1.2.</span> <span class="nav-text">5.1.2、总体结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-3、发送与接收电子邮件基本流程"><span class="nav-number">5.1.3.</span> <span class="nav-text">5.1.3、发送与接收电子邮件基本流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2、简单邮件传输协议（SMTP）"><span class="nav-number">5.2.</span> <span class="nav-text">5.2、简单邮件传输协议（SMTP）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-1、基本了解"><span class="nav-number">5.2.1.</span> <span class="nav-text">5.2.1、基本了解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-2、命令"><span class="nav-number">5.2.2.</span> <span class="nav-text">5.2.2、命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-3、响应"><span class="nav-number">5.2.3.</span> <span class="nav-text">5.2.3、响应</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-4、邮件报文格式"><span class="nav-number">5.2.4.</span> <span class="nav-text">5.2.4、邮件报文格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-5、MIME：通用因特网邮件扩充"><span class="nav-number">5.2.5.</span> <span class="nav-text">5.2.5、MIME：通用因特网邮件扩充</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-6、使用telnet实验SMTP协议"><span class="nav-number">5.2.6.</span> <span class="nav-text">5.2.6、使用telnet实验SMTP协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3、邮件访问协议"><span class="nav-number">5.3.</span> <span class="nav-text">5.3、邮件访问协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-1、POP3"><span class="nav-number">5.3.1.</span> <span class="nav-text">5.3.1、POP3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-2、IMAP"><span class="nav-number">5.3.2.</span> <span class="nav-text">5.3.2、IMAP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-3、基于Web的电子邮件"><span class="nav-number">5.3.3.</span> <span class="nav-text">5.3.3、基于Web的电子邮件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6、CS-域名解析：DNS（Domain-Name-Server）"><span class="nav-number">6.</span> <span class="nav-text">6、CS-域名解析：DNS（Domain Name Server）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1、域名"><span class="nav-number">6.1.</span> <span class="nav-text">6.1、域名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-1、为什么要有域名"><span class="nav-number">6.1.1.</span> <span class="nav-text">6.1.1、为什么要有域名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-2、因特网的域名结构"><span class="nav-number">6.1.2.</span> <span class="nav-text">6.1.2、因特网的域名结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2、域名服务器"><span class="nav-number">6.2.</span> <span class="nav-text">6.2、域名服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-1、服务器种类"><span class="nav-number">6.2.1.</span> <span class="nav-text">6.2.1、服务器种类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-2、提供的服务"><span class="nav-number">6.2.2.</span> <span class="nav-text">6.2.2、提供的服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3、域名查询过程"><span class="nav-number">6.3.</span> <span class="nav-text">6.3、域名查询过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-1、迭代查询"><span class="nav-number">6.3.1.</span> <span class="nav-text">6.3.1、迭代查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-2、递归查询（比较少用）"><span class="nav-number">6.3.2.</span> <span class="nav-text">6.3.2、递归查询（比较少用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-3、DNS优化：DNS缓存"><span class="nav-number">6.3.3.</span> <span class="nav-text">6.3.3、DNS优化：DNS缓存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-4、DNS协议"><span class="nav-number">6.4.</span> <span class="nav-text">6.4、DNS协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-1、资源记录（RR）"><span class="nav-number">6.4.1.</span> <span class="nav-text">6.4.1、资源记录（RR）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-2、DNS报文"><span class="nav-number">6.4.2.</span> <span class="nav-text">6.4.2、DNS报文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-3、在DNS数据库中插入记录"><span class="nav-number">6.4.3.</span> <span class="nav-text">6.4.3、在DNS数据库中插入记录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-5、DNS安全性"><span class="nav-number">6.5.</span> <span class="nav-text">6.5、DNS安全性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-1、针对DNS服务的DDoS攻击"><span class="nav-number">6.5.1.</span> <span class="nav-text">6.5.1、针对DNS服务的DDoS攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-2、利用DNS向目标主机发起DDoS攻击"><span class="nav-number">6.5.2.</span> <span class="nav-text">6.5.2、利用DNS向目标主机发起DDoS攻击</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7、P2P-文件分发"><span class="nav-number">7.</span> <span class="nav-text">7、P2P-文件分发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1、性能比较"><span class="nav-number">7.1.</span> <span class="nav-text">7.1、性能比较</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-1、CS结构分发N个文件副本所需时间-D-cs"><span class="nav-number">7.1.1.</span> <span class="nav-text">7.1.1、CS结构分发N个文件副本所需时间$D_{cs}$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-2、P2P结构分发N个文件副本所需时间-D-p2p"><span class="nav-number">7.1.2.</span> <span class="nav-text">7.1.2、P2P结构分发N个文件副本所需时间$D_{p2p}$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-3、实际性能比较"><span class="nav-number">7.1.3.</span> <span class="nav-text">7.1.3、实际性能比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2、BitTorrent（比特洪流，使用TCP连接）"><span class="nav-number">7.2.</span> <span class="nav-text">7.2、BitTorrent（比特洪流，使用TCP连接）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-1、基本概念"><span class="nav-number">7.2.1.</span> <span class="nav-text">7.2.1、基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-2、请求与响应"><span class="nav-number">7.2.2.</span> <span class="nav-text">7.2.2、请求与响应</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-3、P2P文件分发的意义"><span class="nav-number">7.3.</span> <span class="nav-text">7.3、P2P文件分发的意义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-4、问题与思考"><span class="nav-number">7.4.</span> <span class="nav-text">7.4、问题与思考</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8、P2P-数据库：分布式散列表DHT"><span class="nav-number">8.</span> <span class="nav-text">8、P2P-数据库：分布式散列表DHT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1、基本了解"><span class="nav-number">8.1.</span> <span class="nav-text">8.1、基本了解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2、添加新的键值对"><span class="nav-number">8.2.</span> <span class="nav-text">8.2、添加新的键值对</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-1、ID到IP的转换"><span class="nav-number">8.2.1.</span> <span class="nav-text">8.2.1、ID到IP的转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-2、对等方扰动（以环形覆盖网络为例）"><span class="nav-number">8.2.2.</span> <span class="nav-text">8.2.2、对等方扰动（以环形覆盖网络为例）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9、TCP-UDP套接字编程"><span class="nav-number">9.</span> <span class="nav-text">9、TCP&#x2F;UDP套接字编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1、UDP套接字编程"><span class="nav-number">9.1.</span> <span class="nav-text">9.1、UDP套接字编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-2、TCP套接字编程"><span class="nav-number">9.2.</span> <span class="nav-text">9.2、TCP套接字编程</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1075,24 +1129,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
@@ -1145,6 +1182,45 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
 
   
 

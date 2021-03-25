@@ -486,7 +486,7 @@
 <p><b>4. rdt3.0错误示例</b><br><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/4.%E4%BC%A0%E8%BE%93%E5%B1%82/rdt3.0错误例子1.png" alt></p>
 <h2 id="4-2、流水线可靠数据传输协议"><a href="#4-2、流水线可靠数据传输协议" class="headerlink" title="4.2、流水线可靠数据传输协议"></a>4.2、流水线可靠数据传输协议</h2><h3 id="4-2-1、流水线可靠数据传输基本了解"><a href="#4-2-1、流水线可靠数据传输基本了解" class="headerlink" title="4.2.1、流水线可靠数据传输基本了解"></a>4.2.1、流水线可靠数据传输基本了解</h3><p><b>1. 单发与多发流水的概念演示</b><br><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/4.%E4%BC%A0%E8%BE%93%E5%B1%82/停等协议与流水线协议流程比较.png" alt><br><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/4.%E4%BC%A0%E8%BE%93%E5%B1%82/流水线概念.png" alt></p>
 <p><b>2. 单发与多发流水的性能比较</b><br><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/4.%E4%BC%A0%E8%BE%93%E5%B1%82/rdt3.0与流水线比较示例.png" alt></p>
-<p>&emsp;&emsp;从上图可以看出，在理想情况下，rdt3.0的发送方利用率为$U_{sender}=\dfrac{L/R}{RTT+L/R}$，而流水线协议的发送方利用率则为$U_{stream_sender}=\dfrac{N<em>L/R}{RTT+N</em>L/R}$（其中$N$表示流水线条数，$RTT$$(Round$ $Trip$ $Time)$表示往返时间，$L$表示发送数据比特数，$R$表示接入链路速率）。</p>
+<p>&emsp;&emsp;从上图可以看出，在理想情况下，rdt3.0的发送方利用率为$U<em>{sender}=\dfrac{L/R}{RTT+L/R}$，而流水线协议的发送方利用率则为$U</em>{stream_sender}=\dfrac{N<em>L/R}{RTT+N</em>L/R}$（其中$N$表示流水线条数，$RTT$$(Round$ $Trip$ $Time)$表示往返时间，$L$表示发送数据比特数，$R$表示接入链路速率）。</p>
 <p><b>3. 流水线技术带来的影响：</b></p>
 <ul>
 <li>必须增加序号范围</li>
@@ -595,7 +595,7 @@
 <p><b>4. 两个窗口的烦恼</b></p>
 <p><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/4.%E4%BC%A0%E8%BE%93%E5%B1%82/SR问题示例.png" alt></p>
 <p>&emsp;&emsp;以上这种情况限制了SR协议的接收方窗口不能大于序号空间的一半。</p>
-<p>&emsp;&emsp;<font color="red"><b>证明：</b></font>如果接收方窗口大小为$N/2+1$，那么设想最坏情况，接收方正在等待$[0,N/2]$编号范围内的数据，此时发送方发连续发送编号是$[0,N/2]$的数据，如果接受方完全接受，然后发送的ACK都丢了，那么下一次接收方等待$(N/2,N)\cup\{0,1\}$范围内的数据。而发送方重发发送$[0,N/2]$编号范围内的数据。两个集合有交集$\{0,1\}$，这就导致了错误的发生。</p>
+<p>&emsp;&emsp;<font color="red"><b>证明：</b></font>如果接收方窗口大小为$N/2+1$，那么设想最坏情况，接收方正在等待$[0,N/2]$编号范围内的数据，此时发送方发连续发送编号是$[0,N/2]$的数据，如果接受方完全接受，然后发送的ACK都丢了，那么下一次接收方等待$(N/2,N)\cup{0,1}$范围内的数据。而发送方重发发送$[0,N/2]$编号范围内的数据。两个集合有交集${0,1}$，这就导致了错误的发生。</p>
 <p>&emsp;&emsp;上面涉及的窗口与序号空间需要格外注意，要分清这两个概念的区别。可以认为<font color="red">序号空间是最大窗口而窗口为活动窗口</font>；也可以从含义上来理解：活动窗口是已经开启的流水线，最大窗口包括已经开启的流水线与还能够开启的流水线。最大窗口包括活动窗口，二者的起始位置是一样的。</p>
 <h2 id="4-3、简单总结与需要注意的问题"><a href="#4-3、简单总结与需要注意的问题" class="headerlink" title="4.3、简单总结与需要注意的问题"></a>4.3、简单总结与需要注意的问题</h2><h3 id="4-3-1、机制总结"><a href="#4-3-1、机制总结" class="headerlink" title="4.3.1、机制总结"></a>4.3.1、机制总结</h3><p><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/4.%E4%BC%A0%E8%BE%93%E5%B1%82/可靠数据传输机制总结.png" alt></p>
 <h3 id="4-3-2、关键的问题"><a href="#4-3-2、关键的问题" class="headerlink" title="4.3.2、关键的问题"></a>4.3.2、关键的问题</h3><ul>
@@ -679,7 +679,7 @@
 <li>紧急数据指针（16）：实践中未使用</li>
 </ul>
 <h2 id="6-3、往返时间的估计与超时"><a href="#6-3、往返时间的估计与超时" class="headerlink" title="6.3、往返时间的估计与超时"></a>6.3、往返时间的估计与超时</h2><h3 id="6-3-1、估计往返时间"><a href="#6-3-1、估计往返时间" class="headerlink" title="6.3.1、估计往返时间"></a>6.3.1、估计往返时间</h3><p><b>1. RTT估算</b></p>
-<p>&emsp;&emsp;采用指数加权移动平均来估计：$EstimatedRTT_{initial}=SampleRTT_{first}$$EstimatedRTT = (1-\alpha)<em>EstimatedRTT + \alpha </em>SampleRTT$。<br>&emsp;&emsp;$\alpha$的参考值是0.125，即：$EstimatedRTT = 0.875<em>EstimatedRTT + 0.125 </em>SampleRTT$。</p>
+<p>&emsp;&emsp;采用指数加权移动平均来估计：$EstimatedRTT<em>{initial}=SampleRTT</em>{first}$$EstimatedRTT = (1-\alpha)<em>EstimatedRTT + \alpha </em>SampleRTT$。<br>&emsp;&emsp;$\alpha$的参考值是0.125，即：$EstimatedRTT = 0.875<em>EstimatedRTT + 0.125 </em>SampleRTT$。</p>
 <p><b>2. RTT偏差(振荡范围)估算</b></p>
 <p>&emsp;&emsp;也采用指数加权移动平均来估计：$DevRTT_{initial}=0$$DevRTT=(1-\beta)DevRTT + \beta<em>|SampleRTT-EstimatedRTT|$<br>&emsp;&emsp;$\beta$的参考值是0.25，即：$DevRTT=0.75</em>DevRTT + 0.25*|SampleRTT-EstimatedRTT|$。</p>
 <h3 id="6-3-2、设置和管理重传超时间隔"><a href="#6-3-2、设置和管理重传超时间隔" class="headerlink" title="6.3.2、设置和管理重传超时间隔"></a>6.3.2、设置和管理重传超时间隔</h3><p>&emsp;&emsp;应当假定一个区间，应当有概率论的知识来证明事件P（未丢包且落在此区间之外）是一个小概率事件。<br>&emsp;&emsp;该区间右边界估计方法如下：$TimeoutInterval=EstimateRTT+4*DevRTT$<br>&emsp;&emsp;推荐的$TimeoutInterval$初始值为1秒。</p>
@@ -755,7 +755,7 @@
 <h2 id="6-7、TCP拥塞控制"><a href="#6-7、TCP拥塞控制" class="headerlink" title="6.7、TCP拥塞控制"></a>6.7、TCP拥塞控制</h2><h3 id="6-7-1、基本了解"><a href="#6-7-1、基本了解" class="headerlink" title="6.7.1、基本了解"></a>6.7.1、基本了解</h3><p>&emsp;&emsp;三个关键问题：</p>
 <ul>
 <li>一个TCP发送方如何限制它想起连接发送流量的速率？   <ul>
-<li>$LastByteSent-LastByteAcked \leqslant min\{cwnd,rwnd\}$（$cwnd$表示拥塞窗口）</li>
+<li>$LastByteSent-LastByteAcked \leqslant min{cwnd,rwnd}$（$cwnd$表示拥塞窗口）</li>
 </ul>
 </li>
 <li>一个TCP发送方如何感知从它到目的地之间的路径上存在拥塞呢？<ul>
@@ -808,8 +808,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/1.%E7%89%A9%E7%90%86%E5%B1%82/" rel="next" title="物理层">
-                <i class="fa fa-chevron-left"></i> 物理层
+              <a href="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E9%97%AE%E9%A2%98/" rel="next" title="d.计算机网络/问题">
+                <i class="fa fa-chevron-left"></i> d.计算机网络/问题
               </a>
             
           </div>
@@ -818,8 +818,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2021/03/25/test/" rel="prev" title="test">
-                test <i class="fa fa-chevron-right"></i>
+              <a href="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/3.%E7%BD%91%E7%BB%9C%E5%B1%82/" rel="prev" title="网络层">
+                网络层 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1103,24 +1103,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
@@ -1173,6 +1156,45 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
 
   
 

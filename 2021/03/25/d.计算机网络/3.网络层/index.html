@@ -381,7 +381,7 @@
 <li>必须用硬件进行查找以达到应有的转发速率。</li>
 <li>对大型转发表应使用超出简单线性搜索的技术。</li>
 </ul>
-<h3 id="1-1-2、输入端口排队"><a href="#1-1-2、输入端口排队" class="headerlink" title="1.1.2、输入端口排队"></a>1.1.2、输入端口排队</h3><p>&emsp;&emsp;由于$R_{line} &lt; R_{switch}$，所以排队微不足道，一般不会出现缓存不够而丢包的情况。<br>&emsp;&emsp;尽管输入端口的排队一般不会引起丢包的问题，但是可能影响效率，如下图中的情况：</p>
+<h3 id="1-1-2、输入端口排队"><a href="#1-1-2、输入端口排队" class="headerlink" title="1.1.2、输入端口排队"></a>1.1.2、输入端口排队</h3><p>&emsp;&emsp;由于$R<em>{line} &lt; R</em>{switch}$，所以排队微不足道，一般不会出现缓存不够而丢包的情况。<br>&emsp;&emsp;尽管输入端口的排队一般不会引起丢包的问题，但是可能影响效率，如下图中的情况：</p>
 <p><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/3.%E7%BD%91%E7%BB%9C%E5%B1%82/输入端口排队举例.png" alt="输入端口排队举例"></p>
 <p>&emsp;&emsp;该情况称为排头阻塞（HOL阻塞），一种更有效率的方式是，输入端口2中的两个分组同时能够发出去，这可以通过增设多条队列来实现。</p>
 <p>另外，HOL阻塞可能带来丢包。[Karol 1987]指出，由于HOL阻塞，只要输入链路上的分组到达速率达到其容量的58%，在某些假设前提下，输入队列长度将无限制的增大（不严格地讲，这等同于说将出现大量的丢包）。</p>
@@ -414,7 +414,7 @@
 <li>如何选择要闭合的交叉点呢？（路径如何选择？）</li>
 </ul>
 <h2 id="1-3、输出端口"><a href="#1-3、输出端口" class="headerlink" title="1.3、输出端口"></a>1.3、输出端口</h2><p><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/3.%E7%BD%91%E7%BB%9C%E5%B1%82/输出端口处理.png" alt="输出端口处理"></p>
-<h3 id="1-3-1、输出端口排队"><a href="#1-3-1、输出端口排队" class="headerlink" title="1.3.1、输出端口排队"></a>1.3.1、输出端口排队</h3><p>&emsp;&emsp;由于$R_{line} &gt; R_{switch}$，所以队列过长将会导致丢包（“在网络中丢弃”，“被路由器丢弃”）现象。这是一个很重要的问题。</p>
+<h3 id="1-3-1、输出端口排队"><a href="#1-3-1、输出端口排队" class="headerlink" title="1.3.1、输出端口排队"></a>1.3.1、输出端口排队</h3><p>&emsp;&emsp;由于$R<em>{line} &gt; R</em>{switch}$，所以队列过长将会导致丢包（“在网络中丢弃”，“被路由器丢弃”）现象。这是一个很重要的问题。</p>
 <h3 id="1-3-2、分组调度程序（Chapter7有更深入的讲解）"><a href="#1-3-2、分组调度程序（Chapter7有更深入的讲解）" class="headerlink" title="1.3.2、分组调度程序（Chapter7有更深入的讲解）"></a>1.3.2、分组调度程序（Chapter7有更深入的讲解）</h3><p>&emsp;&emsp;简单的调度策略有下面几种：</p>
 <ul>
 <li>缓存足够<ul>
@@ -430,9 +430,9 @@
 </ul>
 <p>&emsp;&emsp;主动队列管理算法（AQM）：在缓存填满前便丢弃（或在首部加标记）一个分组，以便向发送方提供一个拥塞信号。随机早期检测（RED）是一种得到最广泛研究和实现的AQM算法：</p>
 <ul>
-<li>$Length_{queue} &lt; min_{th}$：新到分组被接纳进队列</li>
-<li>$Length_{queue} \in [min_{th},max_{th}]$：新到分组以某种概率被丢弃</li>
-<li>$Length_{queue} &gt; max_{th}$：新到分组被丢弃</li>
+<li>$Length<em>{queue} &lt; min</em>{th}$：新到分组被接纳进队列</li>
+<li>$Length<em>{queue} \in [min</em>{th},max_{th}]$：新到分组以某种概率被丢弃</li>
+<li>$Length<em>{queue} &gt; max</em>{th}$：新到分组被丢弃</li>
 </ul>
 <h2 id="1-4、路由选择处理器（路由控制平面）"><a href="#1-4、路由选择处理器（路由控制平面）" class="headerlink" title="1.4、路由选择处理器（路由控制平面）"></a>1.4、路由选择处理器（路由控制平面）</h2><p>&emsp;&emsp;其主要功能如下：</p>
 <ul>
@@ -557,7 +557,7 @@
 <li>自我终止的</li>
 <li>分布式的</li>
 </ul>
-<p>&emsp;&emsp;对于每个路由器，一旦其有了新的最短路径，它就会将这条最短路径发送给它的邻居。最短路径通过Bellman-Ford方程选出来：$d_x(y) = min_v\{c(x,v)+d_v(y)\}$。</p>
+<p>&emsp;&emsp;对于每个路由器，一旦其有了新的最短路径，它就会将这条最短路径发送给它的邻居。最短路径通过Bellman-Ford方程选出来：$d_x(y) = min_v{c(x,v)+d_v(y)}$。</p>
 <p>&emsp;&emsp;伪代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">Variable declare:</span><br><span class="line">    x can be any node in the router topology</span><br><span class="line">    N is the set of all the destination nodes</span><br><span class="line">    G is the graph of all router nodes</span><br><span class="line"></span><br><span class="line">Initialization of node x:</span><br><span class="line">    for y in x.destinations:    &#x2F;&#x2F; x.destinations &#x3D; N</span><br><span class="line">        &#x2F;&#x2F; 最开始x只知道到其直接相邻的节点间的距离</span><br><span class="line">        if y is a neighbor of x: </span><br><span class="line">            D(x-&gt;y) &#x3D; c(x,y)</span><br><span class="line">        else:</span><br><span class="line">            D(x-&gt;y) &#x3D; INF    </span><br><span class="line">    distance vector DV(x-&gt;x.destinations) &#x3D; &#123;D(x-&gt;y), y in x.destinations&#125;</span><br><span class="line">    for w in x.neighbors:</span><br><span class="line">        send DV to w</span><br><span class="line"></span><br><span class="line">Loop:</span><br><span class="line">    &#x2F;&#x2F; 等待自身周边链路状态发生改变或者其他路由器周边链路状态发生改变</span><br><span class="line">    wait:</span><br><span class="line">        do nothing</span><br><span class="line">    until:</span><br><span class="line">        one link from x to its neighbor change or</span><br><span class="line">        x receive a DV vector from its neighbors</span><br><span class="line">    &#x2F;&#x2F; 更新DV向量，如有改变则重新发送给所有邻居</span><br><span class="line">    for y in x.destinations:</span><br><span class="line">        for v in x.neighbors:   &#x2F;&#x2F; 只能靠邻居中转</span><br><span class="line">            D(x-&gt;y) &#x3D; min&#123;c(x,v)+D(v-&gt;y),D(x-&gt;y)&#125;</span><br><span class="line">    if D(x-&gt;y) is changed for any y in x.destinations:</span><br><span class="line">        distance vector DV(x-&gt;x.destinations) &#x3D; &#123;D(x-&gt;y), y in x.destinations&#125;</span><br><span class="line">        for w in x.neighbors:</span><br><span class="line">            send DV to w    </span><br><span class="line">Forever</span><br></pre></td></tr></table></figure></p>
 <h3 id="4-2-2、例子"><a href="#4-2-2、例子" class="headerlink" title="4.2.2、例子"></a>4.2.2、例子</h3><blockquote>
 <ul>
@@ -769,8 +769,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.%E5%BA%94%E7%94%A8%E5%B1%82/" rel="next" title="应用层">
-                <i class="fa fa-chevron-left"></i> 应用层
+              <a href="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/4.%E4%BC%A0%E8%BE%93%E5%B1%82/" rel="next" title="传输层">
+                <i class="fa fa-chevron-left"></i> 传输层
               </a>
             
           </div>
@@ -779,8 +779,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/1.%E7%89%A9%E7%90%86%E5%B1%82/" rel="prev" title="物理层">
-                物理层 <i class="fa fa-chevron-right"></i>
+              <a href="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/2.%E9%93%BE%E8%B7%AF%E5%B1%82/" rel="prev" title="链路层">
+                链路层 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1064,24 +1064,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
@@ -1134,6 +1117,45 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
 
   
 
