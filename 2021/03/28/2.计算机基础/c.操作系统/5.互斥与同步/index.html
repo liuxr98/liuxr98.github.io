@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="&lt;font face&#x3D;&quot;fangsong&quot;) C5并发性：互斥与同步  0、总览  三个问题：{简单互斥、生产者&#x2F;消费者问题，读者&#x2F;写者问题} 五种机制：{中断，互斥量与原子指令，信号量与PV原语，管程，消息传递与send&#x2F;receive原语}  最基础：中断，互斥量与原子指令 高一层：信号量与PV原语（原语由上一层实现） “面向对象”的管程：实现涉及到上面两层">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2.计算机基础&#x2F;c.操作系统&#x2F;5.互斥与同步">
+<meta property="og:url" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/5.%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5/index.html">
+<meta property="og:site_name" content="RBlog">
+<meta property="og:description" content="&lt;font face&#x3D;&quot;fangsong&quot;) C5并发性：互斥与同步  0、总览  三个问题：{简单互斥、生产者&#x2F;消费者问题，读者&#x2F;写者问题} 五种机制：{中断，互斥量与原子指令，信号量与PV原语，管程，消息传递与send&#x2F;receive原语}  最基础：中断，互斥量与原子指令 高一层：信号量与PV原语（原语由上一层实现） “面向对象”的管程：实现涉及到上面两层">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/5.%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5/%E7%AE%A1%E7%A8%8B%E7%BB%93%E6%9E%84.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/5.%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5/%E7%9B%B4%E6%8E%A5%E5%AF%BB%E5%9D%80.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/5.%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5/%E9%97%B4%E6%8E%A5%E5%AF%BB%E5%9D%80.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/5.%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5/%E6%B6%88%E6%81%AF%E6%A0%BC%E5%BC%8F%E5%9B%A0%E6%9E%9C%E5%85%B3%E7%B3%BB.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/5.%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5/%E5%8F%98%E9%95%BF%E6%B6%88%E6%81%AF%E6%A0%BC%E5%BC%8F.png%22">
+<meta property="article:published_time" content="2021-03-28T15:44:18.730Z">
+<meta property="article:modified_time" content="2021-03-28T15:59:37.704Z">
+<meta property="article:author" content="Ryan">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/5.%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5/%E7%AE%A1%E7%A8%8B%E7%BB%93%E6%9E%84.png%22">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/03/28/2.计算机基础/c.操作系统/5.互斥与同步/"/>
+
+
+
+
+
+  <title>2.计算机基础/c.操作系统/5.互斥与同步 | RBlog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/5.%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2.计算机基础/c.操作系统/5.互斥与同步</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-28T23:44:18+08:00">
+                2021-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&lt;font face="fangsong") <font size="6"><b>C5并发性：互斥与同步</b></font> <font size="4"></font></p>
+<h1 id="总览">0、总览</h1>
+<ul>
+<li>三个问题：{简单互斥、生产者/消费者问题，读者/写者问题}</li>
+<li>五种机制：{中断，互斥量与原子指令，信号量与PV原语，管程，消息传递与send/receive原语}
+<ul>
+<li>最基础：中断，互斥量与原子指令</li>
+<li>高一层：信号量与PV原语（原语由上一层实现）</li>
+<li>“面向对象”的管程：实现涉及到上面两层</li>
+</ul></li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">相关术语</th>
+<th style="text-align: left;">含义解释</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">原子操作</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">临界区</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">死锁</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">活锁</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">互斥</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">竞争条件</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">饥饿</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<h1 id="互斥的硬件支持">1、互斥的硬件支持</h1>
+<ul>
+<li>中断禁用（适合单处理器的机器）</li>
+<li>专用机器指令
+<ul>
+<li>compare&amp;swap指令</li>
+<li>exchange指令</li>
+<li><font color="red">二者的区别在于提供了一个指针参数还是两个立即数参数</font> ## 1.1、通过中断提供互斥   通过禁用中断从而使得进程之间不再通过时钟分片进行轮转。 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">while(true)&#123;</span><br><span class="line">    &#x2F;* 禁用中断 *&#x2F;</span><br><span class="line">    &#x2F;* 临界区，该段代码将会一直执行到启用中断 *&#x2F;</span><br><span class="line">    &#x2F;* 启用中断 *&#x2F;</span><br><span class="line">    &#x2F;* 其余部分 *&#x2F;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> ## 1.2、比较和交换指令   该原子操作指令的逻辑如下： <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compare_swap</span><span class="params">(<span class="keyword">int</span> *ptr_oldval, <span class="keyword">int</span> testval, <span class="keyword">int</span> newval)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> oldval = *ptr_oldval; </span><br><span class="line">    <span class="keyword">if</span>(oldval == testval)</span><br><span class="line">        *ptr_oldval = newval;</span><br><span class="line">    <span class="keyword">return</span> oldval;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>   使用该指令实现互斥的代码如下： <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> mutex; <span class="comment">/* 0:can execute the critical codes, 1:can't ... */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">P</span><span class="params">(<span class="keyword">int</span> pid)</span></span>&#123;    </span><br><span class="line">    <span class="keyword">while</span>(compare_swap(&amp;mutex,<span class="number">1</span>,<span class="number">0</span>)==<span class="number">1</span>)</span><br><span class="line">        <span class="comment">/* do nothing */</span>;</span><br><span class="line">    <span class="comment">/* critical code */</span></span><br><span class="line">    mutex = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">/* other codes */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    mutex = <span class="number">0</span>;</span><br><span class="line">    parbegin(P(<span class="number">1</span>),P(<span class="number">2</span>),...,P(n));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> ## 1.3、寄存器/内存交换指令   该原子操作指令的逻辑如下： <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exchange</span><span class="params">(<span class="keyword">int</span> *<span class="keyword">register</span>,<span class="keyword">int</span> *memory)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> temp;</span><br><span class="line">    temp = *<span class="keyword">register</span>;</span><br><span class="line">    *<span class="keyword">register</span> = *memory;</span><br><span class="line">    *memory = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>   使用该指令实现互斥的代码如下： <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> mutex;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">P</span><span class="params">(<span class="keyword">int</span> pid)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> occupied = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(occupied == <span class="literal">true</span>)</span><br><span class="line">            exchange(&amp;occupied,&amp;mutex);</span><br><span class="line">        <span class="comment">/* critical codes */</span></span><br><span class="line">        mutex = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">/* other codes */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    mutex = <span class="number">0</span>;</span><br><span class="line">    parbegin(P(<span class="number">1</span>),P(<span class="number">2</span>),...,P(n));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> # 2、信号量</li>
+</ul></li>
+<li>注意：
+<ul>
+<li>1、当进程执行semWait之后该进程要么进入信号量的排队队列，要么进入就绪队列，对于阻塞的进程，此后都将由信号量对其进行调度。</li>
+<li>2、强信号量：FIFO（可以保证不会饥饿，弱信号量则不行）；弱信号量：没有规定进程从队列中移出顺序的信号量</li>
+<li>3、信号量的semWait和semSignal是原子操作 ## 2.1、信号量原语（原子操作） ### 2.1.1、二元信号量 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 二元信号量</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">binary_semaphore</span>&#123;</span></span><br><span class="line">    <span class="keyword">enum</span> &#123;zero, one&#125; value;</span><br><span class="line">    queueType <span class="built_in">queue</span>; <span class="comment">// 进程排队</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">semWait</span><span class="params">(binary_semaphore s)</span></span>&#123;</span><br><span class="line">    <span class="comment">// 等价于一般信号量中的s.count--;</span></span><br><span class="line">    <span class="keyword">if</span>(s.value==one)&#123;</span><br><span class="line">        s.value = zero;</span><br><span class="line">        <span class="comment">// 此时有资源供当前进程使用，不需要排队</span></span><br><span class="line">    &#125;    </span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        把当前进程插入到队列当中（排队等待）</span></span><br><span class="line"><span class="comment">        阻塞当前进程</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">void</span> semSignal(binary_semaphore s)&#123;</span><br><span class="line">    <span class="keyword">if</span>(s.<span class="built_in">queue</span> is empty)&#123;</span><br><span class="line">        s.value = one;</span><br><span class="line">        <span class="comment">// 所有排队进程都已经执行完以后才会释放资源</span></span><br><span class="line">    &#125;    </span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        把某一进程P从队列中移除（某一个排队的可以不排了）</span></span><br><span class="line"><span class="comment">        把进程P插入到就绪队列</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>   与二元信号量相关的一个概念是互斥量。两者的关健区别在于为互斥量加锁(设定其值为0)的进程和为互斥量解锁(设定其值为1)的进程必须是同一个进程。相比之下,可能由某个进程对二元信号量进行加锁操作,而由另一个进程为其解锁。 ### 2.1.2、一般信号量（计数信号量） <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一般信号量（计数信号量）</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">semaphore</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> count; <span class="comment">// Qestion: count的初始值应该是多少？？</span></span><br><span class="line">    queueType <span class="built_in">queue</span>; <span class="comment">// 进程排队</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">semWait</span><span class="params">(semaphore s)</span></span>&#123;</span><br><span class="line">    s.count--;</span><br><span class="line">    <span class="keyword">if</span>(s.count &lt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        把当前进程插入到队列s.queue当中（排队等待）</span></span><br><span class="line"><span class="comment">        阻塞当前进程</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 如果s.count--之后仍然≥0，则说明有资源供当前进程使用，不需要排队</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">semSignal</span><span class="params">(semaphore s)</span></span>&#123;</span><br><span class="line">    s.count++;</span><br><span class="line">    <span class="keyword">if</span>(s.count&lt;=<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        把某一进程P从队列中移除（某一个排队的可以不排了）</span></span><br><span class="line"><span class="comment">        把进程P插入到就绪队列</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 如果s.count++之后&gt;0，则说明没有进程在排队，所以不需要激活进程</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> ## 2.2、使用信号量的互斥 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*program mutual_exclusion*/</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> n = <span class="comment">/*进程数*/</span></span><br><span class="line">semaphore s = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">P</span><span class="params">(<span class="keyword">int</span> id)</span></span>&#123;</span><br><span class="line">    semWait(s);</span><br><span class="line">    <span class="comment">/* critical codes */</span></span><br><span class="line">    semSignal(s);</span><br><span class="line">    <span class="comment">/* other codes */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    parbegin(P(<span class="number">1</span>),P(<span class="number">2</span>),...,P(n));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> ## 2.3、（一般）信号量的实现方式 ### 2.3.1、通过中断方式实现 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a、中断方式（可以在单处理器系统上使用）</span></span><br><span class="line">semWait(semaphore s)&#123;</span><br><span class="line">    <span class="keyword">asm</span> cli </span><br><span class="line">    s.count--;</span><br><span class="line">    <span class="keyword">if</span>(s.count &lt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        把当前进程插入到队列s.queue当中（排队等待）</span></span><br><span class="line"><span class="comment">        阻塞当前进程</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        <span class="keyword">asm</span> sti</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">asm</span> sti</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">semSignal(semaphore s)&#123;</span><br><span class="line">    <span class="keyword">asm</span> cli</span><br><span class="line">    s.count++;</span><br><span class="line">    <span class="keyword">if</span>(s.count &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        把某一进程P从队列中移除（某一个排队的可以不排了）</span></span><br><span class="line"><span class="comment">        把进程P插入到就绪队列</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">asm</span> sti </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> ### 2.3.2、通过特殊硬件指令实现 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// b、比较并交换指令</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compare_and_swap</span><span class="params">(<span class="keyword">int</span> *<span class="keyword">word</span>,<span class="keyword">int</span> testval,<span class="keyword">int</span> newval)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> oldval = *<span class="keyword">word</span>;</span><br><span class="line">    <span class="keyword">if</span>(oldval == testval)&#123;</span><br><span class="line">        *<span class="keyword">word</span> = newval;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> oldval;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">semWait(semaphore s)&#123;</span><br><span class="line">    <span class="keyword">while</span>(compare_and_swap(s.flag,<span class="number">0</span>,<span class="number">1</span>)==<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    s.count--;</span><br><span class="line">    <span class="keyword">if</span>(s.count &lt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        把当前进程插入到队列s.queue当中（排队等待）</span></span><br><span class="line"><span class="comment">        阻塞当前进程</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        s.flag = <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        s.flag = <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">semSignal(semaphore s)&#123;</span><br><span class="line">    <span class="keyword">while</span>(compare_and_swap(s.flag,<span class="number">0</span>,<span class="number">1</span>)==<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    s.count++;</span><br><span class="line">    <span class="keyword">if</span>(s.count &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        把某一进程P从队列中移除（某一个排队的可以不排了）</span></span><br><span class="line"><span class="comment">        把进程P插入到就绪队列</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        s.flag = <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+</ul>
+<h1 id="管程">3、管程</h1>
+<h2 id="是什么与为什么">3.1、是什么与为什么</h2>
+<h3 id="什么是管程">3.1.1、什么是管程？</h3>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/5.%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5/管程结构.png%22"></p>
+<p>  管程可以看做一个软件模块，它是将共享的变量和对于这些共享变量的操作封装起来，形成一个具有一定接口的功能模块，进程可以调用管程来实现进程级别的并发控制。管程中的数据变量每次只能被一个进程访问。   管程自身带有互斥的属性，可以这样认为： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">entrance of the monitor:</span><br><span class="line">    &#x2F;* 互斥进入管程 *&#x2F;</span><br><span class="line">    &#x2F;* 管程实体，这里面可能有其余互斥量&#x2F;信号量等 *&#x2F;</span><br><span class="line">    &#x2F;* 退出管程，发出相应信号 *&#x2F;</span><br></pre></td></tr></table></figure>   管程是在互斥量与信号量的基础上进一步抽象的高层设计，这种设计简化了程序员编写代码的过程，不过<font color="red">在编写代码前，需要先设计好管程</font>。</p>
+<p>  管程的特征 - 模块化：管程是一个基本的软件模块，可以被单独编译。 - 抽象数据类型：管程中封装了数据及对于数据的操作，这点有点像面向对象编程语言中的类。 - 信息隐藏：管程外的进程或其他软件模块只能通过管程对外的接口来访问管程提供的操作，管程内部的实现细节对外界是透明的。 - 使用的互斥性：任何一个时刻，管程只能由一个进程使用。进入管程时的互斥由编译器负责完成。</p>
+<h3 id="信号量vs管程">3.1.2、信号量vs管程</h3>
+<p>  使用信号量设计一个正确的程序是很困难的，难点在于semWait和semSignal操作可能分布在整个程序中，而很难看出信号量上的这些操作所产生的整体效果。而管程则将所有的同步机制限制在管程内部，因此不但易于验证同步的正确性，而且易于检测出错误。</p>
+<h2 id="使用管程实现的互斥">3.2、使用管程实现的互斥</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">P</span><span class="params">(pid)</span></span>&#123;</span><br><span class="line">    <span class="comment">/* not critical codes */</span></span><br><span class="line">    in critical codes part:</span><br><span class="line">        &lt;invoke the functions defined in the monitor&gt;</span><br><span class="line">    <span class="comment">/* not critical codes */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    parbegin(P(<span class="number">1</span>),P(<span class="number">2</span>),...,P(n));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用通知和广播的管程">3.3、使用通知和广播的管程</h2>
+<p>  使用循环的<code>cwait</code>以及有别于<code>csignal</code>的<code>cnotify</code>、<code>cbroadcast</code>。该方法错误更少，并且有助于在程序结构中采用更加模块化的方法。</p>
+<h1 id="消息传递">4、消息传递</h1>
+<h2 id="概述">4.1、概述</h2>
+<p>  两种原语： - send(destination,message) - receive(source,message)</p>
+<p>  三种组合 - 阻塞send，阻塞receive - 无阻塞send，阻塞receive - 无阻塞send，无阻塞receive</p>
+<p>  两种寻址 - 直接寻址 - 间接寻址 ## 4.2、寻址 ### 4.2.1、直接寻址 - send原语：send原语包含目标进程的标识号。 - receive原语 - 方式一：显示指定源进程，所以进程必须事先知道希望得到来自哪个进程的消息。 - 方式二：不指定所期望的源进程，例如打印机的服务器进程。对这种应用使用隐式寻址更为有效。</p>
+<p>  结构图如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/5.%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5/直接寻址.png%22"></p>
+<h3 id="间接寻址">4.2.2、间接寻址</h3>
+<p>  主要有下面四种结构： - 一对一： - 允许在两个进程间建立专用的通信链接，隔离它们的交互，避免其他进程的错误干扰。 - 是典型的<font color="red">静态和永久性关系</font>。 - 多对一 - 一个进程给许多其他进程提供服务 - 对客户-服务器间的交互非常有用 - 这时信箱常称为一个<font color="red">端口</font> - 一对多 - 广播 - 多对多 - 可以让多个服务进程对多个客户进程提供服务（例如集群？）</p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/5.%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5/间接寻址.png%22"></p>
+<p>  相关问题： - 信箱与进程动态关联 or 静态关联？ - 信箱所有权问题。</p>
+<h2 id="消息格式">4.3、消息格式</h2>
+<p>  因果如下所示：<br> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/5.%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5/消息格式因果关系.png%22"></p>
+<p>  变长消息的典型格式如下：<br> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/5.%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5/变长消息格式.png%22"></p>
+<h2 id="排队原则">4.4、排队原则</h2>
+<ul>
+<li>FIFO</li>
+<li>带有优先级的排队规则</li>
+</ul>
+<h2 id="使用消息传递的互斥">4.5、使用消息传递的互斥</h2>
+<p>  相当于在<font color="red">传递一个令牌</font>，谁拥有令牌谁有有资格进入临界区。 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> n = <span class="comment">/*进程数*/</span></span><br><span class="line"><span class="keyword">void</span> P(<span class="keyword">int</span> i)&#123;</span><br><span class="line">    message msg;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        receive(box,msg); <span class="comment">// 原子操作，信箱为空时将阻塞该进程</span></span><br><span class="line">        <span class="comment">/* critical codes */</span></span><br><span class="line">        send(box,msg); <span class="comment">// 原子操作</span></span><br><span class="line">        <span class="comment">/* the rest codes */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    create_mailbox(box);</span><br><span class="line">    send(box,null); <span class="comment">// 创建一个令牌，可以激活一个进程</span></span><br><span class="line">    parbegin(P(i),P(<span class="number">2</span>),...,P(n));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="生产者消费者问题使用信号量">5、生产者消费者问题（使用信号量）</h1>
+<h2 id="使用信号量解决生产者消费者问题">5.1、使用信号量解决生产者/消费者问题</h2>
+<h3 id="使用二元信号量解决无限缓冲区生产者消费者问题的方法">5.1.1、使用二元信号量解决无限缓冲区生产者/消费者问题的方法</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用二元信号量解决无限缓冲区生产者/消费者问题的方法</span></span><br><span class="line"><span class="comment">/* program producer_consumer */</span></span><br><span class="line"><span class="keyword">int</span> n=<span class="number">0</span>; <span class="comment">// 已生产的数据数量</span></span><br><span class="line">binary_semaphore s=<span class="number">1</span>, <span class="built_in">delay</span>=<span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">producer</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        produce();</span><br><span class="line">        semWait(s);</span><br><span class="line">            append();</span><br><span class="line">            n++;</span><br><span class="line">            <span class="keyword">if</span>(n==<span class="number">1</span>)&#123;</span><br><span class="line">                semSignal(<span class="built_in">delay</span>);</span><br><span class="line">                <span class="comment">// 已经有数据了，consumer可以执行了</span></span><br><span class="line">            &#125;</span><br><span class="line">        semSignal(s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">consumer</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m;</span><br><span class="line">    semWait(<span class="built_in">delay</span>);</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        semWait(s);</span><br><span class="line">            take();</span><br><span class="line">            n--;</span><br><span class="line">            m = n; <span class="comment">// 注意m的使用</span></span><br><span class="line">        semSignal(s);</span><br><span class="line">        consume();</span><br><span class="line">        <span class="keyword">if</span>(m==<span class="number">0</span>)&#123;</span><br><span class="line">            semWait(<span class="built_in">delay</span>);</span><br><span class="line">            <span class="comment">// 当前没有未消费的数据，consumer阻塞</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    parbegin(producer,consumer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="使用一般信号量解决无限缓冲区生产者消费者问题的方法">5.1.2、使用一般信号量解决无限缓冲区生产者/消费者问题的方法</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用一般信号量解决无限缓冲区生产者/消费者问题的方法</span></span><br><span class="line"><span class="comment">/* program producer_consumer */</span></span><br><span class="line">semaphore n=<span class="number">0</span>;</span><br><span class="line">semaphore s=<span class="number">1</span>; <span class="comment">// 最多只能同时有一个信号量s上的进程运行</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">producer</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        produce();</span><br><span class="line">        semWait(s);</span><br><span class="line">            append();</span><br><span class="line">        semSignal(s);</span><br><span class="line">        semSignal(n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">consumer</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        semWait(n);</span><br><span class="line">        semWait(s);</span><br><span class="line">            take();</span><br><span class="line">        semSignal(s);</span><br><span class="line">        consume();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    parbegin(producer,consumer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="使用一般信号量解决有限缓冲区生产者消费者问题的方法">5.1.3、使用一般信号量解决有限缓冲区生产者/消费者问题的方法</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用一般信号量解决有限缓冲区生产者/消费者问题的方法</span></span><br><span class="line"><span class="comment">/* program producer_consumer */</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> size_of_buffer = <span class="comment">/*缓冲区大小*/</span></span><br><span class="line">semaphore n = <span class="number">0</span>;</span><br><span class="line">semaphore s = <span class="number">1</span>; <span class="comment">// 最多只能同时有一个信号量s上的进程运行</span></span><br><span class="line">semaphore e = size_of_buffer;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">producer</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        produce();</span><br><span class="line">        semWait(e); <span class="comment">// 生产者数量有限，可能需要排队</span></span><br><span class="line">        semWait(s);</span><br><span class="line">            append();</span><br><span class="line">        semSignal(s);</span><br><span class="line">        semSignal(n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">consumer</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        semWait(n);</span><br><span class="line">        semWait(s);</span><br><span class="line">            take();</span><br><span class="line">        semSignal(s);</span><br><span class="line">        semSignal(e);</span><br><span class="line">        consume();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    parbegin(producer,consumer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用管程解决生产者消费者问题">5.2、使用管程解决生产者/消费者问题</h2>
+<h3 id="管程设计">5.2.1、管程设计</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 这一整个过程中每次只允许一个进程进入 */</span></span><br><span class="line">monitor boundedbuffer;</span><br><span class="line"><span class="keyword">char</span> <span class="built_in">buffer</span>[N];</span><br><span class="line"><span class="keyword">int</span> nextin,nextout;</span><br><span class="line"><span class="keyword">int</span> count;</span><br><span class="line">cond notfull,notempty;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">append</span><span class="params">(<span class="keyword">char</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(count==N)&#123;</span><br><span class="line">        cwait(notfull);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">buffer</span>[nextin] = x;</span><br><span class="line">    nextin=(nextin+<span class="number">1</span>)%N;</span><br><span class="line">    count++;</span><br><span class="line">    csignal(notempty);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">take</span><span class="params">(<span class="keyword">char</span> &amp;x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(count==<span class="number">0</span>)&#123;</span><br><span class="line">        cwait(notempty);</span><br><span class="line">    &#125;</span><br><span class="line">    x = <span class="built_in">buffer</span>[nextout];</span><br><span class="line">    nextout=(nextout+<span class="number">1</span>)%N;</span><br><span class="line">    count--;</span><br><span class="line">    csignal(notfull);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">initialize</span><span class="params">()</span></span>&#123;</span><br><span class="line">    nextin = <span class="number">0</span></span><br><span class="line">    nextout = <span class="number">0</span>;</span><br><span class="line">    count = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="调用管程解决生产者消费者问题">5.2.2、调用管程解决生产者/消费者问题</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 由于使用了管程，所以不需要额外使用互斥锁等机制 */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">producer</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> x;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        produce(x);</span><br><span class="line">        append(x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">consumer</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> x;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        take(x);</span><br><span class="line">        consume(X);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    parbegin(producer(),consumer());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用消息传递解决有界缓冲区生产者消费者问题的一种方法">5.3、使用消息传递解决有界缓冲区生产者/消费者问题的一种方法</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> capacity = <span class="comment">/* 缓冲区容量 */</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> null = <span class="comment">/* 空消息 */</span></span><br><span class="line"><span class="keyword">int</span> i;</span><br><span class="line">mailbox mayproduce,mayconsume;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">producer</span><span class="params">()</span></span>&#123;</span><br><span class="line">    message pmsg;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        receive(mayproduce,pmsg); <span class="comment">// 应当看做是引用传递</span></span><br><span class="line">        pmsg = produce();</span><br><span class="line">        send(mayconsume,pmsg);</span><br><span class="line">        <span class="comment">// 取得pmsg进行修改然后发给mayconsume</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">consumer</span><span class="params">()</span></span>&#123;</span><br><span class="line">    message cmsg;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        receive(mayconsumer,cmsg);</span><br><span class="line">        consume(cmsg);</span><br><span class="line">        send(mayproduce,null);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    create_mailbox(mayproduce);</span><br><span class="line">    create_mailbox(mayconsume);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> it=<span class="number">0</span>;it&lt;capacity;++it)&#123;</span><br><span class="line">        send(mayproduce,null);</span><br><span class="line">        <span class="comment">// 产生capacity个空位</span></span><br><span class="line">    &#125;</span><br><span class="line">    parbegiin(producer,consumer); <span class="comment">// 只有一个消费者和一个生产者的情况</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  消息传递方案的优势： - 方法灵活，可以有多个消费者和多个生产者（只要它们都访问同一个mayproduce和mayconsume信箱）。 - 系统甚至可以是分布式系统（不过需要所有生产者进程和mayproduce信箱在一个站点上，所有消费者进程和mayconsume信箱也在同一个站点上）。这里是说前面的几种都是在同一台机器上的，消息传递突破了这个限制。</p>
+<h1 id="读者写者问题">6、读者/写者问题</h1>
+<h2 id="使用信号量解决">6.1、使用信号量解决</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">进程状态</th>
+<th style="text-align: left;">队列情况</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+| 系统中只有读进程 |
+<ul>
+<li>
+设置wsem
+</li>
+<li>
+无队列
+</li>
+</ul>
+| | 系统中只有写进程 |
+<ul>
+<li>
+设置wsem和rsem
+</li>
+<li>
+写进程在wsem上排队
+</li>
+</ul>
+| | 系统中既有读进程又有写进程，<br>但读进程优先|
+<ul>
+<li>
+<font color="red">由读进程设置wsem</font>
+</li>
+<li>
+由写进程设置rsem
+</li>
+<li>
+所有写进程在wsem上排队
+</li>
+<li>
+一个读进程在rsem上排队
+</li>
+<li>
+其他读进程在z上排队
+</li>
+</ul>
+| | 系统中既有读进程又有写进程，<br>但写进程优先|
+<ul>
+<li>
+<font color="red">由写进程设置wsem</font>
+</li>
+<li>
+由写进程设置rsem
+</li>
+<li>
+所有写进程在wsem上排队
+</li>
+<li>
+一个读进程在rsem上排队
+</li>
+<li>
+其他读进程在z上排队
+</li>
+</ul>
+<p>| ### 6.1.1、读者优先 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Program readers_and_writers*/</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> Semphore;</span><br><span class="line"><span class="keyword">int</span> readcount; <span class="comment">// readcount用于记录当前正在进行的读操作</span></span><br><span class="line">Semphore x=<span class="number">1</span>; <span class="comment">// x是用于保证修改readcount时互斥的信号量</span></span><br><span class="line">Semphore wsem=<span class="number">1</span>; <span class="comment">// wsem是用于保证读写操作（读-写，写-写）互斥的信号量</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reader</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        <span class="comment">// 互斥进行readcount的修改</span></span><br><span class="line">        semWait(x);</span><br><span class="line">            readcount++;</span><br><span class="line">            <span class="keyword">if</span>(readcoount==<span class="number">1</span>)&#123;</span><br><span class="line">                semWait(wsem);</span><br><span class="line">                <span class="comment">// 如果当前没有读进程，那就要确保没有写进程才可执行</span></span><br><span class="line">            &#125;</span><br><span class="line">        semSignal(x);</span><br><span class="line">        <span class="comment">// 进行读取操作，读操作不需要互斥</span></span><br><span class="line">        READUNIT();</span><br><span class="line">        <span class="comment">// 互斥进行readcount的修改      </span></span><br><span class="line">        semWait(x);</span><br><span class="line">            readcount--;</span><br><span class="line">            <span class="keyword">if</span>(readcount==<span class="number">0</span>)&#123;</span><br><span class="line">                semSignal(wsem);</span><br><span class="line">            &#125;</span><br><span class="line">        semSignal(x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">writer</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        semWait(wsem);</span><br><span class="line">        WRITEUNIT();</span><br><span class="line">        semSignal(wsem);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    readcount = <span class="number">0</span>;</span><br><span class="line">    parbegin(reader,writer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> ### 6.1.2、写者优先 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*program readers_and_writers*/</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> Semphore;</span><br><span class="line"><span class="keyword">int</span> readcount; <span class="comment">// readcount用于记录当前正在进行的读操作数量</span></span><br><span class="line"><span class="keyword">int</span> writecount; <span class="comment">// writecount用于记录当前正在进行的写操作数量</span></span><br><span class="line">Semphore x=<span class="number">1</span>; <span class="comment">// x是用于保证修改readcount时互斥的信号量</span></span><br><span class="line">Semphore y=<span class="number">1</span>; <span class="comment">// y是用于保证修改writecount时互斥的信号量</span></span><br><span class="line">Semphore z=<span class="number">1</span>; <span class="comment">// z是用于保证修改writecount时互斥的信号量</span></span><br><span class="line">Semphore rsem=<span class="number">1</span>; <span class="comment">// rsem是用于保证读写操作（读-写，写-写）互斥的信号量</span></span><br><span class="line">Semphore wsem=<span class="number">1</span>; <span class="comment">// wsem是用于保证读写操作（读-写，写-写）互斥的信号量</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reader</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        <span class="comment">// 未进入的</span></span><br><span class="line">        senWait(z); <span class="comment">// 是优化，并非必须</span></span><br><span class="line">            <span class="comment">// 如果所有读进程都在rsem上排队，则导致队伍很长，写进程排很久才轮到</span></span><br><span class="line">            <span class="comment">// 通过z和rsem双重排队，导致同一时刻最多有1个读进程在rsem上排队</span></span><br><span class="line">            semWait(rsem);</span><br><span class="line">                semWait(x);</span><br><span class="line">                    readcount++;</span><br><span class="line">                    <span class="keyword">if</span>(readcount==<span class="number">1</span>)&#123;</span><br><span class="line">                        semWait(wsem);</span><br><span class="line">                    &#125;</span><br><span class="line">                semSignal(x);</span><br><span class="line">            semSignal(rsem);</span><br><span class="line">        semSignal(z); <span class="comment">// 是优化，并非必须</span></span><br><span class="line">        <span class="comment">// 进行读取操作，读操作不需要互斥</span></span><br><span class="line">        READUNIT();</span><br><span class="line">        <span class="comment">// 读操作退出过程互斥</span></span><br><span class="line">        semWait(x);</span><br><span class="line">            readcount--;</span><br><span class="line">            <span class="keyword">if</span>(readcount==<span class="number">0</span>)&#123;</span><br><span class="line">                semSignal(wsem);</span><br><span class="line">            &#125;</span><br><span class="line">        semSignal(x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">writer</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        semWait(y);</span><br><span class="line">            writecount++;</span><br><span class="line">            <span class="keyword">if</span>(writecount==<span class="number">1</span>)&#123;</span><br><span class="line">                <span class="comment">// 写进程也会在rsem上排队</span></span><br><span class="line">                semWait(rsem);</span><br><span class="line">            &#125;</span><br><span class="line">        semSignal(y);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 写操作之间需要互斥</span></span><br><span class="line">        semWait(wsem);</span><br><span class="line">            WRITEUNIT();</span><br><span class="line">        semSignal(wsem);</span><br><span class="line"></span><br><span class="line">        semWait(y);</span><br><span class="line">            writecount--;</span><br><span class="line">            <span class="comment">// 如果当前没有写进程在执行，则使rsem上排队的读进程开始执行</span></span><br><span class="line">            <span class="keyword">if</span>(writecount==<span class="number">0</span>)&#123;</span><br><span class="line">                semSignal(rsem);</span><br><span class="line">            &#125;</span><br><span class="line">        semSignal(y);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    readcount = <span class="number">0</span>;</span><br><span class="line">    parbegin(reader,writer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用消息传递解决">6.2、使用消息传递解决</h2>
+<h3 id="写者优先">6.2.1、写者优先</h3>
+<p>  reader与writer进程代码如下： <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reader</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">    message rmsg;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        rmsg = i;</span><br><span class="line">        send(readrequest,rmsg); <span class="comment">// (请把消息放到mbox中，index=rmsg，此处rmsg作为标识)</span></span><br><span class="line">        receive(mbox[i],rmsg); <span class="comment">// 从mbox中取出要读的消息并存入rmsg，此处rmsg取其本意</span></span><br><span class="line">        READUNIT(); <span class="comment">// 此处</span></span><br><span class="line">        rmsg = i; </span><br><span class="line">        send(finished,rmsg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">writer</span><span class="params">(<span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">    message wmsg;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        wmsg = j;</span><br><span class="line">        send(writerequest,wmsg);</span><br><span class="line">        receive(mbox[j],wmsg);</span><br><span class="line">        WRITEUNIT();</span><br><span class="line">        wmsg = j;</span><br><span class="line">        send(finished,wmsg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>   需要一个控制进程来进行读写进程的控制，controller主要功能如下： | count取值 | 处理措施 | | :- | :- | | count &gt; 0 | | | count = 0 | | | count &lt; 0 | |   代码如下： <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> count = <span class="number">100</span>; <span class="comment">// initialize</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">controller</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(count &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!empty(finished))&#123;</span><br><span class="line">                receive(finished,msg);</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(!empty(writerequest))&#123;</span><br><span class="line">                receive(writerequest,msg);</span><br><span class="line">                writer od = msg.id;</span><br><span class="line">                count = count<span class="number">-100</span>; <span class="comment">// ?</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(!empty(readrequest))&#123;</span><br><span class="line">                receive(readrequest,msg);</span><br><span class="line">                count--;</span><br><span class="line">                send(msg.id,<span class="string">"OK"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(count == <span class="number">0</span>)&#123;</span><br><span class="line">            send(writer id,<span class="string">"OK"</span>);</span><br><span class="line">            receive(finished,msg);</span><br><span class="line">            count = <span class="number">100</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(count &lt; <span class="number">0</span>)&#123;</span><br><span class="line">            receive(finished,msg);</span><br><span class="line">            count++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/4.%E7%BA%BF%E7%A8%8B/" rel="next" title="2.计算机基础/c.操作系统/4.线程">
+                <i class="fa fa-chevron-left"></i> 2.计算机基础/c.操作系统/4.线程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/6.%E6%AD%BB%E9%94%81%E4%B8%8E%E9%A5%A5%E9%A5%BF/" rel="prev" title="2.计算机基础/c.操作系统/6.死锁与饥饿">
+                2.计算机基础/c.操作系统/6.死锁与饥饿 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ryan</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/liuxr98" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#总览"><span class="nav-number">1.</span> <span class="nav-text">0、总览</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#互斥的硬件支持"><span class="nav-number">2.</span> <span class="nav-text">1、互斥的硬件支持</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#管程"><span class="nav-number">3.</span> <span class="nav-text">3、管程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#是什么与为什么"><span class="nav-number">3.1.</span> <span class="nav-text">3.1、是什么与为什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是管程"><span class="nav-number">3.1.1.</span> <span class="nav-text">3.1.1、什么是管程？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号量vs管程"><span class="nav-number">3.1.2.</span> <span class="nav-text">3.1.2、信号量vs管程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用管程实现的互斥"><span class="nav-number">3.2.</span> <span class="nav-text">3.2、使用管程实现的互斥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用通知和广播的管程"><span class="nav-number">3.3.</span> <span class="nav-text">3.3、使用通知和广播的管程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#消息传递"><span class="nav-number">4.</span> <span class="nav-text">4、消息传递</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">4.1.</span> <span class="nav-text">4.1、概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#间接寻址"><span class="nav-number">4.1.1.</span> <span class="nav-text">4.2.2、间接寻址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息格式"><span class="nav-number">4.2.</span> <span class="nav-text">4.3、消息格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排队原则"><span class="nav-number">4.3.</span> <span class="nav-text">4.4、排队原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用消息传递的互斥"><span class="nav-number">4.4.</span> <span class="nav-text">4.5、使用消息传递的互斥</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生产者消费者问题使用信号量"><span class="nav-number">5.</span> <span class="nav-text">5、生产者消费者问题（使用信号量）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用信号量解决生产者消费者问题"><span class="nav-number">5.1.</span> <span class="nav-text">5.1、使用信号量解决生产者&#x2F;消费者问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用二元信号量解决无限缓冲区生产者消费者问题的方法"><span class="nav-number">5.1.1.</span> <span class="nav-text">5.1.1、使用二元信号量解决无限缓冲区生产者&#x2F;消费者问题的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用一般信号量解决无限缓冲区生产者消费者问题的方法"><span class="nav-number">5.1.2.</span> <span class="nav-text">5.1.2、使用一般信号量解决无限缓冲区生产者&#x2F;消费者问题的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用一般信号量解决有限缓冲区生产者消费者问题的方法"><span class="nav-number">5.1.3.</span> <span class="nav-text">5.1.3、使用一般信号量解决有限缓冲区生产者&#x2F;消费者问题的方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用管程解决生产者消费者问题"><span class="nav-number">5.2.</span> <span class="nav-text">5.2、使用管程解决生产者&#x2F;消费者问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#管程设计"><span class="nav-number">5.2.1.</span> <span class="nav-text">5.2.1、管程设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用管程解决生产者消费者问题"><span class="nav-number">5.2.2.</span> <span class="nav-text">5.2.2、调用管程解决生产者&#x2F;消费者问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用消息传递解决有界缓冲区生产者消费者问题的一种方法"><span class="nav-number">5.3.</span> <span class="nav-text">5.3、使用消息传递解决有界缓冲区生产者&#x2F;消费者问题的一种方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#读者写者问题"><span class="nav-number">6.</span> <span class="nav-text">6、读者&#x2F;写者问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用信号量解决"><span class="nav-number">6.1.</span> <span class="nav-text">6.1、使用信号量解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用消息传递解决"><span class="nav-number">6.2.</span> <span class="nav-text">6.2、使用消息传递解决</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#写者优先"><span class="nav-number">6.2.1.</span> <span class="nav-text">6.2.1、写者优先</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ryan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

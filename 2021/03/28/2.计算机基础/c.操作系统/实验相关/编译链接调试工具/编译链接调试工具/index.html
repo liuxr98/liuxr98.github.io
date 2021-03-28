@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1、汇编：TASM 1-1、命令格式   TASM [options] sources [,object] [,listing] [,xref]  方括号内的选项都是可选项，注意复数形式代表可以有一个或多个选项。 1-2、选项解释   options：参数（≥1个）   sources：待汇编的源文件名，可以一次汇编多个源文件。   object：指定生成的目标文件名">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2.计算机基础&#x2F;c.操作系统&#x2F;实验相关&#x2F;编译链接调试工具&#x2F;编译链接调试工具">
+<meta property="og:url" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C%E7%9B%B8%E5%85%B3/%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7/%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:site_name" content="RBlog">
+<meta property="og:description" content="1、汇编：TASM 1-1、命令格式   TASM [options] sources [,object] [,listing] [,xref]  方括号内的选项都是可选项，注意复数形式代表可以有一个或多个选项。 1-2、选项解释   options：参数（≥1个）   sources：待汇编的源文件名，可以一次汇编多个源文件。   object：指定生成的目标文件名">
+<meta property="article:published_time" content="2021-03-28T15:44:18.384Z">
+<meta property="article:modified_time" content="2018-04-12T05:45:18.000Z">
+<meta property="article:author" content="Ryan">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/03/28/2.计算机基础/c.操作系统/实验相关/编译链接调试工具/编译链接调试工具/"/>
+
+
+
+
+
+  <title>2.计算机基础/c.操作系统/实验相关/编译链接调试工具/编译链接调试工具 | RBlog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C%E7%9B%B8%E5%85%B3/%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7/%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2.计算机基础/c.操作系统/实验相关/编译链接调试工具/编译链接调试工具</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-28T23:44:18+08:00">
+                2021-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="汇编tasm">1、汇编：TASM</h1>
+<h2 id="命令格式">1-1、命令格式</h2>
+<blockquote>
+<p><font size="4"> TASM [options] sources [,object] [,listing] [,xref]</font></p>
+</blockquote>
+<p>方括号内的选项都是可选项，注意复数形式代表可以有一个或多个选项。<BR></BR></p>
+<h2 id="选项解释">1-2、选项解释</h2>
+<UL>
+<LI>
+options：参数（≥1个）
+</LI>
+<LI>
+sources：待汇编的源文件名，可以一次汇编多个源文件。
+</LI>
+<LI>
+object：指定生成的目标文件名，如果缺省，则生成文件名为源文件名（大写）
+</LI>
+<LI>
+listing：指定生成的列表文件名，如果缺省，则不生成列表文件
+</LI>
+<LI>
+xref：指定生成的交叉引用文件名，如果缺省，则不生成交叉引用文件
+</LI>
+</UL>
+<h2 id="帮助">1-3、帮助</h2>
+使用 “tasm/?”或“tasm”命令可以得到TASM汇编软件用法的详细信息。
+<CENTER>
+<IMG src="1.PNG"><BR>图1.1 TASM用法
+</BR></IMG></CENTER>
+<h2 id="部分参数解释">1-4、部分参数解释</h2>
+<UL>
+<LI>
+对大小写是否敏感（win32中必须使用/ml）
+</LI>
+<pre><code>&lt;UL&gt;
+&lt;LI&gt;/ml：全部敏感&lt;/LI&gt;
+&lt;LI&gt;/mx：全局变量大小写敏感&lt;/LI&gt;
+&lt;LI&gt;/mu：不敏感&lt;/LI&gt;
+&lt;/UL&gt;</code></pre>
+<LI>
+/m#：允许第#次编译扫描时可以向前引用，一般使用/m2
+</LI>
+<LI>
+/i 路径：设定include文字所在的路径
+</LI>
+<LI>
+list文件的格式
+</LI>
+<pre><code>&lt;UL&gt;
+&lt;LI&gt;/l：正常格式&lt;/LI&gt;
+&lt;LI&gt;/la：扩充格式&lt;/LI&gt;
+&lt;/UL&gt;</code></pre>
+<LI>
+符号调试信息的控制
+</LI>
+<pre><code>&lt;UL&gt;
+&lt;LI&gt;/zi：全部&lt;/LI&gt;
+&lt;LI&gt;/zd：仅有行号&lt;/LI&gt;
+&lt;LI&gt;/zn：不产生调试信息&lt;/LI&gt;
+&lt;/UL&gt;</code></pre>
+</UL>
+<h1 id="编译tcc">2、编译：TCC</h1>
+<h2 id="命令格式-1">2-1、命令格式</h2>
+<blockquote>
+<p><font size="4"> TCC [options] files</font></p>
+</blockquote>
+<p>方括号内的选项都是可选项，注意复数形式代表可以有一个或多个选项。<BR></BR></p>
+<h2 id="选项解释-1">2-2、选项解释</h2>
+<UL>
+<LI>
+options：TCC用到的编译选项
+</LI>
+<LI>
+files：待编译的C源文件
+</LI>
+</UL>
+<h2 id="帮助-1">2-3、帮助</h2>
+使用 “tcc”命令可以得到TCC编译软件用法的详细信息。
+<CENTER>
+<IMG src="2.PNG"><BR>图2.1 TCC用法
+</BR></IMG></CENTER>
+<h2 id="部分参数解释-1">2-4、部分参数解释</h2>
+<UL>
+<LI>
+-mt：选择Tiny Model
+</LI>
+<LI>
+-c：只编译，仅生成obj文件
+</LI>
+<h1 id="链接tlink">3、链接：TLINK</h1>
+<h2 id="命令格式-2">3-1、命令格式</h2>
+<blockquote>
+<p><font size="4"> TLINK [option] objfiles [,exefile] [,mapfile] [,libfiles] [,deffile] [,resfiles]</font></p>
+</blockquote>
+<p>方括号内的选项都是可选项，注意复数形式代表可以有一个或多个选项。<BR></BR></p>
+<h2 id="选项解释-2">3-2、选项解释</h2>
+<UL>
+<LI>
+option：TLINK用的到链接选项（1个），可以使用默认的选项。
+</LI>
+<LI>
+objfiles：待链接的目标文件，可以有1个或多个。当多于一个时，需要用'+'连接起来。要注意其<FONT color="RED">前后顺序</FONT>。
+</LI>
+<LI>
+exefile：链接后可执行程序的文件名，缺省时以第一个目标文件名为可执行程序名。
+</LI>
+<LI>
+mapfile：生成的影像文件名，可省略。通过分析映像文件可以分析程序的性能。
+</LI>
+<LI>
+libfiles：链接时用到的库文件，不需要库文件时可以省略该选项。
+</LI>
+<LI>
+deffile：程序用到的定义文件
+</LI>
+<LI>
+resfiles：程序用到的资源文件
+</LI>
+</UL>
+<h2 id="帮助-2">3-3、帮助</h2>
+使用 “tlink/?”或“tlink”命令可以得到TLINK链接软件用法的详细信息。
+<CENTER>
+<IMG src="3.PNG"><BR>图3.1 TLINK用法
+</BR></IMG></CENTER>
+<h2 id="部分参数解释-2">3-4、部分参数解释</h2>
+<UL>
+<LI>
+/t：生成.COM文件。
+</LI>
+<pre><code>&lt;UL&gt;
+&lt;LI&gt;需要注意的是.COM文件是一种不分段的程序结构，所有的代码、数据和堆栈都在一个物理段内。故而当汇编文件定义了多个段时，链接时将提示致命错误——存在可浮动装配的段，链接失败。&lt;/LI&gt;
+&lt;/UL&gt;</code></pre>
+</UL>
+<h1 id="调试td">4、调试：TD</h1>
+<h2 id="命令格式-3">4-1、命令格式</h2>
+<blockquote>
+<p><font size="4"> TD [options] [program [arguments] ]</font></p>
+</blockquote>
+<h2 id="选项解释-3">4-2、选项解释</h2>
+<UL>
+<LI>
+options:打开TD时的参数选择
+</LI>
+<LI>
+program:要调试的程序名字
+</LI>
+</UL>
+<h2 id="帮助-3">4-3、帮助</h2>
+使用 “td/?”命令可以得到TD调试软件用法的详细信息。
+<CENTER>
+<IMG src="4.PNG"><BR>图4.1 TD用法
+</BR></IMG></CENTER>
+<h2 id="部分参数解释-3">4-4、部分参数解释</h2>
+<h2 id="调试界面用法">4-5、调试界面用法</h2>
+<A>https://wenku.baidu.com/view/34896f906037ee06eff9aef8941ea76e58fa4a8d.html"</A>
+<UL>
+<LI>
+追踪方法
+</LI>
+<pre><code>&lt;UL&gt;
+&lt;LI&gt;单步执行：每次执行一条指令，观察指令执行后寄存器、内存单元内容的变化，分析程序功能。&lt;/LI&gt;
+    &lt;UL&gt;               
+    &lt;LI&gt;F7：表示Trace，按照CPU的实际执行过程，跟踪每一条指令的执行，是严格意义上的“单条指令”执行。&lt;/LI&gt;
+    &lt;LI&gt;F8：与F7有所不同，F8会将循环体执行一次，而F7会反复执行。&lt;/LI&gt;
+    &lt;LI&gt;上述不同仅仅发生在“代码调试”方式下，在“符号调试”中，此刻的F7和F8功能相仿。&lt;/LI&gt;
+    &lt;/UL&gt;       
+&lt;LI&gt;分段执行：每次执行一组指令，观察该段指令执行后寄存器、内存单元内容的变化，分析程序功能。
+    &lt;UL&gt;               
+    &lt;LI&gt;F2：在当前位置设置断点（该断点可多次使用）。&lt;/LI&gt;
+    &lt;LI&gt;F9：从当前指令开始执行到断点处。&lt;/LI&gt;
+    &lt;LI&gt;F4：从“当前指令”执行到光标条所在行停下（该“断点”只能使用一次）&lt;/LI&gt;
+    &lt;/UL&gt;
+&lt;/LI&gt;
+&lt;/UL&gt;</code></pre>
+<LI>
+重新启动
+</LI>
+<UL>
+<LI>
+修改IP寄存器的值为初始地址使程序重新开始执行。
+</LI>
+</UL>
+<LI>
+查看地址内容： ALT+F10——goto，输入ds:offset，查看该位置处的内容
+</LI>
+</UL>
+</UL>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C%E7%9B%B8%E5%85%B3/%E4%B8%AD%E6%96%AD/%E4%B8%AD%E6%96%AD/" rel="next" title="2.计算机基础/c.操作系统/实验相关/中断/中断">
+                <i class="fa fa-chevron-left"></i> 2.计算机基础/c.操作系统/实验相关/中断/中断
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/" rel="prev" title="2.计算机基础/c.操作系统/11.IO管理和磁盘调度">
+                2.计算机基础/c.操作系统/11.IO管理和磁盘调度 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ryan</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/liuxr98" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#汇编tasm"><span class="nav-number">1.</span> <span class="nav-text">1、汇编：TASM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令格式"><span class="nav-number">1.1.</span> <span class="nav-text">1-1、命令格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选项解释"><span class="nav-number">1.2.</span> <span class="nav-text">1-2、选项解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#帮助"><span class="nav-number">1.3.</span> <span class="nav-text">1-3、帮助</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部分参数解释"><span class="nav-number">1.4.</span> <span class="nav-text">1-4、部分参数解释</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编译tcc"><span class="nav-number">2.</span> <span class="nav-text">2、编译：TCC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令格式-1"><span class="nav-number">2.1.</span> <span class="nav-text">2-1、命令格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选项解释-1"><span class="nav-number">2.2.</span> <span class="nav-text">2-2、选项解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#帮助-1"><span class="nav-number">2.3.</span> <span class="nav-text">2-3、帮助</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部分参数解释-1"><span class="nav-number">2.4.</span> <span class="nav-text">2-4、部分参数解释</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#链接tlink"><span class="nav-number">3.</span> <span class="nav-text">3、链接：TLINK</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令格式-2"><span class="nav-number">3.1.</span> <span class="nav-text">3-1、命令格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选项解释-2"><span class="nav-number">3.2.</span> <span class="nav-text">3-2、选项解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#帮助-2"><span class="nav-number">3.3.</span> <span class="nav-text">3-3、帮助</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部分参数解释-2"><span class="nav-number">3.4.</span> <span class="nav-text">3-4、部分参数解释</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#调试td"><span class="nav-number">4.</span> <span class="nav-text">4、调试：TD</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令格式-3"><span class="nav-number">4.1.</span> <span class="nav-text">4-1、命令格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选项解释-3"><span class="nav-number">4.2.</span> <span class="nav-text">4-2、选项解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#帮助-3"><span class="nav-number">4.3.</span> <span class="nav-text">4-3、帮助</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部分参数解释-3"><span class="nav-number">4.4.</span> <span class="nav-text">4-4、部分参数解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调试界面用法"><span class="nav-number">4.5.</span> <span class="nav-text">4-5、调试界面用法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ryan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

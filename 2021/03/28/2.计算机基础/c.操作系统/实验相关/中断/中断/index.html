@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1、了解中断 1-1、定义     中断是现代微型计算机系统广泛采用的资源共享技术。   所谓中断是指CPU在正常执行程序的过程中,由于某个外部或内部事件的作用,强迫CPU停止当前正在执行的程序,转去为该事件服务(称为中断服务),待服务结東后,又能自动返回到被中断的程序中继续执行  1-2、中断的功能    实现CPU与外部设备的速度匹配与并行工作。   实现实时信息监测">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2.计算机基础&#x2F;c.操作系统&#x2F;实验相关&#x2F;中断&#x2F;中断">
+<meta property="og:url" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C%E7%9B%B8%E5%85%B3/%E4%B8%AD%E6%96%AD/%E4%B8%AD%E6%96%AD/index.html">
+<meta property="og:site_name" content="RBlog">
+<meta property="og:description" content="1、了解中断 1-1、定义     中断是现代微型计算机系统广泛采用的资源共享技术。   所谓中断是指CPU在正常执行程序的过程中,由于某个外部或内部事件的作用,强迫CPU停止当前正在执行的程序,转去为该事件服务(称为中断服务),待服务结東后,又能自动返回到被中断的程序中继续执行  1-2、中断的功能    实现CPU与外部设备的速度匹配与并行工作。   实现实时信息监测">
+<meta property="article:published_time" content="2021-03-28T15:44:18.357Z">
+<meta property="article:modified_time" content="2018-04-16T05:04:24.000Z">
+<meta property="article:author" content="Ryan">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/03/28/2.计算机基础/c.操作系统/实验相关/中断/中断/"/>
+
+
+
+
+
+  <title>2.计算机基础/c.操作系统/实验相关/中断/中断 | RBlog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C%E7%9B%B8%E5%85%B3/%E4%B8%AD%E6%96%AD/%E4%B8%AD%E6%96%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2.计算机基础/c.操作系统/实验相关/中断/中断</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-28T23:44:18+08:00">
+                2021-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="了解中断">1、了解中断</h1>
+<h2 id="定义">1-1、定义</h2>
+<blockquote>
+<p><FONT size="4" color="BLACK">   中断是现代微型计算机系统广泛采用的资源共享技术。</FONT></p>
+<p>  所谓中断是指CPU在正常执行程序的过程中,由于某个外部或内部事件的作用,强迫CPU停止当前正在执行的程序,转去为该事件服务(称为中断服务),待服务结東后,又能自动返回到被中断的程序中继续执行</p>
+</blockquote>
+<h2 id="中断的功能">1-2、中断的功能</h2>
+<OL>
+<FONT size="4" color="BLACK">
+<LI>
+实现CPU与外部设备的速度匹配与并行工作。
+</LI>
+<LI>
+实现实时信息监测和控制。
+</LI>
+<LI>
+实现故障检测和自动处理。
+</LI>
+</FONT></OL>
+<h2 id="中断处理流程图">1-3、中断处理流程图</h2>
+<CENTER>
+<IMG src="1.PNG"><BR>图1：中断处理流程框图
+</BR></IMG></CENTER>
+  对于单个中断来讲，其处理过程如下：
+<CENTER>
+<IMG src="2.PNG"><BR>图2：单个中断处理流程
+</BR></IMG></CENTER>
+<h2 id="中断的种类">1-4、中断的种类</h2>
+<UL>
+<FONT size="4" color="BLACK">
+<LI>
+内部中断：CPU在处理某些特殊事件而引起或通过自己内部逻辑去调用的中断
+</LI>
+<pre><code>&lt;UL&gt;
+&lt;LI&gt;软中断：中断指令调用的中断&lt;/LI&gt;
+&lt;LI&gt;异常中断：由于CPU的某些错误引起的中断，如除法出错中断、溢出中断&lt;/LI&gt;
+&lt;LI&gt;陷阱中断：为调试程序设置的中断&lt;/LI&gt;
+&lt;/UL&gt;</code></pre>
+<LI>
+外部中断：由于外部设备要求数据输入或输岀操作时请求CPU为之服务的中断
+</LI>
+<pre><code>&lt;UL&gt;
+&lt;LI&gt;可屏蔽中断：&lt;FONT COLOR=RED&gt;外设&lt;/FONT&gt;完成数据准备，请求进行数据传输引起的中断&lt;/LI&gt;
+&lt;LI&gt;不可屏蔽中断（NMI）：通常代表CPU外部的故障，例如存储器校验错&lt;/LI&gt;
+&lt;/UL&gt;</code></pre>
+</FONT></UL>
+<h2 id="中断优先级与嵌套">1-5、中断优先级与嵌套</h2>
+<blockquote>
+<p><FONT size="4" color="BLACK"> 软件中断（内部中断） &gt; 不可屏蔽中断（NMI） &gt; 可屏蔽中断（INTR） &gt; 单步中断</FONT></p>
+</blockquote>
+<h1 id="中断服务程序编写">2、中断服务程序编写</h1>
+<h2 id="典型中断程序模板">2-1、典型中断程序模板</h2>
+<blockquote>
+<p>push ...     ；step1，保护现场<BR><BR> sti       ；step2，开中断，允许响应更高级的中断<BR><BR> ···<BR> ；step3，中断服务程序<BR> ···<BR><BR> cli       ；step4 关中断 <BR><BR> mov al,20h   ；step5 发送中断结束信号<BR> out 20h,al <BR> out 0A0h,al <BR><BR> pop ...     ；step6 恢复现场 <BR><BR> iret      ；step7，返回断点</BR></BR></BR></BR></BR></BR></BR></BR></BR></BR></BR></BR></BR></BR></BR></BR></p>
+</blockquote>
+<h1 id="中断向量表">3、中断向量表</h1>
+网址：<A>https://blog.csdn.net/nicholas199109/article/details/8557484</A> ## 3-1、0x86中断向量
+<p align="left">
+</p>
+<table border="1" cellpadding="1" width="100%">
+<tbody>
+<tr>
+<td>
+<p align="center">
+<strong>I/O ADDR</strong>
+</p>
+</td>
+<td>
+<p align="center">
+<strong>INT TYPE</strong>
+</p>
+</td>
+<td>
+<p align="left">
+<strong>FUNCTION</strong>
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="center">
+00 ~ 03
+</p>
+</td>
+<td>
+<p align="center">
+0
+</p>
+</td>
+<td>
+<p align="left">
+除法溢出中断
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="center">
+04 ~ 07
+</p>
+</td>
+<td>
+<p align="center">
+1
+</p>
+</td>
+<td>
+<p align="left">
+单步(用于DEBUG)
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="center">
+08 ~ 0B
+</p>
+</td>
+<td>
+<p align="center">
+2
+</p>
+</td>
+<td>
+<p align="left">
+非屏蔽中断(NMI)
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="center">
+0C ~ 0F
+</p>
+</td>
+<td>
+<p align="center">
+3
+</p>
+</td>
+<td>
+<p align="left">
+断点中断(用于DEBUG)
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="center">
+10 ~ 13
+</p>
+</td>
+<td>
+<p align="center">
+4
+</p>
+</td>
+<td>
+<p align="left">
+溢出中断
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="center">
+14 ~ 17
+</p>
+</td>
+<td>
+<p align="center">
+5
+</p>
+</td>
+<td>
+<p align="left">
+打印屏幕
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="center">
+18 ~ 1F
+</p>
+</td>
+<td>
+<p align="center">
+6,7
+</p>
+</td>
+<td>
+<p align="left">
+保留
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p align="left">
+　
+</p>
+<h1 id="a">4、8259A</h1>
+<h1 id="端口">5、端口</h1>
+<h2 id="什么是端口">5-1、什么是端口</h2>
+  接口电路内部有一组寄存器，用于暂存CPU与外部设备之间传递的信息。为了使CPU能对这些寄存器进行读写，这些寄存器都分配到一个专用的地址，CPU可以用<strong>输入输出指令</strong>对这些寄存器进行读写，这种分配了地址的寄存器称为端口。 ## 5-2、端口分类
+<UL>
+<LI>
+数据输入端口：存放输入设备输入的数据信息，如键盘输入的字符代码
+</LI>
+<LI>
+数据输出端口：存放送往输出设备，准备输出的数据信息，如送往打印机的字符代码
+</LI>
+<LI>
+状态端口（输入）：存放外部设备/接口的状态信号，供CPU读取
+</LI>
+<LI>
+控制端口（输出）：存放CPU发往外部设备或接口的命令或控制信息
+</LI>
+</UL>
+<h2 id="端口编址方式">5-3、端口编址方式</h2>
+###5-3-1、I/O端口与内存统一编址   从内存地址空间里划分出一部分，供I/O端口使用，CPU对端口的操作就如同使用内存单元一样。 ###5-3-2、I/O端口与内存独立编址   为I/O端口另外设置一套地址，端口不占用内存的地址空间，CPU对端口与对内存单元使用不同的操作指令。80x86微机采用该种方式，用16位二进制表示一个端口的地址，最多可以有65536个不同的端口。 ## 5-4、8086的输入输出指令   IN和OUT指令的共同特点是：必须使用累加器（ACC）AL或AX进行数据的传送。 ### 5-4-1、端口输入指令IN
+<UL>
+<LI>
+指令格式：
+</LI>
+<pre><code>&lt;UL&gt;
+&lt;LI&gt;IN ACC,PORT&lt;/LI&gt;
+&lt;LI&gt;IN ACC,DX&lt;/LI&gt;
+&lt;/UL&gt;</code></pre>
+<LI>
+操作：
+</LI>
+<pre><code>&lt;UL&gt;
+&lt;LI&gt;AL/AX &lt;- (PORT)&lt;/LI&gt;
+&lt;LI&gt;AL/AX &lt;- (DX)&lt;/LI&gt;
+&lt;/UL&gt;</code></pre>
+<LI>
+功能：把指定端口中的数据读入AL/AX中。
+</LI>
+<LI>
+常用端口
+</LI>
+<pre><code>&lt;UL&gt;
+&lt;LI&gt;&lt;/LI&gt;
+&lt;LI&gt;&lt;/LI&gt;
+&lt;LI&gt;&lt;/LI&gt;
+&lt;/UL&gt;</code></pre>
+</UL>
+<h3 id="端口输出指令out">5-4-2、端口输出指令OUT</h3>
+<UL>
+<LI>
+指令格式：
+</LI>
+<pre><code>&lt;UL&gt;
+&lt;LI&gt;OUT PORT,ACC&lt;/LI&gt;
+&lt;LI&gt;OUT DX,ACC&lt;/LI&gt;
+&lt;/UL&gt;</code></pre>
+<LI>
+操作：
+</LI>
+<pre><code>&lt;UL&gt;
+&lt;LI&gt;(PORT) &lt;- AL/AX&lt;/LI&gt;
+&lt;LI&gt;(DX) &lt;- AL/AX&lt;/LI&gt;
+&lt;/UL&gt;</code></pre>
+<LI>
+功能：把AL/AX中的数据向指定端口输出。
+</LI>
+<LI>
+常用端口
+</LI>
+<pre><code>&lt;UL&gt;
+&lt;LI&gt;&lt;/LI&gt;
+&lt;LI&gt;&lt;/LI&gt;
+&lt;LI&gt;&lt;/LI&gt;
+&lt;/UL&gt;</code></pre>
+</UL>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/README/" rel="next" title="2.计算机基础/c.操作系统/README">
+                <i class="fa fa-chevron-left"></i> 2.计算机基础/c.操作系统/README
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C%E7%9B%B8%E5%85%B3/%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7/%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7/" rel="prev" title="2.计算机基础/c.操作系统/实验相关/编译链接调试工具/编译链接调试工具">
+                2.计算机基础/c.操作系统/实验相关/编译链接调试工具/编译链接调试工具 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ryan</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/liuxr98" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#了解中断"><span class="nav-number">1.</span> <span class="nav-text">1、了解中断</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">1.1.</span> <span class="nav-text">1-1、定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中断的功能"><span class="nav-number">1.2.</span> <span class="nav-text">1-2、中断的功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中断处理流程图"><span class="nav-number">1.3.</span> <span class="nav-text">1-3、中断处理流程图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中断的种类"><span class="nav-number">1.4.</span> <span class="nav-text">1-4、中断的种类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中断优先级与嵌套"><span class="nav-number">1.5.</span> <span class="nav-text">1-5、中断优先级与嵌套</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#中断服务程序编写"><span class="nav-number">2.</span> <span class="nav-text">2、中断服务程序编写</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#典型中断程序模板"><span class="nav-number">2.1.</span> <span class="nav-text">2-1、典型中断程序模板</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#中断向量表"><span class="nav-number">3.</span> <span class="nav-text">3、中断向量表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#a"><span class="nav-number">4.</span> <span class="nav-text">4、8259A</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#端口"><span class="nav-number">5.</span> <span class="nav-text">5、端口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是端口"><span class="nav-number">5.1.</span> <span class="nav-text">5-1、什么是端口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#端口编址方式"><span class="nav-number">5.2.</span> <span class="nav-text">5-3、端口编址方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#端口输出指令out"><span class="nav-number">5.2.1.</span> <span class="nav-text">5-4-2、端口输出指令OUT</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ryan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

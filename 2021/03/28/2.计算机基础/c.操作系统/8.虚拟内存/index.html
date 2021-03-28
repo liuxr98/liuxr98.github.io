@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1、硬件和控制结构 1.1、局部性原理 可参考超算课件4 - 时间局部性 - 空间局部性 1.2、分页 1.2.1、纲要  分页  一级页表 两级页表  多级页表如何划分不同的level？（应运用整体性思想进行分析）  倒排页表  线性倒排页表 散列倒排页表  转换检测缓冲区&#x2F;快表（TLB：translation lookaside buffer）  关联映">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2.计算机基础&#x2F;c.操作系统&#x2F;8.虚拟内存">
+<meta property="og:url" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/index.html">
+<meta property="og:site_name" content="RBlog">
+<meta property="og:description" content="1、硬件和控制结构 1.1、局部性原理 可参考超算课件4 - 时间局部性 - 空间局部性 1.2、分页 1.2.1、纲要  分页  一级页表 两级页表  多级页表如何划分不同的level？（应运用整体性思想进行分析）  倒排页表  线性倒排页表 散列倒排页表  转换检测缓冲区&#x2F;快表（TLB：translation lookaside buffer）  关联映">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/%E5%88%86%E9%A1%B5%E5%9C%B0%E5%9D%80%E7%BB%93%E6%9E%84.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/%E4%B8%80%E7%BA%A7%E5%88%86%E9%A1%B5%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/%E4%BA%8C%E7%BA%A7%E5%88%86%E9%A1%B5%E7%AE%80%E5%8D%95%E7%A4%BA%E6%84%8F.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/%E4%BA%8C%E7%BA%A7%E5%88%86%E9%A1%B5%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/%E5%80%92%E6%8E%92%E9%A1%B5%E8%A1%A8%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/TLB%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/TLB%E5%85%B3%E8%81%94.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/%E6%9C%89TLB%E7%9A%84%E8%AE%BF%E9%97%AE%E6%B5%81%E7%A8%8B.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/%E5%88%86%E6%AE%B5%E5%9C%B0%E5%9D%80%E7%BB%93%E6%9E%84.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/%E5%88%86%E6%AE%B5%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/%E6%AE%B5%E9%A1%B5%E5%BC%8F%E5%9C%B0%E5%9D%80%E7%BB%93%E6%9E%84.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/%E6%AE%B5%E9%A1%B5%E5%BC%8F%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/%E7%BD%AE%E6%8D%A2%E7%AD%96%E7%95%A5%E4%BE%8B%E9%A2%98.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/%E7%90%86%E6%83%B3%E5%8C%96%E5%B7%A5%E4%BD%9C%E9%9B%86%E7%AD%96%E7%95%A5%E7%A4%BA%E4%BE%8B.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/%E5%B7%A5%E4%BD%9C%E9%9B%86%E5%A4%A7%E5%B0%8F%E7%9A%84%E5%85%B8%E5%9E%8B%E5%9B%BE%E5%BD%A2.png%22">
+<meta property="article:published_time" content="2021-03-28T15:44:18.839Z">
+<meta property="article:modified_time" content="2021-03-28T16:02:24.515Z">
+<meta property="article:author" content="Ryan">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/%E5%88%86%E9%A1%B5%E5%9C%B0%E5%9D%80%E7%BB%93%E6%9E%84.png%22">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/03/28/2.计算机基础/c.操作系统/8.虚拟内存/"/>
+
+
+
+
+
+  <title>2.计算机基础/c.操作系统/8.虚拟内存 | RBlog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2.计算机基础/c.操作系统/8.虚拟内存</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-28T23:44:18+08:00">
+                2021-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="硬件和控制结构">1、硬件和控制结构</h1>
+<h2 id="局部性原理">1.1、局部性原理</h2>
+<p>可参考超算课件4 - 时间局部性 - 空间局部性</p>
+<h2 id="分页">1.2、分页</h2>
+<h3 id="纲要">1.2.1、纲要</h3>
+<ul>
+<li>分页
+<ul>
+<li>一级页表</li>
+<li>两级页表
+<ul>
+<li>多级页表如何划分不同的level？（应运用整体性思想进行分析）</li>
+</ul></li>
+<li>倒排页表
+<ul>
+<li>线性倒排页表</li>
+<li>散列倒排页表</li>
+</ul></li>
+<li>转换检测缓冲区/快表（TLB：translation lookaside buffer）
+<ul>
+<li>关联映射：可同时查询多项</li>
+<li>TLB是全关联的（from计组）</li>
+<li>提升性能的方法
+<ul>
+<li>扩大TLB大小</li>
+<li>增大页尺寸</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>分段</li>
+<li>段页式</li>
+</ul>
+<p>  <font color="red">在虚存中，地址的转换变得更加复杂：逻辑地址（虚拟页号+offset）-&gt;伪物理地址（本地页号+offset）-&gt;物理地址（页框好+offset）。</font></p>
+<h3 id="一级分页">1.2.2、一级分页</h3>
+<p>  只采用分页的虚拟地址结构如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/分页地址结构.png%22">   虚拟地址通过查表转换成物理地址： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/一级分页地址转换.png%22"></p>
+<h3 id="二级分页">1.2.3、二级分页</h3>
+<p>  采用二级分页的虚拟地址结构与一级分页的一样，区别在于二级分页对其虚拟页号再次进行了划分： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/二级分页简单示意.png%22">   虚拟地址通过查两次表转换成物理地址： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/二级分页地址转换.png%22"></p>
+<h3 id="倒排页表">1.2.4、倒排页表</h3>
+<p>  <a href="E:\课_操作系统\virtual_memory4.pdf">参考资料</a></p>
+<p>  散列倒排页表的转换简化过程如下（散列-存取数据规则一致）： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/倒排页表地址转换.png%22"></p>
+<p>  倒排页表也有两种：一种是线性倒排页表，另一种则是哈希倒排列表，上图是哈希倒排列表的结构图。线性倒排列表的结构比较简单，可以认为申请了一块比较大的空间用来存储线性倒排列表，其中的条目数为<span class="math inline">\(2^{\text{length_of_VPN}}\)</span>。这样可能消耗的空间会比较多，哈希倒排列表则减少了空间的消耗（类似直接下标查找和哈希查找）。</p>
+<h3 id="tlb">1.2.5、TLB</h3>
+<p>  使用了TLB的分页机制的虚拟地址转换成物理地址的过程如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/TLB地址转换.png%22">   通过使用关联技术可以提高TLB查找的速度： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/TLB关联.png%22">   总体的流程如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/有TLB的访问流程.png%22"></p>
+<h2 id="分段">1.3、分段</h2>
+<p>  与单级分页很像，其虚拟地址结构如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/分段地址结构.png%22">   虚拟地址转换成物理地址的过程如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/分段地址转换.png%22"></p>
+<h2 id="段页式">1.4、段页式</h2>
+<p>  虚拟地址结构如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/段页式地址结构.png%22">   虚拟地址转换成物理地址的过程如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/段页式地址转换.png%22"></p>
+<h2 id="保护和共享">1.5、保护和共享</h2>
+<h1 id="操作系统的内存管理设计">2、操作系统的内存管理设计</h1>
+<p>  操作系统的内存管理设计取决于三个基本的选择（前二者取决于硬件平台）： - 是否使用虚存技术 - 分页 or 分段 or 段页式？ - 为各种存储管理特征采用的算法 ## 2.1、读取策略 - <font color="red">请求分页</font>：只有当访问到某页的一个单元时才将该页取入内存 - <font color="red">预先分页</font>：利用空间局部性原理与辅存设备的特性（连续取可降低单页取入时间）</p>
+<p>  进程首次启动时，应采用预先分页的读取策略。</p>
+<h2 id="放置策略">2.2、放置策略</h2>
+<p>  第七章中有提到： - <font color="red">最佳适配</font> - <font color="red">首次适配</font> - <font color="red">下次适配</font></p>
+<p>  <font color="red">纯分页或段页式系统中放置策略并不重要</font>，因为地址转换硬件和内存访问硬件能以相同的效率为任何页框组合执行相应的功能。<br>   在NUMA（非一致存储访问）系统中放置策略则比较重要，因为其性能很大程度上取决于数据驻留的位置与使用数据的处理器间的距离，所以自动防治策略希望能把页分配到能够提供最佳性能的内存位置。</p>
+<h2 id="置换策略">2.3、置换策略</h2>
+<p>  目标：移出最近最不可能访问的页。 &gt; 页框锁定：内存中的某些页框可能是被锁定的。大部分操作系统内核和重要的控制结构就保存在锁定的页框中。一个页框被锁定时，当前保存在该页框中的页就不能被置换。</p>
+<h3 id="基本算法">2.3.1、基本算法</h3>
+<p>  基本算法有如下几种： - OPT - LRU - FIFO - Clock</p>
+<blockquote>
+<p>最佳置换策略（Optimal，OPT）</p>
+</blockquote>
+<p>  置换下次访问距当前时间最长的那些页，这种算法导致的缺页中断最少，但是需要知道未来发生的事件，故而是<font color="red">不可能实现</font>的，只能作为性能评估的参考。</p>
+<blockquote>
+<p>最近最少使用（Least-Recently-Used，LRU）</p>
+</blockquote>
+<p>  置换内存中最长时间未被引用的页。性能接近OPT，但是<font color="red">开销很大</font>。</p>
+<p>  实现方案： - 方案1：维护一个关于访问页的栈 - 方案2：给每页添加一个时间戳 - 方案3：移位计数器</p>
+<blockquote>
+<p>先进先出（FIFO）</p>
+</blockquote>
+<p>  是最简单的置换策略，隐含的逻辑是置换驻留在内存中时间最长的页（这一推断通常是错误的）。 &gt; 时钟置换策略（Clock）</p>
+<p>  是一种折中方案，试图用较小的开销取得接近LRU的性能。用一个情景来描述：一圈立着的木牌，开始的时候都是倒着的(value=0)，一个人从开始位置起，每收到一个指令（要新加一页），他就往前走，找到第一个倒着的木牌，把它竖起来，表示目标找到。<font color="red">在此过程中，它途径路上所有竖着的木牌都会被他放倒</font>。</p>
+<p>  可以通过伪代码来理解其过程： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">pagearr[N] &#x3D; &#123;N pages&#125;</span><br><span class="line">pagearr[*].usebit &#x3D; 0</span><br><span class="line">ptr &#x3D; pagearr</span><br><span class="line"></span><br><span class="line">if hit:</span><br><span class="line">    *ptr.usebit &#x3D; 1</span><br><span class="line">else:</span><br><span class="line">    # 从当前指针位置开始，找到一个合题意的页（或许有内容，或许为空）进行置换</span><br><span class="line">    while (access page):</span><br><span class="line">        if (*ptr.usebit &#x3D; 0):</span><br><span class="line">            load page</span><br><span class="line">            *ptr.usebit &#x3D; 1</span><br><span class="line">            break</span><br><span class="line">        else:</span><br><span class="line">            *ptr.usebit &#x3D; 0</span><br><span class="line">            ptr++</span><br><span class="line">    ptr++</span><br></pre></td></tr></table></figure></p>
+<p>  * 通过增加使用的位数可以使时钟算法更有效。</p>
+<blockquote>
+<p>例题 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/置换策略例题.png%22"></p>
+</blockquote>
+<h3 id="页缓冲">2.3.2、页缓冲</h3>
+<ul>
+<li>空闲页链表</li>
+<li>修改页链表</li>
+</ul>
+<h2 id="清除策略">2.4、清除策略</h2>
+<p>  与读取策略相反，清除策略决定何时将已修改的一页写回辅存。 - 请求式清除：只有当一页被置换时才被写回辅存。 - 预约式清除：将已修改的多页在需要时他们所占据的页框之前成批地写回辅存。</p>
+<p>  <font color="red">结合页缓冲技术可以允许如下策略：只清除可用于置换的页，但去除了清除和置换操作间的成对关系。</font></p>
+<h2 id="驻留集管理">2.5、驻留集管理</h2>
+<h3 id="基本方面">2.5.1、基本方面</h3>
+<p><b>驻留集大小</b></p>
+<p><b>分配策略</b> - 固定分配策略 - 可变分配策略</p>
+<p><b>置换范围</b> - 局部置换策略 - 全局置换策略</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">   局部置换</th>
+<th style="text-align: left;">  全局置换</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+固定分配 |
+<ul>
+<li>
+分配给一个进程的页框数是固定的
+</li>
+<li>
+从分配给该进程的页框中选择被置换的页
+</li>
+</ul>
+|   不存在 可变分配 |
+<ul>
+<li>
+分配给一个进程的页框数不时发生变化
+</li>
+<li>
+从分配给该进程的页框中选择被置换的页
+</li>
+</ul>
+|
+<ul>
+<li>
+从内存中的所有可用页框中选择被置换的页，这导致进程驻留集大小不断改变
+</li>
+</ul>
+<p><b>固定分配、局部范围</b> - 优点 - 缺点 - 总页数若分配过少，将产生很高的缺页率 - 总页数分配过多，内存中只能有很少的几个程序</p>
+<p><b>可变分配、全局范围</b> - 优点 - 最容易实现 - 缺点 - 难点在于置换页的选择（没有空闲页框时） - 改进 - 使用页缓冲，此时选择置换哪一页不重要，因为如果下一次重写这些页之前访问到了被替换的页，该页可以回收。</p>
+<p><b>可变分配、局部范围</b> - 过程总结 - 优点 - 性能较好 - 缺点 - 实现比“可变分配、全局范围”复杂得多</p>
+<h3 id="工作集策略隶属于可变分配局部范围">2.5.2、工作集策略（隶属于可变分配、局部范围）</h3>
+<p><b>理想化的工作集策略（<font color="red">理想情况下工作集=驻留集</font>）</b></p>
+<blockquote>
+<p>相关变量： - 工作集W：（当前活跃）页的集合 - 虚拟时间t：推测——<span class="math inline">\(t\in[0,\Delta]\)</span>时，t++且W++，当<span class="math inline">\(t=\Delta\)</span>时，清除没有用过的页。 - 虚拟时间窗口<span class="math inline">\(\Delta\)</span>：虚拟窗口越大，工作集就越大（<span class="math inline">\(W_{max}(t,\Delta+1)&gt; W_{max}(t,\Delta)\)</span>） - 进程页数N：<span class="math inline">\(1\leqslant W(t,\Delta) \leqslant min\{\Delta,N\}\)</span>，前<span class="math inline">\(N\)</span>次全部缺失的时候右边等号成立。</p>
+</blockquote>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/理想化工作集策略示例.png%22"><br>理想化工作集策略示例</p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/工作集大小的典型图形.png%22"><br>工作集大小的典型图形</p>
+<p>  从上图可以看出： - 稳定状态 <span class="math inline">\(\iff\)</span> 进程进入局部性阶段 - 瞬变状态 <span class="math inline">\(\iff\)</span> 进程转移到新的局部性阶段</p>
+<p>  工作集策略可以指导有关驻留集大小的策略： - <font color="red">进程全集 <span class="math inline">\(\supseteq\)</span> 驻留集 <span class="math inline">\(\supseteq\)</span> 工作集</font> - 监视每个进程的工作集。 - 周期性地从一个进程的驻留集中移去那些不在其工作集中的页（<font color="red">工作集 <span class="math inline">\(\neq\)</span> 驻留集</font>）。 - 只有当一个进程的工作集在内存中（即其驻留集 <span class="math inline">\(\supseteq\)</span> 工作集）时，才可执行该进程。</p>
+<p>  工作集策略存在的问题： - 根据过去并不总能预测未来 - 为每个进程真实地测量工作集是不实际的 - <span class="math inline">\(\Delta\)</span>的最优值是未知的，且它在任何情况下都会变化</p>
+<p><b>缺页中断频率（PFF）算法</b></p>
+<p>  定义一个阈值F（通过虚拟时间来表示缺页率），如果从上一次缺页中断到这次缺页中断的时间小于F（缺页率太高了），则把该页加到该进程的驻留集中；否则淘汰所有使用位为0的页，缩减驻留集大小。</p>
+<p>  还可以使用两个时间阈值对该算法进行改进：定义低时间阈值<span class="math inline">\(F_{min}\)</span>/<span class="math inline">\(f_{max}\)</span>（用于引发驻留集大小减小的最低时间阈值），高时间阈值<span class="math inline">\(F_{max}\)</span>/<span class="math inline">\(f_{min}\)</span>（用于引发驻留集大小增加的最高时间阈值）。<font color="red">注意这里的F表示时间，频率应取其倒数（<span class="math inline">\(f_{min} &lt; f_{max}\iff F_{max} &gt; F_{min}\)</span>）。</font> - <span class="math inline">\(f &lt; f_{min}\iff F &gt; F_{max}\)</span>：缺页率过低，驻留集可以适当减小。 - <span class="math inline">\(f &gt; f_{max}\iff F &lt; F_{min}\)</span>：缺页率过高，驻留集应当适当增大。 - <span class="math inline">\(f \in [f_{min},f_{max}]\iff F \in [F_{min},F_{max}]\)</span>：驻留集规模保持不变。</p>
+<p>  主要的缺点： - 如果要转移到新的局部性阶段，则在过渡过程中其执行效果不太好</p>
+<p><b><font color="purple">可变采样间隔的工作集（VSWS）策略</font></b> &gt;基本思想：<br>  在采样区间的开始处,该进程的所有驻留页的使用位被重置；在末尾处，只有在这个区间中被访问过的页才设置它们的使用位，这些也在下一个区间期间仍然保留在驻留集中，而其他页则被淘汰出驻留集。<br>  <font color="red">驻留集的大小只能在一个区间的末尾处减小，而在每个区间中，任何缺页中断都将导致该页被添加到驻留集中。</font></p>
+<p>  工作过程： |parameters|meaning| |:-:|:-| M | 采样区间的最大宽度 L | 采样区间的最小宽度 Q | 采样实例间允许发生的缺页中断数量 - 若从上次采样示例至今的单位时间达到L，则挂起该进程并扫描使用位。 - 若在这个长度为L的虚拟时间区间内，发生了Q次缺页中断： - 若从上次采样示例至今的时间小于M，则等待，直到经过的虚拟时间到达M，才挂起该进程并扫描使用位。 - 若从上次采样实例至今的时间大于等于M，则挂起该进程并扫描使用位。</p>
+<h2 id="加载控制">2.6、加载控制</h2>
+<ul>
+<li>系统并发度</li>
+<li>进程挂起</li>
+</ul>
+<h1 id="unix和solaris内存管理">3、UNIX和Solaris内存管理</h1>
+<h1 id="linux内存管理">4、Linux内存管理</h1>
+<h1 id="windows内存管理">5、Windows内存管理</h1>
+<h1 id="android内存管理">6、Android内存管理</h1>
+<p><b></b></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="next" title="2.计算机基础/c.操作系统/7.内存管理">
+                <i class="fa fa-chevron-left"></i> 2.计算机基础/c.操作系统/7.内存管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/9.%E5%8D%95%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6/" rel="prev" title="2.计算机基础/c.操作系统/9.单处理器调度">
+                2.计算机基础/c.操作系统/9.单处理器调度 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ryan</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/liuxr98" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#硬件和控制结构"><span class="nav-number">1.</span> <span class="nav-text">1、硬件和控制结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#局部性原理"><span class="nav-number">1.1.</span> <span class="nav-text">1.1、局部性原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分页"><span class="nav-number">1.2.</span> <span class="nav-text">1.2、分页</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#纲要"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1、纲要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一级分页"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2、一级分页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二级分页"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.2.3、二级分页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#倒排页表"><span class="nav-number">1.2.4.</span> <span class="nav-text">1.2.4、倒排页表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tlb"><span class="nav-number">1.2.5.</span> <span class="nav-text">1.2.5、TLB</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分段"><span class="nav-number">1.3.</span> <span class="nav-text">1.3、分段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#段页式"><span class="nav-number">1.4.</span> <span class="nav-text">1.4、段页式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保护和共享"><span class="nav-number">1.5.</span> <span class="nav-text">1.5、保护和共享</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#操作系统的内存管理设计"><span class="nav-number">2.</span> <span class="nav-text">2、操作系统的内存管理设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#放置策略"><span class="nav-number">2.1.</span> <span class="nav-text">2.2、放置策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#置换策略"><span class="nav-number">2.2.</span> <span class="nav-text">2.3、置换策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本算法"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.3.1、基本算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#页缓冲"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.3.2、页缓冲</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#清除策略"><span class="nav-number">2.3.</span> <span class="nav-text">2.4、清除策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#驻留集管理"><span class="nav-number">2.4.</span> <span class="nav-text">2.5、驻留集管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本方面"><span class="nav-number">2.4.1.</span> <span class="nav-text">2.5.1、基本方面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工作集策略隶属于可变分配局部范围"><span class="nav-number">2.4.2.</span> <span class="nav-text">2.5.2、工作集策略（隶属于可变分配、局部范围）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加载控制"><span class="nav-number">2.5.</span> <span class="nav-text">2.6、加载控制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#unix和solaris内存管理"><span class="nav-number">3.</span> <span class="nav-text">3、UNIX和Solaris内存管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#linux内存管理"><span class="nav-number">4.</span> <span class="nav-text">4、Linux内存管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#windows内存管理"><span class="nav-number">5.</span> <span class="nav-text">5、Windows内存管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#android内存管理"><span class="nav-number">6.</span> <span class="nav-text">6、Android内存管理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ryan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

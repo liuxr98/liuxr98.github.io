@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. 概述 1.1. 文件与文件系统 1.2. 文件结构  Reference：Files_Records_and_Fields.pdf - 域（field） - 记录（record） - 文件（file） - 数据库（database）  1.3. 文件管理系统   设备驱动  启动设备上的I&#x2F;O操作，处理I&#x2F;O请求的完成  基本文件系统（物理I&#x2F;O层）  处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2.计算机基础&#x2F;c.操作系统&#x2F;12.文件管理">
+<meta property="og:url" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:site_name" content="RBlog">
+<meta property="og:description" content="1. 概述 1.1. 文件与文件系统 1.2. 文件结构  Reference：Files_Records_and_Fields.pdf - 域（field） - 记录（record） - 文件（file） - 数据库（database）  1.3. 文件管理系统   设备驱动  启动设备上的I&#x2F;O操作，处理I&#x2F;O请求的完成  基本文件系统（物理I&#x2F;O层）  处理">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E5%AD%97%E8%8A%82%E5%BA%8F%E5%88%97.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E5%A0%86%E6%96%87%E4%BB%B6.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E9%A1%BA%E5%BA%8F%E6%96%87%E4%BB%B6.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E7%B4%A2%E5%BC%95%E9%A1%BA%E5%BA%8F%E6%96%87%E4%BB%B6.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E7%B4%A2%E5%BC%95%E6%96%87%E4%BB%B6.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/FCB%E7%A4%BA%E4%BE%8B.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E4%BF%A1%E6%81%AF%E5%8D%95%E5%85%83.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E4%B8%80%E7%BA%A7%E7%9B%AE%E5%BD%95.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E4%BA%8C%E7%BA%A7%E7%9B%AE%E5%BD%95.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E5%A4%9A%E7%BA%A7%E7%9B%AE%E5%BD%95.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E6%94%B9%E8%BF%9B%E7%9A%84%E5%A4%9A%E7%BA%A7%E7%9B%AE%E5%BD%95.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E5%9F%BA%E6%9C%AC%E7%9B%AE%E5%BD%95%E9%A1%B9%E7%BB%84%E7%BB%87.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E7%AC%A6%E5%8F%B7%E7%9B%AE%E5%BD%95%E9%A1%B9%E7%BB%84%E7%BB%87.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E6%94%B9%E8%BF%9B%E7%9A%84%E5%A4%9A%E7%BA%A7%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E5%9B%BE%E7%A4%BA%E4%BE%8B.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E6%94%B9%E8%BF%9B%E7%9A%84%E5%A4%9A%E7%BA%A7%E7%9B%AE%E5%BD%95%E4%BE%8B%E5%AD%90.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E7%A1%AC%E9%93%BE%E6%8E%A5.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E8%AE%BF%E9%97%AE%E7%9F%A9%E9%98%B5.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E5%9B%BA%E5%AE%9A%E7%BB%84%E5%9D%97.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E5%8F%AF%E5%8F%98%E9%95%BF%E5%BA%A6%E8%B7%A8%E8%B6%8A%E5%BC%8F%E7%BB%84%E5%9D%97.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E5%8F%AF%E5%8F%98%E9%95%BF%E5%BA%A6%E9%9D%9E%E8%B7%A8%E8%B6%8A%E5%BC%8F%E7%BB%84%E5%9D%97.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E8%BF%9E%E7%BB%AD%E5%88%86%E9%85%8D.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E9%93%BE%E5%BC%8F%E5%88%86%E9%85%8D.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E5%9F%BA%E4%BA%8E%E5%9D%97%E7%9A%84%E7%B4%A2%E5%BC%95%E5%88%86%E9%85%8D.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E5%9F%BA%E4%BA%8E%E9%95%BF%E5%BA%A6%E5%8F%AF%E5%8F%98%E5%88%86%E5%8C%BA%E7%9A%84%E7%B4%A2%E5%BC%95%E5%88%86%E9%85%8D.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E6%96%87%E4%BB%B6%E5%88%86%E9%85%8D%E6%AD%A5%E9%AA%A4.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E8%A1%A5%E5%85%851.png%22">
+<meta property="article:published_time" content="2021-03-28T15:44:18.525Z">
+<meta property="article:modified_time" content="2021-03-28T16:06:04.659Z">
+<meta property="article:author" content="Ryan">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84.png%22">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/03/28/2.计算机基础/c.操作系统/12.文件管理/"/>
+
+
+
+
+
+  <title>2.计算机基础/c.操作系统/12.文件管理 | RBlog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2.计算机基础/c.操作系统/12.文件管理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-28T23:44:18+08:00">
+                2021-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><font size="4" face="fangsong"></font></p>
+<h1 id="概述">1. 概述</h1>
+<h2 id="文件与文件系统">1.1. 文件与文件系统</h2>
+<h2 id="文件结构">1.2. 文件结构</h2>
+<blockquote>
+<p>Reference：<a href="Reference/Files_Records_and_Fields.pdf">Files_Records_and_Fields.pdf</a> - 域（field） - 记录（record） - 文件（file） - 数据库（database）</p>
+</blockquote>
+<h2 id="文件管理系统">1.3. 文件管理系统</h2>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/文件系统软件架构.png%22"></p>
+<ol type="1">
+<li>设备驱动
+<ul>
+<li>启动设备上的I/O操作，处理I/O请求的完成</li>
+</ul></li>
+<li>基本文件系统（物理I/O层）
+<ul>
+<li>处理在磁盘间或磁带系统间交换的数据块</li>
+<li>关注这些数据块在辅存和内存缓冲区中的位置</li>
+</ul></li>
+<li>基本I/O管理程序
+<ul>
+<li>文件I/O的控制与调度</li>
+<li>调度对磁盘和磁带的访问</li>
+<li>指定I/O缓冲区</li>
+<li>分配辅存</li>
+</ul></li>
+<li>逻辑I/O
+<ul>
+<li>处理文件记录</li>
+<li>提供一种通用的记录I/O能力，并维护关于文件的基本数据</li>
+</ul></li>
+<li>访问方法
+<ul>
+<li>在应用程序和文件系统以及保存数据的设备之间提供了一个标准接口。不同的访问方法反映了不同的文件结构及访问和处理数据的不同方法</li>
+</ul></li>
+</ol>
+<h1 id="文件组织和访问">2. 文件组织和访问</h1>
+<blockquote>
+<ul>
+<li>文件组织：文件中记录的逻辑结构，由用户访问记录的方式确定。</li>
+<li>文件在二级存储中的物理组织取决于分块策略和文件分配策略。</li>
+</ul>
+</blockquote>
+<h2 id="文件组织的五个原则">2.1. 文件组织的五个原则：</h2>
+<ul>
+<li>快速访问</li>
+<li>易于修改</li>
+<li>节约存储空间</li>
+<li>维护简单</li>
+<li>可靠性</li>
+</ul>
+<h2 id="种基本组织">2.2. 5种基本组织：</h2>
+<blockquote>
+<p>References： - <a href="Reference/数据库的存储结构（文件、记录的组织和索引技术）">数据库的存储结构（文件、记录的组织和索引技术）</a> - <a href="http://www.wlxt.uestc.edu.cn/wlxt/ncourse/sf/web/web/wenjian/wenjian10.1.1.1.htm" target="_blank" rel="noopener">数据结构：文件</a> - <a href="https://baike.baidu.com/item/%E7%B4%A2%E5%BC%95%E9%A1%BA%E5%BA%8F%E6%96%87%E4%BB%B6/20862504" target="_blank" rel="noopener">索引顺序文件-百度百科</a> - <a href="https://blog.csdn.net/liang0000zai/article/details/14613329" target="_blank" rel="noopener">文件组织：索引顺序文件</a> ### 2.2.1. 字节序列 - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/字节序列.png%22"> - 构成文件的基本单位是字节，文件是一个无结构的字节序列，其逻辑意义由用户程序解释 - 管理简单，提供很大的灵活性 - 不便于检索 - Unix、MS-DOS中采用</p>
+</blockquote>
+<h3 id="堆文件这里堆应该是内存组织中的含义--往下增长">2.2.2. 堆文件（这里堆应该是内存组织中的含义--往下增长）</h3>
+<ul>
+<li>物理组织
+<ul>
+<li>最简单的文件组织形式，堆文件没有结构，数据按照到达的顺序被收集</li>
+<li>记录是变长的，域也可以是变长的，需要能够自我描述</li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/堆文件.png%22"></li>
+</ul></li>
+<li>逻辑组织
+<ul>
+<li>没有逻辑组织</li>
+</ul></li>
+<li>修改
+<ul>
+<li>查找
+<ul>
+<li>对记录的访问通过穷举查找方式进行，查找速度慢</li>
+</ul></li>
+<li>插入
+<ul>
+<li>将新记录放在最后即可</li>
+</ul></li>
+<li>删除</li>
+</ul></li>
+<li>适用程序
+<ul>
+<li>适用于数据难以组织的情况，空间使用情况很好，大多数情况下都不适用</li>
+</ul></li>
+<li>优缺点
+<ul>
+<li>优点是简单、节省空间</li>
+<li>缺点是穷举查找，速度慢 ### 2.2.3. 顺序文件</li>
+</ul></li>
+<li>物理组织
+<ul>
+<li>记录按照<font color="red">关键域</font>的顺序来存储，物理组织直接对应于文件的逻辑组织</li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/顺序文件.png%22"></li>
+</ul></li>
+<li>逻辑组织
+<ul>
+<li>顺序的，与物理组织一致</li>
+</ul></li>
+<li>修改
+<ul>
+<li>查找
+<ul>
+<li>查找需要顺序查找，查找速度慢（之所以不能够二分查找等操作，是因为二分查找的时候需要将所有项放到内存里，这对于文件来讲显然是不可能的）。</li>
+</ul></li>
+<li>插入
+<ul>
+<li>新记录一般放到一个单独的堆文件中，该文件称为<font color="red">日志文件/事务文件</font>，周期性地执行批更新，把日志文件合并到主文件中</li>
+<li>还可以组织成链表的形式，此时新记录的插入仅涉及指针操作，而不再要求将新记录放到某个特定的物理块位置</li>
+</ul></li>
+<li>删除</li>
+</ul></li>
+<li>适用程序
+<ul>
+<li>适用于涉及对所有记录的处理的应用</li>
+</ul></li>
+<li>优缺点
+<ul>
+<li>缺点是增加了额外的物理和空间开销 ### 2.2.4. 索引顺序文件</li>
+</ul></li>
+<li>物理组织
+<ul>
+<li>两个文件：索引文件+主文件，索引有序，主文件有序，静态索引</li>
+<li>索引文件中的每条记录由两个域组成：关键域+指向主文件的指针，其中关键域与主文件的关键域相同</li>
+<li>每个索引可以对应到一条或多条记录，还可以有多级索引</li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/索引顺序文件.png%22"></li>
+</ul></li>
+<li>逻辑组织
+<ul>
+<li>有点像桶排序，可以提供快速接近目标记录的能力</li>
+</ul></li>
+<li>修改
+<ul>
+<li>查找
+<ul>
+<li>首先是检索索引，可以顺序、二分查找，最后可能是索引直接对应到记录，也有可能是索引对应到一组记录，然后对记录进行顺序查找。</li>
+</ul></li>
+<li>插入
+<ul>
+<li><font color="red">溢出文件</font>类似于顺序文件中使用的日志文件，但溢出文件中的记录可根据它前面记录的指针进行定位</li>
+</ul></li>
+<li>删除</li>
+</ul></li>
+<li>适用程序 ### 2.2.5. 索引（无序）文件</li>
+<li>物理组织
+<ul>
+<li>两个文件：索引文件+主文件，索引有序，主文件无序，静态索引</li>
+<li>每种关键域都有一个索引表</li>
+<li>一条记录的各个关键域分别对应到一个单独的索引，还可以有多级索引</li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/索引文件.png%22"></li>
+</ul></li>
+<li>逻辑组织
+<ul>
+<li>顺序索引表-&gt;无序主文件记录表</li>
+</ul></li>
+<li>修改
+<ul>
+<li>查找（检索）</li>
+<li>插入</li>
+<li>删除</li>
+</ul></li>
+<li>适用程序 ### 2.2.6. 直接或散列文件</li>
+<li>物理组织</li>
+<li>逻辑组织</li>
+<li>查找</li>
+<li>插入</li>
+<li>删除</li>
+<li>适用程序</li>
+</ul>
+<h1 id="b树">3. B树</h1>
+<p>  动态索引。 # 4. 文件目录 ## 4.1. 文件目录是什么及其内容 ### 4.1.1. 理解文件目录 1. 文件控制块FCB - 从文件管理角度看，文件由文件体（文件本身的信息，数据）和文件说明组成（元数据） - 文件说明（也称文件控制块，File Control Block，FCB）是操作系统为管理文件而设置的数据结构，<font color="red">存放为管理文件所需的所有相关信息（如FAT文件系统中[32B长]的目录项/文件条目）</font> - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/FCB示例.png%22"> 2. 文件目录 - 把所有的FCB组织在一起，就构成了<font color="red">文件目录，即文件控制块的有序集合，其中一个FCB就称作一个目录项 </font> - 目录的主要功能是用于从文件名到文件内容的映射 3. 目录文件 - 通常将文件目录以文件的形式保存在外存，这个文件就叫目录文件（OS所有） - 该文件可以被各种文件管理例程访问 ### 4.1.2. 文件目录的内容 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/文件目录信息单元.png%22"></p>
+<h3 id="目录操作">4.1.3. 目录操作</h3>
+<ol type="1">
+<li>查找文件</li>
+<li>创建文件</li>
+<li>删除文件</li>
+<li>显示目录：可能会请求文件的全部或部分内容</li>
+<li>修改目录：由于某些文件属性保存在目录中，因而这些属性的变化需要改变相应的目录项</li>
+</ol>
+<h2 id="文件目录的结构">4.2. 文件目录的结构</h2>
+<h3 id="一级目录">4.2.1. 一级目录</h3>
+<ul>
+<li>结构：整个目录组织是一个线性结构，系统中的所有文件都建立在一张目录表中
+<ul>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/一级目录.png%22"></li>
+</ul></li>
+<li>优缺点：
+<ul>
+<li>优点
+<ul>
+<li>结构简单，易实现</li>
+</ul></li>
+<li>缺点
+<ul>
+<li>文件多时目录检索时间长，从而平均检索时间长</li>
+<li>有命名冲突：如多个文件有相同的文件名（不同用户的相同作用的文件）或一个文件有多个不同的文件名（不同用户对同一文件的命名）</li>
+</ul></li>
+</ul></li>
+<li>适用范围：主要用于非常简单的单用户操作系统，如CP/M、DOS 1.0、Orang’S</li>
+</ul>
+<h3 id="二级目录">4.2.2. 二级目录</h3>
+<ul>
+<li>结构：在根目录（第一级目录，主文件目录MFD）下，每个用户对应一个目录（第二级目录，用户文件目录UFD ），在用户目录下是该用户的文件，而不再有下级目录
+<ul>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/二级目录.png%22"></li>
+</ul></li>
+<li>优缺点
+<ul>
+<li>优点
+<ul>
+<li>降低了平均检索时间</li>
+<li>部分克服了命名冲突问题</li>
+</ul></li>
+<li>缺点
+<ul>
+<li>不利用户对文件的分类管理</li>
+</ul></li>
+</ul></li>
+<li>适用范围：适用于多用户系统，各用户可有自己的专用目录</li>
+</ul>
+<h3 id="多级目录">4.2.3. 多级目录</h3>
+<ul>
+<li>结构:采用层次结构，每个用户可在其用户目录下自主创建若干层次的子目录(树)，也称为树型 (tree-like)目录
+<ul>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/多级目录.png%22"></li>
+</ul></li>
+<li>优缺点
+<ul>
+<li>优点
+<ul>
+<li>层次结构清晰，便于管理和保护，适用于较大的文件系统管理</li>
+<li>解决了命名冲突问题</li>
+</ul></li>
+<li>缺点
+<ul>
+<li>目录级别太多时，会增加路径检索时间（目录文件存放在外存）</li>
+</ul></li>
+</ul></li>
+<li>适用范围：当前主流OS采用</li>
+<li>目录树相关概念
+<ul>
+<li>目录名：可以修改</li>
+<li>目录树：中间结点是目录，叶结点是目录或文件</li>
+<li>目录的上下级关系：
+<ul>
+<li>当前目录 (current directory, working directory工作目录)，一般用单个句点表示：.</li>
+<li>父目录 (parent directory) ，一般用双句点表示：..</li>
+<li>子目录 (subdirectory)</li>
+<li>根目录(root directory) ，一般用单斜线表示：/（类Unix）、（DOS&amp;Windows）</li>
+</ul></li>
+<li>路径(path)：每个目录或文件，可以由根目录开始依次经由的各级目录名，加上最终的目录名或文件名来表示。一般用斜线分隔：/（类Unix）、（DOS&amp;Windows），如/user/cs、/home/cs、C:</li>
+</ul></li>
+</ul>
+<h3 id="改进的多级目录">4.2.4. 改进的多级目录</h3>
+<blockquote>
+<p>references： - <a href="https://wenku.baidu.com/view/7f71fd1efbd6195f312b3169a45177232f60e4db.html" target="_blank" rel="noopener">百度文库_题目</a> - <a href="https://books.google.com/books?id=iwqzV9vTuY4C&lpg=PA271&ots=45gE3Jrsok&dq=%E7%AC%A6%E5%8F%B7%E7%9B%AE%E5%BD%95%E9%A1%B9%E4%B8%8E%E5%9F%BA%E6%9C%AC%E7%9B%AE%E5%BD%95%E9%A1%B9&hl=zh-CN&pg=PA183#v=onepage&q=%E7%AC%A6%E5%8F%B7%E7%9B%AE%E5%BD%95%E9%A1%B9%E4%B8%8E%E5%9F%BA%E6%9C%AC%E7%9B%AE%E5%BD%95%E9%A1%B9&f=false" target="_blank" rel="noopener">计算机操作系统教程</a></p>
+</blockquote>
+<ol type="1">
+<li>结构：为了提高目录检索速度，可把目录项（FCB，文件控制块）中的文件说明（文件描述符）信息分成两个部分：
+<ul>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/改进的多级目录.png%22"></li>
+<li>基本目录项BFCB(主部)：目录或文件的物理地址、存取控制和管理信息等
+<ul>
+<li>把基本目录项构成的基本文件目录组织成<font color="red">线性结构（逻辑线性、物理线性）</font>，按文件内部标识排序（也称索引节点目录）</li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/基本目录项组织.png%22"></li>
+</ul></li>
+<li>符号目录项(次部)：存储文件的符号名以及相应的标识符（该标识符唯一标识该文件，由系统赋予）等信息。
+<ul>
+<li>把符号目录项构成的符号文件目录组织成<font color="red">树状结构（逻辑树状、物理线性）</font>，按文件名排序</li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/符号目录项组织.png%22"></li>
+</ul></li>
+</ul></li>
+<li>文件目录对应地分成基本文件目录和符号文件目录两个目录。
+<ul>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/改进的多级目录结构图示例.png%22"></li>
+</ul></li>
+<li>优缺点
+<ul>
+<li>便于多用户共享文件</li>
+<li>提高了查找效率</li>
+</ul></li>
+<li>性能比较例子：
+<ul>
+<li>reference：<a href="https://blog.csdn.net/u011240016/article/details/52861729" target="_blank" rel="noopener">平均磁盘访问次数计算</a></li>
+<li>公式：<font color="red"><span class="math inline">\(\dfrac{1}{n}*\sum\limits_{i=1}^{n}{i}=\dfrac{1}{n}*\dfrac{n(n+1)}{2}=\dfrac{n+1}{2}\)</span>，注意是整除。</font></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/改进的多级目录例子.png%22"></li>
+</ul></li>
+</ol>
+<h1 id="文件共享">5. 5、文件共享</h1>
+<h2 id="文件共享-1">5.1. 文件共享</h2>
+<h3 id="提供文件共享的方法">5.1.1. 提供文件共享的方法</h3>
+<ol type="1">
+<li>各用户通过唯一的共享文件路径名访问共享文件
+<ul>
+<li>访问速度慢，适用于不经常访问的文件共享</li>
+</ul></li>
+<li>利用多个目录中的不同文件名来描述同一共享文件（即文件别名）
+<ul>
+<li>访问速度快，但会影响文件系统的树状结构，适用于经常访问的文件共享，同时存在一定的限制</li>
+<li>实现方法
+<ul>
+<li>基于索引节点，也称<font color="red">硬链接（hard link）</font></li>
+<li>基于符号链接（symbolic link, shortcut），也成为<font color="red">软链接（soft link）</font> ### 5.1.2. 硬链接（基于索引节点）</li>
+</ul></li>
+</ul></li>
+</ol>
+<ul>
+<li>基于改进的多级目录结构，将目录内容分为两部分：文件名和索引结点（index node）
+<ul>
+<li>前者包括文件名和索引结点编号（符号目录项）</li>
+<li>后者包括文件的其他内容（包括属主、访问权限、磁盘地址等）（基本目录项）</li>
+</ul></li>
+<li>通过将多个文件名链接(link)到同一个索引结点，可建立同一个文件的多个彼此平等的别名</li>
+<li>别名的数目，被记录在索引结点的链接计数中，若其减至0，则文件被删除</li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/硬链接.png%22"></li>
+<li>存在问题：
+<ul>
+<li>记账或配额问题：设B、C共享文件file，C是文件主，若C删除了file而B不删除，则file仍然存在，且仍然是C为file付账，占的也是C的配额</li>
+</ul></li>
+</ul>
+<h3 id="软链接基于符号链接">5.1.3. 软链接（基于符号链接）</h3>
+<blockquote>
+<p>references: - <a href="https://www.zhihu.com/question/20729978" target="_blank" rel="noopener">知乎：符号连接、软连接、硬连接、快捷方式、副本(copy)之间有何区别和联系？</a> - 建立一个类型为Link的特殊文件，其内容是到另一个目录或文件路径的链接 - 建立符号链接文件，并不影响原文件，实际上它们各是一个文件 - 可以建立任意的别名关系，甚至原文件是在其他计算机上 - 快捷方式本质上就是符号链接 - 缺点 - 空间和时间开销更大 - 如果设置不当，上下级目录关系可能会形成环状</p>
+</blockquote>
+<h2 id="文件的访问控制">5.2. 文件的访问控制</h2>
+<h3 id="文件访问权限">5.2.1. 文件访问权限</h3>
+<p>  设置文件访问权限的目的是为了在多个用户间提供有效的文件共享机制，同时对文件进行一定的安全性保护。</p>
+<p>  通过两级控制来实现文件访问权限：①、用户验证：当用户登录时，检验其身份；②、存取控制：审查用户的权限、本次操作的合法性。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">访问权限</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">无</td>
+<td style="text-align: left;">不知道文件的存在</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">知道</td>
+<td style="text-align: left;">知道文件的存在及其owner</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">执行</td>
+<td style="text-align: left;">可加载并执行但不能复制</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">读</td>
+<td style="text-align: left;">可以查看/复制内容</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">追加</td>
+<td style="text-align: left;">可以在文件尾追加数据</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">更新</td>
+<td style="text-align: left;">可以修改/删除/添加数据</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">改变保护</td>
+<td style="text-align: left;">（文件所有者）修改授予其他用户的访问权限</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">删除</td>
+<td style="text-align: left;">从文件系统中去掉</td>
+</tr>
+</tbody>
+</table>
+<p>  文件属主（Owner）具有上述所有权限，并可将不同的访问权限授予不同的用户类</p>
+<h3 id="用户类">5.2.2. 用户类</h3>
+<ul>
+<li>特定用户</li>
+<li>用户组</li>
+<li>全部 ### 5.2.3. 访问权限和用户类的组合：</li>
+<li>访问矩阵（存取控制矩阵）：矩阵的一维（列）是每个目录和文件，另一维（行）是用户范围，每个元素是允许的访问方式
+<ul>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/访问矩阵.png%22"></li>
+</ul></li>
+<li>访问策略(policy)：规定每种文件访问方式所允许或禁止的用户范围
+<ul>
+<li>可以将文件访问方式推广到其他操作如用户管理、备份、网络访问等</li>
+</ul></li>
+</ul>
+<h2 id="共享文件的并发同时访问控制">5.3. 共享文件的并发/同时访问控制</h2>
+<p>  加锁解锁，例如读者-写者问题。</p>
+<h1 id="记录组块">6. 记录组块</h1>
+<p>  记录组块说的是文件的每一条记录在块中的存储情况。 1. 固定组块(fixed blocking) - 记录长度固定，每个块中存放的记录数目也固定——常用但有内部碎片 - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/固定组块.png%22"> 2. 可变长度跨越式组块(variable-length spanned blocking) - 记录长度可变，一个记录允许存放在不同块中——效率高但难实现 - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/可变长度跨越式组块.png%22"> 3. 可变长度非跨越式组块(variable-length unspanned blocking) - 记录长度可变，一个记录只能存放在一个块中——浪费多 - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/可变长度非跨越式组块.png%22"></p>
+<h1 id="辅存管理">7. 辅存管理</h1>
+<h2 id="文件分配把空间分配给文件">7.1. 文件分配：把空间分配给文件</h2>
+<h3 id="基本划分标准">7.1.1. 基本划分标准</h3>
+<ol type="1">
+<li>是否一次性分配其所需要的最大空间
+<ul>
+<li>预分配
+<ul>
+<li>文件创建时必须要声明文件的最大长度</li>
+<li>难以可靠估计文件可能的最大长度</li>
+<li>倾向于估大文件长度（导致空间浪费）</li>
+<li>适用于从不改变的文件</li>
+</ul></li>
+<li>动态分配
+<ul>
+<li>需要时才给文件分配空间</li>
+<li>需要考虑空闲空间的碎片问题
+<ul>
+<li>首次适配</li>
+<li>最佳适配</li>
+<li>最近适配</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>分区大小
+<ul>
+<li>大小可变的大规模连续分区</li>
+<li>块</li>
+</ul></li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"> </th>
+<th style="text-align: left;">预分配</th>
+<th style="text-align: left;">动态分配</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+|<strong>大小可变的大规模连续分区</strong>|
+<ol>
+<li>
+不需要<font color="red">文件分配表（FAT, File Allocation Table）</font>，只需要指向第一块的指针和分配的块的数量（也可以将其看做是特殊的文件分配表）
+</li>
+<li>
+局部性良好但有外部碎片
+</li>
+</ol>
+|
+<ol>
+<li>
+文件分配表动态变化
+</li>
+<li>
+局部性较好但有外部碎片，需要定期执行<font color="red">紧缩算法</font>
+</li>
+</ol>
+<div class="line-block"></div>
+|<strong>块</strong>|
+<ol>
+<li>
+需要一个文件分配表，不过文件分配表大小是固定的
+</li>
+<li>
+局部性较差但没有外部碎片
+</li>
+</ol>
+|
+<ol>
+<li>
+文件分配表动态变化
+</li>
+<li>
+局部性较差但没有外部碎片，需要定期执行<font color="red">合并算法</font>
+</li>
+</ol>
+<div class="line-block"></div>
+<h3 id="文件分配方法">7.1.2. 文件分配方法</h3>
+<ol type="1">
+<li>连续分配：大小可变分区+预分配
+<ul>
+<li>优点是简单，容易实现；局部性较好，对于顺序处理可以一次性读入多个块；检索一个块也比较容易。</li>
+<li>缺点是会出现外部碎片，时常需要执行紧缩算法来释放磁盘中的额外空间;文件不能动态增长；另外需要在创建文件时声明文件的大小。</li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/连续分配.png%22"></li>
+</ul></li>
+<li>链式分配：块+动态分配
+<ul>
+<li>优点是不会出现外部碎片</li>
+<li>缺点是局部性交叉，需要周期性地合并文件（<font color="red">以提高局部性</font>）</li>
+<li>适合顺序处理的顺序文件</li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/链式分配.png%22"></li>
+</ul></li>
+<li>索引分配：大小可变分区/块+动态分配+文件索引
+<ul>
+<li>通过增加一级索引来提高检索的效率，是当前最普遍的一种文件分配形式。</li>
+<li>优点
+<ul>
+<li>既能顺序存取，又能随机存取</li>
+<li>满足了文件动态增长、插入删除的要求，也能充分利用外存空间</li>
+</ul></li>
+<li>缺点
+<ul>
+<li>较多的寻道次数和寻道时间</li>
+<li>索引表本身带来了系统开销：内外存空间、存取时间</li>
+</ul></li>
+<li>基于块来分配
+<ul>
+<li>使用合并算法进行文件整理时，索引数目不会减少</li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/基于块的索引分配.png%22"></li>
+</ul></li>
+<li>基于大小可变分区来分配
+<ul>
+<li>执行紧缩算法进行文件整理时，索引数目将会减少</li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/基于长度可变分区的索引分配.png%22"></li>
+</ul></li>
+</ul></li>
+</ol>
+<h2 id="空闲空间管理跟踪可用空间">7.2. 空闲空间管理：跟踪可用空间</h2>
+<ol type="1">
+<li>位表（bit table）
+<ul>
+<li>用一串二进制位反映磁盘空间中分配使用情况，每个物理块对应一位，取值0和1分别表示空闲和占用</li>
+<li>通过划分子区域以及对每个子区域设置汇总表来提高位表的搜索性能。当文件系统需要大量的连续块时，首先扫描汇总表来发现符合要求的子区域，然后再查找这个子区域
+<ul>
+<li>事实上与索引的思想是有相似之处的，都是多了高一层的内容</li>
+</ul></li>
+</ul></li>
+<li>链接空闲区
+<ul>
+<li>每个空闲分区记录指向下一个空闲分区的指针和长度</li>
+<li>类比7.1中的FAT和链式分配</li>
+<li>与文件分配中的链式分配类似，时间久了以后，磁盘会出现很多很小的碎片</li>
+</ul></li>
+<li>索引
+<ul>
+<li>把空闲空间看作一个文件，该文件使用索引分配（即在索引表中记录各个空闲块）</li>
+<li>类比文件分配中的索引分配</li>
+</ul></li>
+<li>空闲块列表
+<ul>
+<li>每个块关联一个顺序号，所有空闲块的顺序号组成一个列表，该列表称为“空闲块列表”</li>
+<li>虽然空闲块列表很大，但是下面两种技术可以把该列表的一小部分保存到内存中
+<ul>
+<li>栈（LIFO）：需要给文件分配空闲块时，从栈顶取出所需数量的块；解除一个块的分配时,该序号会再次被压入栈中。这样子当栈空了的时候才需要访问磁盘中剩余部分的空闲块列表来获取新的块序号。</li>
+<li>队列（FIFO）：与栈类似，区别只是顺序问题。</li>
+</ul></li>
+</ul></li>
+</ol>
+<h2 id="卷">7.3. 卷</h2>
+<p>  卷本质上是逻辑磁盘。通常一个磁盘会分成几个分区，每个分区都作为一个单独的卷来工作。</p>
+<h2 id="可靠性">7.4. 可靠性</h2>
+<p>  主要内容是防止出现数据一致性错误。</p>
+<p>  请求一个文件分配时，需要执行以下步骤： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/文件分配步骤.png%22"></p>
+<p>  这种技术可以防止错误，但是在频繁地分配比较小的块时，会对性能产生重要的影响。</p>
+<h1 id="补充">8. 补充：</h1>
+<p><br> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/补充1.png%22"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/" rel="next" title="2.计算机基础/c.操作系统/11.IO管理和磁盘调度">
+                <i class="fa fa-chevron-left"></i> 2.计算机基础/c.操作系统/11.IO管理和磁盘调度
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E9%97%AE%E9%A2%98/" rel="prev" title="2.计算机基础/c.操作系统/12.文件管理/问题">
+                2.计算机基础/c.操作系统/12.文件管理/问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ryan</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/liuxr98" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">1. 概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件与文件系统"><span class="nav-number">1.1.</span> <span class="nav-text">1.1. 文件与文件系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件结构"><span class="nav-number">1.2.</span> <span class="nav-text">1.2. 文件结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件管理系统"><span class="nav-number">1.3.</span> <span class="nav-text">1.3. 文件管理系统</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件组织和访问"><span class="nav-number">2.</span> <span class="nav-text">2. 文件组织和访问</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件组织的五个原则"><span class="nav-number">2.1.</span> <span class="nav-text">2.1. 文件组织的五个原则：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#种基本组织"><span class="nav-number">2.2.</span> <span class="nav-text">2.2. 5种基本组织：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#堆文件这里堆应该是内存组织中的含义--往下增长"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.2. 堆文件（这里堆应该是内存组织中的含义--往下增长）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#b树"><span class="nav-number">3.</span> <span class="nav-text">3. B树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录操作"><span class="nav-number">3.0.1.</span> <span class="nav-text">4.1.3. 目录操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件目录的结构"><span class="nav-number">3.1.</span> <span class="nav-text">4.2. 文件目录的结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一级目录"><span class="nav-number">3.1.1.</span> <span class="nav-text">4.2.1. 一级目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二级目录"><span class="nav-number">3.1.2.</span> <span class="nav-text">4.2.2. 二级目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多级目录"><span class="nav-number">3.1.3.</span> <span class="nav-text">4.2.3. 多级目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改进的多级目录"><span class="nav-number">3.1.4.</span> <span class="nav-text">4.2.4. 改进的多级目录</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件共享"><span class="nav-number">4.</span> <span class="nav-text">5. 5、文件共享</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件共享-1"><span class="nav-number">4.1.</span> <span class="nav-text">5.1. 文件共享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#提供文件共享的方法"><span class="nav-number">4.1.1.</span> <span class="nav-text">5.1.1. 提供文件共享的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软链接基于符号链接"><span class="nav-number">4.1.2.</span> <span class="nav-text">5.1.3. 软链接（基于符号链接）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件的访问控制"><span class="nav-number">4.2.</span> <span class="nav-text">5.2. 文件的访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件访问权限"><span class="nav-number">4.2.1.</span> <span class="nav-text">5.2.1. 文件访问权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户类"><span class="nav-number">4.2.2.</span> <span class="nav-text">5.2.2. 用户类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共享文件的并发同时访问控制"><span class="nav-number">4.3.</span> <span class="nav-text">5.3. 共享文件的并发&#x2F;同时访问控制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#记录组块"><span class="nav-number">5.</span> <span class="nav-text">6. 记录组块</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#辅存管理"><span class="nav-number">6.</span> <span class="nav-text">7. 辅存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件分配把空间分配给文件"><span class="nav-number">6.1.</span> <span class="nav-text">7.1. 文件分配：把空间分配给文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本划分标准"><span class="nav-number">6.1.1.</span> <span class="nav-text">7.1.1. 基本划分标准</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件分配方法"><span class="nav-number">6.1.2.</span> <span class="nav-text">7.1.2. 文件分配方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空闲空间管理跟踪可用空间"><span class="nav-number">6.2.</span> <span class="nav-text">7.2. 空闲空间管理：跟踪可用空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#卷"><span class="nav-number">6.3.</span> <span class="nav-text">7.3. 卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可靠性"><span class="nav-number">6.4.</span> <span class="nav-text">7.4. 可靠性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充"><span class="nav-number">7.</span> <span class="nav-text">8. 补充：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ryan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

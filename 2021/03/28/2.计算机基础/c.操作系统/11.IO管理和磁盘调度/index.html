@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1、IO设备 1.1、IO设备分类  人可读 机器可读 通信  1.2、不同IO设备间的主要差别  数据传送速率    应用 控制的复杂性 传送单位 数据表示 错误条件  2、IO功能的组织 2.1、如何执行IO与IO功能的发展   IO模块发展主要经历了下列过程：   程序驱动IO：忙等待，通过处理器实现IO和内存间的数据传送 中断驱动IO：通过中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2.计算机基础&#x2F;c.操作系统&#x2F;11.IO管理和磁盘调度">
+<meta property="og:url" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/index.html">
+<meta property="og:site_name" content="RBlog">
+<meta property="og:description" content="1、IO设备 1.1、IO设备分类  人可读 机器可读 通信  1.2、不同IO设备间的主要差别  数据传送速率    应用 控制的复杂性 传送单位 数据表示 错误条件  2、IO功能的组织 2.1、如何执行IO与IO功能的发展   IO模块发展主要经历了下列过程：   程序驱动IO：忙等待，通过处理器实现IO和内存间的数据传送 中断驱动IO：通过中">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/%E5%85%B8%E5%9E%8BIO%E9%80%9F%E7%8E%87.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/IO%E5%8F%91%E5%B1%95.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/%E4%B8%89%E7%A7%8D%E6%8A%80%E6%9C%AF%E6%B5%81%E7%A8%8B%E5%9B%BE.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/IO%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/DMA%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%A4%BA%E6%84%8F%E5%9B%BE.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/%E5%8D%95%E6%80%BB%E7%BA%BF%E3%80%81IO%E5%88%86%E7%A6%BB%E7%9A%84DMA%E7%BB%93%E6%9E%84.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/%E5%8D%95%E6%80%BB%E7%BA%BF%E3%80%81IO%E9%9B%86%E6%88%90%E7%9A%84DMA%E7%BB%93%E6%9E%84.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/IO%E6%80%BB%E7%BA%BF%E7%9A%84DMA%E7%BB%93%E6%9E%84.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/IO%E9%80%BB%E8%BE%91%E7%BB%93%E6%9E%84.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/IO%E7%BC%93%E5%86%B2.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/%E7%BC%93%E5%86%B2%E6%B1%A0.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/%E7%A3%81%E7%9B%98IO%E6%97%B6%E5%BA%8F.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/SCAN%E5%9B%BE%E7%A4%BA.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/CSCAN%E5%9B%BE%E7%A4%BA.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/%E7%A3%81%E5%A4%B4%E8%87%82%E9%BB%8F%E7%9D%80.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6%E7%A4%BA%E4%BE%8B.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/7-level-RAID.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID0-%E6%97%A0%E5%86%97%E4%BD%99.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID1-%E9%95%9C%E5%83%8F.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID2-%E9%80%9A%E8%BF%87%E6%B1%89%E6%98%8E%E7%A0%81%E5%86%97%E4%BD%99.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID3-%E4%BA%A4%E9%94%99%E4%BD%8D%E5%A5%87%E5%81%B6%E6%A0%A1%E9%AA%8C.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID4-%E5%9D%97%E5%A5%87%E5%81%B6%E6%A0%A1%E9%AA%8C.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID5-%E5%9D%97%E5%88%86%E5%B8%83%E5%A5%87%E5%81%B6%E6%A0%A1%E9%AA%8C.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID6-%E5%8F%8C%E9%87%8D%E5%86%97%E4%BD%99.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/%E5%9F%BA%E4%BA%8E%E9%A2%91%E7%8E%87%E7%9A%84%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%951.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/%E5%9F%BA%E4%BA%8E%E9%A2%91%E7%8E%87%E7%9A%84%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%951%E7%9A%84%E9%97%AE%E9%A2%98.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/%E5%9F%BA%E4%BA%8E%E9%A2%91%E7%8E%87%E7%9A%84%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%952.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/cache%E5%A4%A7%E5%B0%8F1.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/cache%E5%A4%A7%E5%B0%8F2.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/OS%E8%AE%BE%E8%AE%A1%E5%B1%82%E6%AC%A1.png%22">
+<meta property="article:published_time" content="2021-03-28T15:44:18.396Z">
+<meta property="article:modified_time" content="2021-03-28T16:04:59.289Z">
+<meta property="article:author" content="Ryan">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/%E5%85%B8%E5%9E%8BIO%E9%80%9F%E7%8E%87.png%22">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/03/28/2.计算机基础/c.操作系统/11.IO管理和磁盘调度/"/>
+
+
+
+
+
+  <title>2.计算机基础/c.操作系统/11.IO管理和磁盘调度 | RBlog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2.计算机基础/c.操作系统/11.IO管理和磁盘调度</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-28T23:44:18+08:00">
+                2021-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="io设备">1、IO设备</h1>
+<h2 id="io设备分类">1.1、IO设备分类</h2>
+<ul>
+<li>人可读</li>
+<li>机器可读</li>
+<li>通信</li>
+</ul>
+<h2 id="不同io设备间的主要差别">1.2、不同IO设备间的主要差别</h2>
+<ul>
+<li>数据传送速率
+<ul>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/典型IO速率.png%22"></li>
+</ul></li>
+<li>应用</li>
+<li>控制的复杂性</li>
+<li>传送单位</li>
+<li>数据表示</li>
+<li>错误条件</li>
+</ul>
+<h1 id="io功能的组织">2、IO功能的组织</h1>
+<h2 id="如何执行io与io功能的发展">2.1、如何执行IO与IO功能的发展</h2>
+<p>  IO模块发展主要经历了下列过程： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/IO发展.png%22"></p>
+<ul>
+<li>程序驱动IO：忙等待，通过处理器实现IO和内存间的数据传送</li>
+<li>中断驱动IO：通过中断的方式来提高效率，通过处理器实现IO和内存间的数据传送
+<ul>
+<li>非阻塞IO指令：继续执行当前进程的后续指令</li>
+<li>阻塞IO指令：阻塞当前进程，运行其他进程</li>
+</ul></li>
+<li>直接存储器访问（DMA）：使用中断，内存与IO数据交换不需要通过处理器
+<ul>
+<li><font color="red">单独的DMA模块</font>控制内存与IO模块之间的数据交换</li>
+</ul></li>
+</ul>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/三种技术流程图.png%22"></p>
+<h2 id="dma">2.2、DMA</h2>
+<blockquote>
+<p>reference: - <a href="https://wenku.baidu.com/view/a09c0dabba0d4a7302763aca.html" target="_blank" rel="noopener">DMA技术简介_百度文库</a></p>
+</blockquote>
+<p>  下图是I/O体系结构的示意图： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/IO体系结构.png%22"></p>
+<p>  传统的数据传输数据都是通过处理器来实现内存与IO设备的数据交换的，而DMA则是在I/O设备与内存之间建立起直接的通道： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/DMA数据传输示意图.png%22"></p>
+<p>  DMA有三种结构： - 单总线、I/O分离的DMA结构 - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/单总线、IO分离的DMA结构.png%22"> - DMA模块充当<font color="red">代理处理器</font> - DMA通过程序控制I/O方式（忙等待）在Memory与I/O模块之间交换数据 - 数据传输效率低，每传送一个字需要2个总线周期（传送请求+传送） - 单总线、I/O集成的DMA结构 - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/单总线、IO集成的DMA结构.png%22"> - 比I/O分离的DMA结构少了传送请求这一部分的时间（参照2.1中流程图中的读I/O模块过程）。 - 在I/O分离的DMA结构中，DMA需要读I/O模块状态，然后再指示I/O模块读取（I/O-&gt;DMA），再由DMA向存储器写入 - 在I/O集成的DMA结构中，I/O作为DMA的一部分，读I/O模块状态这一部分不需要占用系统总线，这就为CPU省出了更多的资源 - IO总线的DMA结构（双总线） - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/IO总线的DMA结构.png%22"> - 所有的I/O模块都在DMA模块之中，各个I/O模块都挂在I/O总线上 - 结构可扩展性强 - 同样的，DMA与I/O模块之间的数据交换脱离系统总线</p>
+<h1 id="操作系统设计问题">3、操作系统设计问题</h1>
+<h2 id="主要内容">3.1、主要内容：</h2>
+<ul>
+<li>I/O机制的设计目标
+<ul>
+<li>效率——最重要（I/O瓶颈），最关注的是磁盘I/O</li>
+<li>通用性——统一处理方式，困难
+<ul>
+<li>处理器看待I/O设备的方式</li>
+<li>操作系统管理I/O设备和I/O操作的方式</li>
+</ul></li>
+</ul></li>
+<li>逻辑结构——层次结构、模块化</li>
+<li>I/O缓冲——为减小系统开销和提高操作效率，在I/O请求发出之前/后，就/才开始执行数据传送</li>
+<li>磁盘调度——磁盘比内存慢4个数量级，磁盘性能与文件系统关系密切</li>
+</ul>
+<h2 id="io软件设计">3.2、I/O软件设计</h2>
+<p>  两个目标： - 效率 - 与处理器和主存相比，大多数I/O设备的速度都相当慢 - 多道程序允许在一些进程等待I/O时运行其他进程 - I/O仍然可能跟不上处理器的速度 - 虚拟内存可解决多道程序设计中的内存不足问题，但是页面交换本身又是I/O操作 - 提高效率技术：I/O缓冲、磁盘调度、磁盘阵列、磁盘高速缓冲等 - 通用性 - 出于简单和避免错误的考虑，人们希望能用一种统一的方式处理所有的设备。 - 低层例程隐藏设备I/O的大部分细节，向进程和高层提供使用设备的通用方式，如read, write, open, close, lock, unlock等——采用层次结构和模块化设计</p>
+<h2 id="io软件层次逻辑">3.3、I/O软件层次逻辑</h2>
+<p>  下面三个例子展示了不同的I/O组织的模型 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/IO逻辑结构.png%22"></p>
+<ul>
+<li>逻辑I/O</li>
+<li>设备I/O</li>
+<li>调度与控制</li>
+</ul>
+<h2 id="用户空间的io软件">3.4、用户空间的I/O软件</h2>
+<h1 id="io缓冲">4、IO缓冲</h1>
+<h2 id="基本相关内容">4.1、基本相关内容</h2>
+<blockquote>
+<p>  I/O缓冲是指在内存里开辟一块区域，用来接收用户输入和用于计算机输出的数据以减小系统开销和提高外设效率。</p>
+</blockquote>
+<ul>
+<li>缓冲减少了进程的阻塞概率，如果没有I/O缓冲，以控制台程序为例，每一次输入字符都要执行一次中断，这显然是效率低下的。</li>
+<li>缓冲技术可提高外设利用率，尽可能使外设处于忙状态</li>
+<li>限制：进程的I/O请求不能超过外设的处理能力</li>
+</ul>
+<p>  两种类型的I/O设备 - block-oriented device - 信息存储的单位是块，传输的单位也是块 - 典型代表是磁盘、SSD、U盘 - stream-oriented device - 以字节流的形式传输数据 - 如终端、打印机、通信端口、鼠标及多数的其他非辅存设备</p>
+<h2 id="单方向缓冲">4.2、单方向缓冲</h2>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/IO缓冲.png%22"></p>
+<h3 id="单缓冲single-buffer">4.2.1、单缓冲（single buffer）</h3>
+<ul>
+<li>面向块的：
+<ul>
+<li>输入传送到缓冲区</li>
+<li>需要时缓冲区中的块被移到用户空间</li>
+<li>再移入另外一块到缓冲区——预读(read ahead)</li>
+</ul></li>
+<li>面向流的：
+<ul>
+<li>每次传送一行/字节（缓冲区用来保存一行/字节的输入/输出）</li>
+<li>用户每次输入一行/字节，并以回车表示一行/字节的结束</li>
+<li>到终端的输出一次一行/字节</li>
+<li>减少了进程挂起的概率，只有当先前的操作还未清空且当前进程需要输出第二行时才会挂起进程</li>
+</ul></li>
+</ul>
+<h3 id="双缓冲double-buffer">4.2.2、双缓冲（double buffer）</h3>
+<ul>
+<li>使用两个而不是一个系统缓冲区</li>
+<li>OS清空或填充一个缓冲区时，进程可以传送数据到另外一个缓冲区（或从另外一个缓冲区取数据）</li>
+<li>进一步减少了进程挂起的概率</li>
+</ul>
+<h3 id="循环缓冲circular-buffer">4.2.3、循环缓冲（circular buffer）</h3>
+<ul>
+<li>使用超过两个的缓冲区</li>
+<li>每个缓冲区是循环缓冲区的一个单元</li>
+<li>使I/O操作能跟上（可能爆发式地执行大量I/O的）进程的速度</li>
+<li>有限缓冲区的生产者/消费者模型</li>
+</ul>
+<h2 id="双方向缓冲">4.3、双方向缓冲</h2>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/缓冲池.png%22"></p>
+<ul>
+<li>缓冲区队列：
+<ul>
+<li>空闲缓冲区</li>
+<li>输入缓冲区</li>
+<li>输出缓冲区</li>
+</ul></li>
+<li>操作：
+<ul>
+<li>设备输入、CPU读入， CPU写出、设备输出</li>
+<li>这些操作互斥访问各个缓冲区队列</li>
+</ul></li>
+<li>缓冲区整体利用率高</li>
+</ul>
+<h1 id="磁盘调度">5、磁盘调度</h1>
+<h2 id="磁盘性能">5.1、磁盘性能</h2>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/磁盘IO时序.png%22"></p>
+<ul>
+<li><span class="math inline">\(r\)</span>：旋转速度，单位为<span class="math inline">\(rotates/second\)</span></li>
+<li><span class="math inline">\(T_s\)</span>：寻道时间，磁头定位到目标磁道所用时间
+<ul>
+<li>工业界计算平均寻道时间的方法是对所有可能的寻道时间取平均值。平均寻道时间在3ms~13ms</li>
+<li>但是由于应用程序以及磁盘访问调度策略的不同，且磁盘数据具有局部性，所以实际的平均寻道时间通常只有标称数据的25%~33%；由于对同一文件通常会做连续访问，操作系统也会尽量把这些访问一起进行调度，所以这种局部性会增加</li>
+</ul></li>
+<li><span class="math inline">\(T_r\)</span>：旋转延迟，磁头从目标磁道进一步定位到目标扇区所用时间
+<ul>
+<li>计算时采用平均值<span class="math inline">\(T_r=\dfrac{1}{2r}\)</span></li>
+</ul></li>
+<li><span class="math inline">\(T_t\)</span>：传输时间，磁头读取目标扇区（一个或多个）所用时间
+<ul>
+<li>计算公式为<span class="math inline">\(T_t=\dfrac{b}{rN}\)</span>，其中b表示要传输的字节数，N表示一个磁道中的字节数</li>
+</ul></li>
+<li>总的平均存取时间为<span class="math inline">\(T_a=T_s+\dfrac{1}{2r}+\dfrac{b}{rN}\)</span></li>
+</ul>
+<h2 id="磁盘调度策略">5.2、磁盘调度策略</h2>
+<blockquote>
+<p>  磁盘调度策略是当有多个磁盘读写请求时，如何安排顺序使得整体寻道时间尽量少以提高平均性能。</p>
+</blockquote>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/磁盘调度算法.png%22"></p>
+<ol type="1">
+<li>FIFO（先进先出）
+<ul>
+<li>使用FIFO,如果只有一些进程需要访向,并且如果大多数请求都是访问簇聚的文件扇区,则有望达到较好的性能。但是,如果有大量进程竞争一个磁盘,这种技术在性能上往往接近于随机调度。因此,需要考虑一些更复杂的调度策略。</li>
+</ul></li>
+<li>SSTF（最短时间服务优先）
+<ul>
+<li>每次选择使磁头臂从当前位置开始移动最少的磁盘I/O请求。</li>
+<li>存在的问题
+<ul>
+<li>可能导致某些进程发生“饥饿”( Starvation)。因为只要不断有新进程到达,且其所要访问的磁道与磁头当前所在磁道的距离较近,这种新进程的I/0请求必被优先满足。</li>
+<li>磁头臂黏着（根源是单队列）</li>
+</ul></li>
+</ul></li>
+<li>SCAN（扫描算法/电梯算法）
+<ul>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/SCAN图示.png%22"></li>
+<li>先沿着一个方向移动，在途中满足所有未完成的请求，然后再往反方向移动，满足剩余的请求。SCAN比较类似于SSTF，不过解决了SSTF中老进程可能饥饿的问题。</li>
+<li>存在的问题
+<ul>
+<li>outer的访问等待时间太长了。</li>
+<li>磁头臂黏着（根源是单队列）</li>
+</ul></li>
+</ul></li>
+<li>C-SCAN（<font color="red">循环</font>扫描算法）
+<ul>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/CSCAN图示.png%22"></li>
+<li>先沿着一个方向满足途中所有磁盘I/O请求，然后磁头臂回到反方向的末端，再次沿着同一方向移动，解决了SCAN算法中outer等待时间过长的情况。</li>
+<li>存在的问题
+<ul>
+<li>磁头臂黏着（根源是单队列）</li>
+</ul></li>
+</ul></li>
+<li>FSCAN（分步电梯调度算法）
+<ul>
+<li>使用两个子队列，扫描开始时，所有请求在一个子队列中，另一个子队列为空。</li>
+<li>扫描过程中，所有新到的请求都被放在另一个子队列中。</li>
+<li>解决了SSTF、SCAN、C-SCAN中的磁头臂黏着现象
+<ul>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/磁头臂黏着.png%22"></li>
+</ul></li>
+</ul></li>
+<li>N-step-SCAN
+<ul>
+<li>把磁盘请求队列分成长度为N的子队列，每一次用SCAN处理一个子队列。</li>
+<li>在处理一个子队列时，新情求必须加到其他某个队列中。</li>
+</ul></li>
+</ol>
+<h2 id="调度算法示例">5.3、调度算法示例</h2>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/磁盘调度示例.png%22"></p>
+<h1 id="raidcontrast-to-sled">6、RAID（contrast to SLED）</h1>
+<p>  RAID（Redundant array of independent disks），通过使得磁盘I/O并行化来提高效率。RAID共有7个层级（0~6），这些层级之间没有对应的上下级关系，而是在三个共同原则下的7种不同的架构（常用的有0,1,5,6）： - RAID is a set of physical disk drives viewed in OS as a single logical drive - Data are distributed across the physical drives of an array in a scheme known as striping. - Redundant disk capacity is used to store parity information, which guarantees the recoverability in case of disk failure.</p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/7-level-RAID.png%22"></p>
+<ol type="1">
+<li>RAID 0（无冗余）
+<ul>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID0-无冗余.png%22"></li>
+<li>严格来讲并不属于RAID家族，因为它并没有冗余</li>
+</ul></li>
+<li>RAID 1（镜像，mirrored）
+<ul>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID1-镜像.png%22"></li>
+<li>两倍的配置，读请求最多可比RAID 0提升一倍，但是写请求没有区别</li>
+<li>用于保存重要的系统文件和数据</li>
+</ul></li>
+<li>RAID 2（通过汉明码冗余）
+<ul>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID2-通过汉明码冗余.png%22"></li>
+<li>所有的磁盘成员参与同一个磁盘I/O请求的执行（一次只能执行一个I/O请求）</li>
+<li>实际中不适用</li>
+</ul></li>
+<li>RAID 3（交错位奇偶校验）
+<ul>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID3-交错位奇偶校验.png%22"></li>
+<li>所有的磁盘成员参与同一个磁盘I/O请求的执行（一次只能执行一个I/O请求）</li>
+<li><font color="red">如何得知哪一个出了错呢？</font></li>
+<li>实际中不适用</li>
+</ul></li>
+<li>RAID 4（块奇偶校验）
+<ul>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID4-块奇偶校验.png%22"></li>
+<li>使用了一种独立访问技术，每个磁盘都独立运转</li>
+<li>对于任何一种情况,每次的写操作都必须包含奇偶校验磁盘,因此奇偶校验磁盘有可能成为瓶颂。</li>
+</ul></li>
+<li>RAID 5（块分布奇偶校验）
+<ul>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID5-块分布奇偶校验.png%22"></li>
+<li>使用了一种独立访问技术，每个磁盘都独立运转</li>
+</ul></li>
+<li>RAID 6（双重冗余）
+<ul>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID6-双重冗余.png%22"></li>
+<li>使用了一种独立访问技术，每个磁盘都独立运转</li>
+<li>使用两种校验算法，一种是4和5中使用的异或计算P，另一种是独立数据校验算法Q</li>
+<li>RAID 6提供了极高的数据可靠性，只有当三个磁盘同时发生错误时，数据才会丢失。</li>
+<li>RAID 6每次写都会影响两个校验块，这导致了严重的写性能损失。</li>
+</ul></li>
+</ol>
+<h1 id="磁盘高速缓存内存作为辅存的缓存">7、磁盘高速缓存（内存作为辅存的缓存）</h1>
+<p>  有如下两点设计考虑因素 1. 传送数据 or 传送指针（共享内存） 2. 置换算法</p>
+<p>  有如下三点性能考虑因素 1. 访问磁盘的局部性 2. 置换算法 3. 缓存大小</p>
+<h2 id="传送数据-or-传送指针">7.1、传送数据 or 传送指针</h2>
+<h2 id="置换算法">7.2、置换算法</h2>
+<ol type="1">
+<li>LRU(Least Recently Used)</li>
+<li>LFU(Least Frequently Used)
+<ul>
+<li>受局部性影响，LFU并不是一个好的置换算法</li>
+</ul></li>
+<li>基于频率的置换算法1
+<ul>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/基于频率的置换算法1.png%22"></li>
+<li>块在逻辑上组织成一个栈，栈顶的一部分作为新区，剩余的作为旧区</li>
+<li>性能与LRU差不多,仅有略微的提高</li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/基于频率的置换算法1的问题.png%22"></li>
+</ul></li>
+<li>基于频率的置换算法2
+<ul>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/基于频率的置换算法2.png%22"></li>
+<li>新区count不变，中间区count每次访问到都会+1，旧区才会被置换</li>
+<li>效率比LRU和LFU有显著提高</li>
+</ul></li>
+</ol>
+<h2 id="缓存大小">7.3、缓存大小</h2>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/cache大小1.png%22"> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/cache大小2.png%22"></p>
+<h1 id="supplement">supplement</h1>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/OS设计层次.png%22"></p>
+<p>课后习题答案：https://max.book118.com/html/2016/0122/33825014.shtm</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C%E7%9B%B8%E5%85%B3/%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7/%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7/" rel="next" title="2.计算机基础/c.操作系统/实验相关/编译链接调试工具/编译链接调试工具">
+                <i class="fa fa-chevron-left"></i> 2.计算机基础/c.操作系统/实验相关/编译链接调试工具/编译链接调试工具
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" rel="prev" title="2.计算机基础/c.操作系统/12.文件管理">
+                2.计算机基础/c.操作系统/12.文件管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ryan</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/liuxr98" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#io设备"><span class="nav-number">1.</span> <span class="nav-text">1、IO设备</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#io设备分类"><span class="nav-number">1.1.</span> <span class="nav-text">1.1、IO设备分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不同io设备间的主要差别"><span class="nav-number">1.2.</span> <span class="nav-text">1.2、不同IO设备间的主要差别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#io功能的组织"><span class="nav-number">2.</span> <span class="nav-text">2、IO功能的组织</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何执行io与io功能的发展"><span class="nav-number">2.1.</span> <span class="nav-text">2.1、如何执行IO与IO功能的发展</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dma"><span class="nav-number">2.2.</span> <span class="nav-text">2.2、DMA</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#操作系统设计问题"><span class="nav-number">3.</span> <span class="nav-text">3、操作系统设计问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主要内容"><span class="nav-number">3.1.</span> <span class="nav-text">3.1、主要内容：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#io软件设计"><span class="nav-number">3.2.</span> <span class="nav-text">3.2、I&#x2F;O软件设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#io软件层次逻辑"><span class="nav-number">3.3.</span> <span class="nav-text">3.3、I&#x2F;O软件层次逻辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户空间的io软件"><span class="nav-number">3.4.</span> <span class="nav-text">3.4、用户空间的I&#x2F;O软件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#io缓冲"><span class="nav-number">4.</span> <span class="nav-text">4、IO缓冲</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本相关内容"><span class="nav-number">4.1.</span> <span class="nav-text">4.1、基本相关内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单方向缓冲"><span class="nav-number">4.2.</span> <span class="nav-text">4.2、单方向缓冲</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单缓冲single-buffer"><span class="nav-number">4.2.1.</span> <span class="nav-text">4.2.1、单缓冲（single buffer）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双缓冲double-buffer"><span class="nav-number">4.2.2.</span> <span class="nav-text">4.2.2、双缓冲（double buffer）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环缓冲circular-buffer"><span class="nav-number">4.2.3.</span> <span class="nav-text">4.2.3、循环缓冲（circular buffer）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双方向缓冲"><span class="nav-number">4.3.</span> <span class="nav-text">4.3、双方向缓冲</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#磁盘调度"><span class="nav-number">5.</span> <span class="nav-text">5、磁盘调度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘性能"><span class="nav-number">5.1.</span> <span class="nav-text">5.1、磁盘性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘调度策略"><span class="nav-number">5.2.</span> <span class="nav-text">5.2、磁盘调度策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调度算法示例"><span class="nav-number">5.3.</span> <span class="nav-text">5.3、调度算法示例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#raidcontrast-to-sled"><span class="nav-number">6.</span> <span class="nav-text">6、RAID（contrast to SLED）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#磁盘高速缓存内存作为辅存的缓存"><span class="nav-number">7.</span> <span class="nav-text">7、磁盘高速缓存（内存作为辅存的缓存）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#传送数据-or-传送指针"><span class="nav-number">7.1.</span> <span class="nav-text">7.1、传送数据 or 传送指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#置换算法"><span class="nav-number">7.2.</span> <span class="nav-text">7.2、置换算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存大小"><span class="nav-number">7.3.</span> <span class="nav-text">7.3、缓存大小</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#supplement"><span class="nav-number">8.</span> <span class="nav-text">supplement</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ryan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
