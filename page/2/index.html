@@ -1729,289 +1729,6 @@ program:要调试的程序名字
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/1.%E7%89%A9%E7%90%86%E5%B1%82/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/1.%E7%89%A9%E7%90%86%E5%B1%82/" itemprop="url">物理层</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-25T20:26:17+08:00">
-                2021-03-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="1、物理层的基本概念"><a href="#1、物理层的基本概念" class="headerlink" title="1、物理层的基本概念"></a>1、物理层的基本概念</h1><p>主要的任务：确定与传输媒体的接口的一些特性</p>
-<ul>
-<li>机械特性<ul>
-<li>指明接口所用接线器的形状和尺寸、引线数目和排列、固定和锁定装置等等。</li>
-</ul>
-</li>
-<li>电气特性<ul>
-<li>指明在接口电缆的各条线上出现的电压的范围。</li>
-</ul>
-</li>
-<li>功能特性<ul>
-<li>指明某条线上出现的某一电平的电压表示何种意义。</li>
-</ul>
-</li>
-<li>过程特性<ul>
-<li>指明对于不同功能的各种可能事件的出现顺序。 </li>
-</ul>
-</li>
-</ul>
-<p>术语：</p>
-<ul>
-<li>数据(data)——运送消息的实体。</li>
-<li>信号(signal)——数据的电气的或电磁的表现。 </li>
-<li>“模拟的”(analogous)——代表消息的参数的取值是连续的。 </li>
-<li>“数字的”(digital)——代表消息的参数的取值是离散的。 </li>
-<li>码元(code)——在使用时间域（或简称为时域）的波形表示数字信号时，代表不同离散数值的基本波形。</li>
-<li>单向通信（单工通信）——只能有一个方向的通信而没有反方向的交互。</li>
-<li>双向交替通信（半双工通信）——通信的双方都可以发送信息，但不能双方同时发送(当然也就不能同时接收)。</li>
-<li>双向同时通信（全双工通信）——通信的双方可以同时发送和接收信息。 </li>
-<li>基带信号（即基本频带信号）<ul>
-<li>来自信源的信号。像计算机输出的代表各种文字或图像文件的数据信号都属于基带信号。</li>
-<li>基带信号往往包含有较多的低频成分，甚至有直流成分，而许多信道并不能传输这种低频分量或直流分量。因此必须对基带信号进行调制(modulation)。   </li>
-</ul>
-</li>
-<li>带通信号——把基带信号经过载波调制后，把信号的频率范围搬移到较高的频段以便在信道中传输（即仅在一段频率范围内能够通过信道）。 </li>
-<li>码元<ul>
-<li>数字通信中一个基带波形所对应的二进制码组</li>
-<li><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/1.%E7%89%A9%E7%90%86%E5%B1%82/码元与比特.png" alt="码元与比特"></li>
-</ul>
-</li>
-<li>比特：一个码元中每一个二进制位</li>
-<li>带宽<ul>
-<li>信道最高信号频率-信道最低信号频率，单位是Hz</li>
-<li>带宽=频带宽度，并非平时所说的表示速率的带宽</li>
-</ul>
-</li>
-<li>信道容量（比特速率）<ul>
-<li>信道能无错误传送的最大信息率。单位是bit/s(bps)。它代表每秒能传送的最大信息量，或者说小于这个数的信息率必能在此信道中无错误地传送。</li>
-<li>表示传输速率（俗称的带宽）</li>
-</ul>
-</li>
-</ul>
-<h1 id="2、数据通信的基础知识"><a href="#2、数据通信的基础知识" class="headerlink" title="2、数据通信的基础知识"></a>2、数据通信的基础知识</h1><h2 id="2-1、数据通信系统的模型"><a href="#2-1、数据通信系统的模型" class="headerlink" title="2.1、数据通信系统的模型"></a>2.1、数据通信系统的模型</h2><p><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/1.%E7%89%A9%E7%90%86%E5%B1%82/数据通信系统.png" alt="数据通信系统"></p>
-<h2 id="2-2、信号调制"><a href="#2-2、信号调制" class="headerlink" title="2.2、信号调制"></a>2.2、信号调制</h2><p>&emsp;&emsp;基带信号往往包含有较多的低频成分，甚至有直流成分，而许多信道并不能传输这种低频分量或直流分量。因此必须对基带信号进行调制(modulation)。</p>
-<p>&emsp;&emsp;最基本的二元制调制方法有以下几种：</p>
-<ul>
-<li>调幅(AM)：载波的振幅随基带数字信号而变化。 </li>
-<li>调频(FM)：载波的频率随基带数字信号而变化。</li>
-<li>调相(PM)：载波的初始相位随基带数字 信号而变化。 </li>
-<li><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/1.%E7%89%A9%E7%90%86%E5%B1%82/几种调制方法.png" alt="几种调制方法"></li>
-<li><font color="red">正交振幅调制QAM？</font>
-
-</li>
-</ul>
-<h2 id="2-3、信道的极限容量与极限信息传输速率"><a href="#2-3、信道的极限容量与极限信息传输速率" class="headerlink" title="2.3、信道的极限容量与极限信息传输速率"></a>2.3、信道的极限容量与极限信息传输速率</h2><ol>
-<li>理想条件下(无噪声干扰)的码元的传输速率极限（码元速率，奈氏准则）<ul>
-<li>受限因素<ul>
-<li>在任何信道中，码元传输的速率是有上限的，否则就会出现码间串扰的问题，使接收端对码元的判决（即识别）成为不可能。</li>
-<li>如果信道的频带越宽，也就是能够通过的信号高频分量越多，那么就可以用更高的速率传送码元而不出现码间串扰。</li>
-</ul>
-</li>
-<li>公式：$CB \leqslant 2W\ (Baud/s)$<ul>
-<li>CC：码元容量/传输速率</li>
-<li>W：链路频带宽度（以Hz为单位）</li>
-<li>码元的最大传输速率与物理链路的带宽(Hz)线性关系</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>理想条件下(无噪声干扰)的极限信息传输速率（比特速率，奈氏准则推导而得）<ul>
-<li>受限因素<ul>
-<li>信道的频带宽度</li>
-<li>编码方案</li>
-</ul>
-</li>
-<li>公式：$Cb \leqslant 2Wlog_2M\ (bit/s)$<ul>
-<li>一个码元最多包含比特数由编码方案决定：$log_2M (bit/Baud)$，$M$表示编码进制数</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>带宽受限且有高斯白噪声干扰的信道的极限、无差错的信息传输速率（比特速率，香农公式）<ul>
-<li>受限因素<ul>
-<li>信道频带宽度</li>
-<li>信噪比</li>
-<li><font color="red">编码方案？</font></li>
-</ul>
-</li>
-<li>公式：$Cb \leqslant Wlog_2(1+S/N) \ (bit/s)$<ul>
-<li>W：链路频带宽度/信道的带宽（以Hz 为单位）</li>
-<li>S：信道内所传信号的平均功率；</li>
-<li>N：信道内部的高斯噪声功率。</li>
-<li>S/N称为信噪比</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h1 id="3、物理层下面的传输媒体"><a href="#3、物理层下面的传输媒体" class="headerlink" title="3、物理层下面的传输媒体"></a>3、物理层下面的传输媒体</h1><h2 id="3-1、导引型传输媒体"><a href="#3-1、导引型传输媒体" class="headerlink" title="3.1、导引型传输媒体"></a>3.1、导引型传输媒体</h2><ul>
-<li>双绞线</li>
-<li>同轴电缆</li>
-<li>光缆<h2 id="3-2、非导引型传输媒体"><a href="#3-2、非导引型传输媒体" class="headerlink" title="3.2、非导引型传输媒体"></a>3.2、非导引型传输媒体</h2></li>
-<li>电离层反射——短波通信</li>
-<li>微波</li>
-</ul>
-<h1 id="4、信道复用技术"><a href="#4、信道复用技术" class="headerlink" title="4、信道复用技术"></a>4、信道复用技术</h1><h2 id="4-1、频分复用、时分复用和统计时分复用"><a href="#4-1、频分复用、时分复用和统计时分复用" class="headerlink" title="4.1、频分复用、时分复用和统计时分复用"></a>4.1、频分复用、时分复用和统计时分复用</h2><h2 id="4-2、波分复用"><a href="#4-2、波分复用" class="headerlink" title="4.2、波分复用"></a>4.2、波分复用</h2><p>&emsp;&emsp;即是光的频分复用。</p>
-<h2 id="4-3、码分复用"><a href="#4-3、码分复用" class="headerlink" title="4.3、码分复用"></a>4.3、码分复用</h2><p>&emsp;&emsp;每个站分配的码片序列不仅必须各不相同，并且还必须互相正交(orthogonal)。在实用的系统中是使用伪随机码序列。</p>
-<h1 id="5、数字传输系统"><a href="#5、数字传输系统" class="headerlink" title="5、数字传输系统"></a>5、数字传输系统</h1><p>&emsp;&emsp;旧的数字传输系统存在着许多缺点</p>
-<ul>
-<li>速率标准不统一。</li>
-<li>不是同步传输。</li>
-</ul>
-<p>同步光纤网SONET</p>
-<p>同步数字系列SDH</p>
-<h1 id="6、宽带接入技术"><a href="#6、宽带接入技术" class="headerlink" title="6、宽带接入技术"></a>6、宽带接入技术</h1><h2 id="6-1、ADSL技术"><a href="#6-1、ADSL技术" class="headerlink" title="6.1、ADSL技术"></a>6.1、ADSL技术</h2><p>DSL(Digital Subscriber Line,数字用户线)的几种类型：</p>
-<ul>
-<li>ADSL(Asymmetric Digital Subscriber Line)：非对称数字用户线<ul>
-<li>ADSL 技术就把0~4 kHz 低端频谱留给传统电话使用，而把原来没有被利用的高端频谱留给用户上网使用。</li>
-<li>ADSL 的极限传输距离与数据率以及用户线的线径都有很大的关系（用户线越细，信号传输时的衰减就越大），而所能得到的最高数据传输速率与实际的用户线上的信噪比密切相关。<ul>
-<li>例如，0.5 毫米线径的用户线，传输速率为1.5 ~ 2.0 Mb/s 时可传送5.5 公里，但当传输速率提高到6.1 Mb/s 时，传输距离就缩短为3.7 公里。</li>
-<li>如果把用户线的线径减小到0.4毫米，那么在6.1 Mb/s的传输速率下就只能传送2.7公里</li>
-</ul>
-</li>
-<li>上行和下行带宽做成不对称的。上行指从用户到ISP，而下行指从ISP 到用户。</li>
-<li>ADSL 在用户线（铜线）的两端各安装一个ADSL 调制解调器。</li>
-<li>我国目前采用的方案是离散多音调DMT (Discrete Multi-Tone)调制技术。这里的“多音调”就是“多载波”或“多子信道”的意思。<ul>
-<li>DMT 调制技术采用频分复用的方法，把40 kHz 以上一直到1.1 MHz 的高端频谱划分为许多的子信道，其中25 个子信道用于上行信道，而249 个子信道用于下行信道。</li>
-<li>每个子信道占据4 kHz 带宽（严格讲是4.3125 kHz），并使用不同的载波（即不同的音调）进行数字调制。这种做法相当于在一对用户线上使用许多小的调制解调器并行地传送数据。</li>
-<li><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/1.%E7%89%A9%E7%90%86%E5%B1%82/DMT分频.png" alt="DMT分频"></li>
-</ul>
-</li>
-<li>ADSL 的数据率<ul>
-<li>由于用户线的具体条件往往相差很大（距离、线径、受到相邻用户线的干扰程度等都不同），因此ADSL 采用自适应调制技术使用户线能够传送尽可能高的数据率。</li>
-<li>当ADSL 启动时，用户线两端的ADSL 调制解调器就测试可用的频率、各子信道受到的干扰情况，以及在每一个频率上测试信号的传输质量。</li>
-<li>ADSL 不能保证固定的数据率。对于质量很差的用户线甚至无法开通ADSL。</li>
-<li>通常下行数据率在32 kb/s 到6.4 Mb/s 之间，而上行数据率在32 kb/s 到640 kb/s 之间。</li>
-</ul>
-</li>
-<li>ADSL 的组成<ul>
-<li><img src="/2021/03/25/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/1.%E7%89%A9%E7%90%86%E5%B1%82/ADSL组成.png" alt="ADSL组成"></li>
-</ul>
-</li>
-<li>第二代ADSL<ul>
-<li>通过提高调制效率得到了更高的数据率。例如，ADSL2 要求至少应支持下行8 Mb/s、上行800 kb/s的速率。而ADSL2+ 则将频谱范围从1.1 MHz 扩展至2.2 MHz，下行速率可达16 Mb/s（最大传输速率可达25 Mb/s），而上行速率可达800 kb/s。</li>
-<li>采用了无缝速率自适应技术SRA (Seamless Rate Adaptation)，可在运营中不中断通信和不产生误码的情况下，自适应地调整数据率。</li>
-<li>改善了线路质量评测和故障定位功能，这对提高网络的运行维护水平具有非常重要的意义。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>HDSL(High speed DSL)：高速数字用户线</li>
-<li>SDSL(Single-line DSL)：1对线的数字用户线</li>
-<li>VDSL(Very high speed DSL)：甚高速数字用户线</li>
-<li>DSL：ISDN 用户线。</li>
-<li>RADSL(Rate-Adaptive DSL)：速率自适应DSL，是ADSL 的一个子集，可自动调节线路速率）。</li>
-</ul>
-<h2 id="6-2、光纤同轴混合网（HFC网）"><a href="#6-2、光纤同轴混合网（HFC网）" class="headerlink" title="6.2、光纤同轴混合网（HFC网）"></a>6.2、光纤同轴混合网（HFC网）</h2><h2 id="6-3、FTTx-技术"><a href="#6-3、FTTx-技术" class="headerlink" title="6.3、FTTx 技术"></a>6.3、FTTx 技术</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/25/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/2.%E9%93%BE%E8%B7%AF%E5%B1%82/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3542,11 +3259,160 @@ program:要调试的程序名字
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/25/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/03/25/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/d.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E9%97%AE%E9%A2%98/" itemprop="url">2.计算机基础/d.计算机网络/问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-25T19:48:42+08:00">
+                2021-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>（应用层）P2P一定要有服务器发送第一个副本吗？可以没有服务器吗？
+<ul>
+<li>可以没有（把其中一个对等方看做服务器就OK了）。</li>
+</ul></li>
+<li>（应用层）如果两个后继同时退出呢？环形覆盖网络就发生了中断，这时候要怎么办？
+<ul>
+<li>重新建立或者手动处理。</li>
+</ul></li>
+<li>（传输层）高层报文长度长于低层报文长度时怎么办？
+<ul>
+<li>不管，在传输层眼中应用层报头与内容都是比特流，没有区别的，切片发送即可，应用层会负责解释拼接的报文的内容，比如确定长度。</li>
+</ul></li>
+<li>（传输层）将应用程序服务器端口是固定的，那么如果电脑上运行的两个应用程序其服务器端端口恰好重合了怎么办？
+<ul>
+<li>两个进程的目标服务器的IP地址不一样</li>
+</ul></li>
+<li>（传输层rdt3.0）如果第一轮的ACK1在第二轮等待ACK1时到达而此时第二轮的ACK1尚未到达，这时就出错了，要如何处理这种情况呢？</li>
+<li>（传输层GBN）计时器的数量是多少个？如果只有一个，那么是如何更新的？</li>
+<li>（传输层GBN）接收方的expectedseqnum作用？</li>
+<li>（传输层拥塞原因）拥塞情况1是因为传输过程发生比特差错吗？<font color="red">（情形1）分组的到达速率接近链路容量时，分组经历巨大的排队时延</font>。为什么？</li>
+<li>（传输层）可靠数据传输原理中的窗口内分组编号与TCP的每个字节编号有什么联系与不同？窗口内分组编号存放在TCP哪里呢？是序号和确认号吗？</li>
+<li>（传输层）可靠数据传输原理中的ACK与TCP中的ACK差别好大？</li>
+<li>（传输层）TCP传数据时的序号与建立连接的序号又有什么关联？</li>
+<li>（链路层）局域网在最开始的时候都是广播局域网吗？后来才变成了交换局域网？</li>
+<li>（链路层）现在的交换局域网是否不需要多路访问协议？</li>
+<li>（链路层）交换机的转发需要路径选择算法吗？</li>
+<li>（链路层）在单纯的局域网中（没有IP地址），ARP是无法运行的，那么此时两台互不认识的终端如何通信？</li>
+<li>（链路层）路由器的性质是收到广播包后不会转发到另一个端口，那么网络层广播怎么办？</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/">&lt;i class&#x3D;&quot;fa fa-angle-left&quot;&gt;&lt;&#x2F;i&gt;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
+    <a class="extend prev" rel="prev" href="/">&lt;i class&#x3D;&quot;fa fa-angle-left&quot;&gt;&lt;&#x2F;i&gt;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
   </nav>
 
 
@@ -3592,7 +3458,7 @@ program:要调试的程序名字
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

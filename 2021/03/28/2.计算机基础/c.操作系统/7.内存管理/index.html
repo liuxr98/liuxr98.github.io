@@ -85,23 +85,23 @@
 <meta property="og:url" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/index.html">
 <meta property="og:site_name" content="RBlog">
 <meta property="og:description" content="第七章-内存管理 1、内存管理的需求  重定位 保护 共享 逻辑组织 物理组织 ## 1.1、重定位   重定位就是程序的物理地址只有当运行时才是确定的，而地址可以是不同的。若程序不能够实现重定位，那么其每次装入内存的地址就必须是固定的，这会大大影响系统的效率。    处理器硬件和操作系统软件必须能以某种方式把程序代码中的内存访问转换为实际的物理内存地址，并反映程序在内存中的当">
-<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E8%BF%9B%E7%A8%8B%E5%AF%BB%E5%9D%80%E9%9C%80%E6%B1%82.png%22">
-<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%9B%BA%E5%AE%9A%E5%88%86%E5%8C%BA.png%22">
-<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E4%B8%8D%E7%AD%89%E9%95%BF%E5%9B%BA%E5%AE%9A%E5%88%86%E5%8C%BA%E6%94%BE%E7%BD%AE%E6%96%B9%E6%B3%952.png%22">
-<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%8A%A8%E6%80%81%E5%88%86%E5%8C%BA%E7%A4%BA%E4%BE%8B.png%22">
-<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%86%85%E5%AD%98%E5%8E%8B%E7%BC%A9.png%22">
-<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E4%BC%99%E4%BC%B4%E7%B3%BB%E7%BB%9F%E7%AE%97%E6%B3%95%E7%A4%BA%E4%BE%8B.png%22">
-<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E4%BC%99%E4%BC%B4%E7%B3%BB%E7%BB%9F%E4%BA%8C%E5%8F%89%E6%A0%91%E8%A1%A8%E7%A4%BA.png%22">
-<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E9%87%8D%E5%AE%9A%E4%BD%8D%E7%9A%84%E7%A1%AC%E4%BB%B6%E6%94%AF%E6%8C%81.png%22">
-<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E9%A1%B5%E8%A1%A8%E7%A4%BA%E4%BE%8B.png%22">
-<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E9%A1%B5%E8%A1%A8%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2.png%22">
-<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E6%AE%B5%E8%A1%A8%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2.png%22">
-<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93.png%22">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E8%BF%9B%E7%A8%8B%E5%AF%BB%E5%9D%80%E9%9C%80%E6%B1%82.png">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%9B%BA%E5%AE%9A%E5%88%86%E5%8C%BA.png">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E4%B8%8D%E7%AD%89%E9%95%BF%E5%9B%BA%E5%AE%9A%E5%88%86%E5%8C%BA%E6%94%BE%E7%BD%AE%E6%96%B9%E6%B3%952.png">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%8A%A8%E6%80%81%E5%88%86%E5%8C%BA%E7%A4%BA%E4%BE%8B.png">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%86%85%E5%AD%98%E5%8E%8B%E7%BC%A9.png">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E4%BC%99%E4%BC%B4%E7%B3%BB%E7%BB%9F%E7%AE%97%E6%B3%95%E7%A4%BA%E4%BE%8B.png">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E4%BC%99%E4%BC%B4%E7%B3%BB%E7%BB%9F%E4%BA%8C%E5%8F%89%E6%A0%91%E8%A1%A8%E7%A4%BA.png">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E9%87%8D%E5%AE%9A%E4%BD%8D%E7%9A%84%E7%A1%AC%E4%BB%B6%E6%94%AF%E6%8C%81.png">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E9%A1%B5%E8%A1%A8%E7%A4%BA%E4%BE%8B.png">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E9%A1%B5%E8%A1%A8%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2.png">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E6%AE%B5%E8%A1%A8%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2.png">
+<meta property="og:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93.png">
 <meta property="article:published_time" content="2021-03-28T15:44:18.789Z">
-<meta property="article:modified_time" content="2021-03-28T15:59:44.144Z">
+<meta property="article:modified_time" content="2021-03-28T16:14:49.683Z">
 <meta property="article:author" content="Ryan">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E8%BF%9B%E7%A8%8B%E5%AF%BB%E5%9D%80%E9%9C%80%E6%B1%82.png%22">
+<meta name="twitter:image" content="http://yoursite.com/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E8%BF%9B%E7%A8%8B%E5%AF%BB%E5%9D%80%E9%9C%80%E6%B1%82.png">
 
 
 
@@ -361,7 +361,7 @@
 <li>物理组织 ## 1.1、重定位   重定位就是程序的物理地址只有当运行时才是确定的，而地址可以是不同的。若程序不能够实现重定位，那么其每次装入内存的地址就必须是固定的，这会大大影响系统的效率。</li>
 </ol>
 <p>  处理器硬件和操作系统软件必须能以某种方式把程序代码中的内存访问转换为实际的物理内存地址，并反映程序在内存中的当前位置。</p>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/进程寻址需求.png%22"></p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/进程寻址需求.png"></p>
 <h2 id="保护">1.2、保护</h2>
 <p>  简而言之，保护是各个进程（用户进程、系统进程）不被其他进程有意无意的干扰。</p>
 <p>  满足重定位增大了满足保护需求的难度：编译时无法通过检查绝对地址来确保保护。</p>
@@ -370,7 +370,7 @@
 <h1 id="内存分区">2、内存分区</h1>
 <h2 id="固定分区">2.1、固定分区</h2>
 <h3 id="分区大小">2.1.1、分区大小</h3>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/固定分区.png%22"><br>固定分区大小</p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/固定分区.png"><br>固定分区大小</p>
 <p>  相同大小固定分区的缺陷： - 程序太大——装不下 - 程序太小——内部碎片大，浪费空间</p>
 <h3 id="放置算法">2.1.2、放置算法</h3>
 <ul>
@@ -387,7 +387,7 @@
 </ul></li>
 <li>方案2：性能与开销的折中——只有一条队列
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/不等长固定分区放置方法2.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/不等长固定分区放置方法2.png"></li>
 <li>当需要把一个进程装入内存时，选择可以容纳该进程的最小可用分区。</li>
 <li>如果没有可用分区则需要进行交换，可以选择最小分区，也可选择阻塞进程所占用的分区。 ### 2.1.3、固定分区方案评价</li>
 </ul></li>
@@ -399,11 +399,11 @@
 <li>缺点
 <ul>
 <li><font color="red">限制了系统中活动进程的数量</font></li>
-<li>分区大小设置未必合理，故而可能比较低效 ## 2.2、动态分区 ### 2.2.1、基本原理与外部碎片   最开始时一点都不浪费空间，后来逐渐出现许多“细小空洞”，称为“外部碎片”，工作过程如下图所示： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/动态分区示例.png%22"></li>
+<li>分区大小设置未必合理，故而可能比较低效 ## 2.2、动态分区 ### 2.2.1、基本原理与外部碎片   最开始时一点都不浪费空间，后来逐渐出现许多“细小空洞”，称为“外部碎片”，工作过程如下图所示： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/动态分区示例.png"></li>
 </ul></li>
 </ul>
 <h3 id="内存压缩">2.2.2、内存压缩</h3>
-<p>  用于解决外部碎片的问题。通过操作系统不时地移动进程，使得进程占用的空间连续，并使所有的空闲空间连成一片。 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/内存压缩.png%22"></p>
+<p>  用于解决外部碎片的问题。通过操作系统不时地移动进程，使得进程占用的空间连续，并使所有的空闲空间连成一片。 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/内存压缩.png"></p>
 <p>  缺陷： - 内存压缩非常耗时且占用处理器时间 - 要求程序能够<font color="red">动态重定位</font> - 必须能够把程序从内存的一块区域移动到另一块区域，且不会使程序中的内存访问无效 - <font color="red">不同于前面所说的加载时重定位</font></p>
 <h3 id="放置算法-1">2.2.3、放置算法</h3>
 <ul>
@@ -424,18 +424,18 @@
 <p>  是固定分区与动态分区的折中（在克服了固定分区的进程数量限制以外，维护起来也比动态分区更简单）。</p>
 <p><b>伪代码表述</b> - 可供分配的整个内存大小：<span class="math inline">\(2^U\)</span>字节 - 可能分配的最大块尺寸：<span class="math inline">\(2^U\)</span>字节 - 可能分配的最小块尺寸：<span class="math inline">\(2^L\)</span>字节 - 可用内存块大小：<span class="math inline">\(2^K \in [2^L,2^U]\)</span>，之所以 <span class="math inline">\(2^K \geqslant 2^L\)</span> 而不是 <span class="math inline">\(2^K \geqslant 0\)</span> ，是因为 <span class="math inline">\(2^L\)</span> 是不断二分得到的，不可能是0。</p>
 <p>  该算法分配的块只能是2的整数次幂，首先要确定要申请空间 <span class="math inline">\(Size\)</span> 的范围区间 <span class="math inline">\([2^{i-1},2^i]\)</span>，然后通过下面递归算法找到一个大小为 <span class="math inline">\(2^i\)</span>大小的hole。 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">i_list(i=...) <span class="comment">// 系统维护的所有大小为2^i的hole的list</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">get_hole</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(i==(U+<span class="number">1</span>))&#123;</span><br><span class="line">        &lt;failure&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(i_list is empty)&#123;</span><br><span class="line">        get_gole(i+<span class="number">1</span>);</span><br><span class="line">        &lt;split hole into buddies&gt;;</span><br><span class="line">        &lt;<span class="built_in">put</span> buddies on i_list&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">    &lt;take the first hole on i_list&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>   另外，如果有两个“二叉节点”均未分配的话，二者应当合并为一个更大的块。</p>
-<p><b>示例</b> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/伙伴系统算法示例.png%22"></p>
-<p><b>二叉树表示</b> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/伙伴系统二叉树表示.png%22"></p>
+<p><b>示例</b> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/伙伴系统算法示例.png"></p>
+<p><b>二叉树表示</b> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/伙伴系统二叉树表示.png"></p>
 <h2 id="重定位">2.4、重定位</h2>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/重定位的硬件支持.png%22"><br>重定位的硬件支持</p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/重定位的硬件支持.png"><br>重定位的硬件支持</p>
 <h1 id="分页">3、分页</h1>
 <p>  从分页开始，逻辑地址出现，不过简单分页与简单分段中逻辑地址空间与物理地址空间是一致的。</p>
-<p>  一个页表的例子如下图所示： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/页表示例.png%22"><br>页表示例   逻辑地址转换为物理地址过程如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/页表地址转换.png%22"><br>页表地址转换</p>
+<p>  一个页表的例子如下图所示： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/页表示例.png"><br>页表示例   逻辑地址转换为物理地址过程如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/页表地址转换.png"><br>页表地址转换</p>
 <h1 id="分段">4、分段</h1>
 <p>  段表结构与页表相似。</p>
-<p>  逻辑地址转换为物理地址过程如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/段表地址转换.png%22"><br>段表地址转换</p>
+<p>  逻辑地址转换为物理地址过程如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/段表地址转换.png"><br>段表地址转换</p>
 <h1 id="简单总结">5、简单总结</h1>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/简单总结.png%22"><br>简单总结</p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/简单总结.png"><br>简单总结</p>
 <table>
 <colgroup>
 <col style="width: 33%">
@@ -604,7 +604,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

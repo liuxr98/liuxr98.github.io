@@ -370,11 +370,12 @@
 </tr>
 </tbody>
 </table>
-<p><b>2. 七状态模型</b> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/9.%E5%8D%95%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6/三种调度关系.png%22"></p>
-<p><b>3. 调度本质上是队列管理</b> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/9.%E5%8D%95%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6/队列调度.png%22"></p>
+<p><b>2. 七状态模型</b></p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/9.%E5%8D%95%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6/三种调度关系.png"></p>
+<p><b>3. 调度本质上是队列管理</b> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/9.%E5%8D%95%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6/队列调度.png"></p>
 <h1 id="调度算法">2、调度算法</h1>
 <h2 id="短程调度准则">2.1、短程调度准则</h2>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/9.%E5%8D%95%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6/调度规则总览.png%22"></p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/9.%E5%8D%95%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6/调度规则总览.png"></p>
 <ul>
 <li>面向用户
 <ul>
@@ -405,7 +406,7 @@
 </ul></li>
 </ul>
 <h2 id="优先级使用">2.2、优先级使用</h2>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/9.%E5%8D%95%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6/优先级排队.png%22"></p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/9.%E5%8D%95%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6/优先级排队.png"></p>
 <p>  通过指数衰减的方式来更新各个队列的优先级，否则很可能会出现饥饿的现象。</p>
 <h2 id="选择调度策略">2.3、选择调度策略</h2>
 <h3 id="种调度策略">2.3.1、7种调度策略</h3>
@@ -445,7 +446,7 @@
 <li><font color="green">虚拟轮转（VRR）</font>
 <ul>
 <li>引入优先级，解除了I/O阻塞的进程都会转移到一个FCFS辅助队列中，该队列优先级高于就绪队列。</li>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/9.%E5%8D%95%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6/VRR排队图.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/9.%E5%8D%95%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6/VRR排队图.png"></li>
 </ul></li>
 <li><font color="blue">最短进程优先（SPN:Shortest Process Next）</font>
 <ul>
@@ -460,7 +461,7 @@
 <ul>
 <li>各项比例和为<span class="math inline">\(\alpha \sum\limits_{i=0}^{n-1}{(1-\alpha)^i}+(1-\alpha)^n=1\)</span>。</li>
 <li><span class="math inline">\(\alpha\)</span>取值越大，平均值越能反映观测值的快速变化，波动越大；反之<span class="math inline">\(\alpha\)</span>取值越小，波动越小。</li>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/9.%E5%8D%95%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6/alpha不同取值下的观测值变化.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/9.%E5%8D%95%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6/alpha不同取值下的观测值变化.png"></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -489,7 +490,7 @@
 <li><span class="math inline">\(q=1\)</span>：每个队列中的时间片都是<span class="math inline">\(1\)</span></li>
 <li><span class="math inline">\(q=2^i\)</span>：第<span class="math inline">\(i\)</span>个队列中的时间片是<span class="math inline">\(2^i\)</span>（也可以没有这一特点，但是带来的后果是长进程执行时间将会惊人地增加）。</li>
 </ul></li>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/9.%E5%8D%95%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6/反馈调度.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/9.%E5%8D%95%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6/反馈调度.png"></li>
 <li>缺点
 <ul>
 <li>新作业频繁进入系统时，长进程老进程可能会出现饥饿的情况。</li>
@@ -523,9 +524,9 @@
 </tr>
 </tbody>
 </table>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/9.%E5%8D%95%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6/各种调度策略的特点.png%22"></p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/9.%E5%8D%95%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6/各种调度策略的特点.png"></p>
 <h3 id="示例">2.3.3、示例</h3>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/9.%E5%8D%95%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6/调度示例表.png%22"> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/9.%E5%8D%95%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6/调度示例图.png%22"></p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/9.%E5%8D%95%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6/调度示例表.png"> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/9.%E5%8D%95%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6/调度示例图.png"></p>
 <h2 id="性能比较">2.4、性能比较</h2>
 <h3 id="排队分析">2.4.1、排队分析</h3>
 <h3 id="仿真建模">2.4.2、仿真建模</h3>
@@ -688,19 +689,19 @@
 </ul>
 <p>  <font color="red">在虚存中，地址的转换变得更加复杂：逻辑地址（虚拟页号+offset）-&gt;伪物理地址（本地页号+offset）-&gt;物理地址（页框好+offset）。</font></p>
 <h3 id="一级分页">1.2.2、一级分页</h3>
-<p>  只采用分页的虚拟地址结构如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/分页地址结构.png%22">   虚拟地址通过查表转换成物理地址： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/一级分页地址转换.png%22"></p>
+<p>  只采用分页的虚拟地址结构如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/分页地址结构.png">   虚拟地址通过查表转换成物理地址： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/一级分页地址转换.png"></p>
 <h3 id="二级分页">1.2.3、二级分页</h3>
-<p>  采用二级分页的虚拟地址结构与一级分页的一样，区别在于二级分页对其虚拟页号再次进行了划分： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/二级分页简单示意.png%22">   虚拟地址通过查两次表转换成物理地址： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/二级分页地址转换.png%22"></p>
+<p>  采用二级分页的虚拟地址结构与一级分页的一样，区别在于二级分页对其虚拟页号再次进行了划分： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/二级分页简单示意.png">   虚拟地址通过查两次表转换成物理地址： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/二级分页地址转换.png"></p>
 <h3 id="倒排页表">1.2.4、倒排页表</h3>
 <p>  <a href="E:\课_操作系统\virtual_memory4.pdf">参考资料</a></p>
-<p>  散列倒排页表的转换简化过程如下（散列-存取数据规则一致）： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/倒排页表地址转换.png%22"></p>
+<p>  散列倒排页表的转换简化过程如下（散列-存取数据规则一致）： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/倒排页表地址转换.png"></p>
 <p>  倒排页表也有两种：一种是线性倒排页表，另一种则是哈希倒排列表，上图是哈希倒排列表的结构图。线性倒排列表的结构比较简单，可以认为申请了一块比较大的空间用来存储线性倒排列表，其中的条目数为<span class="math inline">\(2^{\text{length_of_VPN}}\)</span>。这样可能消耗的空间会比较多，哈希倒排列表则减少了空间的消耗（类似直接下标查找和哈希查找）。</p>
 <h3 id="tlb">1.2.5、TLB</h3>
-<p>  使用了TLB的分页机制的虚拟地址转换成物理地址的过程如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/TLB地址转换.png%22">   通过使用关联技术可以提高TLB查找的速度： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/TLB关联.png%22">   总体的流程如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/有TLB的访问流程.png%22"></p>
+<p>  使用了TLB的分页机制的虚拟地址转换成物理地址的过程如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/TLB地址转换.png">   通过使用关联技术可以提高TLB查找的速度： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/TLB关联.png">   总体的流程如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/有TLB的访问流程.png"></p>
 <h2 id="分段">1.3、分段</h2>
-<p>  与单级分页很像，其虚拟地址结构如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/分段地址结构.png%22">   虚拟地址转换成物理地址的过程如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/分段地址转换.png%22"></p>
+<p>  与单级分页很像，其虚拟地址结构如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/分段地址结构.png">   虚拟地址转换成物理地址的过程如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/分段地址转换.png"></p>
 <h2 id="段页式">1.4、段页式</h2>
-<p>  虚拟地址结构如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/段页式地址结构.png%22">   虚拟地址转换成物理地址的过程如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/段页式地址转换.png%22"></p>
+<p>  虚拟地址结构如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/段页式地址结构.png">   虚拟地址转换成物理地址的过程如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/段页式地址转换.png"></p>
 <h2 id="保护和共享">1.5、保护和共享</h2>
 <h1 id="操作系统的内存管理设计">2、操作系统的内存管理设计</h1>
 <p>  操作系统的内存管理设计取决于三个基本的选择（前二者取决于硬件平台）： - 是否使用虚存技术 - 分页 or 分段 or 段页式？ - 为各种存储管理特征采用的算法 ## 2.1、读取策略 - <font color="red">请求分页</font>：只有当访问到某页的一个单元时才将该页取入内存 - <font color="red">预先分页</font>：利用空间局部性原理与辅存设备的特性（连续取可降低单页取入时间）</p>
@@ -729,7 +730,7 @@
 <p>  可以通过伪代码来理解其过程： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">pagearr[N] &#x3D; &#123;N pages&#125;</span><br><span class="line">pagearr[*].usebit &#x3D; 0</span><br><span class="line">ptr &#x3D; pagearr</span><br><span class="line"></span><br><span class="line">if hit:</span><br><span class="line">    *ptr.usebit &#x3D; 1</span><br><span class="line">else:</span><br><span class="line">    # 从当前指针位置开始，找到一个合题意的页（或许有内容，或许为空）进行置换</span><br><span class="line">    while (access page):</span><br><span class="line">        if (*ptr.usebit &#x3D; 0):</span><br><span class="line">            load page</span><br><span class="line">            *ptr.usebit &#x3D; 1</span><br><span class="line">            break</span><br><span class="line">        else:</span><br><span class="line">            *ptr.usebit &#x3D; 0</span><br><span class="line">            ptr++</span><br><span class="line">    ptr++</span><br></pre></td></tr></table></figure></p>
 <p>  * 通过增加使用的位数可以使时钟算法更有效。</p>
 <blockquote>
-<p>例题 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/置换策略例题.png%22"></p>
+<p>例题 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/置换策略例题.png"></p>
 </blockquote>
 <h3 id="页缓冲">2.3.2、页缓冲</h3>
 <ul>
@@ -787,8 +788,8 @@
 <blockquote>
 <p>相关变量： - 工作集W：（当前活跃）页的集合 - 虚拟时间t：推测——<span class="math inline">\(t\in[0,\Delta]\)</span>时，t++且W++，当<span class="math inline">\(t=\Delta\)</span>时，清除没有用过的页。 - 虚拟时间窗口<span class="math inline">\(\Delta\)</span>：虚拟窗口越大，工作集就越大（<span class="math inline">\(W_{max}(t,\Delta+1)&gt; W_{max}(t,\Delta)\)</span>） - 进程页数N：<span class="math inline">\(1\leqslant W(t,\Delta) \leqslant min\{\Delta,N\}\)</span>，前<span class="math inline">\(N\)</span>次全部缺失的时候右边等号成立。</p>
 </blockquote>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/理想化工作集策略示例.png%22"><br>理想化工作集策略示例</p>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/工作集大小的典型图形.png%22"><br>工作集大小的典型图形</p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/理想化工作集策略示例.png"><br>理想化工作集策略示例</p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8.%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/工作集大小的典型图形.png"><br>工作集大小的典型图形</p>
 <p>  从上图可以看出： - 稳定状态 <span class="math inline">\(\iff\)</span> 进程进入局部性阶段 - 瞬变状态 <span class="math inline">\(\iff\)</span> 进程转移到新的局部性阶段</p>
 <p>  工作集策略可以指导有关驻留集大小的策略： - <font color="red">进程全集 <span class="math inline">\(\supseteq\)</span> 驻留集 <span class="math inline">\(\supseteq\)</span> 工作集</font> - 监视每个进程的工作集。 - 周期性地从一个进程的驻留集中移去那些不在其工作集中的页（<font color="red">工作集 <span class="math inline">\(\neq\)</span> 驻留集</font>）。 - 只有当一个进程的工作集在内存中（即其驻留集 <span class="math inline">\(\supseteq\)</span> 工作集）时，才可执行该进程。</p>
 <p>  工作集策略存在的问题： - 根据过去并不总能预测未来 - 为每个进程真实地测量工作集是不实际的 - <span class="math inline">\(\Delta\)</span>的最优值是未知的，且它在任何情况下都会变化</p>
@@ -937,7 +938,7 @@
 <li>物理组织 ## 1.1、重定位   重定位就是程序的物理地址只有当运行时才是确定的，而地址可以是不同的。若程序不能够实现重定位，那么其每次装入内存的地址就必须是固定的，这会大大影响系统的效率。</li>
 </ol>
 <p>  处理器硬件和操作系统软件必须能以某种方式把程序代码中的内存访问转换为实际的物理内存地址，并反映程序在内存中的当前位置。</p>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/进程寻址需求.png%22"></p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/进程寻址需求.png"></p>
 <h2 id="保护">1.2、保护</h2>
 <p>  简而言之，保护是各个进程（用户进程、系统进程）不被其他进程有意无意的干扰。</p>
 <p>  满足重定位增大了满足保护需求的难度：编译时无法通过检查绝对地址来确保保护。</p>
@@ -946,7 +947,7 @@
 <h1 id="内存分区">2、内存分区</h1>
 <h2 id="固定分区">2.1、固定分区</h2>
 <h3 id="分区大小">2.1.1、分区大小</h3>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/固定分区.png%22"><br>固定分区大小</p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/固定分区.png"><br>固定分区大小</p>
 <p>  相同大小固定分区的缺陷： - 程序太大——装不下 - 程序太小——内部碎片大，浪费空间</p>
 <h3 id="放置算法">2.1.2、放置算法</h3>
 <ul>
@@ -963,7 +964,7 @@
 </ul></li>
 <li>方案2：性能与开销的折中——只有一条队列
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/不等长固定分区放置方法2.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/不等长固定分区放置方法2.png"></li>
 <li>当需要把一个进程装入内存时，选择可以容纳该进程的最小可用分区。</li>
 <li>如果没有可用分区则需要进行交换，可以选择最小分区，也可选择阻塞进程所占用的分区。 ### 2.1.3、固定分区方案评价</li>
 </ul></li>
@@ -975,11 +976,11 @@
 <li>缺点
 <ul>
 <li><font color="red">限制了系统中活动进程的数量</font></li>
-<li>分区大小设置未必合理，故而可能比较低效 ## 2.2、动态分区 ### 2.2.1、基本原理与外部碎片   最开始时一点都不浪费空间，后来逐渐出现许多“细小空洞”，称为“外部碎片”，工作过程如下图所示： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/动态分区示例.png%22"></li>
+<li>分区大小设置未必合理，故而可能比较低效 ## 2.2、动态分区 ### 2.2.1、基本原理与外部碎片   最开始时一点都不浪费空间，后来逐渐出现许多“细小空洞”，称为“外部碎片”，工作过程如下图所示： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/动态分区示例.png"></li>
 </ul></li>
 </ul>
 <h3 id="内存压缩">2.2.2、内存压缩</h3>
-<p>  用于解决外部碎片的问题。通过操作系统不时地移动进程，使得进程占用的空间连续，并使所有的空闲空间连成一片。 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/内存压缩.png%22"></p>
+<p>  用于解决外部碎片的问题。通过操作系统不时地移动进程，使得进程占用的空间连续，并使所有的空闲空间连成一片。 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/内存压缩.png"></p>
 <p>  缺陷： - 内存压缩非常耗时且占用处理器时间 - 要求程序能够<font color="red">动态重定位</font> - 必须能够把程序从内存的一块区域移动到另一块区域，且不会使程序中的内存访问无效 - <font color="red">不同于前面所说的加载时重定位</font></p>
 <h3 id="放置算法-1">2.2.3、放置算法</h3>
 <ul>
@@ -1000,18 +1001,18 @@
 <p>  是固定分区与动态分区的折中（在克服了固定分区的进程数量限制以外，维护起来也比动态分区更简单）。</p>
 <p><b>伪代码表述</b> - 可供分配的整个内存大小：<span class="math inline">\(2^U\)</span>字节 - 可能分配的最大块尺寸：<span class="math inline">\(2^U\)</span>字节 - 可能分配的最小块尺寸：<span class="math inline">\(2^L\)</span>字节 - 可用内存块大小：<span class="math inline">\(2^K \in [2^L,2^U]\)</span>，之所以 <span class="math inline">\(2^K \geqslant 2^L\)</span> 而不是 <span class="math inline">\(2^K \geqslant 0\)</span> ，是因为 <span class="math inline">\(2^L\)</span> 是不断二分得到的，不可能是0。</p>
 <p>  该算法分配的块只能是2的整数次幂，首先要确定要申请空间 <span class="math inline">\(Size\)</span> 的范围区间 <span class="math inline">\([2^{i-1},2^i]\)</span>，然后通过下面递归算法找到一个大小为 <span class="math inline">\(2^i\)</span>大小的hole。 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">i_list(i=...) <span class="comment">// 系统维护的所有大小为2^i的hole的list</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">get_hole</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(i==(U+<span class="number">1</span>))&#123;</span><br><span class="line">        &lt;failure&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(i_list is empty)&#123;</span><br><span class="line">        get_gole(i+<span class="number">1</span>);</span><br><span class="line">        &lt;split hole into buddies&gt;;</span><br><span class="line">        &lt;<span class="built_in">put</span> buddies on i_list&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">    &lt;take the first hole on i_list&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>   另外，如果有两个“二叉节点”均未分配的话，二者应当合并为一个更大的块。</p>
-<p><b>示例</b> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/伙伴系统算法示例.png%22"></p>
-<p><b>二叉树表示</b> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/伙伴系统二叉树表示.png%22"></p>
+<p><b>示例</b> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/伙伴系统算法示例.png"></p>
+<p><b>二叉树表示</b> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/伙伴系统二叉树表示.png"></p>
 <h2 id="重定位">2.4、重定位</h2>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/重定位的硬件支持.png%22"><br>重定位的硬件支持</p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/重定位的硬件支持.png"><br>重定位的硬件支持</p>
 <h1 id="分页">3、分页</h1>
 <p>  从分页开始，逻辑地址出现，不过简单分页与简单分段中逻辑地址空间与物理地址空间是一致的。</p>
-<p>  一个页表的例子如下图所示： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/页表示例.png%22"><br>页表示例   逻辑地址转换为物理地址过程如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/页表地址转换.png%22"><br>页表地址转换</p>
+<p>  一个页表的例子如下图所示： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/页表示例.png"><br>页表示例   逻辑地址转换为物理地址过程如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/页表地址转换.png"><br>页表地址转换</p>
 <h1 id="分段">4、分段</h1>
 <p>  段表结构与页表相似。</p>
-<p>  逻辑地址转换为物理地址过程如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/段表地址转换.png%22"><br>段表地址转换</p>
+<p>  逻辑地址转换为物理地址过程如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/段表地址转换.png"><br>段表地址转换</p>
 <h1 id="简单总结">5、简单总结</h1>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/简单总结.png%22"><br>简单总结</p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/7.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/简单总结.png"><br>简单总结</p>
 <table>
 <colgroup>
 <col style="width: 33%">
@@ -1190,10 +1191,10 @@
 <h1 id="死锁原理">1、死锁原理</h1>
 <h2 id="资源">1.1、资源</h2>
 <h3 id="可重用资源">1.1.1、可重用资源</h3>
-<p>  指一次仅供一个进程安全使用且不因使用而耗尽的资源。例如：处理器、I/O设备、内存和外存、设备，以及诸如文件、数据库和信号量之类的数据结构。<br>   可重用资源死锁的例子： - 内存请求（可使用虚存解决） ### 1.1.2、可消耗资源   指可被创建和销毁的资源，例如send和receive中产生和销毁的message。 ### 1.1.3、资源分配图 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/6.%E6%AD%BB%E9%94%81%E4%B8%8E%E9%A5%A5%E9%A5%BF/资源分配图.png%22"><br>资源分配图示例</p>
+<p>  指一次仅供一个进程安全使用且不因使用而耗尽的资源。例如：处理器、I/O设备、内存和外存、设备，以及诸如文件、数据库和信号量之类的数据结构。<br>   可重用资源死锁的例子： - 内存请求（可使用虚存解决） ### 1.1.2、可消耗资源   指可被创建和销毁的资源，例如send和receive中产生和销毁的message。 ### 1.1.3、资源分配图 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/6.%E6%AD%BB%E9%94%81%E4%B8%8E%E9%A5%A5%E9%A5%BF/资源分配图.png"><br>资源分配图示例</p>
 <h2 id="联合进程图">1.2、联合进程图</h2>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/6.%E6%AD%BB%E9%94%81%E4%B8%8E%E9%A5%A5%E9%A5%BF/联合进程图_死锁.png%22"><br>死锁示例</p>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/6.%E6%AD%BB%E9%94%81%E4%B8%8E%E9%A5%A5%E9%A5%BF/联合进程图_无死锁.png%22"><br>无死锁示例</p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/6.%E6%AD%BB%E9%94%81%E4%B8%8E%E9%A5%A5%E9%A5%BF/联合进程图_死锁.png"><br>死锁示例</p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/6.%E6%AD%BB%E9%94%81%E4%B8%8E%E9%A5%A5%E9%A5%BF/联合进程图_无死锁.png"><br>无死锁示例</p>
 <h2 id="死锁产生的条件">1.3、死锁产生的条件</h2>
 <p>  四个条件： - 互斥：一次只有一个进程可以使用一个资源，其他进程不能访问已分配给其他进程的资源。 - 占有且等待：当一个进程等待其他进程时，继续占有已分配的资源。 - 不可抢占：不能强行抢占进程已占有的资源。 - 循环等待：存在一个闭合的进程链，每个进程至少占由此链中下一个进程所需的一个资源。</p>
 <p><span class="math display">\[\text{死锁}\Rightarrow \text{\{互斥、占有且等待、不可抢占\}}\]</span> <span class="math display">\[\text{\{互斥、占有且等待、不可抢占、\red{循环等待}\}}\Leftrightarrow \text{死锁}\]</span></p>
@@ -1203,7 +1204,7 @@
 <p>  从四个条件入手： - 互斥 - 一般不能禁止 - 占有且等待 - 修改方案：可以要求进程一次性的请求所有需要的资源，并阻塞这个进程直到所有请求都同时满足。 - 不可抢占（资源状态可以很容易地保存和恢复时该方案才实用） - 修改方案1：申请资源时如果被拒绝则要释放已占有的资源 - 修改方案2：一个进程请求当前被另一个进程占有的一个资源时，操作系统可以抢占另一个进程，要求它释放资源（需要两个进程的优先级不同，否则还是会死锁）。 - 循环等待 - 修改方案：定义资源类型的线性顺序：若一个进程已分配了R类型的资源，则其接下来请求的资源只能是那些排在R类型之后的资源（可通过反证法证明其正确性）。</p>
 <h2 id="死锁避免">2.2、死锁避免</h2>
 <p>  优点： - 无须死锁检测中的抢占和回滚进程，且与死锁预防相比限制较少。</p>
-<p>  限制： - 必须事先声明每个进程请求的最大资源 - 所讨论的进程必须是无关的，即他们的执行顺序必须没有任何同步要求的限制 - 分配的资源数量必须是固定的 - 在占有资源时，进程不能退出 ### 2.2.1、进程启动拒绝 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/6.%E6%AD%BB%E9%94%81%E4%B8%8E%E9%A5%A5%E9%A5%BF/进程启动拒绝向量矩阵.png%22"><br>进程启动拒绝的相关数据</p>
+<p>  限制： - 必须事先声明每个进程请求的最大资源 - 所讨论的进程必须是无关的，即他们的执行顺序必须没有任何同步要求的限制 - 分配的资源数量必须是固定的 - 在占有资源时，进程不能退出 ### 2.2.1、进程启动拒绝 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/6.%E6%AD%BB%E9%94%81%E4%B8%8E%E9%A5%A5%E9%A5%BF/进程启动拒绝向量矩阵.png"><br>进程启动拒绝的相关数据</p>
 <p>  进程启动条件：<span class="math inline">\(R_j \geqslant C_{(n+1)j} + \sum\limits_{i=1}^{n}C_{ij}\)</span>（已经启动的进程对资源R的最大需求 + 将要启动的进程对资源R的最大需求 <span class="math inline">\(\leqslant\)</span> 资源R的总数量）。</p>
 <p>  简而言之，<font color="red">时刻保持<span class="math inline">\(R\)</span>能够满足所有已经启动进程的最大资源需求</font>。</p>
 <h3 id="资源分配拒绝">2.2.2、资源分配拒绝</h3>
@@ -1224,10 +1225,10 @@
 <h2 id="死锁检测">2.3、死锁检测</h2>
 <h3 id="死锁检测算法">2.3.1、死锁检测算法</h3>
 <p>  死锁检测算法相比于死锁避免，其条件进一步放宽。相比于死锁避免中资源分配拒绝方法时刻需要保证至少有一个安全序列，死锁检测只需要时刻保证资源<span class="math inline">\(R\)</span>至少能够使得一个进程执行结束，然后每隔一段时间进行检测，看能否通过不断回收资源使得所有进程都能执行完成。<br>   简而言之，<font color="red">资源分配拒绝允许分配资源的前提是分配后系统存在一个所有进程的安全序列，而死锁检测则是分配资源后向量<span class="math inline">\(R\)</span>至少能够使得一个进程顺利执行完成</font>。</p>
-<p>  算法过程： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/6.%E6%AD%BB%E9%94%81%E4%B8%8E%E9%A5%A5%E9%A5%BF/死锁检测过程.png%22"></p>
-<p>  例子： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/6.%E6%AD%BB%E9%94%81%E4%B8%8E%E9%A5%A5%E9%A5%BF/死锁检测示例.png%22"></p>
+<p>  算法过程： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/6.%E6%AD%BB%E9%94%81%E4%B8%8E%E9%A5%A5%E9%A5%BF/死锁检测过程.png"></p>
+<p>  例子： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/6.%E6%AD%BB%E9%94%81%E4%B8%8E%E9%A5%A5%E9%A5%BF/死锁检测示例.png"></p>
 <h3 id="恢复回滚">2.3.2、恢复/回滚</h3>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/6.%E6%AD%BB%E9%94%81%E4%B8%8E%E9%A5%A5%E9%A5%BF/恢复and回滚.png%22"></p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/6.%E6%AD%BB%E9%94%81%E4%B8%8E%E9%A5%A5%E9%A5%BF/恢复and回滚.png"></p>
 <h2 id="一种综合的死锁策略">2.4、一种综合的死锁策略</h2>
 <p>  解决死锁的所有策略都各有优缺点，与其将操作系统机制设计为只采用其中的一种策略，不如在不同情况下使用不同的策略。</p>
 <p>  一种综合的方案是把资源分成几组不同的资源类： - 资源类之间采用线性排序策略（死锁预防）避免发生资源类之间循环等待的死锁。 - 资源类之内根据情况采用不同的算法来避免发生资源类之内循环等待的死锁。</p>
@@ -1422,7 +1423,7 @@
 <h1 id="管程">3、管程</h1>
 <h2 id="是什么与为什么">3.1、是什么与为什么</h2>
 <h3 id="什么是管程">3.1.1、什么是管程？</h3>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/5.%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5/管程结构.png%22"></p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/5.%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5/管程结构.png"></p>
 <p>  管程可以看做一个软件模块，它是将共享的变量和对于这些共享变量的操作封装起来，形成一个具有一定接口的功能模块，进程可以调用管程来实现进程级别的并发控制。管程中的数据变量每次只能被一个进程访问。   管程自身带有互斥的属性，可以这样认为： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">entrance of the monitor:</span><br><span class="line">    &#x2F;* 互斥进入管程 *&#x2F;</span><br><span class="line">    &#x2F;* 管程实体，这里面可能有其余互斥量&#x2F;信号量等 *&#x2F;</span><br><span class="line">    &#x2F;* 退出管程，发出相应信号 *&#x2F;</span><br></pre></td></tr></table></figure>   管程是在互斥量与信号量的基础上进一步抽象的高层设计，这种设计简化了程序员编写代码的过程，不过<font color="red">在编写代码前，需要先设计好管程</font>。</p>
 <p>  管程的特征 - 模块化：管程是一个基本的软件模块，可以被单独编译。 - 抽象数据类型：管程中封装了数据及对于数据的操作，这点有点像面向对象编程语言中的类。 - 信息隐藏：管程外的进程或其他软件模块只能通过管程对外的接口来访问管程提供的操作，管程内部的实现细节对外界是透明的。 - 使用的互斥性：任何一个时刻，管程只能由一个进程使用。进入管程时的互斥由编译器负责完成。</p>
 <h3 id="信号量vs管程">3.1.2、信号量vs管程</h3>
@@ -1436,14 +1437,14 @@
 <p>  两种原语： - send(destination,message) - receive(source,message)</p>
 <p>  三种组合 - 阻塞send，阻塞receive - 无阻塞send，阻塞receive - 无阻塞send，无阻塞receive</p>
 <p>  两种寻址 - 直接寻址 - 间接寻址 ## 4.2、寻址 ### 4.2.1、直接寻址 - send原语：send原语包含目标进程的标识号。 - receive原语 - 方式一：显示指定源进程，所以进程必须事先知道希望得到来自哪个进程的消息。 - 方式二：不指定所期望的源进程，例如打印机的服务器进程。对这种应用使用隐式寻址更为有效。</p>
-<p>  结构图如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/5.%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5/直接寻址.png%22"></p>
+<p>  结构图如下： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/5.%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5/直接寻址.png"></p>
 <h3 id="间接寻址">4.2.2、间接寻址</h3>
 <p>  主要有下面四种结构： - 一对一： - 允许在两个进程间建立专用的通信链接，隔离它们的交互，避免其他进程的错误干扰。 - 是典型的<font color="red">静态和永久性关系</font>。 - 多对一 - 一个进程给许多其他进程提供服务 - 对客户-服务器间的交互非常有用 - 这时信箱常称为一个<font color="red">端口</font> - 一对多 - 广播 - 多对多 - 可以让多个服务进程对多个客户进程提供服务（例如集群？）</p>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/5.%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5/间接寻址.png%22"></p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/5.%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5/间接寻址.png"></p>
 <p>  相关问题： - 信箱与进程动态关联 or 静态关联？ - 信箱所有权问题。</p>
 <h2 id="消息格式">4.3、消息格式</h2>
-<p>  因果如下所示：<br> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/5.%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5/消息格式因果关系.png%22"></p>
-<p>  变长消息的典型格式如下：<br> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/5.%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5/变长消息格式.png%22"></p>
+<p>  因果如下所示：<br> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/5.%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5/消息格式因果关系.png"></p>
+<p>  变长消息的典型格式如下：<br> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/5.%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5/变长消息格式.png"></p>
 <h2 id="排队原则">4.4、排队原则</h2>
 <ul>
 <li>FIFO</li>
@@ -1663,19 +1664,19 @@
 <p>  进程是一整个的任务，但是一个任务中可解耦合的更小单元。以个人编程实践为例，多线程允许在一个进程中实现多个功能的并发执行，而单线程只能顺序完成，这带来的感受是不同的（异步操作）。<br>   相比于单线程（线程即进程），多线程具有下列优点： &gt;- 创建以及终止花费时间少，多个线程之间可以共享同一进程的资源，通信时间短 &gt;- 同一进程内线程间切换比进程切换需要的时间少</p>
 <p>  可以这样认为：没有多线程之前，当需要创建一个新的<font color="red">较小</font>的任务的时候，需要创建一个新的进程，需要额外的资源与通信代价，这带来的开销是无法忍受的。为了减少这种情况下的开销，引进多线程，让多个线程共享一个进程的资源与某些代码，而这多个线程之间是并发的、异步的（类比多进程并发），这就提升了效率。</p>
 <p>  我将多进程+操作系统与多线程+进程作了类比与运用了整体化思想来思考，发现一些有趣的东西：多个进程共享操作系统的一些代码，这提高了计算机的性能（否则如第三章中每个用户进程里面都包含了一个完整的操作系统，这是低效且不可能的）；多线程也与此类似，多个线程共享进程的一部分代码，者减少了重复代码的数量，与此同时多个线程之间通信代价由进程通信时间降低为访存时间。</p>
-<p>  多线程也带来了一些问题，比如<font color="red">线程同步</font>等。 ### 1.1.2、线程结构 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/4.%E7%BA%BF%E7%A8%8B/单线程与多线程进程模型.png%22"></p>
+<p>  多线程也带来了一些问题，比如<font color="red">线程同步</font>等。 ### 1.1.2、线程结构 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/4.%E7%BA%BF%E7%A8%8B/单线程与多线程进程模型.png"></p>
 <h3 id="线程状态与进程状态">1.1.3、线程状态与进程状态</h3>
-<p>  可以认为是进程状态中的五状态模型。 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/4.%E7%BA%BF%E7%A8%8B/五状态进程模型.png%22"></p>
+<p>  可以认为是进程状态中的五状态模型。 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/4.%E7%BA%BF%E7%A8%8B/五状态进程模型.png"></p>
 <h2 id="种类总览">1.2、种类总览</h2>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/4.%E7%BA%BF%E7%A8%8B/线程与进程混搭.png%22"></p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/4.%E7%BA%BF%E7%A8%8B/线程与进程混搭.png"></p>
 <h1 id="线程分类">2、线程分类</h1>
 <p>  线程分为两大类，用户级线程（ULT）与内核级线程（KLT）。二者的区别在于内核能否感知到该线程的存在，可以感知到的即为KLT，感知不到的即为ULT。</p>
-<p>  一个多线程的软件（进程）可以有三种管理线程的模式： 1. 纯ULT - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/4.%E7%BA%BF%E7%A8%8B/纯ULT.png%22"><br>
-- 管理线程的工作完全由应用程序完成，内核意识不到线程的存在 - 通过一个叫线程库的例程包（<font color="red">例如Python的threading、_threads</font>）来“模拟”多线程 - 从处理器的角度来看并不存在线程并行，多线程并行只是在线程库看来的。 - 优点 - 进程不需要为了管理线程而切换到内核模式，进而节省了两次状态转换 - 不打乱底层的操作系统调度程序，可以做到为应用程序量身定做调度算法 - ULT可在任何操作系统中运行，不需要对底层内核进行修改以支持ULT - 缺点 - 在ULT执行一个系统调用时会阻塞该进程中的所有线程 - 在纯ULT策略中，多线程应用程序不能利用多处理技术（即<font color="red">只是应用级多道程序设计，不能并行</font>） - 解决线程阻塞问题的方法 - 将应用程序改成多进程的——不可行 - 使用“套管”技术，将一个产生阻塞的系统调用转化为一个非阻塞的系统调用 2. 纯KLT - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/4.%E7%BA%BF%E7%A8%8B/纯KLT.png%22"> - 管理线程的所有工作均由内核完成，应用级没有线程管理代码，只有一个到内核线程设施的应用编程接口（API） - windows是这种方法的一个例子 - 优点 - 内核可以同时把一个进程内的多个线程调度到多个处理器中 - 进程中的一个线程阻塞时，内核可以调度同一个进程中的另一个线程 - <font color="red">内核例程自身也可是多线程的</font> - 缺点 - 在把控制权从一个线程传送到同一个进程内的另一个线程时，需要切换到内核模式</p>
+<p>  一个多线程的软件（进程）可以有三种管理线程的模式： 1. 纯ULT - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/4.%E7%BA%BF%E7%A8%8B/纯ULT.png"><br>
+- 管理线程的工作完全由应用程序完成，内核意识不到线程的存在 - 通过一个叫线程库的例程包（<font color="red">例如Python的threading、_threads</font>）来“模拟”多线程 - 从处理器的角度来看并不存在线程并行，多线程并行只是在线程库看来的。 - 优点 - 进程不需要为了管理线程而切换到内核模式，进而节省了两次状态转换 - 不打乱底层的操作系统调度程序，可以做到为应用程序量身定做调度算法 - ULT可在任何操作系统中运行，不需要对底层内核进行修改以支持ULT - 缺点 - 在ULT执行一个系统调用时会阻塞该进程中的所有线程 - 在纯ULT策略中，多线程应用程序不能利用多处理技术（即<font color="red">只是应用级多道程序设计，不能并行</font>） - 解决线程阻塞问题的方法 - 将应用程序改成多进程的——不可行 - 使用“套管”技术，将一个产生阻塞的系统调用转化为一个非阻塞的系统调用 2. 纯KLT - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/4.%E7%BA%BF%E7%A8%8B/纯KLT.png"> - 管理线程的所有工作均由内核完成，应用级没有线程管理代码，只有一个到内核线程设施的应用编程接口（API） - windows是这种方法的一个例子 - 优点 - 内核可以同时把一个进程内的多个线程调度到多个处理器中 - 进程中的一个线程阻塞时，内核可以调度同一个进程中的另一个线程 - <font color="red">内核例程自身也可是多线程的</font> - 缺点 - 在把控制权从一个线程传送到同一个进程内的另一个线程时，需要切换到内核模式</p>
 <ol start="3" type="1">
 <li>ULT与KLT混合
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/4.%E7%BA%BF%E7%A8%8B/ULT与KLT混合.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/4.%E7%BA%BF%E7%A8%8B/ULT与KLT混合.png"></li>
 <li>例如Solaris</li>
 </ul></li>
 </ol>
@@ -1820,16 +1821,16 @@
 </ul>
 <h1 id="进程状态">2、进程状态</h1>
 <h2 id="两状态进程模型">2.1、两状态进程模型</h2>
-<p>例如在实验6完成的进程切换就是一种两状态进程模型：运行态&amp;非运行态。所有的进程都在内存中，调度器依据某种规则进行调度。任何时刻只能有一个进程正在执行，未运行的进程在队列中排队（应当是用一个进程标识来作为队列中的项）。 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/两状态进程模型.png%22"></p>
+<p>例如在实验6完成的进程切换就是一种两状态进程模型：运行态&amp;非运行态。所有的进程都在内存中，调度器依据某种规则进行调度。任何时刻只能有一个进程正在执行，未运行的进程在队列中排队（应当是用一个进程标识来作为队列中的项）。 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/两状态进程模型.png"></p>
 <h2 id="五状态进程模型">2.2、五状态进程模型</h2>
-<p>五状态进程模型将未运行态进一步划分为就绪状态与阻塞状态，<font color="red">这避免了让处于阻塞状态的进程进入处理器而浪费处理器的性能</font>，从而提高了效率。<br> 另外该进程模型加入了新建进程与进程退出两个新状态，这使得进程数量动态变化，更加贴合实际。 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/五状态进程模型.png%22"></p>
-<p>由于将未运行态的进程进一步划分为就绪态进程和阻塞态进程，这就要求至少两个队列来供处理器调度。 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/单一阻塞队列.png%22"></p>
-<p>当阻塞态进程等待的条件得到满足时，例如I/O操作以完成，这时处理器会得到I/O设备的响应，然后将对应进程从阻塞队列移动到就绪队列。<br> 这种方法仍有缺点——不同的进程阻塞的原因是不同的，每当处理器收到响应时，需要在整个队列中遍历查找相应条件的进程（<font color="red">因为可能多个进程因为该原因而阻塞</font>）。改善这种缺陷的方法是设置多条阻塞队列，一条队列中的进程因为同一个原因被阻塞，当阻塞事件完成时，处理器将整条队列转至就绪队列。 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/多条阻塞队列.png%22"></p>
+<p>五状态进程模型将未运行态进一步划分为就绪状态与阻塞状态，<font color="red">这避免了让处于阻塞状态的进程进入处理器而浪费处理器的性能</font>，从而提高了效率。<br> 另外该进程模型加入了新建进程与进程退出两个新状态，这使得进程数量动态变化，更加贴合实际。 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/五状态进程模型.png"></p>
+<p>由于将未运行态的进程进一步划分为就绪态进程和阻塞态进程，这就要求至少两个队列来供处理器调度。 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/单一阻塞队列.png"></p>
+<p>当阻塞态进程等待的条件得到满足时，例如I/O操作以完成，这时处理器会得到I/O设备的响应，然后将对应进程从阻塞队列移动到就绪队列。<br> 这种方法仍有缺点——不同的进程阻塞的原因是不同的，每当处理器收到响应时，需要在整个队列中遍历查找相应条件的进程（<font color="red">因为可能多个进程因为该原因而阻塞</font>）。改善这种缺陷的方法是设置多条阻塞队列，一条队列中的进程因为同一个原因被阻塞，当阻塞事件完成时，处理器将整条队列转至就绪队列。 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/多条阻塞队列.png"></p>
 <h2 id="包含挂起状态的进程模型">2.3、包含挂起状态的进程模型</h2>
-<p>前面的五状态模型有一个很大的缺点，要知道每个进程占用的资源是比较多的，下图是我自己电脑的任务管理器的视图： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/进程资源占用示例.png%22"> 可以想象，如果每个进程都必须保留在内存中，那么计算机<font color="red">同时运行的进程数将会大大减少</font>。解决这种缺陷的方法是“进程挂起”——将一部分进程实体放到磁盘里面，当执行到该进程时，再将进程从磁盘中取到内存中。 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/六状态进程模型.png%22"> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/七状态进程模型.png%22"> 需要注意的一点是：<font color="red">这里状态的转变都是在处理器看来的，进程本身并不知道自己是什么状态</font>，所更改的也只是进程的一个标识（可以看一下“3、进程描述”部分）而已。</p>
+<p>前面的五状态模型有一个很大的缺点，要知道每个进程占用的资源是比较多的，下图是我自己电脑的任务管理器的视图： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/进程资源占用示例.png"> 可以想象，如果每个进程都必须保留在内存中，那么计算机<font color="red">同时运行的进程数将会大大减少</font>。解决这种缺陷的方法是“进程挂起”——将一部分进程实体放到磁盘里面，当执行到该进程时，再将进程从磁盘中取到内存中。 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/六状态进程模型.png"> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/七状态进程模型.png"> 需要注意的一点是：<font color="red">这里状态的转变都是在处理器看来的，进程本身并不知道自己是什么状态</font>，所更改的也只是进程的一个标识（可以看一下“3、进程描述”部分）而已。</p>
 <h1 id="进程描述">3、进程描述</h1>
 <h2 id="操作系统的控制结构">3.1、操作系统的控制结构</h2>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/操作系统控制表.png%22"></p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/操作系统控制表.png"></p>
 <h2 id="进程控制结构">3.2、进程控制结构</h2>
 <h2 id="进程位置">3.2.1、进程位置</h2>
 <h2 id="进程属性">3.2.2、进程属性</h2>
@@ -1857,17 +1858,17 @@
 </ul></li>
 <li>通过链表组织
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/PCB表链表逻辑结构.png%22"></li>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/PCB表链表物理结构.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/PCB表链表逻辑结构.png"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/PCB表链表物理结构.png"></li>
 </ul></li>
 <li>通过索引表组织
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/PCB表索引表结构.png%22"> # 4、进程控制 ## 4.1、执行模式</li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/PCB表索引表结构.png"> # 4、进程控制 ## 4.1、执行模式</li>
 </ul></li>
 <li>用户模式
 <ul>
 <li>只能执行非特权指令</li>
-<li>用户程序在用户模式下运行（在Intel x86 CPU中对应于保护模式下的特权级[Privilege Level][1~]3）</li>
+<li>用户程序在用户模式下运行（在Intel x86 CPU中对应于保护模式下的特权级Privilege Level 1~3）</li>
 </ul></li>
 <li>系统模式/特权模式/控制模式/内核模式
 <ul>
@@ -1900,7 +1901,7 @@
 <li>特点：进程概念仅适用于用户程序，OS代码是在特权模式下工作的独立实体</li>
 <li>结构图说明
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/分离的内核.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/分离的内核.png"></li>
 </ul></li>
 </ul></li>
 <li>在用户进程内运行：操作系统作为用户进程的一部分
@@ -1909,8 +1910,8 @@
 <li>特点：OS是用户进程调用的一组例程，OS代码为所有进程映像共享；<font color="red">有点像多个线程共享一个进程的资源</font>，执行OS代码时切换到系统模式（不需进程切换）</li>
 <li>结构图说明
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/在用户进程内执行操作系统例程.png%22"></li>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/进程映像：在用户进程内执行操作系统.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/在用户进程内执行操作系统例程.png"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/进程映像：在用户进程内执行操作系统.png"></li>
 </ul></li>
 </ul></li>
 <li>基于进程的操作系统：操作系统作为一组系统进程来实现，用户进程与系统进程并列
@@ -1919,7 +1920,7 @@
 <li>特点：主要内核功能被组织成独立进程，适合多处理器和多机环境</li>
 <li>结构图说明
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/操作系统例程作为分离的进程.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/3.%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8E%A7%E5%88%B6/操作系统例程作为分离的进程.png"></li>
 </ul></li>
 </ul></li>
 </ol>
@@ -2172,7 +2173,7 @@
 <p>Reference：<a href="Reference/Files_Records_and_Fields.pdf">Files_Records_and_Fields.pdf</a> - 域（field） - 记录（record） - 文件（file） - 数据库（database）</p>
 </blockquote>
 <h2 id="文件管理系统">1.3. 文件管理系统</h2>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/文件系统软件架构.png%22"></p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/文件系统软件架构.png"></p>
 <ol type="1">
 <li>设备驱动
 <ul>
@@ -2217,7 +2218,7 @@
 </ul>
 <h2 id="种基本组织">2.2. 5种基本组织：</h2>
 <blockquote>
-<p>References： - <a href="Reference/数据库的存储结构（文件、记录的组织和索引技术）">数据库的存储结构（文件、记录的组织和索引技术）</a> - <a href="http://www.wlxt.uestc.edu.cn/wlxt/ncourse/sf/web/web/wenjian/wenjian10.1.1.1.htm" target="_blank" rel="noopener">数据结构：文件</a> - <a href="https://baike.baidu.com/item/%E7%B4%A2%E5%BC%95%E9%A1%BA%E5%BA%8F%E6%96%87%E4%BB%B6/20862504" target="_blank" rel="noopener">索引顺序文件-百度百科</a> - <a href="https://blog.csdn.net/liang0000zai/article/details/14613329" target="_blank" rel="noopener">文件组织：索引顺序文件</a> ### 2.2.1. 字节序列 - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/字节序列.png%22"> - 构成文件的基本单位是字节，文件是一个无结构的字节序列，其逻辑意义由用户程序解释 - 管理简单，提供很大的灵活性 - 不便于检索 - Unix、MS-DOS中采用</p>
+<p>References： - <a href="Reference/数据库的存储结构（文件、记录的组织和索引技术）">数据库的存储结构（文件、记录的组织和索引技术）</a> - <a href="http://www.wlxt.uestc.edu.cn/wlxt/ncourse/sf/web/web/wenjian/wenjian10.1.1.1.htm" target="_blank" rel="noopener">数据结构：文件</a> - <a href="https://baike.baidu.com/item/%E7%B4%A2%E5%BC%95%E9%A1%BA%E5%BA%8F%E6%96%87%E4%BB%B6/20862504" target="_blank" rel="noopener">索引顺序文件-百度百科</a> - <a href="https://blog.csdn.net/liang0000zai/article/details/14613329" target="_blank" rel="noopener">文件组织：索引顺序文件</a> ### 2.2.1. 字节序列 - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/字节序列.png"> - 构成文件的基本单位是字节，文件是一个无结构的字节序列，其逻辑意义由用户程序解释 - 管理简单，提供很大的灵活性 - 不便于检索 - Unix、MS-DOS中采用</p>
 </blockquote>
 <h3 id="堆文件这里堆应该是内存组织中的含义--往下增长">2.2.2. 堆文件（这里堆应该是内存组织中的含义--往下增长）</h3>
 <ul>
@@ -2225,7 +2226,7 @@
 <ul>
 <li>最简单的文件组织形式，堆文件没有结构，数据按照到达的顺序被收集</li>
 <li>记录是变长的，域也可以是变长的，需要能够自我描述</li>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/堆文件.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/堆文件.png"></li>
 </ul></li>
 <li>逻辑组织
 <ul>
@@ -2255,7 +2256,7 @@
 <li>物理组织
 <ul>
 <li>记录按照<font color="red">关键域</font>的顺序来存储，物理组织直接对应于文件的逻辑组织</li>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/顺序文件.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/顺序文件.png"></li>
 </ul></li>
 <li>逻辑组织
 <ul>
@@ -2287,7 +2288,7 @@
 <li>两个文件：索引文件+主文件，索引有序，主文件有序，静态索引</li>
 <li>索引文件中的每条记录由两个域组成：关键域+指向主文件的指针，其中关键域与主文件的关键域相同</li>
 <li>每个索引可以对应到一条或多条记录，还可以有多级索引</li>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/索引顺序文件.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/索引顺序文件.png"></li>
 </ul></li>
 <li>逻辑组织
 <ul>
@@ -2311,7 +2312,7 @@
 <li>两个文件：索引文件+主文件，索引有序，主文件无序，静态索引</li>
 <li>每种关键域都有一个索引表</li>
 <li>一条记录的各个关键域分别对应到一个单独的索引，还可以有多级索引</li>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/索引文件.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/索引文件.png"></li>
 </ul></li>
 <li>逻辑组织
 <ul>
@@ -2332,7 +2333,7 @@
 <li>适用程序</li>
 </ul>
 <h1 id="b树">3. B树</h1>
-<p>  动态索引。 # 4. 文件目录 ## 4.1. 文件目录是什么及其内容 ### 4.1.1. 理解文件目录 1. 文件控制块FCB - 从文件管理角度看，文件由文件体（文件本身的信息，数据）和文件说明组成（元数据） - 文件说明（也称文件控制块，File Control Block，FCB）是操作系统为管理文件而设置的数据结构，<font color="red">存放为管理文件所需的所有相关信息（如FAT文件系统中[32B长]的目录项/文件条目）</font> - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/FCB示例.png%22"> 2. 文件目录 - 把所有的FCB组织在一起，就构成了<font color="red">文件目录，即文件控制块的有序集合，其中一个FCB就称作一个目录项 </font> - 目录的主要功能是用于从文件名到文件内容的映射 3. 目录文件 - 通常将文件目录以文件的形式保存在外存，这个文件就叫目录文件（OS所有） - 该文件可以被各种文件管理例程访问 ### 4.1.2. 文件目录的内容 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/文件目录信息单元.png%22"></p>
+<p>  动态索引。 # 4. 文件目录 ## 4.1. 文件目录是什么及其内容 ### 4.1.1. 理解文件目录 1. 文件控制块FCB - 从文件管理角度看，文件由文件体（文件本身的信息，数据）和文件说明组成（元数据） - 文件说明（也称文件控制块，File Control Block，FCB）是操作系统为管理文件而设置的数据结构，<font color="red">存放为管理文件所需的所有相关信息（如FAT文件系统中[32B长]的目录项/文件条目）</font> - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/FCB示例.png"> 2. 文件目录 - 把所有的FCB组织在一起，就构成了<font color="red">文件目录，即文件控制块的有序集合，其中一个FCB就称作一个目录项 </font> - 目录的主要功能是用于从文件名到文件内容的映射 3. 目录文件 - 通常将文件目录以文件的形式保存在外存，这个文件就叫目录文件（OS所有） - 该文件可以被各种文件管理例程访问 ### 4.1.2. 文件目录的内容 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/文件目录信息单元.png"></p>
 <h3 id="目录操作">4.1.3. 目录操作</h3>
 <ol type="1">
 <li>查找文件</li>
@@ -2346,7 +2347,7 @@
 <ul>
 <li>结构：整个目录组织是一个线性结构，系统中的所有文件都建立在一张目录表中
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/一级目录.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/一级目录.png"></li>
 </ul></li>
 <li>优缺点：
 <ul>
@@ -2366,7 +2367,7 @@
 <ul>
 <li>结构：在根目录（第一级目录，主文件目录MFD）下，每个用户对应一个目录（第二级目录，用户文件目录UFD ），在用户目录下是该用户的文件，而不再有下级目录
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/二级目录.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/二级目录.png"></li>
 </ul></li>
 <li>优缺点
 <ul>
@@ -2386,7 +2387,7 @@
 <ul>
 <li>结构:采用层次结构，每个用户可在其用户目录下自主创建若干层次的子目录(树)，也称为树型 (tree-like)目录
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/多级目录.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/多级目录.png"></li>
 </ul></li>
 <li>优缺点
 <ul>
@@ -2422,21 +2423,21 @@
 <ol type="1">
 <li>结构：为了提高目录检索速度，可把目录项（FCB，文件控制块）中的文件说明（文件描述符）信息分成两个部分：
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/改进的多级目录.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/改进的多级目录.png"></li>
 <li>基本目录项BFCB(主部)：目录或文件的物理地址、存取控制和管理信息等
 <ul>
 <li>把基本目录项构成的基本文件目录组织成<font color="red">线性结构（逻辑线性、物理线性）</font>，按文件内部标识排序（也称索引节点目录）</li>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/基本目录项组织.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/基本目录项组织.png"></li>
 </ul></li>
 <li>符号目录项(次部)：存储文件的符号名以及相应的标识符（该标识符唯一标识该文件，由系统赋予）等信息。
 <ul>
 <li>把符号目录项构成的符号文件目录组织成<font color="red">树状结构（逻辑树状、物理线性）</font>，按文件名排序</li>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/符号目录项组织.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/符号目录项组织.png"></li>
 </ul></li>
 </ul></li>
 <li>文件目录对应地分成基本文件目录和符号文件目录两个目录。
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/改进的多级目录结构图示例.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/改进的多级目录结构图示例.png"></li>
 </ul></li>
 <li>优缺点
 <ul>
@@ -2447,7 +2448,7 @@
 <ul>
 <li>reference：<a href="https://blog.csdn.net/u011240016/article/details/52861729" target="_blank" rel="noopener">平均磁盘访问次数计算</a></li>
 <li>公式：<font color="red"><span class="math inline">\(\dfrac{1}{n}*\sum\limits_{i=1}^{n}{i}=\dfrac{1}{n}*\dfrac{n(n+1)}{2}=\dfrac{n+1}{2}\)</span>，注意是整除。</font></li>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/改进的多级目录例子.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/改进的多级目录例子.png"></li>
 </ul></li>
 </ol>
 <h1 id="文件共享">5. 5、文件共享</h1>
@@ -2476,7 +2477,7 @@
 </ul></li>
 <li>通过将多个文件名链接(link)到同一个索引结点，可建立同一个文件的多个彼此平等的别名</li>
 <li>别名的数目，被记录在索引结点的链接计数中，若其减至0，则文件被删除</li>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/硬链接.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/硬链接.png"></li>
 <li>存在问题：
 <ul>
 <li>记账或配额问题：设B、C共享文件file，C是文件主，若C删除了file而B不删除，则file仍然存在，且仍然是C为file付账，占的也是C的配额</li>
@@ -2540,7 +2541,7 @@
 <li>全部 ### 5.2.3. 访问权限和用户类的组合：</li>
 <li>访问矩阵（存取控制矩阵）：矩阵的一维（列）是每个目录和文件，另一维（行）是用户范围，每个元素是允许的访问方式
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/访问矩阵.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/访问矩阵.png"></li>
 </ul></li>
 <li>访问策略(policy)：规定每种文件访问方式所允许或禁止的用户范围
 <ul>
@@ -2550,7 +2551,7 @@
 <h2 id="共享文件的并发同时访问控制">5.3. 共享文件的并发/同时访问控制</h2>
 <p>  加锁解锁，例如读者-写者问题。</p>
 <h1 id="记录组块">6. 记录组块</h1>
-<p>  记录组块说的是文件的每一条记录在块中的存储情况。 1. 固定组块(fixed blocking) - 记录长度固定，每个块中存放的记录数目也固定——常用但有内部碎片 - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/固定组块.png%22"> 2. 可变长度跨越式组块(variable-length spanned blocking) - 记录长度可变，一个记录允许存放在不同块中——效率高但难实现 - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/可变长度跨越式组块.png%22"> 3. 可变长度非跨越式组块(variable-length unspanned blocking) - 记录长度可变，一个记录只能存放在一个块中——浪费多 - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/可变长度非跨越式组块.png%22"></p>
+<p>  记录组块说的是文件的每一条记录在块中的存储情况。 1. 固定组块(fixed blocking) - 记录长度固定，每个块中存放的记录数目也固定——常用但有内部碎片 - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/固定组块.png"> 2. 可变长度跨越式组块(variable-length spanned blocking) - 记录长度可变，一个记录允许存放在不同块中——效率高但难实现 - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/可变长度跨越式组块.png"> 3. 可变长度非跨越式组块(variable-length unspanned blocking) - 记录长度可变，一个记录只能存放在一个块中——浪费多 - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/可变长度非跨越式组块.png"></p>
 <h1 id="辅存管理">7. 辅存管理</h1>
 <h2 id="文件分配把空间分配给文件">7.1. 文件分配：把空间分配给文件</h2>
 <h3 id="基本划分标准">7.1.1. 基本划分标准</h3>
@@ -2636,14 +2637,14 @@
 <ul>
 <li>优点是简单，容易实现；局部性较好，对于顺序处理可以一次性读入多个块；检索一个块也比较容易。</li>
 <li>缺点是会出现外部碎片，时常需要执行紧缩算法来释放磁盘中的额外空间;文件不能动态增长；另外需要在创建文件时声明文件的大小。</li>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/连续分配.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/连续分配.png"></li>
 </ul></li>
 <li>链式分配：块+动态分配
 <ul>
 <li>优点是不会出现外部碎片</li>
 <li>缺点是局部性交叉，需要周期性地合并文件（<font color="red">以提高局部性</font>）</li>
 <li>适合顺序处理的顺序文件</li>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/链式分配.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/链式分配.png"></li>
 </ul></li>
 <li>索引分配：大小可变分区/块+动态分配+文件索引
 <ul>
@@ -2661,12 +2662,12 @@
 <li>基于块来分配
 <ul>
 <li>使用合并算法进行文件整理时，索引数目不会减少</li>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/基于块的索引分配.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/基于块的索引分配.png"></li>
 </ul></li>
 <li>基于大小可变分区来分配
 <ul>
 <li>执行紧缩算法进行文件整理时，索引数目将会减少</li>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/基于长度可变分区的索引分配.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/基于长度可变分区的索引分配.png"></li>
 </ul></li>
 </ul></li>
 </ol>
@@ -2705,10 +2706,10 @@
 <p>  卷本质上是逻辑磁盘。通常一个磁盘会分成几个分区，每个分区都作为一个单独的卷来工作。</p>
 <h2 id="可靠性">7.4. 可靠性</h2>
 <p>  主要内容是防止出现数据一致性错误。</p>
-<p>  请求一个文件分配时，需要执行以下步骤： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/文件分配步骤.png%22"></p>
+<p>  请求一个文件分配时，需要执行以下步骤： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/文件分配步骤.png"></p>
 <p>  这种技术可以防止错误，但是在频繁地分配比较小的块时，会对性能产生重要的影响。</p>
 <h1 id="补充">8. 补充：</h1>
-<p><br> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/补充1.png%22"></p>
+<p><br> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/补充1.png"></p>
 
           
         
@@ -2839,7 +2840,7 @@
 <ul>
 <li>数据传送速率
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/典型IO速率.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/典型IO速率.png"></li>
 </ul></li>
 <li>应用</li>
 <li>控制的复杂性</li>
@@ -2849,7 +2850,7 @@
 </ul>
 <h1 id="io功能的组织">2、IO功能的组织</h1>
 <h2 id="如何执行io与io功能的发展">2.1、如何执行IO与IO功能的发展</h2>
-<p>  IO模块发展主要经历了下列过程： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/IO发展.png%22"></p>
+<p>  IO模块发展主要经历了下列过程： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/IO发展.png"></p>
 <ul>
 <li>程序驱动IO：忙等待，通过处理器实现IO和内存间的数据传送</li>
 <li>中断驱动IO：通过中断的方式来提高效率，通过处理器实现IO和内存间的数据传送
@@ -2862,14 +2863,14 @@
 <li><font color="red">单独的DMA模块</font>控制内存与IO模块之间的数据交换</li>
 </ul></li>
 </ul>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/三种技术流程图.png%22"></p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/三种技术流程图.png"></p>
 <h2 id="dma">2.2、DMA</h2>
 <blockquote>
 <p>reference: - <a href="https://wenku.baidu.com/view/a09c0dabba0d4a7302763aca.html" target="_blank" rel="noopener">DMA技术简介_百度文库</a></p>
 </blockquote>
-<p>  下图是I/O体系结构的示意图： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/IO体系结构.png%22"></p>
-<p>  传统的数据传输数据都是通过处理器来实现内存与IO设备的数据交换的，而DMA则是在I/O设备与内存之间建立起直接的通道： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/DMA数据传输示意图.png%22"></p>
-<p>  DMA有三种结构： - 单总线、I/O分离的DMA结构 - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/单总线、IO分离的DMA结构.png%22"> - DMA模块充当<font color="red">代理处理器</font> - DMA通过程序控制I/O方式（忙等待）在Memory与I/O模块之间交换数据 - 数据传输效率低，每传送一个字需要2个总线周期（传送请求+传送） - 单总线、I/O集成的DMA结构 - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/单总线、IO集成的DMA结构.png%22"> - 比I/O分离的DMA结构少了传送请求这一部分的时间（参照2.1中流程图中的读I/O模块过程）。 - 在I/O分离的DMA结构中，DMA需要读I/O模块状态，然后再指示I/O模块读取（I/O-&gt;DMA），再由DMA向存储器写入 - 在I/O集成的DMA结构中，I/O作为DMA的一部分，读I/O模块状态这一部分不需要占用系统总线，这就为CPU省出了更多的资源 - IO总线的DMA结构（双总线） - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/IO总线的DMA结构.png%22"> - 所有的I/O模块都在DMA模块之中，各个I/O模块都挂在I/O总线上 - 结构可扩展性强 - 同样的，DMA与I/O模块之间的数据交换脱离系统总线</p>
+<p>  下图是I/O体系结构的示意图： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/IO体系结构.png"></p>
+<p>  传统的数据传输数据都是通过处理器来实现内存与IO设备的数据交换的，而DMA则是在I/O设备与内存之间建立起直接的通道： <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/DMA数据传输示意图.png"></p>
+<p>  DMA有三种结构： - 单总线、I/O分离的DMA结构 - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/单总线、IO分离的DMA结构.png"> - DMA模块充当<font color="red">代理处理器</font> - DMA通过程序控制I/O方式（忙等待）在Memory与I/O模块之间交换数据 - 数据传输效率低，每传送一个字需要2个总线周期（传送请求+传送） - 单总线、I/O集成的DMA结构 - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/单总线、IO集成的DMA结构.png"> - 比I/O分离的DMA结构少了传送请求这一部分的时间（参照2.1中流程图中的读I/O模块过程）。 - 在I/O分离的DMA结构中，DMA需要读I/O模块状态，然后再指示I/O模块读取（I/O-&gt;DMA），再由DMA向存储器写入 - 在I/O集成的DMA结构中，I/O作为DMA的一部分，读I/O模块状态这一部分不需要占用系统总线，这就为CPU省出了更多的资源 - IO总线的DMA结构（双总线） - <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/IO总线的DMA结构.png"> - 所有的I/O模块都在DMA模块之中，各个I/O模块都挂在I/O总线上 - 结构可扩展性强 - 同样的，DMA与I/O模块之间的数据交换脱离系统总线</p>
 <h1 id="操作系统设计问题">3、操作系统设计问题</h1>
 <h2 id="主要内容">3.1、主要内容：</h2>
 <ul>
@@ -2889,7 +2890,7 @@
 <h2 id="io软件设计">3.2、I/O软件设计</h2>
 <p>  两个目标： - 效率 - 与处理器和主存相比，大多数I/O设备的速度都相当慢 - 多道程序允许在一些进程等待I/O时运行其他进程 - I/O仍然可能跟不上处理器的速度 - 虚拟内存可解决多道程序设计中的内存不足问题，但是页面交换本身又是I/O操作 - 提高效率技术：I/O缓冲、磁盘调度、磁盘阵列、磁盘高速缓冲等 - 通用性 - 出于简单和避免错误的考虑，人们希望能用一种统一的方式处理所有的设备。 - 低层例程隐藏设备I/O的大部分细节，向进程和高层提供使用设备的通用方式，如read, write, open, close, lock, unlock等——采用层次结构和模块化设计</p>
 <h2 id="io软件层次逻辑">3.3、I/O软件层次逻辑</h2>
-<p>  下面三个例子展示了不同的I/O组织的模型 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/IO逻辑结构.png%22"></p>
+<p>  下面三个例子展示了不同的I/O组织的模型 <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/IO逻辑结构.png"></p>
 <ul>
 <li>逻辑I/O</li>
 <li>设备I/O</li>
@@ -2908,7 +2909,7 @@
 </ul>
 <p>  两种类型的I/O设备 - block-oriented device - 信息存储的单位是块，传输的单位也是块 - 典型代表是磁盘、SSD、U盘 - stream-oriented device - 以字节流的形式传输数据 - 如终端、打印机、通信端口、鼠标及多数的其他非辅存设备</p>
 <h2 id="单方向缓冲">4.2、单方向缓冲</h2>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/IO缓冲.png%22"></p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/IO缓冲.png"></p>
 <h3 id="单缓冲single-buffer">4.2.1、单缓冲（single buffer）</h3>
 <ul>
 <li>面向块的：
@@ -2939,7 +2940,7 @@
 <li>有限缓冲区的生产者/消费者模型</li>
 </ul>
 <h2 id="双方向缓冲">4.3、双方向缓冲</h2>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/缓冲池.png%22"></p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/缓冲池.png"></p>
 <ul>
 <li>缓冲区队列：
 <ul>
@@ -2956,7 +2957,7 @@
 </ul>
 <h1 id="磁盘调度">5、磁盘调度</h1>
 <h2 id="磁盘性能">5.1、磁盘性能</h2>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/磁盘IO时序.png%22"></p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/磁盘IO时序.png"></p>
 <ul>
 <li><span class="math inline">\(r\)</span>：旋转速度，单位为<span class="math inline">\(rotates/second\)</span></li>
 <li><span class="math inline">\(T_s\)</span>：寻道时间，磁头定位到目标磁道所用时间
@@ -2978,7 +2979,7 @@
 <blockquote>
 <p>  磁盘调度策略是当有多个磁盘读写请求时，如何安排顺序使得整体寻道时间尽量少以提高平均性能。</p>
 </blockquote>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/磁盘调度算法.png%22"></p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/磁盘调度算法.png"></p>
 <ol type="1">
 <li>FIFO（先进先出）
 <ul>
@@ -2995,7 +2996,7 @@
 </ul></li>
 <li>SCAN（扫描算法/电梯算法）
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/SCAN图示.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/SCAN图示.png"></li>
 <li>先沿着一个方向移动，在途中满足所有未完成的请求，然后再往反方向移动，满足剩余的请求。SCAN比较类似于SSTF，不过解决了SSTF中老进程可能饥饿的问题。</li>
 <li>存在的问题
 <ul>
@@ -3005,7 +3006,7 @@
 </ul></li>
 <li>C-SCAN（<font color="red">循环</font>扫描算法）
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/CSCAN图示.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/CSCAN图示.png"></li>
 <li>先沿着一个方向满足途中所有磁盘I/O请求，然后磁头臂回到反方向的末端，再次沿着同一方向移动，解决了SCAN算法中outer等待时间过长的情况。</li>
 <li>存在的问题
 <ul>
@@ -3018,7 +3019,7 @@
 <li>扫描过程中，所有新到的请求都被放在另一个子队列中。</li>
 <li>解决了SSTF、SCAN、C-SCAN中的磁头臂黏着现象
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/磁头臂黏着.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/磁头臂黏着.png"></li>
 </ul></li>
 </ul></li>
 <li>N-step-SCAN
@@ -3028,49 +3029,49 @@
 </ul></li>
 </ol>
 <h2 id="调度算法示例">5.3、调度算法示例</h2>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/磁盘调度示例.png%22"></p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/磁盘调度示例.png"></p>
 <h1 id="raidcontrast-to-sled">6、RAID（contrast to SLED）</h1>
 <p>  RAID（Redundant array of independent disks），通过使得磁盘I/O并行化来提高效率。RAID共有7个层级（0~6），这些层级之间没有对应的上下级关系，而是在三个共同原则下的7种不同的架构（常用的有0,1,5,6）： - RAID is a set of physical disk drives viewed in OS as a single logical drive - Data are distributed across the physical drives of an array in a scheme known as striping. - Redundant disk capacity is used to store parity information, which guarantees the recoverability in case of disk failure.</p>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/7-level-RAID.png%22"></p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/7-level-RAID.png"></p>
 <ol type="1">
 <li>RAID 0（无冗余）
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID0-无冗余.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID0-无冗余.png"></li>
 <li>严格来讲并不属于RAID家族，因为它并没有冗余</li>
 </ul></li>
 <li>RAID 1（镜像，mirrored）
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID1-镜像.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID1-镜像.png"></li>
 <li>两倍的配置，读请求最多可比RAID 0提升一倍，但是写请求没有区别</li>
 <li>用于保存重要的系统文件和数据</li>
 </ul></li>
 <li>RAID 2（通过汉明码冗余）
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID2-通过汉明码冗余.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID2-通过汉明码冗余.png"></li>
 <li>所有的磁盘成员参与同一个磁盘I/O请求的执行（一次只能执行一个I/O请求）</li>
 <li>实际中不适用</li>
 </ul></li>
 <li>RAID 3（交错位奇偶校验）
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID3-交错位奇偶校验.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID3-交错位奇偶校验.png"></li>
 <li>所有的磁盘成员参与同一个磁盘I/O请求的执行（一次只能执行一个I/O请求）</li>
 <li><font color="red">如何得知哪一个出了错呢？</font></li>
 <li>实际中不适用</li>
 </ul></li>
 <li>RAID 4（块奇偶校验）
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID4-块奇偶校验.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID4-块奇偶校验.png"></li>
 <li>使用了一种独立访问技术，每个磁盘都独立运转</li>
 <li>对于任何一种情况,每次的写操作都必须包含奇偶校验磁盘,因此奇偶校验磁盘有可能成为瓶颂。</li>
 </ul></li>
 <li>RAID 5（块分布奇偶校验）
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID5-块分布奇偶校验.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID5-块分布奇偶校验.png"></li>
 <li>使用了一种独立访问技术，每个磁盘都独立运转</li>
 </ul></li>
 <li>RAID 6（双重冗余）
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID6-双重冗余.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/RAID6-双重冗余.png"></li>
 <li>使用了一种独立访问技术，每个磁盘都独立运转</li>
 <li>使用两种校验算法，一种是4和5中使用的异或计算P，另一种是独立数据校验算法Q</li>
 <li>RAID 6提供了极高的数据可靠性，只有当三个磁盘同时发生错误时，数据才会丢失。</li>
@@ -3090,22 +3091,22 @@
 </ul></li>
 <li>基于频率的置换算法1
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/基于频率的置换算法1.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/基于频率的置换算法1.png"></li>
 <li>块在逻辑上组织成一个栈，栈顶的一部分作为新区，剩余的作为旧区</li>
 <li>性能与LRU差不多,仅有略微的提高</li>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/基于频率的置换算法1的问题.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/基于频率的置换算法1的问题.png"></li>
 </ul></li>
 <li>基于频率的置换算法2
 <ul>
-<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/基于频率的置换算法2.png%22"></li>
+<li><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/基于频率的置换算法2.png"></li>
 <li>新区count不变，中间区count每次访问到都会+1，旧区才会被置换</li>
 <li>效率比LRU和LFU有显著提高</li>
 </ul></li>
 </ol>
 <h2 id="缓存大小">7.3、缓存大小</h2>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/cache大小1.png%22"> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/cache大小2.png%22"></p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/cache大小1.png"> <img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/cache大小2.png"></p>
 <h1 id="supplement">supplement</h1>
-<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/OS设计层次.png%22"></p>
+<p><img src="/2021/03/28/2.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/11.IO%E7%AE%A1%E7%90%86%E5%92%8C%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6/OS设计层次.png"></p>
 <p>课后习题答案：https://max.book118.com/html/2016/0122/33825014.shtm</p>
 
           
@@ -3146,7 +3147,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
   </nav>
 
 
@@ -3192,7 +3193,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
